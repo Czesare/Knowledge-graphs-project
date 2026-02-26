@@ -1,0 +1,532 @@
+HHAI 2025 289
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250646
+Ontology-Based Risk Assessment in
+Smelting Plant Logistics
+JohnGRANSTRÖM1andAndreasBRÄNNSTRÖM
+DepartmentofComputingScience
+UmeåUniversity,SE-90187,Umeå,Sweden
+ORCiDID:JohnGranströmhttps://orcid.org/0009-0007-1151-4065,Andreas
+Brännströmhttps://orcid.org/0000-0001-9379-4281
+Abstract.Thispaperpresentsanontology-basedapproachtoproactiveriskassess-
+mentinhigh-riskindustrialenvironments,withafocusonmoltenmetalhandlingin
+smeltingplants.Distributedcognitiontheoryservesasthetheoreticalframework,
+guidingthegroundedtheoryandthematicanalysisbyframingcollaborationand
+communicationasemergingfrominteractionsamongoperators,equipment,and
+theenvironment.Thislensemphasizedsharedknowledgeanddistributedresponsi-
+bilities,helpingidentifydomain-relevantconceptscriticalforriskassessment.Ex-
+pertinsightsfromprofessionalsataSwedishsmeltingplantweresystematically
+elicitedandstructuredintoanontologytosupportproactiveriskmanagement.A
+prototypesystemintegratingthisontologywithadynamicinterfaceshowedstrong
+alignmentwithexpertdecision-makingandsafetyassessments.Moreover,thesys-
+temidentifiedoverlookedrisks—suchashazardousequipmentcontainingmolten
+metal—and received positive user feedback. While tailored for smelting opera-
+tions,themethodologyhasbroaderapplicabilitytoimprovinginformationsharing,
+decision-making,andsafetyinothersocio-technicalsystems.
+Keywords.ontologies,distributedcognitiontheory,knowledgerepresentation,risk
+assessment,industrialsafety
+1. Introduction
+Inhigh-stakesindustrialenvironments,managingthelogisticsofhazardousmaterialsis
+acomplex,criticalprocessthatleaveslittleroomforerror.Atamajorsmeltingplantin
+Sweden (name withheld for confidentiality), operators and drivers handle molten met-
+als at extreme temperatures, with even minor oversights potentially resulting in catas-
+trophic incidents, such as explosions due to mishandled or improperly prepared ladles.
+This environment exemplifies the challenges that arise in high-risk settings, where ef-
+fective,proactiveriskassessmentisessentialtomaintainingsafetyandoperationaleffi-
+ciency—challengesthatarealsofoundinsimilarhigh-riskdomains[1,2,3,4].Achieving
+this level of safety requires not only a robust technical solution but also seamless col-
+laboration across roles. Each stakeholder—operators, drivers, supervisors—contributes
+specificknowledgeandperspective,fromreal-timepositionalawarenessofladlestothe
+1CorrespondingAuthor:JohnGranström,johngranstrom@gmail.com
+
+290 J.GranströmandA.Brännström/Ontology-BasedRiskAssessment
+schedulingandproceduralknowledgeessentialformanagingoperations.Theexpertise
+and responsibilities distributed among these roles are interdependent and gaps in com-
+municationorknowledgesharingcanamplifyrisks.Asuccessfulsolutionmusttherefore
+capture, integrate and continuously update the various perspectives and inputs of each
+stakeholder,enablingthesystemtosupportcoordinated,informeddecisionsacrossroles.
+Traditionally, risk management in such dynamic settings has relied on statistical
+models[5,6,7,8]orrule-basedsystems[9,10,11,12]topredictandmitigatepotentialhaz-
+ards. Recently, machine learning has emerged as a promising tool for risk assessment
+in various domains [13,14,15], offering advantages in identifying general patterns and
+predictingoutcomesbasedonlargedatasets.However,whilemachinelearningsolutions
+providebenefitsinsomedomains,theyoftenfallshortinhigh-stakesenvironmentsdue
+totheirdependenceonextensivehistoricaldata[16,17,18].Incontextslikemoltenmetal
+handling,whereincidentsmustbeminimizedanddataonrareeventsislimited,machine
+learning models struggle to provide proactive insights for situations not previously en-
+countered.Furthermore,thesemodelsoftenlacktheflexibilitytoadapttofast-changing
+conditionsortocapturethenuancedinterdependencieswithincomplexsystems.
+Toenableproactiveriskassessment,asolutionmustcapturethreeessentialaspects:
+(1) the entities involved, which include both physical entities, such as equipment and
+operator roles, and non-physical entities, such as information flows, tasks, and poten-
+tial risks; (2) the relationships between these entities, which include procedural depen-
+dencies, communication flows, and causal links to risk factors that could compromise
+safety;and(3)therulesthatgoverninteractions,specifyingsafetyprotocols,operational
+guidelines, and conditions under which certain risk causes may be triggered. Together,
+theseaspectscreateafoundationforasystemthatcananticipatepotentialrisks,interpret
+causalfactors,andsupportinformed,proactivedecision-makinginreal-time.Acompu-
+tationalmethodformodelingtheserequirementsistheconceptofanOntology[19]and
+SemanticWebRuleLanguage(SWRL)[20].
+Whileontologieshaveproveneffectiveforriskassessmentindiversefields,suchas
+manufacturingsystems[21],cyber-physicalsystems[22],constructionsafety[23],fault
+detection[24],andtrafficmanagement[25],theirapplicationtothespecificchallenges
+ofmoltenmetalhandling,particularlyregardingdistributedknowledgeandcoordination
+needs,remainsunexplored.
+Ourapproachtoaddressingtheserequirementsfollowedasystematicknowledgeen-
+gineeringprocess:1)Acquiringdomainunderstandingthroughon-siteobservationsand
+interviewswithexperts;2)QualitativeanalysisthroughthelensofDistributedCognition
+Theory[26];3)Ontologymodelinganddevelopment;4)Implementationandevaluation
+ofaproof-of-conceptprototype.
+This research uniquely utilizes distributed cognition theory as a theoretical frame-
+worktodevelopanontologytailoredtosmeltingplantoperations’risksandoperational
+complexities.Throughanin-depthknowledgeelicitationprocess—includinginterviews,
+observations,andscenarioanalyses[27]wecaptureandencodeessentialknowledgeinto
+anontologythatreflectsthecriticalentities,relationships,andruleswithinthisenviron-
+ment.
+Animportantaspectofourapproachisthedevelopmentofadigitaltwin[28],where
+our ontology-based knowledge representation captures not just data but also the rela-
+tionships and rules governing the molten metal handling system. In this case, the dig-
+ital twin represents entities like ladles, slag trucks, drivers, operators and other critical
+
+J.GranströmandA.Brännström/Ontology-BasedRiskAssessment 291
+components of the process, offering a dynamic, real-time digital model. This enables
+logicalanalysisofprocessesandrisks,providingproactivesupportthroughanontology-
+drivenknowledgebase,whilelayingthegroundworkforfutureintegrationwithvarious
+learningsystemsandsensors.
+Therestofthispaperisstructuredasfollows.InSection2,relatedworkonontology-
+based solutions in industrial safety systems are covered. In Section 3, the case study is
+presented. In Section 4, the knowledge elicitation and modeling process is presented.
+In Section 5, the resulting knowledge model—ontology—is presented. In Section 6,
+the evaluation of a proof-of-concept prototype is presented. Section 7, the limitations,
+strengths,andbroaderapplicabilityoftheapproachisdiscussed.InSection8,thepaper
+concludeswithfutureresearchdirections.
+2. RelatedWork
+Ontology-basedapproacheshavebeenwidelyusedforsafetyandriskassessment.Ah-
+mad et al. [29] and Kostov et al. [30] applied ontologies to aviation safety, improv-
+ingaccidentanalysisandsafetyinformationmanagement.Similarly,Bhosaleetal.[31]
+integrated safety-security risk assessment for industrial control systems, while Ding et
+al. [32] and Gao et al. [23] developed ontology-driven safety management frameworks
+in construction. In supply chain and manufacturing, Aboutorab et al. [33] highlighted
+risk identification techniques, and Abadi et al. [21] utilized digital twins and ontolo-
+gies for maintenance optimization. Wu et al. [34] proposed a Bayesian network-based
+safety integrity evaluation for high-temperature molten metal operations, and Wu et al.
+[35]appliedfuzzyCREAMandBayesiannetworkstoanalyzehumanreliabilityinsuch
+operations. Salama et al. [36] utilized SWRL rules in a rule-based recommendation
+system, demonstrating their capability in automated reasoning. Reda et al. [37] lever-
+aged SWRL rules for smart home scenarios, showcasing their utility in context-aware
+decision-making.Theapplicationofdistributedcognitiontheory[26,38,39]inindustrial
+riskassessmentsettingshasbeenlimited.
+Distributedcognitiontheory,exploredbyLiuetal.[38]andLindblomandThorvald
+[40], remains underutilized in industrial risk assessment. Our approach introduces the
+firstontology-basedproactiveriskassessmentmodelformoltenmetalhandling.Ourap-
+proachdistinguishesitselfbycombiningdistributedcognitiontheorywithexpertknowl-
+edgeandontology-drivenriskassessment,ensuringapracticalandcontext-awaresolu-
+tion for molten metal handling. Unlike prior work, our methodology bridges theoreti-
+calontologydevelopmentwithreal-worldapplication,capturingimplicitknowledgeand
+complexriskfactorsoftenoverlookedingeneralizedframeworks.
+3. CaseStudy
+This research centers on a smelting plant in Sweden, where molten metals at temper-
+atures approximately 1250°C are handled using large ladles, which are transported by
+specialized slag trucks (Figure 1a). The process involves three types of ladles: a drip
+ladlepositionedunderthefurnaceduringmeltingtocatchanyspillage,aslagladlefor
+handlingtheresidualslagbyproduct,andaleadladleforthefinalprocessedmetal.Be-
+
+292 J.GranströmandA.Brännström/Ontology-BasedRiskAssessment
+fore lead extraction, the residual slag—which has a lower density than lead and thus
+accumulates at the top inside the furnace—must be carefully transferred to designated
+slagladles.Thesehandlingproceduresrequirepreciseadherencetosafetyprotocols,as
+impropermanagementpresentssevereexplosionrisksattwocriticalpoints:duringemp-
+tying(endangeringdrivers)andpouring(endangeringoperators).Whenunsolidifiedslag
+contactswaterfromrainorsnow,itcantriggerdangeroussteamexplosions.Tomitigate
+thisrisk,amandatory72-hourwaitingperiodensurescompleteslagsolidificationbefore
+ladles can be emptied and reused. This safety measure addresses explosion risks from
+unsolidifiedslagandresidualmoisture,withmultipleseriousincidentsoccurring.
+The current solidification process relies on manual operations with critical infor-
+mation maintained on a physical whiteboard (Figure 1b), accessible only to operators.
+Drivers,whileawareofladleplacementinreal-time,lackaccesstothisbroaderopera-
+tionaloverview.Thisdivisionofcognitivelaborcreatesasystemvulnerabletocommu-
+nication gaps and errors, particularly dangerous given the high-stakes nature of molten
+metalhandling.
+(a)Slagtruckwithaladle1 (b)Currentsolutiontotrackladles2
+Figure1. Caseenvironment.
+4. KnowledgeElicitation
+An anonymous interview study was conducted followed by a thematic analysis. Dis-
+tributed Cognition Theory served as theoretical framework for the knowledge elicita-
+tionprocess3.Thistheorypositsthatcognitiveprocessesaredistributedacrossmultiple
+elements in the environment, including tools, individuals, and practices. In the context
+of molten metal handling, this framework encompasses human agents (operators and
+drivers),artifacts(physicalobjectsthatplayaroleincognitiveprocesses),tools(ladles,
+trains,monitoringdevices),andinformationflowsbetweenthesecomponents.Thethe-
+oryconsidershowknowledgeandresponsibilitiesaresharedamongstakeholders,mak-
+ing it particularly relevant for understanding complex industrial processes where infor-
+mationdistributionimpactssafetyandefficiency.
+1Imageadaptedandusedwithpermission.
+2Photographedandusedbyauthorwithpermission.
+3Materialrelatedtotheknowledgeelicitationprocess,includinganethicalassessment,interviewtranscripts,
+questionformulations,evaluationandanalysisframeworks,isavailableathttps://github.com/RA-SPL/
+Ontology-RA-SPL;Withthis,weaimtosupporttransparencyandreproducibility.
+
+J.GranströmandA.Brännström/Ontology-BasedRiskAssessment 293
+Theprimarydatawasgatheredthroughinterviewswithover20professionalsatthe
+plant,fromwhomtheirthoughtsandfeedbackonthesystemwererecorded.Adetailed
+overview of the participants’ demographics is presented in Table 1. Among these, four
+in-depthinterviewswereconducted,twowithoperatorsandtwowithslagtruckdrivers.
+Theseinterviews,lastingbetween1.5and3hourseach,weresignificantlymoredetailed
+andfocused,servingasthefoundationforthedevelopmentoftheontologylatercreated.
+Role Count AgeRange Experience(years) Gender
+Operators 12 25-55 3-30 12M
+SlagTruckDrivers 7 30-50 5-20 5M,2F
+Supervisors 3 40-63 15-30 2M,1F
+MaintenanceStaff 2 35-57 10-15 2M
+Table1. ParticipantDemographics
+Theoperators,with20and7yearsofexperiencerespectively,providedin-depthinsights
+into control room operations and safety protocols. The slag truck drivers, with 8 and 3
+yearsofexperienceinmoltenmetaltransportation,contributedhighlyrelevantlogistical
+knowledge.Theinterviewsconsistedof20questions3,coveringbackgroundandexperi-
+ence(1-2),operationalchallengesbefore,during,andafterpouring(3–6),criticalinfor-
+mationneedsforladlemanagement(7–11),collaborationandsafetyconcerns(12–13),
+systemrequirementsandusabilitypreferences(14–20),withafocusonsafety,efficiency,
+and information flow. The answers were transcribed and analyzed from multiple per-
+spectives using distributed cognition theory as the theoretical framework. In addition
+totheinterviews,directobservationsoftheprocesseswereconducted,andthebroader
+feedbackgatheredfromtheotherparticipantswasconsidered.Together,theseelements
+playedacrucialroleinshapingthesystem’sontologyanddeepeningtheunderstanding
+oftheoperationalcontext.
+4.1. KnowledgeCaptureandFormalization
+To illustrate the knowledge elicitation methodology, consider the response to Question
+5:“Whatinformationismostcriticaltohaveavailableaboutaslagladle?”Driver#1’s
+answerprovideskeyinsightsintothecriticalinformationneededforsafeslagladlehan-
+dling. The response, highlighting key domain concepts (marked in monospace), will
+serveasarunningexamplethroughoutthepapertodemonstratehowourmethodology
+transformsrawexpertknowledgeintoformalontologicalstructuresandultimatelyinto
+executablesystemrules.StatementbyDriver#1:
+“Ensuringthatthe[ladle]endsupintherightplace(atthe[solidification site]).If
+itsplacedonthewrong[area]thenextdrivercouldtakethat([unsolidified][ladle])
+andemptyit,ifthathappenstheconsequencecouldbecatastrophic.Ifthe[slag]hasnot
+been[solidified]foratleast[72 hours].Atthemomentwehavenowayofchecking
+this, the [information] is only available to the [operators] in their control room. We
+havetocallandaskifthenext[ladle]withaspecific[number]isactually[solidified]
+fortheactualtime.AndIknowthatnotevery[driver]calls,theytrustthatnextoneissafe.”
+Thisresponseillustratesthetypeofdomainknowledgegathered,highlightingkeycon-
+ceptsthatinformedourontologicalmodel,fromphysicalentities(ladle,area)topro-
+cess requirements (72 hours) and safety constraints (solidified). As we proceed
+
+294 J.GranströmandA.Brännström/Ontology-BasedRiskAssessment
+throughourmethodology,wewillshowhowtheseconceptsareformalizedintoclasses,
+properties,andrulesinourfinalsystem.
+Through the lens of distributed cognition theory, we analyzed each transcribed re-
+sponse through six key categories that reveal how information is distributed and trans-
+formedthroughoutthesystem:Roles(identifyingkeyactors),Tasks(describingtheir
+actions), Tools (physical artifacts used), Information (critical data points), Rules
+(governingprotocols),andRelationships(interactionsbetweencomponents).
+The analysis identified two key roles: Operator, coordinating from the control
+room,andDriver,managingslagladletransporttothesolidificationsite.Thetoolscat-
+egoryhighlightedtheladlesthemselves,whileinformationelementsencompassedcrit-
+ical data like solidification times, ladle numbers, and area assignments. Rules emerged
+aroundsafetyprotocols,suchasthe72-hoursolidificationrequirementandproperarea
+placement, with relationships capturing the vital yet problematic communication pat-
+ternsbetweenoperatorsanddrivers.Theanalysisalsorevealedcriticalrisks,specifically
+one driver’s concern that “[...] if that happens the consequence could be catastrophic”
+regardingunsolidifiedslag.
+Table2. Subsetofconceptsderivedthroughtheknowledgeelicitationprocess.
+Category Concepts
+Roles Operator,Slagtruckdriver
+Tasks Lubrication,VisualInspection,Emptyingofladle,EmptyingofLeadLadle,EmptyingSlag
+Ladle,LeadPouringatrefinery,Pouringoflead,Slagpouring,Cleargasduct,Coolingoflead,
+CoolingOK,LeadPouringDone,LeaveSlagLadle,PickupSlagladle,SlagSolidification,
+Maintenance,Reparations,Inspection,Milling,Sandblasting,FurbergGarage[...]
+Tools Ladle,LeadLadle,SlagLadle,DripLadle,Train[...]
+Information Timeforsolidification,TemperatureofLadle,TemperatureofLead,TemperatureofSlag,Slag
+Ladlenottobeemptied,FleetskillOrderPouring,SolidificationSite,Leaveonarea,Geton
+area,Area,Levelofmoltenmetal,LadleNr,Date,Time,Shift[...]
+Risks Slagladlenotempty,LiquidinSlagladle,LadlenotOKtolift,Holeinladle,FireHazard,
+ExplosionRisk,SmokeHazard,LossofProduction,SlagLadlenotwarm[...]
+Totransformthisdistributedcognitionanalysisintoaformalontologicalstructure,
+weperformedfurtheraggregationoftheexperts’insights.Thisprocessinvolveddistill-
+ingthecategorizedinformationintothreekeyontologicalcomponents:classes(andsub-
+classes),objectproperties(relationshipsbetweenclasses),anddataproperties(attachesa
+classtoadatatypevalue).
+Analyzing participants’ descriptions of, e.g., ladle placement and types, we iden-
+tified classes and their hierarchical relationships, with Ladle as a parent class and
+SlagLadleasaspecializedsubclass.Thedescribedcommunicationneedsbetweenop-
+eratorsanddriversinformedourobjectproperties,suchashasLadleInAreaconnecting
+ladles to their locations. The specific requirements mentioned— “[...] solidified for at
+least72hours”—ledtodatapropertieslikehoursSolidified,whiletheareaandladle
+identification systems mentioned became AreaNr and LadleNr properties. This trans-
+formationfromtheparticipants’practicalknowledgeintoformalontologicalstructures
+provided the foundation for developing a comprehensive knowledge model capable of
+supportingautomatedreasoningaboutthesafetyandoperationaldecisionsthatthepar-
+ticipants’ highlighted as critical. Refer to Table 2 for a selection of identified concepts
+categorizedundereachmaincategory.
+
+J.GranströmandA.Brännström/Ontology-BasedRiskAssessment 295
+Figure2. Classesandsubclasseswithrelationshipsintheontology.
+5. OntologyandSystemArchitecture
+Thefollowingsectionpresentstheontologicalframeworkthatemergedfromourknowl-
+edge elicitation process and demonstrates how it enables automated reasoning about
+safety-criticalsituationsinladlemanagement.
+5.1. OntologicalFramework
+Our ontology captures the distributed knowledge and safety protocols identified dur-
+ing the knowledge elicitation. The framework developed in the ontology editor Pro-
+tégé centers around six main conceptual areas that emerged as critical for ladle man-
+agement: Tools (including trains where the ladles are delivered to the driver and var-
+ious ladle types), Materials (encompassing lead, slag, and potential contaminants),
+SolidificationSite (representing areas where slag ladles solidify), Maintenance
+procedures,andRisks.Figure2presentsthisontologywithitsconcepts,relationships,
+andhierarchies.
+5.2. DescriptionLogicandReasoning
+Theontology’spowerliesinitsabilitytoencodeandreasonaboutcomplexsafetyrules
+through its structural components and logical relationships. Building upon our running
+exampleofDriver#1’sstatementaboutsolidificationverification-“Wehavetocalland
+askifthenextladlewithaspecificnumberisactuallysolidified”-wecanexaminehow
+the ontology represents and automates this knowledge. The hierarchical structure uses
+classes(likeLadle)andsubclasses(likeSlagLadle),connectedthroughobjectproper-
+ties(suchashasMaterial)thatestablishrelationshipsbetweenentities.Dataproperties
+likehoursSolidifiedcapturecriticalvaluesforsafetyassessment,suchasthe72-hour
+solidificationrequirement.ThesecomponentsworktogetherthroughDescriptionLogic
+(DL)queriesandSemanticWebRuleLanguage(SWRL)rules.SWRLrulesconsistofa
+body(antecedent)andhead(consequent),connectedbyanimplicationarrow(→).The
+body contains class assertions and property relationships combined using logical and
+(∧).Forexample,toautomatethedriver’smanualverificationprocess,arulechecksif
+anentityisaLadle,hassolidificationhours,andifthosehoursarelessthanorequal(≤)
+to 72, classifying such ladles as not solidified. The relationship between improper so-
+lidificationandexplosionrisksiscapturedthroughsimilarrulesandriskclassifications.
+Table3presentsasubsetofSWRLrulesderivedfromtheknowledgeelicitationprocess.
+
+296 J.GranströmandA.Brännström/Ontology-BasedRiskAssessment
+Table3. SubsetofSWRLrules:Definingcontext-baseddecisions
+RuleandDescription
+(#1)Ladle(?x)∧hasMaterial(?x,?y)∧Drip(?y)→DripLadle(?x)
+AladlewithdripmaterialisclassifiedasDripLadle.
+(#2)Ladle(?x)∧hasMaterial(?x,?y)∧Slag(?y)→SlagLadle(?x)
+AladlewithslagmaterialisclassifiedasSlagLadle.
+(#3)Ladle(?x)∧hasMaterial(?x,?y)∧Lead(?y)→LeadLadle(?x)
+AladlewithleadmaterialisclassifiedasLeadLadle.
+(#4)SlagLadle(?x)∧hasMaterial(?x,?y)∧Liquid(?y)→Explosion(?x)
+Liquidinaslagladleposesanexplosionrisk.
+(#5)Ladle(?x)∧hoursSolidified(?x,?t)∧swrlb:lessThanOrEqual(?t,72)→SlagIsNotSolidified(?x)
+Iflessthan72hourshavepassed,theslagisnotsolid.
+(#6)Ladle(?x)∧hoursSolidified(?x,?t)∧swrlb:greaterThan(?t,72)→SlagIsSolidified(?x)
+Aladleisokayforproductionifsolidifiedover72hours.
+(#7)Ladle(?x)∧SlagIsNotSolidified(?x)→NotOkForProductionSolidification(?x)
+AladleisNOTokayforproductionifsolidifiedunder72hours.
+(#8)Ladle(?x)∧hasMaintenanceStatus(?x,true)→NotOkForProductionMaintenance(?x)
+AladleisNOTokayforproductionifithassometypeofmaintenance.
+(#9) swrlb:equal(?currentArea,”southTrain”)∧findNextLadle(?nextLadle)∧hasArea(?nextLadle,?-
+nextArea)∧OkForProduction(?nextLadle)→NextLadleForSouthTrain(?nextLadle,?nextArea)
+Identifythenextladleforthesouthtrain.
+(#10)Ladle(?x)∧hasMaterial(?x,?m)∧swrlb:notEqual(?m,empty)∧hoursSolidified(?x,?h)∧swrlb:
+add(?newH,?h,1)→hoursSolidified(?x,?newH)
+Incrementsolidificationtimefornon-emptyladles.
+(#11)Ladle(?x)∧hasArea(?x,?oldA)∧hasTargetArea(?x,?newA)∧swrlb:notEqual(?oldA,?newA)→
+hasArea(?x,?newA)
+Handlemovementofladlesbetweenareas.
+(#12)Ladle(?x)∧hasArea(?x,southTrain)→hasMaterial(?x,empty)∧hasPouringCompleted(?x,false)∧
+hoursSolidified(?x,0)
+Resetladlepropertiesuponmovingtothesouthtrain.
+5.3. OntologicalReasoninginPractice
+The ontology demonstrates its practical value through automated reasoning about vari-
+oussafety-criticalscenarios.Considerasituationwhereanoperatorordriverdiscovers
+liquid residue in a ladle. By marking this in the system, the ontology applies the sub-
+classofMaterial,whichinthiscaseisLiquidwhichinturnclassesthatladleasthe
+ExplosionRiskLiquidInSlagLadlerule(seeTable3),whichimmediatelyclassifies
+the ladle as an explosion risk, making it visible to all users through red warning indi-
+cators. The system’s reasoning extends beyond basic solidification time tracking to en-
+compassmultipleriskfactorsthatcouldcompromisesafety.Maintenancescenariossim-
+ilarly benefit from this shared knowledge framework. When either profession marks a
+ladleformaintenance—whetherduetoobservedcracks,neededsandblasting,orsched-
+uledinspections—theontologyevaluatestheNotOkForProductionMaintenancerule.
+This automatically removes the ladle from consideration for production tasks, visually
+indicatedthroughyellowwarningmarkers.Thesystemmaintainsthisstatusuntilmain-
+tenanceiscompletedandverified,ensuringthatnoladlewithpendingrepairsorinspec-
+tionsenterstheproductioncycle.
+Theontologyalsosupports“lookahead”throughtheapplication’stimesimulationcapa-
+bility.Userscanfastforwardthrough1,5,or12-hourintervalstovisualizefuturestates
+of the solidification areas. This feature runs all relevant rules against projected times,
+showing which ladles will become available for production and identifying potential
+bottlenecks. For example, when advancing time, the system continuously evaluates the
+
+J.GranströmandA.Brännström/Ontology-BasedRiskAssessment 297
+SolidificationOver72Hoursruletodeterminewhichladleswillbesafeforproduc-
+tion. This allows operators and drivers to plan their work more effectively, particularly
+duringshiftchangesorwhencoordinatingmaintenanceschedules.
+5.4. ImplementationArchitecture
+Theimplementationconsistsofaweb-basedfrontendbuiltwithReact18.2andaPython
+3.11Flaskbackend,integratedwithanOWL2.0ontologyusingtheOwlready2reasoner
+(version0.41).Thearchitectureenablesreal-timequeriesandupdatestotheknowledge
+basethroughaRESTfulAPIinterface.ThesystemprocessesSWRLrulesviatheHer-
+miT reasoner integrated within Owlready2, providing continuous evaluation of safety
+conditionsandoperationalconstraints.Theinterface,showninFigure3,displayssolidi-
+ficationsiteswithinteractiveladleiconsandstatusindicators.Color-codingreflectsop-
+erational states: red (not ready for production), yellow (under maintenance), and green
+(completed72-hoursolidificationwithoutrisks).Thesystemincludesdedicatedareasfor
+north and south train operations, where both train systems transporting their respective
+ladlesfromthefurnacetodesignatedpickuppointsfortheslagtruckdrivers.
+The system also features practical utilities such as a ladle library, search function-
+ality(enabledbytranslatingsearchestoDLQueries),andtimesimulationcontrolsthat
+allowuserstoprojectladlestatesforward.Notably,theSWRLterminalwindowvisible
+inthescreenshotprovidestransparencyintothesystem’sdecision-makingprocess.For
+eachoperation,itdisplaysthecorrespondingDescriptionLogicquery,SWRLrulebeing
+applied,andtheresultingdetermination.Thisfeatureallowsuserstounderstandhowthe
+systemarrivesatitssafetyandoperationaldecisions,providingclarityandaccountability
+intheriskassessmentprocess.
+Figure3. Proof-of-conceptprototype;Visibleontologyresponseprovidestransparency.
+6. Evaluation
+The evaluation process was conducted in two phases to assess 1) the decision-making
+capabilitiesoftheontology,and2)theusabilityofthedynamicinterface.Thefirstphase
+focusedonscenario-basedtesting,presentingparticipantswithsevenrealisticoperational
+situations to compare their expert judgment against the system’s automated decisions.
+The second phase comprised an usability assessment of the collaborative digital tool,
+includinghands-oninteractionwiththeinterfaceandstructuredfeedbackcollection.
+
+298 J.GranströmandA.Brännström/Ontology-BasedRiskAssessment
+Only participants with the roles of driver or operator were included in the evalua-
+tion, as they are the primary end-users of the developed technology. This group is best
+positionedtoassesshowaccuratelythesystem’ssuggestionsalignwithreal-worldcon-
+ditions.Byincorporatingbothdriversandoperators,thestudycapturedvaluableinsights
+intohowinformationgapsandcommunicationchallengesemergefromdifferentopera-
+tionalperspectives.
+InTable4asummaryoftheexperts’answersandtheontology’sresponsesispresented,
+withCentralRulesreferencingTable3.Inthiscontext,correctplacementreferstoposi-
+tioningnewlypouredslagladlestoensurethenextladletobeemptiedhasbeensolidified
+for the required minimum of 72 hours. This placement decision must account for mul-
+tiple factors including maintenance status, potential liquid content, solidification time
+ofadjacentladles,andscenarioswithmultipleemptyareaswherethesafestplacement
+optionmaynotbeimmediatelyapparent.
+6.1. Scenario-BasedEvaluationResults
+Table4. Scenario-BasedEvaluationOverview.Furtherdetailsavailableonline3.
+#Description Query ParticipantResponsesOntologyResponse&
+CentralRules
+1Emptyareabetween FindNextArea AND Allparticipants Correctareaidentification
+newlypouredand LadleOKForProduction correctlyidentified andladleselection(Rule
+solidifiedladle optimalarea #9,#11)
+placement
+2Multipleemptyareas FindNextArea AND Solid- Oneparticipant Selectedsafestarea
+withvarying ificationOver72Hours initiallysuggested consideringsolidification
+solidificationtimes unsafearea;others times(Rules#6,#7,#11)
+chosecorrectly
+3Riskassessment- ExplosionRiskLiquidIn- Notednowayto Identifiedandavoided
+ladlecontains SlagLadle AND knowliquidcontent riskyladle(Rules#2,#4)
+liquid/slagshell LadleOKForProduction withoutinspection
+4Maintenancestatus hasMaintenanceStatus AND Noteddifficulty Identifiedandavoided
+tracking LadleOKForProduction trackingmaintenance maintenanceladle(Rule
+status #8)
+5Availableladlesin AreaNr AND Reliedonphone Real-timevisibilityof
+storage LadleOKForProduction communicationto availableladles(Rules#9,
+verifyavailability #11,#12)
+6Ladleemptyingtime FindNextLadleFor- Manual Automatictrackingofladle
+constraints Production AND Time(not communicationaboutstatus(Rules#10,#12)
+allowedbetween23:00and emptiedladles
+07:00)
+7Optimalladle FindNextLadleFor- Allcorrectly Selectedoptimalladle
+selectionwith Production AND identifiedsafe meetingallconstraints
+multipleconstraints LadleOKForProduction AND alternatives (Rules#6,#7,#8)
+SolidificationOver72-
+Hours
+Theevaluationprocessdemonstratedthesystem’sreasoninganddecision-making.Onall
+scenarios,thefourexpertsevaluatedthesystem’sproposedactionsascorrect,suggesting
+that the new system’s logic matches experienced operators’ decision-making. Scenario
+2 was particularly significant. When faced with a situation where there were multiple
+emptyareasonthesolidificationsite,oneexpertsuggestedusingaladleplacementthat
+could have resulted in an explosion. The system correctly prioritized the safest area, a
+
+J.GranströmandA.Brännström/Ontology-BasedRiskAssessment 299
+decisionlatersupportedbytheexpert.Operator#2noted,“AnaccidentIwasinvolvedin
+whendrivingtheslagtrucksimilartothiswouldneverhavehappenedwiththissystem.”
+Theevaluationrevealedseveraladditionalcriticalfindingsregardingsafetyandop-
+erational efficiency. The system demonstrated significant value in addressing mainte-
+nancetrackingdeficienciesthatposecurrentsafetyrisks.Thelimitationsofthecurrent
+whiteboard system, which lacks clear maintenance status indicators, create a danger-
+ousscenariowheredefectiveladlescaninadvertentlyenterproduction.Asoneoperator
+acknowledged when discussing real-world implications, a ladle requiring maintenance
+wouldbe“guaranteedtoenterproduction”undertheexistingmanualsystem,asstatedby
+Operator#1.Thesystemalsostandardizedplacementproceduresfornewlypouredslag
+ladles, resolving inconsistencies in operators’ and drivers’ approaches and establishing
+clear safety-first protocols. Furthermore, the digital system’s comprehensive documen-
+tationcapabilitiesaddressedacrucialchallengeinshifttransitionmanagement,prevent-
+ingtheinformationlossthatfrequentlyoccursduringhandoversbetweenteams.These
+improvementscollectivelyenhancebothoperationalsafetyandprocessefficiency.
+6.2. SystemEvaluation
+The second part involved system demonstration of the interface followed by structured
+evaluation using 23 questions (14 quantitative, 9 qualitative) on a 5-point Likert scale
+(1=Donotagree,5=Stronglyagree).Figure4presentsthequantitativescoresacross
+the five key categories (Usability, Functionality, Visualization, Efficiency, and Safety),
+inspiredby[41].
+Usability Functional
+V
+it
+i
+y sualizat
+E
+io
+f
+n ficiency
+Safety
+Group’slowestscore
+Operators 4.33 4.75 4.67 4.38 4.83 Middlescores
+Drivers 4.17 4.5 4.33 4.0 4.33 Group’shighestscore
+Figure4. HeatmapofMeanScoresbyRole
+Thesystemevaluationresultsindicatethatoperatorsratedsafetythehighest(4.83),
+while drivers rated functionality the highest (4.5). This aligns with the scenario-based
+evaluation, where safety-critical decision-making—such as risk assessment for slag la-
+dles—wasakeybenefitofthesystem.Thelowerusability(Operators4.33,Drivers4.17)
+and efficiency (Operators 4.38, Drivers 4.0) scores suggest that while the system pro-
+videsvaluabledecisionsupport,furtherrefinementsmaybeneededtostreamlineinter-
+actionsandreducetheeffortrequiredtoaccessandactoninformation.Thehighersafety
+rating from operators reflects their stronger reliance on risk assessment, while drivers
+higher rating on functionality suggests they value the system’s ability to support oper-
+ational tasks. These findings highlight a trade-off between detailed safety assessment
+presentationandeaseofuse,whichshouldbeconsideredinfuturedevelopmentefforts.
+7. Discussion
+A significant limitation of the model is its reliance on precise sensor readings from
+theenvironment.Effectivelyintegratingontology-basedreasoningwithreal-worlddata
+
+300 J.GranströmandA.Brännström/Ontology-BasedRiskAssessment
+presents a challenge, particularly in dynamic industrial settings where sensor inconsis-
+tenciescanimpactdecision-making.Whilethischallengecanbemitigatedthroughex-
+tendedknowledgebasesandintegrationwithmachinelearningmethodsdesignedtoin-
+fer and validate facts from the environment, ensuring continuous reliability remains an
+ongoingconcern.Anotherlimitationisthatthecurrentmodelinfersrisksbasedonstatic
+statesbutdoesnotcapturedynamictransitionsbetweenstates.Hence,themodelcannot
+reasonmultiplestepsaheadtopredictrisks.Thisisafocusforfuturework.
+The evaluation results highlight the model’s effectiveness in improving safety,
+decision-making support, and operational transparency. The system’s reasoning aligns
+closelywithexpertjudgment,successfullyidentifyingrisksthatwereoverlookedintra-
+ditionalmethods.Furthermore,transparencyisakeystrengthoftheapproach—notonly
+in decision-making but also in the knowledge elicitation process. All concepts within
+theontologycanbetracedbacktotheiroriginalexpertinterviews,ensuringclarityand
+validationoftheknowledgemodel.Additionally,theontology-poweredintelligentinter-
+face(theevaluatedprototype)supportsvisibilityintoriskfactorsandmaintenancestatus,
+minimizing human error. The structured representation of risk factors enhances collab-
+orationamongoperatorsanddrivers,fosteringasharedunderstandingofcriticalsafety
+protocols.Asaresult,thisapproachoffersascalablefoundationforfutureindustrialap-
+plications,particularlywhenintegratedwithreal-timemonitoringandadaptivelearning
+techniques.
+An ethical assessment of the study is available online4; the interview study and
+expert evaluation were judged appropriate for implementation by authorized decision-
+makeratUmeåUniversity,Sweden.Akeyethicalconcerninexperimentsinvolvingau-
+tomatedreasoningistheriskofunpredictablesystembehavioraffectingparticipants.To
+addressthis,allevaluationtookplaceinasynthetic,controlledsetting.Expertinputwas
+used to construct an ontology, and participants interacted only with predefined, paper-
+based scenarios rather than the system. The same scenarios were submitted to the sys-
+tem, allowing comparison of human and system responses against expert benchmarks.
+Furtherconsiderationsdetailedintheethicalassessment.
+8. ConclusionandFutureWork
+This work demonstrates how an ontology-based knowledge model, integrated with an
+adaptive user interface, enables a digital twin of smelting plant logistics, providing a
+sharedknowledgebaseforproactiveriskassessment.Theapproachfacilitatesimproved
+safety,decision-making,andoperationaltransparencybystructuringdistributedknowl-
+edgeandcriticalsafetyconstraints.Theevaluationsuggeststhatthesystemalignswith
+expertdecision-makingwhileaddressingexistingcommunicationgaps.
+In future work, we aim to extend the theoretical framework to incorporate reason-
+ingaboutdynamicchangesinthedomain.Apromisingdirectionisthedevelopmentof
+a transition system that models operational states, enabling forward reasoning for risk
+predictionandbackwardreasoningforcausalanalysis.Thiswouldenhancethemodel’s
+capability to support human-aware planning and improve proactive risk mitigation in
+industrialsettings.
+4Ethicalassessmentavailableat:https://github.com/RA-SPL/Ontology-RA-SPL
+
+J.GranströmandA.Brännström/Ontology-BasedRiskAssessment 301

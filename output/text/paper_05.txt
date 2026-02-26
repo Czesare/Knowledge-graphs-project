@@ -1,0 +1,378 @@
+HHAI 2025 83
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250628
+Hybrid Autonomy: Towards a Unified
+Framework on Adaptability and Ethical
+Trust in Autonomous Systems
+BeatriceMELISa,b,1,andMartinaDESANCTISbandPaolaINVERARDIband
+AlessioMALIZIAa
+aDept.ofComputerScience,UniversityofPisa,Italy
+bGranSassoScienceInstitute(GSSI),L’Aquila,Italy
+Abstract.ThefutureofArtificialIntelligence(AI)liesinsystemsthatenhance
+humancapabilitieswithoutreplacinghumanagency:inparticular,theevolution
+ofautonomoussystemsposessignificanttechnical,ethical,andsocialchallenges.
+Thesesystemsofferincreasinglyfruitfulopportunities,buttheirdecision-making
+authorityintroducesrisksofmisalignmentwithhumanvaluesandsocietalexpec-
+tations.Asthesesystemsacquiretheabilitytomakeindependentdecisions,inte-
+gratingethicalprinciplesintotheirdesignbecomesessential.
+This work aims to propose a framework for hybrid autonomy-based systems
+thatenhancehumancapabilitieswhilepreservingethicaladaptabilityandfostering
+trust.Thevisionintroducestheconceptofdynamicautonomy,wheresystemscan
+adjusttheircontrollevelsbasedoncontextualandsoft-ethicalfactors.Theprimary
+objectiveistoalignautonomoussystemswithusers’preferencesandboundaries,
+addressingthegapbetweentechnicalperformanceandethicalacceptability.Rather
+thanviewingautonomyasafixedfeature,thisworksearchesforabalancebetween
+machineautonomyandhumancontrolthatisfluid,flexible,andresponsive.
+Throughmultidisciplinaryperspectives,theresearchquestionsaddressthechal-
+lengeofpersonalisingsystemstoethicalpreferences,andevaluatingtheimpacton
+ethicalexplicabilityandtrust.Bystressingtheelementsofadaptabilityandcollabo-
+ration,thisapproachsupportstheresponsibleintegrationofintelligentautonomous
+technologiesacrossdiversesectors,frompersonalassistancetocarerobots,ensur-
+ingthatinnovationalignswiththevaluesofthoseitserves.
+1. Introduction
+Artificial Intelligence (AI) has led to rapid advancements in autonomous systems, en-
+abling them to perform complex decision-making tasks with minimal human interven-
+tion.Fromself-drivingvehiclestoroboticassistantsinhealthcare,AI-poweredautonomy
+isreshapingindustriesandredefininghuman-machinecollaboration[6].However,asau-
+tonomy increases, so do concerns about ethical alignment, trustworthiness, and human
+oversight[50].Afundamentalchallengeemerges:howcanweensurethatautonomous
+systemsnotonlyoperateefficientlybutalsorespecthumanagency,adapttomoralpref-
+erences,andremainaccountable?
+1CorrespondingAuthor:BeatriceMelis,beatrice.melis@phd.unipi.it
+
+84 B.Melisetal./HybridAutonomy
+On one hand, the technical and operational functioning of these systems opens up
+new possibilities, optimizing processes, improving efficiency, and reducing human in-
+terventioninhigh-riskorcomputation-intensivesituations.However,theirautonomyis
+notguaranteedwithoutchallenges-norwithouttheneedforacarefulethicalevaluation
+that can ensure fairness in the adoption of ever greater autonomy [52]. The decision-
+making capacity delegated to AI-powered systems raises concerns about their reliabil-
+ity[3],transparency[32],andsafety[44].Inthiscontext,thetechnicalchallengeisin-
+evitably connected with issues of trust, responsibility, and accountability, as users may
+struggletounderstandthedecisionsmadebyhighlysophisticatedautonomoussystems
+and to evaluate the alignment between technological efficiency and ethical standards.
+Another aspect to consider is the impact of adopting and reinforcing autonomous sys-
+tems,consideringadomainofsocial,legal,ethical,empathetic,orculturalimplications
+thatmustleadtoconsciousregulation[51].Thesesystemshavethepotentialtoradically
+redefine the structure of work, replacing or augmenting [1] human labor with automa-
+tion,andtriggeringchangesinthesocialfabric[6].Itisthereforenecessarytoaddress
+the potential risk of exacerbating social inequality that such technologies might bring
+[22],aswellasthecomplexityofexploitingthebenefitsoftechnologicalautonomywith-
+outoverlookinghumanneeds[34].TraditionalapproachestoAIautonomyhaveprimar-
+ily focused on technical performance and operational efficiency. While this has led to
+significant improvements in automation, it has also highlighted a gap in balancing ma-
+chine autonomy with human moral reasoning [14] and soft ethics [20]. In our vision,
+thedevelopmentofautonomy-basedtechnologiesmustincludeathoroughreflectionon
+the social and ethical values that these systems may undermine, endanger - when their
+primary objective should be to protect and promote them [49,38]. Research is moving
+broadlytoaddresstheseissuesinrelationtosomemorecontroversialsystems,suchas
+autonomousweapons[2]orself-drivingvehicles[24,12]-andourvisioniskeentoin-
+vestigatethesameimplicationsconcerningmorecommonlyusedsystems,suchasper-
+sonalassistance,collaborativeandcarerobots,wheretrustandethicalacceptabilityare
+crucialwithintheinteractionframework.
+2. Visionandmotivation
+TheincreasingroleofAI-poweredautonomoussystemsinsocietydemandsashiftfrom
+rigid,predefinedautonomylevelstomoreadaptiveandcontext-awaremodelstoenable
+Human-AIcoevolution[43].Inthisdirection,thepresentworkintroducesthevisionof
+hybrid autonomy, an approach that enables AI systems to dynamically adjust their au-
+tonomylevelsbasedoncontextual,ethical,anduser-specificfactors.Unlikerigidauton-
+omy models, hybrid autonomy supports ethical adaptability, ensuring that systems can
+respondtosoftethicspreferenceswhilemaintainingoperationaleffectiveness.
+Our vision wants to explore how trust, responsibility, and autonomy-calibration
+mustbeembeddedinAIdesigntoenablemoreflexibleandethicallyaligneddecision-
+making processes. By drawing insights from interdisciplinary research, we seek to de-
+finearoadmapfordevelopingAIsystemsthatarenotonlyintelligentandautonomous
+but also socially responsible and human-centric. In this direction, our research aims to
+thoroughly examine the role of humans in autonomy-based systems - trying to answer
+thequestionofhowitispossibletobalancetheautonomyofsystemswhilepreserving
+humanautonomy[9].
+
+B.Melisetal./HybridAutonomy 85
+Approachingautonomyandethics.Akeyaspectofthisvisionisfocusedonthe
+ideathatautonomyisnotjustatechnicalfeaturetobemodulatedaccordingtothema-
+chine’soperationalenvironment[18],butalsoapersonalandcustomisablefeature.This
+approach introduces an essential dimension to the human-autonomy relationship: the
+needforsystemsthatarenotonlyoperationallyflexiblebutalsoethicallyadaptive.The
+systemshouldbedesignedtoaccommodatevaryinglevelsofautonomybasedontheeth-
+icalandmoralpreferencesoftheuser,recallinganintentionalitythatmakesthesystems
+designedtoleaveroomforhumanautonomyandintervention.Thehumanagentmustre-
+taincontroloverwhenandhowthesystem’sautonomyincreasesordecreases,allowing
+foracontinuouscalibration:thiskindofadaptabilityiscrucialbecauseitrecognizesthat
+autonomyisnotaone-size-fits-allsolution;itmustbetailoredtothecontextinwhichthe
+systemoperatesand,mostimportantly,tothehumanthatlegitimatelyhavetogovernthat
+particularinteraction.Inthisdirection,theworkbyContissaetal.(2017:[12])provides
+animplementationapproach,targetedonself-drivingvehicles,thatinformsourresearch
+totheextentthatautonomy-related“moralchoices”becomeauser-customisablefeature,
+ratherthanapre-programmedsetofrules.However,theyrelyonafixedsetofoptions
+to select from, while we target a more fine-grained approach where users can exhibit
+theirownsoftethics.Ratherthanlimitingethicaladaptabilitytopredefinedsettings,our
+frameworkisenvisionedtoaccommodateuser’sethicalstance.Inthissense,hybridau-
+tonomy becomes not just a matter of pre-configuration, but of ongoing alignment with
+the user’s values, as expressed through interaction. Consistently, the safety component
+is protected and guaranteed, because in our vision both parties are assumed to interact
+in a safe space, where hard ethics requirements [20] are already been embedded; the
+goalofthisvisionintermsofautonomyistointerveneonanotherlevel,whichprecisely
+concernssoftethics-relatedpreferences.
+Approachingtrust.Inourview,thisdynamicandadaptiveapproachcouldhavea
+significantimpactalsoontheissueoftrust.Itsapplicationnotonlypreserveshighlevels
+of technical and operational trust but can also unveil the critical dimension of ethical
+trust.Thisisanotherkeypointofthevision:ithighlightsaninnovativeapproachtode-
+fine and differentiate between various trust levels — technical, operational, and ethical
+—thatusersandoperatorsattributetoautonomoussystems.Aswewillclarifybelow,the
+currentresearcheffortincludesvaryingdefinitions,dissertations,reflectionsandevalua-
+tionsoftheconceptoftrustinthisdomain[46,27],butthereisoftenanoverlapbetween
+thediverseimplicationsthatactuallysupportitsdevelopment-whichiswhyoneofthe
+points of this paper concerns the focus of clarifying the concept at the epistemological
+level,startingwithamorecomprehensiveproposalofdifferentlevelsoftrust.Technical
+trustrelatestotheperceptionthatthesystemisproperlyengineeredanddesigned,freeof
+malfunctionsandaimedatavoidingasmuchaspossibletheoccurrenceoferrorsinthe
+variousoperationalcontexts.Operationaltrust,ontheotherhand,referstothesystem’s
+abilitytoperformitsfunctionssafelyandeffectively,eveninunforeseensituations.Fi-
+nally,ethicaltrustisbasedonthebeliefthatthesystemactsinaccordancewiththemoral
+principlesandethicalstandardsacceptedbythosewhohavetouseit(whetheroperator
+oruser).
+Motivating scenario. In a nursing home, an assistive robot is responsible for helping
+patients with hygiene tasks, such as brushing their teeth or washing. Anna, a patient,
+prefersfullassistance,trustingtherobottohandlethesetasksautonomously.Conversely,
+
+86 B.Melisetal./HybridAutonomy
+Maria values her privacy and requests minimal intervention, preferring to maintain as
+muchindependenceaspossible.
+To handle this situation, the robot relies on adaptive autonomy to adapt its behav-
+iordynamically.ForAnna,thesystemtakesfullcontrol,efficientlycompletingthetask
+while ensuring her help and comfort. For Maria, the robot provides tools, verbal guid-
+ance,andstep-by-stepinstructions,allowinghertoperformthetaskindependentlywhile
+respectingherpreferencesandherautonomy.IfMariastruggleswiththetask,therobot
+suggests involving a caregiver to provide additional support while prioritising her dig-
+nity.Inbothcases,thesystemadaptsitsautonomyleveldynamically,ensuringthateach
+patient’spreferencesandethicalboundariesarerespected.
+By doing so, the robot respects individual dignity and builds trust, demonstrating
+ethical adaptability. While technically capable of operating at a level of autonomy that
+ensures complete assistance, the system decides to act by adapting its level of auton-
+omyaccordingtothepreferencesofeachuserwithwhomitinteracts.Theenvironment
+remains safe, and the system’s performance capacity becomes a spectrum to consult in
+order to set the level of autonomy it must operate at within the context. Consistently,
+soft ethics dispositions become the medium of exchange to understand how power is
+distributedinthecalibrationoftheselevels.Thisscenariohighlightshowhybridauton-
+omycanaddressdiverseneedswithoutcompromisingoperationalefficiencyorusersat-
+isfaction. Through hybrid-autonomy, the robot resolves the conflict without defaulting
+to an exclusive solution: by modulating its autonomy and involving human staff when
+necessary,thesystempreservesthedignity,preferences,andtrustofbothpatients.
+Inconclusion,theabilityofanautonomoussystemtoadaptdynamically,bothoper-
+ationallyandethically,couldrepresentanewparadigmintheconceptualisationandthe
+developmentofautonomoustechnologiesandintheiradoption[28][13],addressingis-
+suessuchasbiaseddecision-makingor(un)explainableautomatedprocesses.Thisshift
+indesignthinking-towardssystemsthatarebothautonomousandethicallyadaptive-
+createsastrongerfoundationfortrust,bridgingthepower-asymmetrygap[42]between
+development and usage, between advanced technical functionality and the human need
+forexplicability[21].
+3. Backgroundandchallenges
+Sofar,priorresearchonautonomy-basedAImodelshasprovidedvaluableinsightsinto
+the technical and philosophical challenges of deploying intelligent systems in human-
+centricenvironments.However,apersistentgapremainsinintegratingethicalconsider-
+ations,adaptivedecision-making,andoperationalautonomyintoaunifiedframework.
+Existing research in Human-Autonomy Interaction (HAI) and Human-Autonomy
+Teaming(HAT)emphasisesthenecessityofcollaborativeintelligenceanddynamicin-
+teraction between AI systems and human operators [25,37,52]. These studies highlight
+thechallengeofdesigningsystemscapableofadjustingtheirautonomylevelsbasedon
+real-time human input, ethical standards, and situational requirements [48,47]. In this
+regard, the interplay between operational effectiveness and ethical responsiveness re-
+mains unexplored when it comes to develop adjustable autonomy levels. Additionally,
+thedistinctionbetweendifferenttypesofautonomy-basedsystemsisfundamentaltoun-
+
+B.Melisetal./HybridAutonomy 87
+derstandAI’sroleindecision-making[30,7,40].Forexample,whileautonomicsystems
+self-regulatewithinpredefinedtechnicalparameters,autonomoussystemsrequirehigher
+levelsofoperationalindependence,oftenleadingtodifferentethicalchallenges[39,10]
+andtospecificsolutionsforthedevelopmentofpositiveuserinteraction.Anothercrucial
+challengeisestablishingascalable,customisablemodelofhybridautonomythatallows
+AI-poweredsystemstodynamicallyshiftbetweenautonomicself-managementandfully
+autonomousdecision-makingbasedonusertrustandethicalboundaries.
+Exploring ethical concerns and regulation. In everyday life, individuals in the
+digitalworldareconstantlyinteractingwithsoftwaresystems,whetherthroughmobile
+devicesorinsideautonomousvehicles.Thesesystemsarebecomingincreasinglycapa-
+bleofmakingindependentdecisions,oftenoutsidethecontrolofusersorevenontheir
+behalf[33].Inmanycases,thisautonomyexceedstheboundariesofthesystemandin-
+trudesontherightsoftheuser,raisingsignificantethicalissues[19].Addressingthese
+challengesrequiresamultidisciplinaryapproach,withbothregulatoryandtechnicalso-
+lutions.Inadditiontoanengagementinvolvingthelegalregulationofcomplexsystems
+(i.e.,theGDPR[16]andtheAIAct[17]),thescientificcommunityandleadingtechnol-
+ogycompaniesarealsolookingforwaystoidentifytheseproblemsandestablishguide-
+linesforthedevelopmentofalgorithmsandsystemsincorporatingautonomouscapabili-
+ties[31].Althoughthedigitalworldisincreasinglyseenaspotentiallyhostiletoindivid-
+uals,effortsarebeingmadetoreducethishostilitybyimplementingnewlawsandpro-
+motingtransparencyandaccountabilityinsoftwaredevelopment.InFloridi’smetaphor
+ofmangrovesocieties[20],individualsareleftunprotectedintheirinteractionswiththe
+digital world. The real challenge in such landscape, which has not yet been fully ad-
+dressed, is to find ways to empower users by aligning autonomous systems with their
+ethicalandmoralvalues.
+Exploring trust and human-centric design. There exists notable research ef-
+fortregardinguserempowermentthroughadaptable,human-centricintelligentsystems;
+namely, projects like the European TANGO [11] and the Mixed Initiative framework
+[29]bothrecognisethatitisessentialtorethinkthedesignofAIsystemstorealisetheir
+fullpotentialinimprovinghumandecision-making;theprojectadvocatestheestablish-
+ment of a symbiosis between humans and machines, where both parties are aligned in
+terms of values, goals, and beliefs, supporting each other to achieve objectives beyond
+their individual capabilities [11]. The shared objectives are i. to enhance collaboration
+betweenhumansandintelligentsystemsbydynamicallyadjustingthelevelofautonomy
+andinitiativebasedoncontext,usergoals,andsystemconfidence[29,26]andii.tocreate
+systemsthatfacilitateafluidexchangeofcontrol,allowingbothhumansandmachines
+toleveragetheirstrengthsformoreefficientandeffectiveproblem-solving.Byenabling
+systems to understand and respond to user needs, preferences, and considerations, this
+approachfosterstrustandacceptanceofautonomoustechnologies[29].Accordingly,the
+issue of trust is also affected. Identifying and understanding the factors that influence
+trustisessentialtobuildsystemsthatareacceptedandtrulyadoptedbyusers,butitalso
+a challenge [46]. These factors influence not only the development of the system [45],
+butalsothedesignoftheuserinterfaceandfeedbacksystem,whichmustbetransparent
+to promote a clear understanding of the capabilities and limitations of the system [35].
+Ethicaltrust,inparticular,iscrucialtoensurethatautonomoussystemsoperateinaway
+thatisnotonlyfunctional,butalsomorallyacceptable,contributingtotheirwidespread
+
+88 B.Melisetal./HybridAutonomy
+acceptance - and it must be validated according to factors of different kinds, including
+environmental[23]anddispositional[27]ones.
+Exploring solutions in vision of hybrid-autonomy. Studying methodologies and
+proposingspecificsolutionsforbalancingtechnicalautonomywithhumancontrolisan
+importantpointtocreateautonomoussystemsthataresafe,trustworthyandmorallyac-
+ceptable[5,36,15];ifsystemsactindependentlywithoutconsideringtheethicalprefer-
+ences of users, conflicts may arise, with the risk of reducing trust and acceptance, thus
+undermining their potential utility on a social level. Answering this question is crucial
+forthegovernment[53]andthedevelopment[33]ofsystemsthatnotonlyfunctionef-
+fectively(andthuscorrectlydevelopexpectationsabouttechnicalandoperationaltrust),
+butarealsomorallysharedbyusers[50].Thiscouldhelptosolvetheconflictbetween
+technicalefficiencyandrespectforhumanagency,increasingthequalityofcollaboration
+between human and system, as well as a solid foundation for a joint coevolution [43].
+Traditionally,thelevelsofautonomyofasystemchangeinresponsetotechnicalprob-
+lemsoroperationaldifficulties,suchasemergencysituationsinwhichthesystemtakes
+control to ensure safety, thus demonstrating adaptive effectiveness in certain contexts.
+The challenge, in this sense, would be to find consistency between legal regulation of
+complex systems, sustainable technical solutions [31], and the innovation given by the
+visionofanhybrid-autonomy.Thisstepinvolvesintegratingworksuchasthatconducted
+byMostafaetal.[41],thatisalsoinherentinthereconstructionofthediscourseonad-
+justableautonomy,complementingitwithaspectsrelatedtoethicsandmoralitythatare
+under-reportedcomparedtotheeffortontechnicalandtechnologicaladvancement.
+In summary, the identified research gap lies in the lack of an integrated approach that
+combines the ethical considerations of autonomous systems with a proper frameworks
+on trust development and ethical adaptability. Previous studies have largely separated
+thesetwoaspects,focusingeitheronthetechnicalandoperationaltrust(asin[27,35,45])
+or on the ethical implications of autonomous systems (as in [5,36,15]). However, this
+visionstemsonthefactthattrustandethicalaccountabilityinautonomoussystemsmust
+beviewedasmulti-levelconstructs,withethicaltrust(understoodasablendofthetwo
+elements)playingacriticalandoftenunder-exploredrole.
+Accountingdownsides.Whilehybrid-autonomyofferspromisingopportunitiesto
+alignsystembehaviorwithethicalandcontextualuserpreferences,itisnotofferedwith-
+outpotentialdrawbacks.First,theflexibilitythathybridautonomyintroducesmaylead
+toinconsistenciesinsystembehavior,particularlywhentransitioningbetweenautonomy
+levels. Such inconsistencies can result in confusion, reduced usability, or even safety
+risks (predictability). Second, empowering users to calibrate ethical preferences could
+unintentionally shift moral responsibility onto individuals; such scenario introduces a
+form of ethical outsourcing that may not be appropriate in all contexts (accountabil-
+ity). Moreover, the added complexity of dynamically managing autonomy can increase
+cognitiveloadforusers,whomaystruggletounderstandorcorrectlyconfigurethesys-
+tem in real time. This is particularly problematic for vulnerable and non-expert users,
+whoshouldbeproperlyinformedandequippedtoeffectivelyengagethesystem(under-
+standability).Finally,thereisariskthatoverlyadaptivesystemsmayerodeusertrustif
+changesinbehaviorarenottransparentorareperceivedasunpredictable.Paradoxically,
+adaptability meant to enhance trust could backfire if users cannot form reliable mental
+models of system behavior and develop a full sense of control over the interaction en-
+vironment (transparency). These considerations underline the importance of designing
+
+B.Melisetal./HybridAutonomy 89
+hybrid-autonomy by truly applying principles fo AI in society in relation to the expli-
+cability dimension - since users ”need to understand and [...] to account the decision-
+making processes of AI” ([21]: p.7). Future work will also be aimed to systematically
+assesstheserisksanddevelopdesignguidelinestomitigatethem.
+Overall,ourworkseekstofillthegapbycreatingacomprehensiveframeworkthat
+integrates ethical trust with existing operational and technical trust models. Defining
+practical, sustainable and scalable outcomes, e.g., customisable frameworks for ethical
+trust that are applicable to personal assistance systems and care robots, remains an es-
+sentialstepinbridginghybrid-autonomytheoryandpractice.
+EEEEELLLIIICCCIIITTTIIINNNGGGAAANNNDDDMMMOOODDDEEELLLIIINNNGGGEEETTTHHHIIICCCAAALLL
+PPPPRROOFFIILLEESS
+DDDDEESSIIGGNNIINNGGAADDYYNNAAMMIICCAAUUTTOONNOOMMYY--
+LLLLEEVVEELLSSWWIITTCCHH
+FFFFOORRMMAALLIISSIINNGGEETTHHIICCAALLDDEECCIISSIIOONN--
+MMMMAAKKIINNGGRRUULLEESS
+UUNNIIFFIIEEDDEETTHHIICCAALL CCCCOONNSSIISSTTEENNCCYYBBEETTWWEEEENNEETTHHIICCAALL
+AADDAAPPTTAABBIILLIITTYY AAAANNDDTTEECCHHNNIICCAALLCCOONNSSTTRRAAIINNTTSS
+FFRRAAMMEEWWOORRKK EEEETTHHIICCAALLRREEIINNFFOORRCCEEMMEENNTTLLEEAARRNNIINNGG
+FFFFOORRSSYYSSTTEEMMAADDAAPPTTAATTIIOONN
+TTTTRRUUSSTT--DDRRIIVVEENNMMOODDUULLAATTIIOONN
+DDDDEEVVEELLOOPPMMEENNTTOOFFEETTHHIICCAALL
+CCCCOOMMPPLLIIAANNCCEEMMEETTRRIICCSS
+CCCCOONNTTEEXXTT--SSEENNSSIITTIIVVEEVVAALLIIDDAATTIIOONN
+OOOOUUTTLLIINNEE
+SSSSTTAANNDDAARRDDIIZZEEDDBBEENNCCHHMMAARRKKIINNGGFFOORR
+AAAAAAAAAADDDDAAAAPPPPTTTTIIIIVVVVEEEEAAAAUUUUTTTTOOOONNNNOOOOMMMMYYYY
+HHYYBBRRIIDD--AAUUTTOONNOOMMOOUUSS
+SSYYSSTTEEMM
+IINNTTTTEERRAACCTTIIOONNEENNVVIIRROONNMMMMEEEENNNNTTTTTTT
+Figure1.Unifiedframeworkonadaptabilityandethicaltrust:anoverview.
+Final aim. The objective is therefore a high-level, holistic framework designed to
+supportthedevelopment,optimisation,andevaluationofautonomy-basedsystems,par-
+ticularlywithinthedomainofpersonalassistanceandcarerobots.Theframeworkaims
+tobestructuredascontext-independent,ensuringflexibilityinimplementationacrossdi-
+verseconditions.Itwillserveasaguidingtool,offeringguidelines,bestpractices,and
+evaluation benchmarks to help producers, developers and users to integrate and to as-
+sessethicaladaptabilityinAI-poweredautonomy.Byfocusingontrust,environmental,
+technical and dispositional factors, the framework will enable systems to be designed
+withintentionality,calibratingtheirlevelsofautonomyaccordingtopersonalandsocial
+ethicalrequirements.Moreover,itwillconsideratethesystemasawhole,andwillpro-
+videtargetedsolutionsbasedonthecontextofdeploymentanduserinteractionmodels.
+The framework is envisioned to intervene at multiple stages of system design and de-
+velopment:itcanshapeearlydesigndecisions,ensuringthatethicalandtrustawareness
+areembeddedfromtheoutset.Besidesthat,itcanalsofunctionasaadaptationmecha-
+nism, providing an overlay to enhance existing autonomy-based systems. Furthermore,
+it is aimed to establish a structured evaluation model, allowing systems to be assessed
+andpotentiallyacknowledgedwithacertificationbasedonethicaltrustandadaptability
+metrics.Givenitsnatureasahigh-levelframework,ourvisionalsoenvisionstheprod-
+uct to be able to determine whether a system requires ethical adaptability, allowing in-
+
+90 B.Melisetal./HybridAutonomy
+vestments in this domain to be targeted and justified. The action plan involves synthe-
+sising and combining existing work on trust and ethical AI in autonomous systems, in
+searchforacoherentandcomprehensiveapproachthatalignstechnicalrobustnesswith
+human-centered values of collaboration and coevolution. An overview of the vision on
+the framework is provided in the Fig. 1, along with a summary of the main identified
+challenges.
+4. Conclusionsandfuturework
+Inthispaper,wehaveintroducedandmotivatedtheneedforhybrid-autonomyinaso-
+cial window that, on the one hand, directs research towards increasingly sophisticated
+autonomy and technology [8] - and, on the other hand, legitimately demands control
+overadvancedsystemsandrespectfortheirethicalandmoralvalues[31].Buildingon
+theinsightsfromveryrecentworks,weemphasizethecriticalimportanceofaddressing
+the feedback loops inherent in human-AI interactions. As highlighted by Pedreschi et
+al.(2025)[43],thecoevolutionbetweenusersandAIsystemscreatescomplexdynam-
+icsthatcanamplifysocietalchallenges,suchaspolarizationandinequality.Tomitigate
+these risks, hybrid systems must be designed to balance individual and collective out-
+comes,leveragingcontributionsandtoolstobetterunderstandandmodeltheseinterac-
+tions.Also,thevisionwhichispresentedinthispaperalignswiththeresearchroadmap
+proposedbyAutilietal.(2024)[4],whichunderscoresthecentralityofhuman,societal,
+andenvironmentalvaluesintheengineeringofdigitalsystems.Trustandtrustworthiness
+mustbeviewedascrucialelementsinthedevelopmentofsystemsthataretransparent,
+explainable,andcapableofethicaladaptability:therefore,theyneedtobebetterdefined
+both at the epistemological and applicative stages. By embedding these principles, we
+aim to support the design of systems that not only meet technical performance bench-
+marks,butalsoalignwithusers’expectationswithregardtotheinteraction.Basingon
+the commitment and attention these contributions call to the development of more fair
+AI-powered autonomous systems, our work is addressing a specific need by applying
+ittocareandassistancerobots,asshowninthemotivatingscenario;suchapproachre-
+quiresspecificadaptationtotheusersintendedfortheiruse,towardsabetterandmore
+personalised experience - and, consequently, it also requires a targeted study of the in-
+tendedaudience’sneedsandexpectations.Inconclusion,ourvisionunderscoresthene-
+cessity for a multidisciplinary lens to develop hybrid-autonomy systems that integrate
+and address ethical adaptability and trust factors. By synthesising and harmonising in-
+sightsfromcomputerscience,human-centricengineering,andethical-awaresystemde-
+sign,thisframeworkcanprovideafoundationforcreatingresponsibleAItechnologies.
+Future work will focus on validating this proposal across diverse domains, exploring
+practicalimplementationspossibilitiesthroughsurveysanduserstudies,andaddressing
+challengesintheinterplaybetweenhumansandautonomoussystems.
+Acknowledgements
+This work has been partially funded by the MUR (Italy) Department of Excellence
+2023-2027,andthePRINproject2022JKA4SL-HALO:etHical-awareAdjustabLeau-
+tOnomoussystems.
+
+B.Melisetal./HybridAutonomy 91

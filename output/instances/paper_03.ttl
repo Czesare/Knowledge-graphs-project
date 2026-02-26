@@ -1,0 +1,168 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_03 a hi:Paper ;
+    hi:describesUseCase inst:Paper_03_UseCase ;
+    hi:hasAuthor inst:Paper_03_Author1,
+        inst:Paper_03_Author2,
+        inst:Paper_03_Author3,
+        inst:Paper_03_Author4 ;
+    hi:hasKeyword "Decision Support Systems",
+        "Explainable Artificial Intelligence",
+        "Human-Computer Interaction",
+        "Interaction Design" ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Formalizing Explanation Design Through Interaction Patterns in Human-AI Decision Support"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_03_Evaluation a hi:Evaluation ;
+    rdfs:label "Explanation Pattern Evaluation" ;
+    hi:hasEvaluationConcept hint:TransparencyEvaluation ;
+    hi:hasExperiment inst:Paper_03_Experiment_ExplanationEffectivenessExperiment ;
+    hi:hasMetricConcept hint:ExplanationClarityMetric,
+        hint:TrustPreservationMetric .
+
+inst:Paper_03_Interaction_User-systemExplanationInteraction a hi:Interaction ;
+    rdfs:label "User-System Explanation Interaction" ;
+    hi:hasAgentInvolved inst:Paper_03_ExplainableAiSystem,
+        inst:Paper_03_InteractionDesigner ;
+    hi:hasInteractionIntentConcept hint:ExplanationIntent ;
+    hi:hasInteractionModalityConcept hint:DashboardModality .
+
+inst:Affiliation_JheronimusAcademyOfDataScience a hi:Affiliation ;
+    rdfs:label "Jheronimus Academy of Data Science" ;
+    schema1:name "Jheronimus Academy of Data Science" .
+
+inst:Affiliation_UtrechtUniversity a hi:Affiliation ;
+    rdfs:label "Utrecht University" ;
+    schema1:name "Utrecht University" .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Paper_03_Author1 a hi:Author ;
+    foaf:name "Henry Maathuis" ;
+    hi:hasAffiliation inst:Affiliation_HuUniversityOfAppliedSciencesUtrecht ;
+    hi:hasAuthorName "Henry Maathuis"^^xsd:string .
+
+inst:Paper_03_Author2 a hi:Author ;
+    foaf:name "Daan Kolkman" ;
+    hi:hasAffiliation inst:Affiliation_UtrechtUniversity ;
+    hi:hasAuthorName "Daan Kolkman"^^xsd:string .
+
+inst:Paper_03_Author3 a hi:Author ;
+    foaf:name "Stefan Leijnen" ;
+    hi:hasAffiliation inst:Affiliation_HuUniversityOfAppliedSciencesUtrecht ;
+    hi:hasAuthorName "Stefan Leijnen"^^xsd:string .
+
+inst:Paper_03_Author4 a hi:Author ;
+    foaf:name "Danielle Sent" ;
+    hi:hasAffiliation inst:Affiliation_JheronimusAcademyOfDataScience ;
+    hi:hasAuthorName "Danielle Sent"^^xsd:string .
+
+inst:Paper_03_Context a hi:Context ;
+    rdfs:label "Decision Support Systems Context" ;
+    hi:hasConstraintConcept hint:EthicalConstraint,
+        hint:TransparencyConstraint ;
+    hi:hasContextConcept hint:ClinicalConsultationContext ;
+    hi:hasInfluenceOn inst:Paper_03_Team ;
+    hi:hasPhenomenonConcept hint:ConfirmationBias,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_03_Exec_DesignExplanationPatternsExecution a hi:TaskExecution ;
+    rdfs:label "Design Explanation Patterns Execution" ;
+    hi:hasMethodConcept hint:CooperativeLearningMethod ;
+    hi:realizesTask inst:Paper_03_Task_DesignExplanationPatterns .
+
+inst:Paper_03_Exec_GenerateExplanationsExecution a hi:TaskExecution ;
+    rdfs:label "Generate Explanations Execution" ;
+    hi:hasMethodConcept hint:PostHocExplanationMethod ;
+    hi:realizesTask inst:Paper_03_Task_GenerateExplanations .
+
+inst:Paper_03_Experiment_ExplanationEffectivenessExperiment a hi:Experiment ;
+    rdfs:label "Explanation Effectiveness Experiment" ;
+    hi:hasAlternativeHypothesis "Explanation patterns improve decision-making."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:ExplanationClarityMetric,
+        hint:TrustPreservationMetric ;
+    hi:hasNullHypothesis "Explanation patterns do not improve decision-making."^^xsd:string .
+
+inst:Paper_03_ExplainableAiSystem_Cap_ExplanationGeneration a hi:Capability ;
+    rdfs:label "Explanation Generation" ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
+inst:Paper_03_ExplainableAiSystem_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_03_Goal_EnhanceDecision-making a hi:Goal ;
+    rdfs:label "Enhance Decision-Making" ;
+    hi:hasGoalConcept hint:AccurateTrustworthyDiagnosisGoal ;
+    hi:requiresTask inst:Paper_03_Task_AssessUserNeeds,
+        inst:Paper_03_Task_DesignExplanationPatterns,
+        inst:Paper_03_Task_GenerateExplanations .
+
+inst:Paper_03_InteractionDesigner_Cap_UserEngagementUnderstanding a hi:Capability ;
+    rdfs:label "User Engagement Understanding" ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_03_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Explanation Stream Patterns in DSS" ;
+    hi:hasDomainConcept hint:HealthAndLifestyleDomain,
+        hint:LawAndPolicyDomain ;
+    hi:hasHITeam inst:Paper_03_Team .
+
+inst:Affiliation_HuUniversityOfAppliedSciencesUtrecht a hi:Affiliation ;
+    rdfs:label "HU University of Applied Sciences Utrecht" ;
+    schema1:name "HU University of Applied Sciences Utrecht" .
+
+inst:Paper_03_ExplainableAiSystem a hi:ArtificialAgent ;
+    rdfs:label "Explainable AI System" ;
+    hi:hasCapability inst:Paper_03_ExplainableAiSystem_Cap_ExplanationGeneration,
+        inst:Paper_03_ExplainableAiSystem_Cap_PatternRecognition ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_03_Exec_GenerateExplanationsExecution .
+
+inst:Paper_03_InteractionDesigner a hi:HumanAgent ;
+    rdfs:label "Interaction Designer" ;
+    hi:hasCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment,
+        inst:Paper_03_InteractionDesigner_Cap_UserEngagementUnderstanding ;
+    hi:hasRoleConcept hint:HumanUserRole ;
+    hi:performsExecution inst:Paper_03_Exec_DesignExplanationPatternsExecution .
+
+inst:Paper_03_Task_AssessUserNeeds a hi:Task ;
+    rdfs:label "Assess User Needs" ;
+    hi:hasTaskConcept hint:SituationalAssessmentTask ;
+    hi:requiresCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment .
+
+inst:Paper_03_Team a hi:HITeam ;
+    rdfs:label "Explanation Stream Patterns in DSS Team" ;
+    hi:hasGoal inst:Paper_03_Goal_EnhanceDecision-making ;
+    hi:hasMember inst:Paper_03_ExplainableAiSystem,
+        inst:Paper_03_InteractionDesigner ;
+    hi:isInfluencedBy inst:Paper_03_Context .
+
+inst:Paper_03_Task_DesignExplanationPatterns a hi:Task ;
+    rdfs:label "Design Explanation Patterns" ;
+    hi:hasTaskConcept hint:ExplanationTask ;
+    hi:requiresCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment .
+
+inst:Paper_03_Task_GenerateExplanations a hi:Task ;
+    rdfs:label "Generate Explanations" ;
+    hi:hasTaskConcept hint:ExplanationTask ;
+    hi:requiresCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment .
+
+inst:Paper_03_InteractionDesigner_Cap_DesignJudgment a hi:Capability ;
+    rdfs:label "Design Judgment" ;
+    hi:allowsTask inst:Paper_03_Task_AssessUserNeeds,
+        inst:Paper_03_Task_DesignExplanationPatterns,
+        inst:Paper_03_Task_GenerateExplanations ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+

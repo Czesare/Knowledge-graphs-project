@@ -1,0 +1,193 @@
+{
+  "paper_id": "competition_01",
+  "title": "HI Competition Scenario: Neurodegeneration Research",
+  "authors": [],
+  "keywords": [
+    "neurodegeneration",
+    "protein folding",
+    "AI collaboration"
+  ],
+  "use_case": {
+    "label": "Neurodegeneration Protein Analysis",
+    "type": "competition",
+    "domain_concepts": [
+      "hint:MedicalDomain"
+    ],
+    "context": {
+      "label": "Pharmaceutical Lab Research",
+      "context_concepts": [
+        "hint:ClinicalConsultationContext"
+      ],
+      "constraint_concepts": [
+        "hint:TransparencyConstraint",
+        "hint:AutonomyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:SkillsComplementarityPhenomenon",
+        "hint:TrustShiftPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Dr. Emily Chen",
+          "role_concept": "hint:ClinicianRole",
+          "capabilities": [
+            {
+              "label": "Clinical Judgment",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Protein Analysis"
+              ]
+            },
+            {
+              "label": "Research Coordination",
+              "concept": "hint:OperatorCoordinationCapability",
+              "allows_tasks": [
+                "Team Optimization"
+              ]
+            },
+            {
+              "label": "Literature Review",
+              "concept": "hint:SemanticReasoningCapability",
+              "allows_tasks": [
+                "Cross-reference Literature"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "AlphaFold",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Protein Structure Prediction",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Protein Analysis"
+              ]
+            },
+            {
+              "label": "3D Model Generation",
+              "concept": "hint:MultimodalInterpretationCapability",
+              "allows_tasks": [
+                "Protein Analysis"
+              ]
+            },
+            {
+              "label": "Data Processing",
+              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "allows_tasks": [
+                "Protein Analysis"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Identify Neuroprotective Proteins",
+        "goal_concept": "hint:AccurateTrustworthyDiagnosisGoal",
+        "tasks": [
+          {
+            "label": "Protein Analysis",
+            "task_concept": "hint:SymptomAnalysisTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability",
+              "hint:MultimodalInterpretationCapability"
+            ],
+            "sub_tasks": [
+              {
+                "label": "Sequence Input",
+                "task_concept": "hint:DataCollectionTask",
+                "required_capabilities": [
+                  "hint:SensingCapability"
+                ]
+              },
+              {
+                "label": "3D Model Generation",
+                "task_concept": "hint:ReconstructTrajectoryTask",
+                "required_capabilities": [
+                  "hint:MultimodalInterpretationCapability"
+                ]
+              },
+              {
+                "label": "Binding Site Identification",
+                "task_concept": "hint:SemanticReasoningTask",
+                "required_capabilities": [
+                  "hint:SemanticReasoningCapability"
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Cross-reference Literature",
+            "task_concept": "hint:KnowledgeGraphQueryTask",
+            "required_capabilities": [
+              "hint:SemanticReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Team Optimization",
+            "task_concept": "hint:OperatorCoordinationTask",
+            "required_capabilities": [
+              "hint:OperatorCoordinationCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Weekly Team Meeting",
+        "modality_concept": "hint:VoiceChatModality",
+        "intent_concept": "hint:DeliberationIntent",
+        "agents_involved": [
+          "Dr. Emily Chen",
+          "AlphaFold"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Execute Protein Analysis",
+        "task_label": "Protein Analysis",
+        "performed_by": "AlphaFold",
+        "method_concept": "hint:KnowledgeGraphQueryMethod"
+      },
+      {
+        "label": "Conduct Literature Review",
+        "task_label": "Cross-reference Literature",
+        "performed_by": "Dr. Emily Chen",
+        "method_concept": "hint:SemanticLinkingMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Research Output Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric",
+        "hint:DiagnosisAccuracyMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Protein Structure Prediction Accuracy",
+          "experiment_concept": "hint:DiagnosisExperiment",
+          "metrics_tested": [
+            "hint:DiagnosisAccuracyMetric"
+          ],
+          "null_hypothesis": "AlphaFold predictions do not improve research outcomes.",
+          "alternative_hypothesis": "AlphaFold predictions significantly improve research outcomes."
+        }
+      ]
+    }
+  },
+  "new_concepts": []
+}

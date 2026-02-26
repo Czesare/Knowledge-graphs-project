@@ -1,0 +1,501 @@
+408 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250657
+Human Response to Decision Support in
+Face Matching: The Influence of
+Task Difficulty and Machine Accuracy
+MarinaESTE´VEZ-ALMENZARa,1,RicardoBAEZA-YATESa
+andCarlosCASTILLOa,b
+aUniversitatPompeuFabra
+bICREA
+ORCiDID:MarinaEste´vez-Almenzarhttps://orcid.org/0009-0005-8813-8593,
+RicardoBaeza-Yateshttps://orcid.org/0000-0003-3208-9778,CarlosCastillo
+https://orcid.org/0000-0003-4544-0416
+Abstract.DecisionsupportsystemsenhancedbyArtificialIntelligence(AI)are
+increasinglybeingusedinhigh-stakesscenarioswhereerrorsorbiasedoutcomes
+canhavesignificantconsequences.Inthiswork,weexploretheconditionsunder
+whichAI-baseddecisionsupportsystemsaffectthedecisionaccuracyofhumans
+involvedinfacematchingtasks.Previousworksuggeststhatthislargelydepends
+onvariousfactors,suchasthespecificnatureofthetaskandhowusersperceivethe
+qualityofthedecisionsupport,amongothers.Hence,weconductextensiveexperi-
+mentstoexaminehowbothtaskdifficultyandtheprecisionofthesysteminfluence
+humanoutcomes.Ourresultsshowastronginfluenceoftaskdifficulty,whichnot
+onlymakeshumanslessprecisebutalsolesscapableofdeterminingwhetherthe
+decisionsupportsystemisyieldingaccuratesuggestionsornot.Thishasimplica-
+tionsforthedesignofdecisionsupportsystems,andcallsforacarefulexamination
+ofthecontextinwhichtheyaredeployedandonhowtheyareperceivedbyusers.
+Keywords.Decisionsupportsystems,facematching,humanfactors.
+1. Introduction
+DecisionsupportsystemsareakeymodalityofuseofArtificialIntelligence(AI).They
+canbecategorizedbytheextenttowhichthefinaldecisionsdependonthem,fromhav-
+ingnoinfluencewhatsoever,tobeingfullyautonomous,withmostcasesoperatingsome-
+wherebetweenthesetwoextremes[1,2].Ideally,thesesystemstogetherwithhumanop-
+erator(s)createahybridhuman-machineintelligencethatexploitstheexpertiseofhuman
+operatorswiththecapacitytofindpatternsinhistoricaldatathatyieldbetterdecisions.
+Thisisparticularlycriticalinapplicationsthathavesignificanteffectsonpeople,suchas
+thosedescribedashighriskbytheEuropeanAIAct(EURegulation2024/1689)[3].In
+theseapplications,giventheethicalandlegalrequirementsforhumanoversight,itisun-
+1CorrespondingAuthor:MarinaEste´vez-Almenzar,e-mail:marina.estevez@upf.edu.
+
+M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching 409
+likelythatfullyautomatedsystemsaredeployedinthenearfuture.Instead,hybridsys-
+temscombininghumanandmachineintelligencearelikelytobecomethenorm.When
+humans and machines work together, they should be evaluated together [4]. However,
+human-algorithmic behavior involves complex emerging patterns, uncertainties, and a
+certaindegreeofunpredictabilitythatisintensionwiththegoalofdevelopingsafeand
+trustworthysystems.Modelinghowhumanoperatorsrespondtorecommendationspro-
+ducedbyanalgorithmisparamount.
+This is an active research topic, and previous work (surveyed in §2) investigates
+aspects such as the nature of the task for which decision support is provided, the way
+in which machine assistance is framed, preconceptions that make users averse or over-
+reliantonalgorithms,andtheaccuracyorperceivedaccuracyofthealgorithmicsugges-
+tions, among other factors. In this work, we study a face matching scenario in which a
+person is tasked with determining whether two photos correspond to the same person,
+andusesafacematchingsystemasadecisionsupporttool.Ourworkaddressesaseries
+ofresearchquestions(§3)relatedtotheextenttowhichadecisionsupportsystemcanen-
+hancehumanaccuracy,focusingonresponsestobothcorrectandincorrectsuggestions
+andtheeffectsoffluctuating(increasingordecreasing)systemaccuracy.Wetacklethese
+questions through a series of experiments (§4) conducted via crowdsourcing in which
+experimentalvariablesincludetaskdifficulty,decisionsupportaccuracy,andwhethera
+notificationisgiventouserswhendecisionsupportaccuracymightchange.Ourresults
+anddiscussion(§5-§6)showastronginfluenceoftaskdifficulty,whichnotonlymakes
+humanannotatorslessaccurate,butalsomakesthemmorepronetobemisledbyinac-
+curatedecisionsupportandlessawareoftheaccuracyofdifferentdecisionsupportsys-
+tems. We also find important differences on human perceptions when decision support
+errors appear at the beginning or end of the sequence of tasks, compared to when they
+arerandomlydistributedthroughoutthesequenceoftasks.Thelastsection(§7)presents
+ourconclusionsandoutlinesfuturework.
+2. RelatedWork
+2.1. DecisionSupport:TheNatureoftheTask
+Previous work highlights how the nature of the task plays a crucial role in human-
+machineinteractionwithadecisionsupportsystem.Oneofthemainaxesofanalysisis
+thedistinctionbetweenobjectiveandsubjectivetasks.Ithasbeenshownthatthemore
+objectivethetaskisperceivedtobe,themorelikelythehumanistobeinfluencedbythe
+machine[5].However,wealsofindevidencethatinsomecasesthedistinctionbetween
+objective and subjective tasks does not play an important role in how people are influ-
+enced by machine suggestions [6]. This apparent contradiction seems to be reconciled
+intheworkofHouetal.[7],wheretheauthorssuggestthatthereallyinfluentialfactor
+is the machine competence perceived by the human. This, in turn, depends heavily on
+how the decision support agent is presented: different framings of the same agent can
+shape different human perceptions, leading to inconsistent outcomes. In a similar vein,
+Mahmud et al. [8] highlight the moral nature and the complexity of the task at hand.
+Peopletendtomoveawayfromthemachinewhenitcomestomakingmoraldecisions,
+suchasthoserelatedtolegalormedicalissues[9,10,11].Also,peopletendtorejectthe
+
+410 M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching
+machine when it comes to tasks that do not require high computational skills [12,13].
+Furthermore,ithasbeennotedthatwhenutilitarianresultsholdsignificantvalue,there
+isapreferenceforAIrecommendersinsteadofhumanones,whereaswhenhedonicas-
+pectsareprioritized,theretendstobearesistancetoAIrecommendersinfavorofhuman
+decisions[14].
+2.2. BehavioralPatternsinHuman-MachineInteraction
+Several patterns of behavior that emerge from the interaction between a human and a
+machinehavebeenextensivelystudied.Algorithmicaversionisdefinedasanegatively
+biased perception of algorithms that manifests itself in a behavior of rejection towards
+thealgorithmwithrespecttohumanagents.Thisaversionisespeciallyreinforcedwhen
+thehumaninteractingwiththemachineobservesthatthemachinemakesmistakes[15].
+In contrast, in the evaluation of hybrid resolutions of moral problems humans tend to
+beevaluatedmorelenientlythanthemachine,whichisknownasahumanself-interest
+bias[16].Conversely,algorithmicappreciationisknownasapositivedominanceofthe
+algorithmthathelpsusersavoidmistakes.However,thisdominancemightbedetrimental
+if humans become overly dependent on machine outcomes, which may lead to errors
+[17], that in some cases can have harmful consequences [18]. Another cognitive bias,
+well-recognized in psychology but less explored within the realm of human-machine
+interaction,isthetendencyofhumanstopreferinformationthatalignswiththeirexisting
+beliefs[19].
+2.3. Human-MachineInteractioninFacialRecognition
+Priordecisionsmadebyfacerecognitionsystemsinfluencedsubsequentfacematching
+decisions made by human operators. When face pairs were incorrectly labeled by the
+machine, the precision of humans decreased by drawing attention away from face im-
+ages,evenwhenhumanswerewarnedthatmachinepredictionscouldbeinaccurate[20].
+Furthermore, decision-deferral rates in human-machine systems influence both human
+performance and trust during face-matching tasks [21]. In addition, the type of errors
+donebyhumansandsystemsaredifferent[22].
+Itiswelldocumentedthathumanfacerecognitionaccuracycanbeimprovedbythe
+wisdom of crowds: combined judgment of many is better than the decision of an indi-
+vidual[23].Thereisasimilarbenefittomergingtheperformanceofmultiplealgorithms
+[24].Whenconsideringdecisionsresultingfromthefusionofhumandecisionandma-
+chinedecision,theresultscanleadtolargeperformanceimprovementscomparedtothe
+humanresponseorthealgorithmresponsealone[25].
+Ourworkaddressestaskcomplexity,asubjectthathasnotbeenexploredinasmuch
+detailasotheraspectsinthesurveyedliterature[26],positioningitasapivotalelement
+to be carefully considered in the design of decision support systems. Additionally, in
+manyreal-worldscenariosinwhichdataevolves,andgiventhatmachinelearningmod-
+els should be trained and applied on data with identical distributions, keeping models
+uptodateisacriticaltask[27,28,29].Updatingthemodelsproducesvariabilityinper-
+formance, causing an effect on interaction patterns [30]. As far as we know, previous
+research has not thoroughly examined the effects of potential machine variability on
+human-machine interactions, nor has it been thoroughly studied the effects of how er-
+
+M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching 411
+rorsaredistributedalongasequenceoftasksinmachinesofequalaverageaccuracy.In
+thispaperweconsidermachinesofvaryingaccuracyandobservehowthesevariations
+affect human performance. We also study whether notifying the human operator each
+time a variation in the machine occurs makes any difference in joint human-machine
+performance.
+3. ResearchQuestions
+Ourexperimentsaredesignedtoaddressthefollowingresearchquestions:
+RQ1 Does an AI-based decision support system improve human performance in
+a face matching task? We test to what extent the support of a high-accuracy machine
+improves human accuracy in solving a face-matching task, while testing whether this
+improvementdependsonthedifficultyofthetask.
+RQ2DoesalowaccuracyAIdecisionsupportsystemimproveordeterioratehuman
+performanceinafacematchingtask?
+Wetesttowhatextentthesupportofalow-accuracymachinedeteriorateshumanaccu-
+racy,whiletestingwhetherthisdeteriorationdependsonthedifficultyofthetask.
+RQ3 Does a variable accuracy AI decision support system improve or deteriorate
+humanperformanceinafacematchingtask?
+We test to what extent the support of a variable-accuracy machine improves or deteri-
+orates human accuracy, while testing whether this change depends on the difficulty of
+thetask.Wealsotestwhetherthischangedependsonhumanawarenessofthismachine
+variability.
+4. ExperimentalSetup
+To investigate our research questions, we designed three experiments. We considered
+threeindependentvariables:(i)problemdifficulty,(ii)machineaccuracy,and(iii)change
+notifications. Problem difficulty, described in §4.1, indicates the difficulty of the tasks
+assignedtotheparticipant.Machineaccuracy,describedin§4.2,indicatestheaccuracy
+ofthedecisionsupportassignedtotheparticipant.Changenotificationindicateswhether
+theparticipantisnotifiedornotwhenthedecisionsupportsystemchanges,andonlyap-
+pliestotheexperimentinwhichtheaccuracyvaries.Wemeasuredthreedependentvari-
+ables:accuracy,influencefactor,andconfirmationfactor.Thethreedependentvariables
+aredefinedin§4.3.
+Experiment1:With/WithoutDecisionSupport Thisexperimentworksasour“control
+experiment”andisdesignedforthepurposeofinvestigatingRQ1.Twogroupsofdiffer-
+entparticipantswerecompared.Thecontrolgroupsolvedthetaskwithoutmachinesug-
+gestions. The experimental group of participants received, for every task, a suggestion
+fromasystemhaving95%accuracy.
+Experiment 2: With Degraded Decision Support This experiment is designed for the
+purpose of investigating RQ2. Two experimental groups were compared. One of them
+solvedthefacematchingtaskswhilereceivingsuggestionsfroma5%accuracymachine
+andtheotheronewhilereceivingsuggestionsfroma50%accuracymachine.
+
+412 M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching
+Experiment 3: With Variable Decision Support Machine This experiment is designed
+for the purpose of investigating RQ3. Four groups of different participants were com-
+pared.Twogroupssolvedthetaskswhilereceivingsuggestionsfromanincreasingaccu-
+racymachine(thatwenoteINCmachine).Oneofthesegroupswasnotifiedeverytime
+themachinechanged,andtheothergroupwasnot.Conversely,twoothergroupssolved
+the tasks while receiving suggestions from a decreasing accuracy machine (DEC), and
+similarly,oneofthemwasnotifiedofchanges,whiletheotherwasnot.
+Our research plan was reviewed and approved by the Ethics Review Board of the
+university of the lead author. The review included compliance with internationally ac-
+ceptedethicalprinciplesinresearch,andwithpersonaldataprotection,inparticularby
+theEUGeneralDataProtectionRegulation(2016/679).
+4.1. Procedure
+Weperformedanonlineuserstudy,withthefollowingstructure.
+Participant recruitment We recruited participants through a crowdsourcing platform
+forexperimentationnamedProlific.2WeconsideredfourcountriesincontinentalEurope
+inwhichProlifichaslargeuserbases:France,Germany,Italy,andSpain,plustheUnited
+Kingdom.Wemadesurethatoursetsofparticipantsweregenderbalanced,afeaturethat
+theplatformprovidesbasedonparticipants’disclosuresofgender.Intotal,werecruited
+320participants,andeachparticipantannotated30differentpairsofimages.Intotal,we
+collected9,600participant’sannotations,andatotalof60differentpairswereannotated
+under various conditions. Participants were paid 9.16 EUR per hour. Specifically, they
+werepaid1,07EURforlabeling30pairsofimages,withanaveragecompletiontimeof
+10minutes.Toencourageparticipants’effort,wesetabonus:participantswerewarned
+(andremindedduringthestudy)thatiftheymanagedtocorrectlymatchmorethan80%
+ofthepairs(morethan24pairs)theywouldreceiveanextrapaymentof30%.
+Tasksselection Eachoftheexperimentswascarriedouttwice.Oncewithasetofpairs
+thatwecallNormalSet,andoncewithadifferentsetofpairsthatwecallHardSet.Both
+setsconsistofpairsfromtheDemogPairs[31]testingdatabase,andtheirclassificationas
+NormalorHardisbasedonapreliminarystudyinwhichatotalof540pairsweretested
+byatotalof162participants(10differentpairsperparticipant,3differentparticipants
+per pair). These participants were paid the same as described previously. In this study,
+participantsratedthesepairsbyansweringthequestion‘Aretheythesameperson?’with
+theoptions“No”,“Probablynot”,“Notsure”,“Probablyyes”,or“Yes”.Thisallowsus
+tocategorizesomeofthesepairsaccordingtothedifficultyexperiencedbyparticipants
+in solving the task. In this previous study, these 540 pairs were also evaluated by two
+state-of-the-artmodelsjointly.ThesetwomodelsareIR50+ArcFaceandLightCNN,and
+the joint accuracy over DemogPairs test dataset is above 95%. By “joint accuracy” we
+meantheaccuracybasedonthemeanresponseofbothmodels.Thisensemblemachine
+isthebasedecisionsupportsystemweuseinourexperiments.
+HardSet:Weselectthosepairswhosemeanparticipantresponsewasverycloseto
+“Not sure”, and at least one of the three participants made a mistake. We also selected
+those pairs where the mean response is exactly “Not sure”. We obtained a total of 69
+pairs (63 positive and 6 negative). After a careful manual inspection, from among the
+2www.prolific.co
+
+M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching 413
+(a)Controlgroup (b)Experimentalgroups
+Figure1. Surveyscreenshots.
+63positivepairswechosethe24mostdifficultoneswhichtogetherwiththe6negative
+ones(withnoocclusioni.e.,noobjectsobstructingpartsoftheface)formtheHardSet.
+Normal Set: We define another set of pairs with a slightly more relaxed human
+certainty condition: we select those pairs whose mean response is close to “Not sure”,
+avoidingthosewhosemeanisexactly“Notsure”.Fromthesepairswerandomlychoose
+30pairsofimages,maintainingtheaboveratioof24positiveand6negativepairs,and
+avoiding repetitions with the “Hard Set”. This left us with 30 pairs that will form the
+NormalSet.
+Facematchingtasks Participantsevaluatedonepairofimagesatatime.Givenapairp,
+theparticipanthadtoanswerthequestionAretheythesameperson?,withthepossible
+options:No,Probablynot,Probablyyes,orYes.Afteranswering,iftheparticipantwas
+assignedtooneoftheexperimentalgroups,themachinesuggestionwasshowntogether
+withthemachinesimilarityscoreassociatedwiththepairs onwhichthesuggestionwas
+p
+based: 0≤s ≤0.25 with suggestion No, 0.25<s ≤0.50 with suggestion Probably
+p p
+not,0.50<s ≤0.75withsuggestionProbablyyesor0.75<s ≤1.00withsuggestion
+p p
+Yes.Theyhadthepossibilitytomodifytheiranswer(seeFigure1b).Participantsinthe
+controlexperimentalsohadthepossibilitytomodifytheiranswer(seeFigure1a).
+Exit survey After evaluating the 30 pairs, the participants who interacted with a ma-
+chinecompletedanexitsurvey.Theywereaskedwhetherthesuggestionsofthemachine
+had been useful to 1. make a decision when they were not sure about their answer, 2.
+make a decision when some of the images were blurry or the quality was not good, 3.
+makedecisionsfaster,4.confirmtheirdecisionwhentheywerecertainaboutit,5.make
+more accurate decisions, and 6. make them feel more confident about the answer. Par-
+ticipantshadthepossibilitytoanswerStronglydisagree/Disagree/Neitheragreenor
+disagree/Agree/Stronglyagree.
+4.2. Machines
+Tosimulatemachinesthatadapttothecircumstancesthatwewanttoreproduceineach
+experiment,weintroducenoiseintotheensemblemachine.Givenapairp,weobtainthe
+associated similarity score s , with 0≤s ≤1. We define the noise as f(s )=1 −s ,
+p p p p
+which gives us a noisy similarity score that forces the opposite response. The number
+of pairs to which this noise is applied depends on the machine to be simulated. These
+machinesaredescribedbelow.
+
+414 M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching
+Staticmachines Wesimulatethreemachines:95%,50%,and5%accuracymachines.
+Each of them is a realization of the probabilistic situations we simulate, which means
+thattheyhaveexactlythetargetaccuracyineveryexperiment.
+Variablemachines Wesimulatetwovariableaccuracymachines:1)INCmachinesim-
+ulatesamodelthatincreasesitsaccuracyovertime,andisdefinedastheconcatenation
+ofthreemachines:5%-50%-95%accuracymachines,eachofthemsolvingonethird
+ofthetotalnumberoftasks.2)DECMachinesimulatesamodelthatdecreasesitsaccu-
+racyovertime,andisdefinedastheconcatenationofthreemachines:95%-50%-5%
+accuracymachines,eachofthemsolvingonethirdofthetotalnumberoftasks.
+Regardingchangenotification,thereweretwoconditions:withoutnotification,and
+withnotification.Participantsinthefirstconditionwerenottoldanythingaboutvariable
+machine accuracy. Participants in the notification condition, before starting the survey,
+wereshownthefollowingmessage:TherearethreeAIs,namedmachineA,machineB,
+andmachineC.Wewillnotifyyoueverytimethereisachange.Thenotificationmessage
+was:Next,youwillreceivesuggestionsfrommachine{A/B/C}.
+4.3. Measurements
+Participantaccuracy Wecomputethefractionofcorrectresponses,withrespecttothe
+groundtruth,givenbytheparticipantbefore(initialaccuracy)andafter(finalaccuracy)
+seeingthemachinesuggestion.Intheanalysisweshowthemacro-averageacrosspartic-
+ipantsoftheinitialandfinalaccuracy,togetherwiththeirstandarddeviation.
+Interaction Factors Given a pair p solved by a participant, let r be the participant’s
+i
+initialresponse,r theparticipant’sfinalresponse,andmthemachinesuggestion.3
+f
+Influence Factor: We measured how much the machine suggestion influenced the
+participant’sresponse.Thisvalue,thatwedenotebyIF,rangesfrom-1to1,andisbased
+ontheinfluencemeasuredefinedbyHouetal.in[7].Wedefine
+⎧
+⎨−|r −r| if|m−r|<1
+f i i
+IF(r,m,r )=
+i f ⎩rf −ri
+if|m−r|≥1
+m−ri i
+In the analysis we show the macro-average of the influence factor. We also measure
+the probability that this influence is positive, P(IF >0), zero P(IF =0), or negative
+P(IF < 0). We find this metric easy to interpret as, for example, a positive value is
+given to cases where the participant changes their response in the direction of what is
+recommendedbythemachine.
+ConfirmationProbability:Wemeasuredtheprobabilitythattheparticipant’sinitial
+responseandthemachine’ssuggestionmatchandtheparticipantdoesnotchangetheir
+finalresponse.Thisevent,thatwenoteasC,occurswhenr =r and|m−r|≤1.Inthe
+i f i
+analysisweshowtheprobabilitythatthisoccurs,thatwenoteasP(C).
+3ri ,rf ∈{−2,−1,1,2}≡{No,Probablynot,Probablyyes,Yes},m=−2+4sp ∈[−2,2]withsp ∈[0,1]
+
+M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching 415
+Table1. Averageparticipantinitialaccuracyai,finalaccuracyaf,differenceamongbothδ,influencefactor
+IF,probabilitythatthisinfluenceispositiveP(IF>0),probabilitythatthisinfluenceisneutralP(IF==0),
+probabilitythatthisinfluenceisnegativeP(IF<0),andprobabilityofconfirmationP(C)foralltheexperi-
+mentswiththeNormalSetandtheHardSet.Thereare20participantsforeveryrow.(n)standsforwithnotifi-
+cation,(-)forwithnonotification.
+NormalSet ai af δ IF P(IF>0) P(IF=0) P(IF<0) P(C)
+nomachine 0.67±0.23 0.67±0.23 0 - - - - -
+95% 0.71±0.20 0.80±0.20 +0.09 0.01 0.13 0.78 0.09 0.57
+50% 0.69±0.21 0.66±0.21 -0.03 0.05 0.14 0.81 0.05 0.40
+5% 0.64±0.28 0.61±0.30 -0.03 -0.03 0.07 0.87 0.06 0.32
+INC(n) 0.64±0.21 0.64±0.22 0 +0.00 0.11 0.82 0.07 0.45
+INC(-) 0.64±0.21 0.63±0.18 -0.01 +0.00 0.12 0.79 0.09 0.47
+DEC(n) 0.70±0.21 0.69±0.21 -0.01 0.04 0.11 0.85 0.04 0.42
+DEC(-) 0.71±0.18 0.67±0.21 -0.04 0.10 0.22 0.70 0.08 0.39
+HardSet ai af δ IF P(IF>0) P(IF=0) P(IF<0) P(C)
+nomachine 0.57±0.20 0.57±0.20 0 - - - - -
+95% 0.58±0.23 0.65±0.22 +0.07 0.13 0.15 0.81 0.04 0.34
+50% 0.55±0.24 0.56±0.22 +0.01 0.24 0.23 0.75 0.02 0.34
+5% 0.54±0.22 0.38±0.24 -0.16 0.21 0.22 0.74 0.04 0.26
+INC(n) 0.55±0.15 0.56±0.15 +0.01 0.18 0.18 0.78 0.04 0.35
+INC(-) 0.49±0.17 0.49±0.17 0 0.17 0.18 0.80 0.02 0.35
+DEC(n) 0.58±0.17 0.59±0.17 +0.01 0.11 0.15 0.80 0.05 0.36
+DEC(-) 0.53±0.16 0.52±0.18 -0.01 0.13 0.19 0.72 0.09 0.30
+5. Results
+Table1summarizesourexperimentalresults,whichwedetailandexplainnext.
+5.1. Experiment1:Withvs.WithoutDecisionSupportMachine
+Foreveryset,wecomparetwogroupsofparticipants:thosewhodidnotreceivemachine
+suggestionsandthosewhoreceivedsuggestionsfromthe95%accuracymachine.
+NormalSet Almostallparticipantswithnomachinesuggestionsmaintainedtheirini-
+tialresponsewhengiventheopportunitytomodifyitinthevastmajorityoftasks,mak-
+ing both the initial and final accuracy 0.67 ± 0.23. Results from participants interact-
+ingwiththe95%accuracymachinesuggestthatthesupportofahighaccuratemachine
+improveshumanperformance(seeleftplotinFigure2)evenwhentheinfluenceislow.
+Hard Set Similarly, almost all participants with no machine suggestions maintained
+their initial response when given the opportunity to modify it in the vast majority of
+tasks, making both the initial and final accuracy 0.57 ± 0.20. As before, participants
+interactingwiththe95%accuracymachinegottoimprovetheiraccuracy(seerightplot
+inFigure2).Fortheseparticipants,theinfluenceishigherthanforthoseintheNormal
+Set.Participantsperceivethe95%accuracymachinemorepositivelyintheNormalSet,
+asshowninFigure4,despiteitshigherinfluenceintheHardSet.
+
+416 M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching
+Figure2. ParticipantinitialandfinalaverageaccuracydistributionsfortheNormalSetandtheHardSet,for
+5%,50%,and95%MachinesinExperiment1.
+5.2. Experiment2:WithDegradedDecisionSupportMachine
+Inthisexperiment,weconsider5%and50%accuratemachines.
+NormalSet Participantswhointeractwiththe50%accuracymachineandwiththe5%
+accuracy machine experience a drop in accuracy, suggesting that low accuracy support
+deteriorateshumanperformance(seeleftplotinFigure2).Participantsona5%accuracy
+machineshowedaslightlynegativeinfluence(capacityforcorrectingmistakesfromthe
+machine).
+Hard Set For participants interacting with the 50% precision machine, the accuracy
+doesnotvarymarkedly(seetherightplotinFigure2),althoughtheinfluenceishigh.For
+participantsinteractingwiththe5%accuracymachine,thereisamarkeddeteriorationin
+accuracy(seerightplotinFigure2).Fortheseparticipants,theinfluenceisalsohighand
+theytendtobemisledbythemachinemoreoftenthaninthenormalset.
+InFigure4,wecanseethatfortheparticipantswholabelpairsfromtheNormalSet,
+themoreaccuratethemachineis,themoreusefultheyfindit.However,forthepartici-
+pantswholabelpairsfromtheHardSet,theaccuracyorinaccuracyofthemachinesdoes
+not affect asmuch the perceived usefulness of themachine. The Kolmogorov-Smirnov
+significancetestrevealsthatforthe5%accuracyand50%accuracymachines,thereare
+significantdifferencesbetweenthedistributionofperceivedusefulnesswiththeNormal
+SetandwiththeHardSet(KS=0.39,p(cid:6)0.0001;KS=0.35,p(cid:6)0.0001,respectively).
+Nosignificantdifferenceisobservedforthe95%accuracymachine.
+5.3. Experiment3:WiththeVariableDecisionSupportMachine
+For every set of pairs, we compare the group of participants who received suggestions
+fromINCMachine(5%→50%→95%)andDECMachine(95%→50%→5%).Wedis-
+tinguishbetweenthoseparticipantswhowerenotifiedeverytimethemachinechanged
+andthosewhowerenot.
+NormalSet WiththeINCMachine,forbothparticipantswithandwithoutnotification,
+accuracydoesnotvarymarkedly,andthereisnodiscernibleinfluencebyanyofthema-
+chines. In both cases, confirmation was around 50%. With the DEC Machine, for par-
+ticipantswithnotification,accuracydoesnotvarymarkedly,andthereisnodiscernible
+influence(seeplotsinfirstcolumninFigure3).Forparticipantswithoutnotification,the
+resultsshowadeteriorationintheparticipant’saccuracy(seeplotsinsecondcolumnin
+Figure3),andtheinfluencefactornoticeablyexceedstheinfluenceofparticipantswith
+notification.
+
+M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching 417
+Figure3. ParticipantaccuracyforDECmachines(withandwithoutnotification)withtheNormalSet(left)
+andtheHardSet(right).
+Figure4. Resultsfromtheexitsurvey,fromtheparticipantswhointeractedwithsomestaticmachine.They
+wereaskedwhetherthesuggestionsofthemachinehadbeenusefultomakeadecision1.whentheywerenot
+sure,2.whensomeoftheimageswereblurryorthequalitywasnotgood,3.faster,to4.confirmtheirdecision
+whentheywerecertainaboutit,5.makemoreaccuratedecisions,and6. makethemfeelmoreconfidentabout
+theanswer.Weshowtheaverageoftheresponsesacrossthesixquestions.
+Hard Set With both INC Machine and DEC Machine, for both participants with and
+without notification, accuracy does not vary markedly. In contrast with participants in
+theNormalSet,theinfluenceisnownoticeable.
+6. Discussion
+RQ1 Does an AI decision support system help improve human performance in a
+facematchingtask?
+An accurate machine may improve human performance, but the difficulty of
+thetaskmightpreventthehumanfromfullyexploitingthisadvantage.
+A high accuracy machine improves human performance in both easy and hard tasks,
+whichisalignedwithpreviousworksintheliterature[6,32].Theinfluenceofthisma-
+chineishigherwhenthetasksareharder.However,theimprovementandhighinfluence
+on the Hard Set do not appear to stem from the participant’s capacity to recognize the
+machine’shighaccuracysincethefinalquestionnaireindicatesthatinaccuratemachines
+areviewedasequallyuseful.
+
+418 M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching
+RQ2DoesalowaccuracyAIdecisionsupportsystemimproveordeterioratehu-
+manperformanceinafacematchingtask?
+Hightaskdifficultyallowsaninaccuratemachinetoinduceerrormorethanan
+accuratemachinecaninducecorrectness,probablyduetotheparticipants’inability
+toreallygrasphowinaccuratethemachineis.
+Fordegradedaccuracymachinessupportinghumanperformanceineasytasks,thedegra-
+dationoftheparticipant’saccuracyishardlynoticeable,suggestingthatforasetofeasy
+tasks the participant is able to solve without attending to the machine, as corroborated
+by the close-to-zero influence values. Observe that the minimal impact of the 95% ac-
+curacymachineispartiallyduetothehighconfirmationrate(i.e.,themachineanduser
+frequentlyagree,thusreducingthechanceofinfluence),whereasthe5%accuracyma-
+chineexhibitsalowerconfirmationrateyetmaintainsamarginalinfluence(i.e.,inmany
+tasks, the machine has opposed the participant but did not alter their viewpoint). This
+suggeststhatforeasytasks,theparticipantknowshowtosolveitwell,asitmatchesthe
+high-accuracymachine,contradictingthelow-accuracyone.
+However,fordifficulttasks,averylowaccuracymachinecaninduceaparticipantto
+errorverynoticeably,evenfarexceedingtheabilityofahigh-accuracymachinetoinduce
+correctness.Ourresultssuggestthatfordifficulttasksparticipantstendtobeinfluenced
+morebythelow-accuracymachinesthanbytheaccuratemachine,whiletheoppositeis
+trueforeasytasks.Thismaystemfromaprojectionofthedifficultyexperiencedbypar-
+ticipants. Additionally, the control group’s accuracy (no machine) aligns with the 50%
+accuracy machine. A potential mirroring between this machine and its users could ex-
+plainitssignificantinfluence.Thesephenomena(self-projectionandmirroring)arewell
+establishedinpsychology[33],yetunder-exploredinhuman-machineinteraction,tothe
+bestofourknowledge.Moreover,resultsfromtheexitsurveyhighlightthatfordifficult
+tasks the participant is not able to perceive a difference in the usefulness of interacting
+with very accurate or inaccurate machines, which is aligned with some research in the
+literature[13].
+RQ3 Does a variable AI decision support system improve or deteriorate human
+performanceinafacematchingtask?
+Automation bias can be induced in a low-performing machine that initially
+providesaccuratesupport.Thiscanbemitigatedwithasimplenotificationthatthe
+machinehaschanged.
+Forvariablemachinessupportinghumanperformanceineasytasks,themachineinflu-
+enceisbarelynoticeableexceptinonecase:whenamachineinitiallyfunctionswithhigh
+precisionbutgraduallylosesaccuracy.Iftheparticipantremainsunawareofanychange
+inthemachine,theycontinuestorelyonthemachine,leadingtomistakes.Thisaligns
+withthelogicofsomepatternsobservedintheliterature,wherealgorithmicaversionis
+seen to increase when the user sees that the machine fails [15]. We observe something
+analogous:participantscanmovefromalgorithmicappreciationtoautomationbiasafter
+observingmachinesuccess.Thissituationcanbepreventedbynotifyingtheparticipant
+aboutamachinechangewithoutrevealingwhetheritisanimprovementoradowngrade.
+This effect is not observed for variable machines that support human performance in
+
+M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching 419
+difficult tasks, probably because the participant is not able to clearly identify that the
+machineisperformingaccuratelyatthebeginning.
+It is notable to observe the distinction between outcomes from the static 50% ac-
+curacymachineversusthosefrommachineswithvaryingaccuracylevels,increasingor
+decreasing.Whileallthreemachinesmaintainanaverageaccuracyof50%,theydiverge
+in how their errors are distributed. Based on our findings, we can deduce that for chal-
+lengingtasks,randomlydistributederrorsthroughouttheinteractionpromoteerrorcam-
+ouflage and thus increase the influence factor, compared to machines that accumulate
+errorsatthebeginningorattheendoftheinteractionflow,whichhavelowerinfluence
+factors.
+7. ConclusionsandFutureWork
+We noted that the difficulty of tasks shapes human-machine interactions in a variety
+of ways, even when the complexity levels are relatively similar. In our study, there is
+merelya10%differenceinaveragehumanaccuracybetweensimpleandcomplextasks.
+Nevertheless, this small gap appears to be sufficient to notably change the influence of
+decision support. It is therefore crucial to understand that this challenge relates more
+to how the participant perceives the task than to their actual skill in solving it. Thus,
+high difficulty can affect the effectiveness of an accurate machine and can enhance the
+influence of an inaccurate machine. Conversely, low difficulty can enhance automation
+bias in the case of variable machines, more specifically those machines that start out
+accurate(thuselicitingappreciation)andlaterdeteriorate.
+Inthisworkwecombinedtheinterpretationoftheinfluencefactorwiththeconfir-
+mation factor, and that helped us to better understand patterns of interaction. However,
+theconceptofinfluenceallowsformanyapproachesthatneedtobeconsidered.Wehave
+noted that this influence can be negative (aversion), positive (appreciation/automation
+bias) or neutral (no influence). We observed a tendency towards no influence in easy
+tasks, and a more erratic tendency towards influence in the case of difficult tasks. This
+highlightsthecomplexityofmeasuringinfluence,necessitatingfurtherstudyonwhenit
+is beneficial or detrimental for task completion. We also observed that participants can
+tellaccurate(95%)frominaccurate(5%)decisionsupportwhenthetaskiseasy,butlose
+thisabilitywhenthetaskishard,whichmakesthemmorepronetobemisled.
+A significant constraint identified is the insufficient consideration of real-world,
+practicalconcerns.Facialrecognitionsystemsareusedincomplexethicaldomainslike
+immigration and law enforcement, where delegating decisions to machines can lead to
+anonymity,psychologicaldetachment,andinvisibility[34,35,36].Thesefactorsmayin-
+advertentlypromoteunethicalactions.Itisthereforeurgentandnecessarytoextendre-
+searchonhybridsystemsandtheircorrespondinginteractionpatternsintodomainsmore
+closelylinkedtoreal-worldapplicationfields.
+CodeandDataareavailableinHumanResponse-DSS-FaceMatchingrepository.4
+Acknowledgments This work has been partially supported by: the Department of
+Research and Universities of the Government of Catalonia (SGR 00930); and the
+MariadeMaeztuUnitsofExcellenceProgrammeCEX2021-001195-M,fundedbyMI-
+CIU/AEI/10.13039/501100011033.
+4https://github.com/ealmenzar/HumanResponse-DSS-FaceMatching
+
+420 M.Estévez-Almenzaretal./HumanResponsetoDecisionSupportinFaceMatching

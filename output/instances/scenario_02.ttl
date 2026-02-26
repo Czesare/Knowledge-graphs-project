@@ -1,0 +1,136 @@
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Scenario_02_Evaluation a hi:Evaluation ;
+    rdfs:label "Research Output Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Scenario_02_Experiment_ProteinStructurePredictionAccuracy ;
+    hi:hasMetricConcept hint:DiagnosisAccuracyMetric,
+        hint:TaskSuccessRateMetric .
+
+inst:Scenario_02_Interaction_WeeklyTeamMeeting a hi:Interaction ;
+    rdfs:label "Weekly Team Meeting" ;
+    hi:hasAgentInvolved inst:Scenario_02_Alphafold,
+        inst:Scenario_02_DrEmilyChen ;
+    hi:hasInteractionIntentConcept hint:DeliberationIntent ;
+    hi:hasInteractionModalityConcept hint:VoiceChatModality .
+
+inst:Scenario_02_UseCase a hi:CompetitionUseCase ;
+    rdfs:label "Neurodegeneration Protein Analysis" ;
+    hi:hasDomainConcept hint:MedicalDomain ;
+    hi:hasHITeam inst:Scenario_02_Team ;
+    hi:hasScenarioDescription "Pharmaceutical Lab Research"^^xsd:string .
+
+inst:Scenario_02_Alphafold_Cap_3dModelGeneration a hi:Capability ;
+    rdfs:label "3D Model Generation" ;
+    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
+
+inst:Scenario_02_Alphafold_Cap_DataProcessing a hi:Capability ;
+    rdfs:label "Data Processing" ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Scenario_02_Alphafold_Cap_ProteinStructurePrediction a hi:Capability ;
+    rdfs:label "Protein Structure Prediction" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Scenario_02_Context a hi:Context ;
+    rdfs:label "Pharmaceutical Lab Research" ;
+    hi:hasConstraintConcept hint:AutonomyConstraint,
+        hint:TransparencyConstraint ;
+    hi:hasContextConcept hint:ClinicalConsultationContext ;
+    hi:hasInfluenceOn inst:Scenario_02_Team ;
+    hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Scenario_02_DrEmilyChen_Cap_LiteratureReview a hi:Capability ;
+    rdfs:label "Literature Review" ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
+
+inst:Scenario_02_DrEmilyChen_Cap_ResearchCoordination a hi:Capability ;
+    rdfs:label "Research Coordination" ;
+    hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
+
+inst:Scenario_02_Exec_ConductLiteratureReview a hi:TaskExecution ;
+    rdfs:label "Conduct Literature Review" ;
+    hi:hasMethodConcept hint:SemanticLinkingMethod ;
+    hi:realizesTask inst:Scenario_02_Task_Cross-referenceLiterature .
+
+inst:Scenario_02_Exec_ExecuteProteinAnalysis a hi:TaskExecution ;
+    rdfs:label "Execute Protein Analysis" ;
+    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
+    hi:realizesTask inst:Scenario_02_Task_ProteinAnalysis .
+
+inst:Scenario_02_Experiment_ProteinStructurePredictionAccuracy a hi:Experiment ;
+    rdfs:label "Protein Structure Prediction Accuracy" ;
+    hi:hasAlternativeHypothesis "AlphaFold predictions significantly improve research outcomes."^^xsd:string ;
+    hi:hasExperimentConcept hint:DiagnosisExperiment ;
+    hi:hasMetricTested hint:DiagnosisAccuracyMetric ;
+    hi:hasNullHypothesis "AlphaFold predictions do not improve research outcomes."^^xsd:string .
+
+inst:Scenario_02_Goal_IdentifyNeuroprotectiveProteins a hi:Goal ;
+    rdfs:label "Identify Neuroprotective Proteins" ;
+    hi:hasGoalConcept hint:AccurateTrustworthyDiagnosisGoal ;
+    hi:requiresTask inst:Scenario_02_Task_Cross-referenceLiterature,
+        inst:Scenario_02_Task_ProteinAnalysis,
+        inst:Scenario_02_Task_TeamOptimization .
+
+inst:Scenario_02_Task_3dModelGeneration a hi:Task ;
+    rdfs:label "3D Model Generation" .
+
+inst:Scenario_02_Task_BindingSiteIdentification a hi:Task ;
+    rdfs:label "Binding Site Identification" .
+
+inst:Scenario_02_Task_SequenceInput a hi:Task ;
+    rdfs:label "Sequence Input" .
+
+inst:Scenario_02_Alphafold a hi:ArtificialAgent ;
+    rdfs:label "AlphaFold" ;
+    hi:hasCapability inst:Scenario_02_Alphafold_Cap_3dModelGeneration,
+        inst:Scenario_02_Alphafold_Cap_DataProcessing,
+        inst:Scenario_02_Alphafold_Cap_ProteinStructurePrediction ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Scenario_02_Exec_ExecuteProteinAnalysis .
+
+inst:Scenario_02_DrEmilyChen a hi:HumanAgent ;
+    rdfs:label "Dr. Emily Chen" ;
+    hi:hasCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment,
+        inst:Scenario_02_DrEmilyChen_Cap_LiteratureReview,
+        inst:Scenario_02_DrEmilyChen_Cap_ResearchCoordination ;
+    hi:hasRoleConcept hint:ClinicianRole ;
+    hi:performsExecution inst:Scenario_02_Exec_ConductLiteratureReview .
+
+inst:Scenario_02_Task_TeamOptimization a hi:Task ;
+    rdfs:label "Team Optimization" ;
+    hi:hasTaskConcept hint:OperatorCoordinationTask ;
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
+
+inst:Scenario_02_Team a hi:HITeam ;
+    rdfs:label "Neurodegeneration Protein Analysis Team" ;
+    hi:hasGoal inst:Scenario_02_Goal_IdentifyNeuroprotectiveProteins ;
+    hi:hasMember inst:Scenario_02_Alphafold,
+        inst:Scenario_02_DrEmilyChen ;
+    hi:isInfluencedBy inst:Scenario_02_Context .
+
+inst:Scenario_02_Task_Cross-referenceLiterature a hi:Task ;
+    rdfs:label "Cross-reference Literature" ;
+    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
+
+inst:Scenario_02_Task_ProteinAnalysis a hi:Task ;
+    rdfs:label "Protein Analysis" ;
+    hi:hasSubTask inst:Scenario_02_Task_3dModelGeneration,
+        inst:Scenario_02_Task_BindingSiteIdentification,
+        inst:Scenario_02_Task_SequenceInput ;
+    hi:hasTaskConcept hint:SymptomAnalysisTask ;
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
+
+inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment a hi:Capability ;
+    rdfs:label "Clinical Judgment" ;
+    hi:allowsTask inst:Scenario_02_Task_Cross-referenceLiterature,
+        inst:Scenario_02_Task_ProteinAnalysis,
+        inst:Scenario_02_Task_TeamOptimization ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+

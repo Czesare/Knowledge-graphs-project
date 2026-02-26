@@ -1,0 +1,322 @@
+238 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250641
+Multi-Head Networks for Missing
+Modalities: A Study on Robustness in
+Multimodal Learning
+GiovanniFELICIa,DiegoMariaPINTOa,1andAntonioVICINANZAb
+aInstituteforSystemsAnalysisandComputerScienceCNR,
+NationalResearchCouncilofItaly(CNR),ViadeiTaurini19,00185Rome,Italy
+bSpindoxS.p.A.
+ORCiDID:GiovanniFelicihttps://orcid.org/0000-0003-0544-5407,DiegoMariaPinto
+https://orcid.org/0000-0003-2609-1070,AntonioVicinanza
+https://orcid.org/0009-0000-0371-738X
+Abstract.Multimodallearninghasemergedasacriticalareaofresearchinartifi-
+cialintelligence,enablingmodelstointegrateandprocessdiversedatasourcessuch
+asimages,text,audio,andsensorreadings.However,real-worldmultimodalsys-
+temsareoftenchallengedbymissingmodalitiesduetosensorfailures,occlusions,
+ordatatransmissionissues,leadingtodegradedperformance.Toaddressthis,we
+investigatetherobustnessofMulti-HeadNetworks(MHNs)trainedwithanorthog-
+onality componentin theloss function,which enforcesdecorrelation amongla-
+tentrepresentationstoenhancefeaturediversityandresiliencetomissingdata.We
+developandevaluatethreeMHNarchitecturevariants,eachleveragingdifferent
+featureextractionstrategies.Ourexperiments,conductedonarecentlypublished
+multimodaldatasetforbehavioralbiometrics,includeanablationstudyinwhich
+wesystematicallyremovethemostinformativefeaturesandassesstheimpactof
+theorthogonalityconstraint.ResultsshowthatCNN-basedarchitecturesbenefitthe
+mostfromorthogonalityloss,FNNsshowmoderategains,whileLSTMnetworks
+exhibitavariableresponse,suggestingthattheeffectivenessofthisconstraintis
+model-dependent.Thesefindingsalsohighlighttheneedforarchitecture-specific
+robustnessstrategies.
+Keywords.Multi-HeadDeepLearning,MultimodalAI,RobustAI,HighQuality
+AI
+1CorrespondingAuthor:DiegoMariaPinto,diegomaria.pinto@iasi.cnr.it
+
+G.Felicietal./Multi-HeadNetworksforMissingModalities 239
+1. Introductionandliteraturereview
+Multimodal learning is an essential area of Artificial Intelligence (AI), enabling mod-
+els to integrate and process diverse data sources such as images, text, audio, and sen-
+sor readings. These models are widely applied in fields including autonomous driving
+[1],healthcare[2],emotionrecognition[3],andhuman-computerinteraction[4,5].Mul-
+timodality mirrors the human ability to synthesize information from multiple sensory
+inputs,enhancingperceptionandinteraction.
+Despite its advantages, multimodal learning faces significant challenges in real-
+world applications due to missing data or missing modalities, which can arise from
+sensor failures, occlusions, transmission errors, or adversarial conditions. The absence
+of critical modalities during training or inference can severely degrade model perfor-
+mance.Tomitigatethis,recentadvancesinMultimodalLearningwithMissingModali-
+ties(MLMM)haveexploredtechniquestoenhancemodelrobustness[6].
+Various approaches have been proposed to address these challenges, including
+shared-specific feature modeling to separate shared and modality-specific information
+[7], parameter-efficient adaptation to refine pre-trained models with minimal overhead
+[8], and Bayesian meta-learning to enable adaptation in extreme missing modality
+scenarios [9]. Another emerging method is multimodal prompt learning, which uses
+modality-aware prompts to guide inference and maintain accuracy even with missing
+inputs[10][11].
+These studies highlight the importance of assessing the robustness of multimodal
+modelsinthepresenceofincompleteinputs.Inthiscontext,robustnessisadefiningtrait
+of high-quality AI, reflected not only in performance under ideal conditions, but in the
+model’sabilitytoremainreliablewhenfacedwithdatavariabilityordegradation.
+One promising direction to support such robustness lies in architectural designs
+thatcancapturecomplementaryinformationacrossmodalities,whilealsoexploitingre-
+dundancy to compensate for potential data loss. In this context, Multi-Head Networks
+(MHNs) provide a flexible framework in which multiple parallel processing heads in-
+dependentlyextractdiversefeaturerepresentations.Originallyintroducedinthecontext
+ofself-attentionmechanisms[12],theyhavesincebecomeacorecomponentinvarious
+multimodal applications, including vision-language modeling [13], audio-visual event
+localization[14],andcross-modalretrieval[15].Beyondattention-basedmodels,multi-
+head architectures have also been successfully applied in multi-task learning [16], ob-
+ject detection[17], and other deeplearning frameworks to promotemodularity, feature
+diversity,andgeneralization.
+In this study, we extend the MHN paradigm by designing architectures in which
+each head is an independently parameterized sub-network operating on the same in-
+put.Topromoterepresentationaldiversityandrobustness,weintroduceanoveltraining
+lossthatincorporatesanorthogonality-basedregularizationterm.Thistermencourages
+decorrelationamongthelatentrepresentationsproducedbydifferentheads,withtheaim
+ofenhancingrobustnesstomissinginformation.
+Wetestedthreearchitecturevariants,m-FFNet,m-ConvNet,andm-LSTMNet,each
+correspondingtoadifferentfeatureextractionstrategy.Inallcases,theprefixmdenotes
+thenumberofparallelandindependentlytrainedheads,whichfunctionassub-networks
+withinthelargerMHNarchitecture.Acomparativeablationstudyisconductedtoassess
+the impact of the orthogonality loss against standard loss functions when key modality
+featuresaremissing.
+
+240 G.Felicietal./Multi-HeadNetworksforMissingModalities
+Our results indicate that the proposed framework is both conceptually sound and
+practicallyeffective.Modelstrainedwithorthogonalityconstraintsconsistentlydemon-
+strate improved robustness under feature ablation, with the convolutional configuration
+(m-ConvNet)yieldingthemostpronouncedgains.
+The remainder of this paper is structured as follows. Section 2 details the pro-
+posedmethodology,includingmodelarchitecturesandthelossfunctiondesign.Section
+3presentstheexperimentalsetup,ablationstudy,andobtainedresults.Finally,Section4
+discussesconclusions,limitations,andfuturedirections.
+2. Methodology
+This section describes the methodology employed in designing and evaluating the pro-
+posed models and loss function. The work integrates multiple neural network architec-
+tures to extract features from input data and applies a novel loss function to improve
+classificationperformancethroughanorthogonalityconstraintonlatentrepresentations.
+Theneworthogonalitylossisspecificallydesignedtomitigateperformancedropsinsce-
+narios where certain inputs are missing. While the primary task remains classification,
+theadditionoftheorthogonalitylossenhancestherobustnessofthemodelagainstinput
+perturbations,ensuringmorestablefeaturerepresentations.
+The idea of enforcing orthogonality to promote feature diversity or separation has
+beenexploredinpreviousworksforotherpurposes[18,19].However,unliketheseprior
+studies, our orthogonality constraint is specifically adapted to multi-head architectures
+topromoteresilienceagainstmissingmodalitiesinmultimodallearning.
+2.1. ModelArchitectures
+Wedesignaneuralnetworkarchitecturecomposedofmbaseblocksthatperformfeature
+extractionandoutputlatentrepresentationsoftheinputspace.Themlatentvectorsare
+concatenatedandpassedtoafullyconnectedlayer,whichusesthemtopredictthelogits.
+Thelogitsareutilizedintheclassificationloss,whilethelatentvectorsareemployedin
+theorthogonalityloss.
+Thearchitecturesexploredinthisstudydifferbasedonthechoiceoffeatureextrac-
+tionbaseblocks.Specifically,wedesignthefollowingmodels:
+• m-FFNet:CombinesmFFNetblocks.
+• m-ConvNet:CombinesmConvNetblocks.
+• m-LSTMNet:CombinesmLSTMNetblocks.
+Thefeatureextractionbaseblocksaredescribedasfollows:
+• FeedforwardNetworks(FFNet):Asimplefeedforwardnetworkconsistingoftwo
+fullyconnectedlayers[20]withaReLUactivationfunctionappliedafterthefirst
+layer.Thisbaseblockisusedinthem-FFNetarchitecture.
+• ConvolutionalNeuralNetworks(ConvNet):ACNN-based[21]architecturecon-
+sisting of two convolutional layers, adaptive average pooling, and a fully con-
+nectedlayer.Thisbaseblockisusedinthem-ConvNetarchitecture.
+• LSTM Networks (LSTMNet): A recurrent neural network block composed of an
+LSTM[22]layerfollowedbyafullyconnectedlayer.Thisbaseblockisusedin
+them-LSTMNetarchitecture.
+
+G.Felicietal./Multi-HeadNetworksforMissingModalities 241
+2.2. LossFunctionDesign
+The total loss function defined in Eq. 1 is used to train the model and is a weighted
+combinationoftheclassificationlossandtheorthogonalityloss:
+TotalLoss=α·ClassificationLoss+β·OrthogonalityLoss, (1)
+whereα andβ arehyperparametersthatcontroltherelativeimportanceofeachcompo-
+nent.
+The Classification Loss is a standard cross-entropy loss, applied to the logits pro-
+ducedbytheclassifierandthetrueclasslabels.Itensuresthatthemodellearnstopredict
+theclassoftheinputdatacorrectly.
+The Orthogonality Loss, given in the Eq. 2, operates on the latent representations
+producedbythemnetworkblocks(latent ,...,latent ).Topromotediversityanddecor-
+1 m
+relationamongtheextractedfeatures,theorthogonalitylossenforcespairwiseorthogo-
+nalitybyminimizingthesquaredcosinesimilaritybetweenthenormalizedlatentvectors
+(u ,...,u ).TheorthogonalitylossisdefinedinEq.2:
+1 m
+OrthogonalityLoss= 1 ∑ N ∑ (u j,i ·u k,i )2 (2)
+N
+i=11≤j<k≤m
+where N is thebatch size andu j,i represents thenormalized version oflatent j,i , deeply
+thelatentvectorforthebaseblock jfortheinputi,computedasinEq.3
+u j,i = (cid:3)lat l e a n te t n j, t i (cid:3) j,i +ε , (3)
+withε beingasmallconstanttopreventdivisionbyzero.
+Theclassificationlossfocusesontheprimarytaskofaccurateclassification,while
+the orthogonality loss promotes robustness by reducing redundancy among the latent
+representations.Thisaddedrobustnesshelpsthemodelmaintainperformanceevenwhen
+inputsareperturbedormissing,makingitmorestableinreal-worldscenarios.
+Combining these two components in the total loss function (equation 1), the pro-
+posed approach achieves improved classification performance while ensuring diversity
+androbustnessinfeatureextraction.
+3. ExperimentalResults
+3.1. Experimentalset-up
+Inthissection,wedescribetheexperimentalsetupusedtoevaluatetheproposedneural
+networkmodelsandtheirperformanceunderdifferentconfigurations.
+All experiments were conducted on a system equipped with an NVIDIA Tesla T4
+GPU. The dataset described in Section 3.2 was split into training, validation, and test
+setsusingastratifiedsamplingstrategywhilemaintaininga70-10-20%split.Toensure
+numericalstability,thefollowingpreprocessingstepswereapplied:
+
+242 G.Felicietal./Multi-HeadNetworksforMissingModalities
+• Inputfeatureswerenormalizedtotherange[0,1].
+• Missingvalues(NaNs)werereplacedwithzero.
+ThemodelsweretrainedusingtheAdamWoptimizerduetoitsefficiencyandadaptive
+learningratecapabilities.Thetrainingprocesswasconfiguredasfollows:
+• Batchsize:4,ensuringstablegradientupdatesandefficientresourceutilization.
+• Learningrate:Initiallysetto0.0001toallowcontrolledparameterupdates.
+• Maximum epochs: 1000, with early stopping applied to prevent overfitting and
+unnecessarycomputations.
+• Earlystopping:Trainingwashaltedifthevalidationlossdidnotimprovefor10
+consecutiveepochs.
+• Learningratescheduling:Ifthevalidationlossdidnotimprovefor5consecutive
+epochs,thelearningratewasreducedbyafactorof0.1.
+Model hyperparameters were selected using a cross-validation strategy to ensure gen-
+eralization across different data subsets. The performance of the models was evaluated
+usingclassificationaccuracy,definedas
+Numberofcorrectpredictions
+Accuracy= . (4)
+Totalnumberofsamples
+3.1.1. AblationStudy
+Toassesstheimpactoftheorthogonalityconstraint,weconductedanablationstudyby
+trainingthesamemodelsunderdifferentweightingschemesfortheorthogonalityloss.
+Specifically, we considered two scenarios: one where the orthogonality loss was given
+equal importance to the classification loss and another where it was entirely omitted.
+Thisanalysisenabledustoevaluatetheeffectofenforcingfeaturediversitythroughthe
+orthogonality constraint on both classification performance and the model’s robustness
+toinputperturbations.
+3.2. Datasetandtaskdescription
+Toevaluatetheeffectivenessoftheapproachinhandlingmissingmodalities,weconsid-
+eredarecentlypublisheddataset[23]providingacomprehensivemultimodalbenchmark
+forstudyingbehavioralbiometricsandsensor-basedauthentication.Therichmultimodal
+natureofthisdatasetmakesitavaluabletestbedforstudyingmissingmodalityscenarios
+andtheeffectivenessoforthogonallyconstrainedlossfunctionsincomparisontotradi-
+tionalapproaches.ThedatasetispubliclyavailablethroughtheEuropeanCommission’s
+JointResearchCentrerepository2.
+Thedatasetconsistsofrawsensordatacollectedinanoffice-likeenvironmentwhere
+54adultparticipantsperformedsixdistincttasksundercontrolledconditions.Eachpar-
+ticipant completed two sessions per task, with each task presented in three variations
+designed to induce different levels of cognitive load. The experimental setup included
+multiple sensor modalities, such as inertial measurement units (IMUs), force sensors,
+radar sensors, and electroencephalogram (EEG) recordings. The task aimed to identify
+eachofthe54individualsbasedonthesebiometricsensordata,giventhediversesetof
+physiologicalandbehaviouralinputs.
+2https://data.jrc.ec.europa.eu/dataset/7be86ffd-1bac-4d3e-82fc-02b3ea40ab49
+
+G.Felicietal./Multi-HeadNetworksforMissingModalities 243
+3.3. Experimentsonclassificationtasks
+A pre-processing phase identified a total of 46 features extracted from the raw data.
+Then, all three MHNs are trained on a training set, with each network structured using
+m equivalent heads (i.e. m-FFNet, m-ConvNet, and m-LSTMNet). We tested different
+configurations varying m∈[2,3,...,10]. This design allows to assess the robustness of
+differentnumberofheadsanddifferentfeatureextractionparadigmsinhandlingmissing
+features.
+Aftertraining,weevaluatedthemodelsonaseparatetestset,whereallthreearchi-
+tecturesachievedcomparableaccuracyscores,consistentlyfallingwithina[94%–98%]
+range.TheseresultsindicatethattheMHN-basedapproachcansuccessfullydifferentiate
+betweenthe54individualsbasedontheavailablemultimodalbiometricsignals,demon-
+stratinghighclassificationperformanceacrossdifferentfeatureextractionstrategies.
+To assess the robustness of the proposed approach through a structured ablation
+study,wefirstidentifiedthemostinfluentialfeaturescontributingtoclassificationaccu-
+racy.Tothisend,weconductedafeatureimportanceanalysisusingtheexpectedgradi-
+ents method, as implemented in the SHAP (SHapley Additive exPlanations) python li-
+brary[24],whichassignseachfeatureanimportancevalueforaparticularpredictionac-
+cordingtoShapleyvalues[25].Specifically,weemployedSHAP’sGradientExplainerto
+interpretthecontributionofeachfeaturetothemodel’spredictions.GradientExplaineris
+animplementationofexpectedgradientstoapproximateSHAPvaluesfordeeplearning
+models.
+The results of the explainability analysis, as illustrated in Figure 1, reveal that the
+mostsignificantfeatures[0,..,7] originatefromtheelectroencephalogram(EEG)signals,
+oneofthekeymodalitiespresentinthedataset.Thusonemodalityexhibitedthehighest
+contribution to the model’s accuracy. This finding also highlights the dominant role of
+neuralactivitydataindistinguishingamongindividuals.
+Figure1. Thebest10informativefeaturesaccordingtoSHAP’sGradientExplainer
+
+244 G.Felicietal./Multi-HeadNetworksforMissingModalities
+TheseEEGrelatedfeaturesarethentheoneusedfortheablationstudy,whosere-
+sultsarepresentedinFigure2,illustratingtheimpactoforthogonalitylossonclassifica-
+tionperformanceacrossthreearchitectures:FFNet,ConvNet,andLSTMNet.They-axis
+ofeachplotrepresentstheaccuracydifference,computedasinEq.5
+ΔAccuracy=Accuracy −Accuracy (5)
+orthogonalloss regularloss
+Figure2. ForeachnumberofheadsintheMHN(x-axis),theplotshowstheaverageandstandarddeviation
+ofΔAccuracy(eq.5)computedfromindividualEEGfeatureablationexperiments.Solidlinesrepresentthe
+averageΔAccuracypermodeltype,shadedareasindicateonestandarddeviation,anddottedlinesdenotethe
+overallaverageΔAccuracyacrossallheadconfigurationsforeachmodel.
+Thisvalue(Eq.5)quantifiesthedifferenceinaccuracybetweenmodelstrainedwith
+orthogonality loss and those trained with a regular loss function. Specifically, models
+were first trained on the full dataset, with all features present, and then tested under
+conditionswhereonefeatureatatimewasremovedfromthemostinformativemodality.
+Apositivevalueindicatesthattheaccuracydegradationduetoamissingfeatureis
+less severe in the MHN trained with orthogonality loss compared to the MHN trained
+withregularloss.Conversely,anegativevaluemeansthatthemodeltrainedwithorthog-
+onalitylossexperiencesagreateraccuracydropthanitsregularlosscounterpart.
+The average accuracy difference (+1.52%) in case of FFNet suggests that, in this
+application,theorthogonalitylossmitigatesaccuracydegradationwhencriticalfeatures
+are missing during testing. However, the results have high variance and show positive
+and negative variations, indicating that the impact of the orthogonality constraint is in-
+consistentbetweendifferentmissingfeaturescenarios.
+Unlike the other architectures, results for LSTMNet show only marginal improve-
+ment (+0.04%), with effects that are largely negligible. While the orthogonality con-
+straint encourages temporal feature diversity, it may also interfere with the recurrent
+structure’s ability to preserve sequential dependencies. These mixed outcomes suggest
+thatorthogonalitymustbecarefullytunedwhenappliedtotemporalarchitectures.
+Attheotherendofthespectrum,ConvNetarchitectureconsistentlybenefitthemost
+from the proposed approach (+5.34% on average). The combination of spatial feature
+extractionandhead-wiseorthogonalitypromotesdiverseandcomplementaryrepresen-
+tations,enablingthemodeltobettertoleratemissinginputs.Thisconfirmsthatorthogo-
+nalityisparticularlyeffectivewhenappliedtoconvolutionalarchitectures,likelydueto
+theirabilitytodecomposeandgeneralizelocalpatterns.
+
+G.Felicietal./Multi-HeadNetworksforMissingModalities 245
+ItisclearthatConvNetexhibitsthemostpronouncedimprovement,withanaverage
+ΔAccuracy exceeding 5% when critical features are missing. This gain is particularly
+noteworthygiventhatallmodelsweretrainedonthefullfeaturesetandevaluatedsolely
+under feature ablation scenarios. However, ConvNet also shows the widest variance in
+robustnessperformanceacrossdifferentheadsconfigurationsanddifferentmissingfea-
+tures.Thisvariabilityhighlightsitspotentialtoachieveexceptionallyhighimprovements
+(insomecasesupto15%)butalso,thoughrarely,slightdegradations.
+ThisbehaviorunderscoresakeyconsiderationinapplyingMHNswithorthogonal-
+ity regularization: robustness gains must be balanced with stability. The wide variance
+ofConvNetsuggeststhatwhilethearchitectureishighlyresponsivetothebenefitsofor-
+thogonalheads,itisalsomoresensitivetotheirconfiguration.Consequently,fine-tuning
+thenumberofheadsisimportanttoensureconsistentperformanceundermissingmodal-
+ityconditions.
+Inourexperiments,theconfigurationwithm=6headsemergesasthemostfavor-
+able.Itprovidesahighaveragerobustnessgainwhilesimultaneouslyreducingvariability
+comparedtootherconfigurations.
+Theseresultssuggestthatarchitecturalredundancy,achievedthroughmultipleinde-
+pendentlyparameterizedheads,cansignificantlyimproveresiliencetomissingfeatures,
+provided the number of heads is carefully tuned to avoid overparameterization and in-
+stability. Overall, our findings validate the proposed approach as a viable and effective
+strategyforenhancingrobustnessinmultimodallearningsystems.
+4. Conclusionsandperspectiveoutlooks
+ThisstudyinvestigatestheintegrationofMulti-HeadNetwork(MHN)architectureswith
+orthogonality-based regularization as a strategy to enhance robustness against missing
+modalityfeaturesinmultimodallearning.Ourresultsshowthatthedegreeofimprove-
+mentisarchitecture-dependent,withconvolutionalmodelsbenefitingthemostfromthe
+proposedapproach.
+Tofurthervalidateourapproach,futureresearchwillextendevaluationtoadditional
+datasetsandapplicationdomains,aimingtoassessitsadaptabilityindiversemultimodal
+contexts. A refined training and testing pipeline is also under development: after train-
+ing MHNs with heterogeneous heads, explainability techniques will identify the most
+informativemodalities.Thiswillguidetheselectionandtuningofthenumberofheads
+tomaximizerobustnesswhileminimizingperformancevariabilitywhencriticalfeatures
+aremissing.
+The code for our experiments will be made publicly available to foster further re-
+searchanddevelopmentinmultimodalAI.
+Acknowledgments
+ThisworkhasbeensupportedbyPNRRMURprojectPE0000013-FAIR-FutureArtifi-
+cialIntelligenceResearch[CUP:B53C22003630006].
+
+246 G.Felicietal./Multi-HeadNetworksforMissingModalities

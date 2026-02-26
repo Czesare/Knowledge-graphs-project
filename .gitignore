@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Envs
+.venv/
+venv/
+.env
+
+# OS/editor
+.DS_Store
+.vscode/
+
+# Secrets
+config.py

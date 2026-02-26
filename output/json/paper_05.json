@@ -1,0 +1,211 @@
+{
+  "paper_id": "paper_628",
+  "title": "Hybrid Autonomy: Towards a Unified Framework on Adaptability and Ethical Trust in Autonomous Systems",
+  "authors": [
+    {
+      "name": "Beatrice Melis",
+      "affiliation": "University of Pisa"
+    },
+    {
+      "name": "Martina De Sanctis",
+      "affiliation": "Gran Sasso Science Institute"
+    },
+    {
+      "name": "Paola Inverardi",
+      "affiliation": "Gran Sasso Science Institute"
+    },
+    {
+      "name": "Alessio Malizia",
+      "affiliation": "University of Pisa"
+    }
+  ],
+  "keywords": [
+    "Hybrid Autonomy",
+    "Ethical Trust",
+    "Adaptive Systems"
+  ],
+  "use_case": {
+    "label": "Adaptive Autonomy in Care Robots",
+    "type": "research",
+    "domain_concepts": [
+      "hint:HealthAndLifestyleDomain"
+    ],
+    "context": {
+      "label": "Nursing Home Assistance",
+      "context_concepts": [
+        "hint:HealthMonitoringContext"
+      ],
+      "constraint_concepts": [
+        "hint:EthicalConstraint",
+        "hint:PrivacyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:TrustShiftPhenomenon",
+        "hint:SkillsComplementarityPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Patient",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Provide Preferences",
+              "concept": "hint:SelfReportingCapability",
+              "allows_tasks": [
+                "Preference Communication"
+              ]
+            },
+            {
+              "label": "Feedback Provision",
+              "concept": "hint:RecommendationRationaleFeedback",
+              "allows_tasks": [
+                "Provide Feedback"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Assistive Robot",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Adaptive Autonomy",
+              "concept": "hint:ReinforcementLearningCapability",
+              "allows_tasks": [
+                "Autonomy Adjustment"
+              ]
+            },
+            {
+              "label": "Task Execution",
+              "concept": "hint:FineDexterityCapability",
+              "allows_tasks": [
+                "Hygiene Assistance"
+              ]
+            },
+            {
+              "label": "Verbal Guidance",
+              "concept": "hint:ExplainingCapability",
+              "allows_tasks": [
+                "Provide Instructions"
+              ]
+            },
+            {
+              "label": "Situational Awareness",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Monitor Patient State"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Respect Patient Preferences",
+        "goal_concept": "hint:UserWellbeingGoal",
+        "tasks": [
+          {
+            "label": "Preference Communication",
+            "task_concept": "hint:ProvideStatementTask",
+            "required_capabilities": [
+              "hint:SelfReportingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Autonomy Adjustment",
+            "task_concept": "hint:DecideInterventionTask",
+            "required_capabilities": [
+              "hint:ReinforcementLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Hygiene Assistance",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:FineDexterityCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Provide Instructions",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:ExplainingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Monitor Patient State",
+            "task_concept": "hint:SituationalAssessmentTask",
+            "required_capabilities": [
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Patient-Robot Interaction",
+        "modality_concept": "hint:VoiceChatModality",
+        "intent_concept": "hint:GuideIntent",
+        "agents_involved": [
+          "Patient",
+          "Assistive Robot"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Execute Hygiene Task",
+        "task_label": "Hygiene Assistance",
+        "performed_by": "Assistive Robot",
+        "method_concept": "hint:DataCollectionMethod"
+      },
+      {
+        "label": "Adjust Autonomy Level",
+        "task_label": "Autonomy Adjustment",
+        "performed_by": "Assistive Robot",
+        "method_concept": "hint:ReinforcementLearningMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Trust and Ethical Adaptability Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TrustPreservationMetric",
+        "hint:UserComfortMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Trust Evaluation Experiment",
+          "experiment_concept": "hint:TransparencyTrustExperiment",
+          "metrics_tested": [
+            "hint:TrustPreservationMetric"
+          ],
+          "null_hypothesis": "Adaptive autonomy does not affect trust levels.",
+          "alternative_hypothesis": "Adaptive autonomy positively affects trust levels."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:AdaptiveAutonomyCapability",
+      "label": "Adaptive Autonomy Capability",
+      "definition": "The ability of a system to adjust its level of autonomy based on user preferences and contextual factors.",
+      "broader": "hint:ReinforcementLearningCapability",
+      "category": "Capability"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+HI Competition Scenario
+Event: HI Comp @ HICentreCM 2024
+Date: 17/04/2024
+Team: T4. Cybersecurity Response Team
+Outcome: best case
+
+Scenario Description:
+Estonia, after the DoS attacks of 2007 (https://en.wikipedia.org/wiki/2007_cyberattacks_on_Estonia), learned its lesson and implemented an HI system for contrasting future attacks [not real].
+Estonia also allows for its citizens to vote online, for all elections. 
+During EU election day, 9/06/24, the voting system experience a DDoS attack.
+
+The idea of the system is that, in order to ensure quick response, the AI system will automatically block suspected IPs providing quick explanation. Then the human agent can unblock such IPs using their experience and context awareness at a later stage.
+
+Q4 will be among the core strenghts of the system. Both the agents need to be extremely clear on their communication and explanation for their decisions, and continuous learning will be fundamental to properly distinguish actual attacks from intended safe requests from voters. Q6 will also be involved, as both need to understand each others skills and limitations.
+Specifically, the human will understand the context of some voters living abroad, and of the AI systems making 'predictions', and will be able to cross-check such predictions with electors lists. This could even be injected into the AI system to perform an on-line filtering once the issue is detected.

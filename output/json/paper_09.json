@@ -1,0 +1,207 @@
+{
+  "paper_id": "paper_637",
+  "title": "Towards Building a Trustworthy RAG-Based Chatbot for the Italian Public Administration",
+  "authors": [
+    {
+      "name": "Chandana Sree Mala",
+      "affiliation": "Department of Informatics, Scuola Normale Superiore"
+    },
+    {
+      "name": "Christian Di Maio",
+      "affiliation": "Department of Information Engineering, University of Siena"
+    },
+    {
+      "name": "Mattia Proietti",
+      "affiliation": "Department of Philology, Literature and Linguistics, University of Pisa"
+    },
+    {
+      "name": "Gizem Gezici",
+      "affiliation": "Department of Informatics, Scuola Normale Superiore"
+    },
+    {
+      "name": "Fosca Giannotti",
+      "affiliation": "Department of Informatics, Scuola Normale Superiore"
+    },
+    {
+      "name": "Stefano Melacci",
+      "affiliation": "Department of Information Engineering, University of Siena"
+    },
+    {
+      "name": "Alessandro Lenci",
+      "affiliation": "Department of Philology, Literature and Linguistics, University of Pisa"
+    },
+    {
+      "name": "Marco Gori",
+      "affiliation": "Department of Information Engineering, University of Siena"
+    }
+  ],
+  "keywords": [
+    "Trustworthiness",
+    "Generative AI Chatbot",
+    "Public Sector AI",
+    "Robustness",
+    "Reliability",
+    "Retrieval-Augmented Generation (RAG)",
+    "LLM",
+    "Data Privacy"
+  ],
+  "use_case": {
+    "label": "Trustworthy RAG Chatbot for Public Administration",
+    "type": "research",
+    "domain_concepts": [
+      "hint:LawAndPolicyDomain"
+    ],
+    "context": {
+      "label": "Italian Public Administration Context",
+      "context_concepts": [
+        "hint:JuryDeliberationContext"
+      ],
+      "constraint_concepts": [
+        "hint:PrivacyConstraint",
+        "hint:TransparencyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:KnowledgeMismatchPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Public Administration Employee",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Domain Judgment",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Provide Statement Task"
+              ]
+            },
+            {
+              "label": "Contextual Understanding",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Decide Intervention Task"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "RAG Chatbot",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Data Collection Task"
+              ]
+            },
+            {
+              "label": "Semantic Embedding",
+              "concept": "hint:EmbeddingReasoningCapability",
+              "allows_tasks": [
+                "Semantic Reasoning Task"
+              ]
+            },
+            {
+              "label": "Information Retrieval",
+              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "allows_tasks": [
+                "Knowledge Graph Query Task"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Provide Accessible Support",
+        "goal_concept": "hint:UserWellbeingGoal",
+        "tasks": [
+          {
+            "label": "Extract Information",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:SensingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Generate Responses",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:ExplainingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Ensure Comprehensibility",
+            "task_concept": "hint:AssessCommunicationAccuracy",
+            "required_capabilities": [
+              "hint:ReportingCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "User Query Interaction",
+        "modality_concept": "hint:TextChatModality",
+        "intent_concept": "hint:AnswerIntent",
+        "agents_involved": [
+          "Public Administration Employee",
+          "RAG Chatbot"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Execute Information Retrieval",
+        "task_label": "Extract Information",
+        "performed_by": "RAG Chatbot",
+        "method_concept": "hint:KnowledgeGraphQueryMethod"
+      },
+      {
+        "label": "Execute Response Generation",
+        "task_label": "Generate Responses",
+        "performed_by": "RAG Chatbot",
+        "method_concept": "hint:PostHocExplanationMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Evaluate Retrieval Performance",
+      "evaluation_concepts": [
+        "hint:DataCollectionQualityEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Embedding Model Comparison",
+          "experiment_concept": "hint:DiagnosisExperiment",
+          "metrics_tested": [
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "Italian-specific models perform equally well as English models.",
+          "alternative_hypothesis": "English models outperform Italian-specific models."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:BilingualMappingCapability",
+      "label": "Bilingual Mapping Capability",
+      "definition": "The ability to map and translate between two languages effectively.",
+      "broader": "hint:Capability",
+      "category": "Capability"
+    }
+  ]
+}

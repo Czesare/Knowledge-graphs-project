@@ -1,0 +1,153 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_02 a hi:Paper ;
+    hi:describesUseCase inst:Paper_02_UseCase ;
+    hi:hasAuthor inst:Paper_02_Author1,
+        inst:Paper_02_Author2,
+        inst:Paper_02_Author3,
+        inst:Paper_02_Author4 ;
+    hi:hasKeyword "Conversational AI",
+        "Information extraction",
+        "Social Conversations" ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Extracting Triples from Dialogues for Conversational Social Agents"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_02_Evaluation a hi:Evaluation ;
+    rdfs:label "Triple Extraction Evaluation" ;
+    hi:hasEvaluationConcept hint:DataCollectionQualityEvaluation ;
+    hi:hasExperiment inst:Paper_02_Experiment_TripleExtractionPrecisionTest ;
+    hi:hasMetricConcept hint:TaskSuccessRateMetric .
+
+inst:Paper_02_Interaction_Human-aiDialogueAnnotation a hi:Interaction ;
+    rdfs:label "Human-AI Dialogue Annotation" ;
+    hi:hasAgentInvolved inst:Paper_02_DialogueAnnotator,
+        inst:Paper_02_TripleExtractionModel ;
+    hi:hasInteractionIntentConcept hint:ExplanationIntent ;
+    hi:hasInteractionModalityConcept hint:TextChatModality .
+
+inst:Affiliation_InovacioniCentarEtfBelgradeRs a hi:Affiliation ;
+    rdfs:label "Inovacioni Centar ETF: Belgrade, RS" ;
+    schema1:name "Inovacioni Centar ETF: Belgrade, RS" .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Paper_02_Author1 a hi:Author ;
+    foaf:name "Piek Vossen" ;
+    hi:hasAffiliation inst:Affiliation_VrijeUniversiteitAmsterdam ;
+    hi:hasAuthorName "Piek Vossen"^^xsd:string .
+
+inst:Paper_02_Author2 a hi:Author ;
+    foaf:name "Selene Báez Santamaría" ;
+    hi:hasAffiliation inst:Affiliation_VrijeUniversiteitAmsterdam ;
+    hi:hasAuthorName "Selene Báez Santamaría"^^xsd:string .
+
+inst:Paper_02_Author3 a hi:Author ;
+    foaf:name "Lenka Bajcetic" ;
+    hi:hasAffiliation inst:Affiliation_InovacioniCentarEtfBelgradeRs ;
+    hi:hasAuthorName "Lenka Bajcetic"^^xsd:string .
+
+inst:Paper_02_Author4 a hi:Author ;
+    foaf:name "Thomas Belluci" ;
+    hi:hasAffiliation inst:Affiliation_VrijeUniversiteitAmsterdam ;
+    hi:hasAuthorName "Thomas Belluci"^^xsd:string .
+
+inst:Paper_02_Context a hi:Context ;
+    rdfs:label "Social Conversation Context" ;
+    hi:hasConstraintConcept hint:TransparencyConstraint ;
+    hi:hasContextConcept hint:VirtualExhibitionContext ;
+    hi:hasInfluenceOn inst:Paper_02_Team ;
+    hi:hasPhenomenonConcept hint:KnowledgeMismatchPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_02_DialogueAnnotator_Cap_JudgmentCapability a hi:Capability ;
+    rdfs:label "Judgment Capability" ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+
+inst:Paper_02_Exec_TripleExtractionExecution a hi:TaskExecution ;
+    rdfs:label "Triple Extraction Execution" ;
+    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
+    hi:realizesTask inst:Paper_02_Task_ExtractTriplesFromDialogue .
+
+inst:Paper_02_Experiment_TripleExtractionPrecisionTest a hi:Experiment ;
+    rdfs:label "Triple Extraction Precision Test" ;
+    hi:hasAlternativeHypothesis "Triple extraction models improve precision over baseline."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:TaskSuccessRateMetric ;
+    hi:hasNullHypothesis "Triple extraction models do not improve precision over baseline."^^xsd:string .
+
+inst:Paper_02_Goal_ExtractKnowledgeFromConversations a hi:Goal ;
+    rdfs:label "Extract Knowledge from Conversations" ;
+    hi:hasGoalConcept hint:EnhancedVisitorGoal ;
+    hi:requiresTask inst:Paper_02_Task_AnnotateDialogueTurns,
+        inst:Paper_02_Task_EvaluateTripleExtraction,
+        inst:Paper_02_Task_ExtractTriplesFromDialogue .
+
+inst:Paper_02_TripleExtractionModel_Cap_PatternRecognitionCapability a hi:Capability ;
+    rdfs:label "Pattern Recognition Capability" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_02_TripleExtractionModel_Cap_TripleExtractionCapability a hi:Capability ;
+    rdfs:label "Triple Extraction Capability" ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_02_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Triple Extraction in Social Conversations" ;
+    hi:hasDomainConcept hint:DigitalMuseumDomain ;
+    hi:hasHITeam inst:Paper_02_Team .
+
+inst:Paper_02_DialogueAnnotator a hi:HumanAgent ;
+    rdfs:label "Dialogue Annotator" ;
+    hi:hasCapability inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability,
+        inst:Paper_02_DialogueAnnotator_Cap_JudgmentCapability ;
+    hi:hasRoleConcept hint:HumanUserRole .
+
+inst:Paper_02_Task_AnnotateDialogueTurns a hi:Task ;
+    rdfs:label "Annotate Dialogue Turns" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability .
+
+inst:Paper_02_Task_EvaluateTripleExtraction a hi:Task ;
+    rdfs:label "Evaluate Triple Extraction" ;
+    hi:hasTaskConcept hint:ConflictResolutionTask ;
+    hi:requiresCapability inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability .
+
+inst:Paper_02_Team a hi:HITeam ;
+    rdfs:label "Triple Extraction in Social Conversations Team" ;
+    hi:hasGoal inst:Paper_02_Goal_ExtractKnowledgeFromConversations ;
+    hi:hasMember inst:Paper_02_DialogueAnnotator,
+        inst:Paper_02_TripleExtractionModel ;
+    hi:isInfluencedBy inst:Paper_02_Context .
+
+inst:Paper_02_TripleExtractionModel a hi:ArtificialAgent ;
+    rdfs:label "Triple Extraction Model" ;
+    hi:hasCapability inst:Paper_02_TripleExtractionModel_Cap_PatternRecognitionCapability,
+        inst:Paper_02_TripleExtractionModel_Cap_TripleExtractionCapability ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_02_Exec_TripleExtractionExecution .
+
+inst:Affiliation_VrijeUniversiteitAmsterdam a hi:Affiliation ;
+    rdfs:label "Vrije Universiteit Amsterdam" ;
+    schema1:name "Vrije Universiteit Amsterdam" .
+
+inst:Paper_02_Task_ExtractTriplesFromDialogue a hi:Task ;
+    rdfs:label "Extract Triples from Dialogue" ;
+    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
+    hi:requiresCapability inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability .
+
+inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability a hi:Capability ;
+    rdfs:label "Annotation Capability" ;
+    hi:allowsTask inst:Paper_02_Task_AnnotateDialogueTurns,
+        inst:Paper_02_Task_EvaluateTripleExtraction,
+        inst:Paper_02_Task_ExtractTriplesFromDialogue ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+

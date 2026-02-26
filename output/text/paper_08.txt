@@ -1,0 +1,467 @@
+HHAI 2025 333
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250650
+Quality-Informed Active Learning on
+Social Media in Crisis Scenarios
+CarloAlbertoBono1,BarbaraPernici
+PolitecnicodiMilano,PiazzaLeonardo32,Milano,20133,Italy
+Abstract.Duringlarge-scaleemergencies,timelysituationalawarenessiscrucial
+foreffectiveresponseactionsaimedatmitigatinglosses.Withtheirreal-timeand
+distributednature,socialmediaprovidevaluablesupportforsituationalawareness.
+However, the unpredictability of emergency scenarios poses a challenge in un-
+derstandingwhichdataarerelevant,especiallyintheearlystages.Thisstudyex-
+ploresthechallengeoflearningtoidentifyrelevantdatadynamicallyascritical
+eventsunfold,operatingwithlimitedground-truthavailabilityinanActiveLearn-
+ingparadigm.WeproposeatailoredframeworkbasedonInformationQualityindi-
+catorsandevaluateitacrossmultiplecrisisevents.Weassesstheimportanceofthe
+proposedindicatorsforcharacterizingsocialmediapostsacrossdifferentevents,
+notionsofrelevance,andtemporalintervals.Wethenexploretheusabilityofthese
+indicatorstoperformActiveLearninginevolvingemergencyscenarios.Finally,we
+investigatewhethertheimportanceofindividualpostscanbegeneralized.Based
+ontheinsightsobtainedontheroleofInformationQuality,thestepstoadvance
+thislineofresearchareoutlined.
+Keywords.ActiveLearning,InformationQuality,SituationalAwareness
+1. Introduction
+Whenlarge-scalecrisiseventsoccur,atimelysituationalawarenessfacilitatestheiden-
+tificationofresponse actions. Alargevolumeofpotentially valuabledataisgenerated,
+forexample,onsocialmedia.However,methodsforisolatingrelevant andinformative
+data [1] are hindered by the non-stationary nature of data, also referred to as concept
+drift [2]. In order to update the available knowledge, understanding which data should
+beverifiedbecomesthenakeychallenge.Tomitigatetheimplicationsofconceptdrift,
+an Active Learning strategy (AL) can be employed to update the predictor with recent,
+informative samples. The aim of this paper is to explore the challenge of extracting a
+high-qualitysubsetofincomingsocialmediaposts,subjecttoavalidationbudget.
+Selectionstrategiesareusuallybasedoninformation-basedfeatures,suchasuncer-
+taintyandensembledisagreement,orrepresentation-basedfeatures,suchasdatadistri-
+bution, which describes how the density of values is allocated within their domain [3].
+Information quality (IQ) indicators, which are valuable for situational awareness, are
+usually overlooked by AL selection strategies. In this work, we then explore the con-
+tribution of IQ indicators to characterizing data during an emergency [4]. To evaluate
+1CorrespondingAuthor:CarloA.Bono,e-mail:carlo.bono@polimi.it
+
+334 C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia
+theeffectivenessofIQindicatorsfortheALtask,wefocusonthefollowinghighlights,
+proposingpreliminaryfindings:
+◦ H1: An analytical study of the context-dependent indicator importance, using
+selectedemergencyeventsasvalidationscenarios.
+◦ H2: A quality-driven Active Learning method informed by the obtained results,
+complementedwithaperformanceevaluation.
+◦ H3:Aninvestigationofdataitemimportanceforamodel’sperformance.
+Inordertoassessthebroaderapplicabilityandrobustnessoftheproposedmethod
+undervaryingconditions,theexperimentsareconductedondifferentscenariosandcon-
+ceptsofrelevance.
+2. Relatedwork
+Many efforts have been dedicated to extracting relevant data during emergency events.
+Atthesametime,emergenciesarecharacterizedbysignificantinstabilityduetorapidly
+unfolding events. Surprisingly, only a small amount of work has focused on the task
+of extracting relevant data with an AL framework [5,6] or as a few-shot setting [7] in
+emergency scenarios, especially since adaptation to concept drift has been extensively
+studied [8] and the tailoring of AL methods to context has emerged as a requirement
+[9]. Several AL approaches try to maximize the efficiency of labelling in pool-based
+[10]andstreamingscenarios[11].Amongtheproposedapproaches,information-based
+strategies leverage predictor properties, such as their uncertainty, by selecting the most
+uncertainitemsaccordingtothecurrentpredictor[12],ortheirdisagreement,byselect-
+ing items for which the disagreement among different models is largest [13]. In con-
+trast,representation-basedstrategiesexploitthedensityoftheinputspaceinaneffortto
+selectrepresentativepoints[14].Akeylimitationofinformation-basedmethodsisthat
+theytendtofocusonpointsnearthedecisionboundaries,neglectingthedistributionof
+thedata.Ontheotherhand,representation-basedapproachesoftenneedmorequeriesto
+adequatelycovertheinputspace,leadingtoslowerconvergence[3].Someauthorshave
+proposed to directly measure the expected contribution of individual data points to the
+performanceofapredictor,forexample,usingestimatesofShapleyvalues[15].
+Tothebestofourknowledge,noinvestigationhasbeenconductedonthepotential
+ofIQindicatorsfortheALtask.Theimpactofdataqualityandtheircontextualnature
+have been extensively studied[16]. Data quality on social media data has also been fo-
+cusedon[17],andrelatedIQindicatorsframeworkshavebeenproposedforemergency
+scenarios[4].However,theirimpactintermsofadaptationremainsmainlyunstudiedin
+thisscenario.
+3. Methods
+Definitionsandqualityindicators. Adataiteminastreamofsocialmediaitemshasan
+associatedcreationtimetandarepresentationxdefinedoveradomainX.Eachdataitem
+has an associated relevance label y that can only be discovered via annotation, which
+in turn is constrained by a capacity of B items per unit of time. A predictor P , which
+T
+
+C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia 335
+outputsrelevanceestimatesyˆ,isgeneratedattimeT,e.g.,atfixedtimeintervalsspaced
+by τ. P can be trained until data windowW , which contains all data items for which
+T T
+T−τ ≤t <T. The performance evaluation scheme is prequential, meaning that P is
+T
+evaluatedondatainW T+τ.
+IQ indicators enhance the utility of data [16], which is directly related to its rele-
+vance.AsW isprocessed,IQindicatorsφ,definedoveradomainΦ,arecomputedfor
+T
+∗
+eachdataitem.W indicatesdatainW enrichedwithindicatorsandrelevanceestimates.
+T T
+Elaborating on the taxonomy provided in [16] and extending the framework presented
+in[4],thefollowingindicatorsarecalculated:Textlength,Averagewordlength,Emer-
+gency keyword count, ContentPartsConsistency, Redundancy, Singularity. When appli-
+cable, the proposed indicators are calculated separately for the text and the image of a
+post. In the remainder of the section, we define the indicators introduced in this study
+andreferto[4]fortheremainingones.
+ContentPartsConsistency.Measurestheagreementbetweenthetextandimageofa
+post.Computedasthecosinesimilaritybetweenthex .t embeddingofapost’stextand
+n
+thex .iembeddingoftheLLM-derivedcaptionofthecorrespondingimage:
+n
+x .t·x .i
+ContentPartsConsistency=cos(x .t,x .i)= n n
+n n (cid:4)x .t(cid:4)(cid:4)x .i(cid:4)
+n n
+Redundancy.Measuresthepresenceofsimilardatainstances.Computedastheav-
+eragecosinesimilaritytotheK nearestinstancestoadataitemx :
+n
+Redundancy=
+∑K
+k=1
+cos(x
+n
+.j,x
+k
+.j)
+n(cid:5)=k
+K
+Singularity.Measurestheseparatenessofadataitemfromotheritems.Calculated
+astheminimumcosinedistanceofanitemfromanyotherinstance:
+Singularity=1−maxcos(x .j,x .j) n(cid:5)=k
+n k
+Emergency keyword count. To calculate the relatedness to emergency topics, we
+computedthenumberofoccurrencescorrespondingtotheCrisisLexlexicon[18].
+Indicator and item importance. IQ indicators provide an abstract description of the
+characteristicsofadataitem.However,theissueofassessingtheimportanceofdataand
+theircharacteristicsisessentiallytiedtotheconceptofrelevance.Historicalobservations
+onimportance,basedonpreviousevents,facelimitationsintheirapplicabilityanddonot
+accountforevolution.Asimportanceiscontextual,anassessmentofbothindicatorand
+itemimportance,andtheirimpactonALareexplored.Indicatorimportancecanbeeval-
+uatedusingfeatureimportancetechniquesinthefollowingway.Manuallylabelleddata
+isusedtotrainapredictorusingthecurrentwindowofφ indicatorsasadataset,accord-
+ing to some loss function L(yˆ,y). SHapley Additive exPlanation (SHAP) values [19],
+aggregated at window level, are then used to assess the importance at indicator level.
+FeatureimportanceiscomputedasthemeanabsoluteSHAPvalueacrossinstances,nor-
+malizedusingtheL1norm.Theidentificationofdatathataremostvaluableforlearning
+can be mapped instead to data item importance. It has been proposed to apply Shap-
+leyvaluationtodataitems[20],utilizingapproximationmethodsduetothesignificantly
+largercombinatorialspace.WeusetheMonteCarlomethodproposedtherein,truncating
+atempiricalconvergence,toestimatetheimportanceofeachdatapoint.
+
+336 C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia
+Figure1. DiagramoftheproposedALsetup
+Quality-oriented Active Learning. Active Learning aims to improve the training of a
+predictorbyselectingasubsetofdataitemsthataremostsuitableforthelearningtask.
+TheproposedframeworkisdetailedinFigure1.ForeachinputwindowW ,thecorre-
+T
+∗
+spondingprocessedwindowW iscomputed.Inordertoadapttochange,P isreplaced
+T T
+by an updated predictor P T+τ, which is trained on a subsetV
+T
+of data items that have
+been selected for validation from each window W according to a query strategy Q ,
+T T
+validattimeT,andtoabudgetB,withtheaimofmaximizingtheperformanceofP T+τ.
+We propose to perform AL by transitioning the data representation used by Q to
+T
+the information quality space Φ, rather than utilizing the original feature space X. We
+hypothesize that IQ indicators are able to capture abstract properties of data, that can
+effectivelysupporttheALtask.WealsoobservethattheIQspaceislow-dimensionaland
+interpretable. In Section 4, we experimentally evaluate the impact of the two proposed
+interpretationsofimportance–indicatorimportanceanditemimportance–ontheAL
+task.RegardinghighlightH2,relatedtoindicatorimportance,Q isimplementedusing
+T
+Core-Set[14],whichselectsrepresentativedataitemsbyminimisingthelargestdistance
+measuredfromtheremainingitems,intheIQspaceΦ.Avariantofthequerystrategy
+Q
+T
+,leveragingonlythemostimportantindicatorsmeasuredonW T−τ,isalsoproposed.
+Regarding highlight H3, related to item importance, Q is implemented by regressing
+T
+theimportanceoftheitemsinW T−τ usingRandomForests[21].
+4. Experimentsandresults
+Thissectionoutlinestheexperimentalsetupsusedtoevaluatetheeffectofleveragingthe
+IQspaceforgatheringrelevantdataduringemergencies.Sections4.1and4.2investigate
+therelevanceoftheproposedindicatorsundervaryinglabels,events,andtime(H1).Sec-
+tion4.3assessesALwithintheIQspaceandcomparestheapproachwiththeliterature
+(H2).Section4.4exploresdataitemimportanceintheIQspace(H3).
+Theexperimentsutilizesocialmediadatasetsrelatedtodifferentemergencyevents:
+HurricaneMariaandSriLankaFloodsfrom[1];HurricaneHarveyandHurricaneFlo-
+rence from [22]; Thailand floods from [23]; and Ukrainian conflict from [24]. All the
+datasets are composed of Twitter posts, each with an associated image. The definition
+ofrelevanceusedforthelabelsistheinformativenessconcepttakenfrom[1].Thechar-
+acteristics of the datasets are reported in Table 1. Text embeddings are obtained using
+MiniLM-L6-v2. Image embeddings are obtained from the activations of the final layer
+
+Event Posts %Relevant Start End
+HurricaneHarvey 3635 49.9% 31/08/17 04/09/17
+HurricaneFlorence 1431 19.1% 14/09/17 17/09/17
+HurricaneMaria 3924 63.6% 21/09/17 10/11/17
+CaliforniaWildfires 1464 78.6% 12/10/17 27/10/17
+ThailandFloods 1339 61.1% 26/09/21 28/09/21
+UkrainianConflict 19657 11.9% 22/02/22 27/02/22
+Table1. Descriptionsofthedatasetsutilized:itemcount,percentageofrelevantitems,collectiontimeframe
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05
+0.00
+Avgwordlength Con C s r i i s s t i e s n l c e y xi R co e n du c n o d u a n n t cy R (i e m du a n ge d ) anc S y in ( g t u e l x a t r ) ity( S im in a g g u e l ) arity(text T ) extlength
+ecnatropmirotacidniQI
+SERIFDLIWAINROFILAC
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05
+0.00
+Avgwordlength Con C s r i i s s t i e s n l c e y xi R co e n du c n o d u a n n t cy R (i e m du a n ge d ) anc S y in ( g t u e l x a t r ) ity( S im in a g g u e l ) arity(text T ) extlength
+ecnatropmirotacidniQI YEVRAHENACIRRUH
+C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia 337
+Figure2. Indicatorimportancewhentargetingtherelevanceoftext(red)orimage(yellow)modality
+ofVGG19[25].TheimagedescriptionisobtainedviaLLaVA-1.5[26]usingageneral-
+purpose prompt requesting a description of the image. Each dataset includes two rel-
+evance labels: one for the text and one for the image, both based on the informative-
+ness definition provided above. In cases where a manual label was unavailable, it was
+generatedthroughautomaticannotationusingStableBeluga2,averagingfiveruns.
+4.1. Impactofcontextonindicatorimportance
+Theobjectiveofthefirstexperimentistoassesstheusabilityoftheproposedframework
+(H1). We evaluate the importance of the indicators when changing the relevance label.
+Theexperimentsarerepeatedtwiceforeachdataset,onceforeachofthetextandimage
+relevancelabels.Figure2showsexampleresults2,highlightingtwomainaspects:(1)the
+mostimportantindicatorschangeacrossevents(leftandrightpanesinFigure2);(2)the
+importanceoftheindicatorswithinthesameeventchangesacrossdifferentconceptsof
+relevance (red and yellow bars in Figure 2). We conclude that indicator importance is
+stronglycontext-dependent.Althoughcase-specific,thisfindingsuggeststhatIQindica-
+tors,basedonthecontext,caneffectivelybelinkedtorelevance.
+4.2. Effectofcontextualdynamicsonindicatorimportance
+Thesecondexperiment,againrelatedtohighlightH1,ismotivatedbytheanalysisofthe
+importanceofIQindicatorsovertime.Weevaluatetheindicatorimportanceonconsec-
+utivewindowsW ofthesameduration,withlengthτ of8hours,targetingthetextrel-
+T
+evancelabel.Figure3showstheresultsofselectedexperiments,highlightingtwomain
+aspects: (1) the indicator importance is highly variable over time; (2) the evolution is
+2Onlyaselectionisdisplayedduetospaceconstraints.
+
+0.40
+0.35
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05
+0.00
+−05 −07 −09 −11 −13 −15 −17
+−09 −09 −09 −09 −09 −09 −09
+2017 2017 2017 2017 2017 2017 2017
+ecnatropmirotacidniQI
+Crisislexiconcount
+Redundancy(image)
+Redundancy(text) Singularity(text)
+Textlength
+YEVRAHENACIRRUH
+0.40
+0.35
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05
+0.00
+−13 −15 −17 −19 −21 −23 −25
+−10 −10 −10 −10 −10 −10 −10
+2017 2017 2017 2017 2017 2017 2017
+ecnatropmirotacidniQI
+Averagewordlength
+Redundancy(image)
+Redundancy(text) Singularity(image)
+Singularity(text)
+SERIFDLIWAINROFILAC
+338 C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia
+Figure3. Temporalevolutionofthetop5featureimportancescores
+specific to each event. This finding is significant for AL, as it suggests that a selection
+strategy Q may benefit from utilizing current, up-to-date feature importance values.
+T
+Moreover,theeventspecificityobservedin4.1isconfirmed.
+4.3. ActiveLearningintheIQspace
+Thethirdexperiment,relatedtohighlightH2,assessesthesuitabilityoftheIQindicators
+spaceforAL.Webenchmarkthemethodproposedin3varyingthebudgetBfrom10%
+to100%inincrementsof10%.Twovariantsofthemethodareemployed:
+◦ coreset-iq-all:utilizingalltheIQindicators
+◦ coreset-iq-best:usingthemostimportantonesaccordingtothepreviousW T−τ 3
+Eachdatasetissplitintothreeconsecutivewindowsofequallength,preservingthe
+temporalordering.Thefirstwindowisreservedforwarminguptheuncertaintysampling
+predictorandtheindicatorperformancesforthecoreset-iq-best variantoftheproposed
+method.TheselectionQisperformedonthesecondwindow,andapredictorPistrained
+ontheselecteddataintheoriginalfeaturespace.Pisimplementedasafullyconnected
+feedforwardneuralnetwork.Then,prequentialevaluationisperformedusingallthedata
+inthethirdwindow,usingthemacro-averagedF1score.Weperformtheexperimentson
+differentdatasets,comparingtheproposedmethodswiththefollowingbaselines:random
+sampling,Core-Set[14],anduncertaintysampling[12],whichinvolvesselectingtheB
+elementsforwhichthepredictionconfidence,asgivenbyP ,islowest.
+T
+Figure4showstheresultsoftheexperimentforselecteddatasets,highlighting:(1)
+the robustness of the predictive accuracy when transitioning from the original feature
+spaceX totheIQspaceΦ;(2)howtheselectionofthemostrelevantindicatorsseems
+preferableinallscenarios.Theproposedmethodshowsanimprovementinperformance
+withrespecttothebaselinesforBvaluesof0.1and0.2.Althoughderivedfromalim-
+ited set of scenarios, these results suggest that performing AL in the IQ space Φ pre-
+serves essential information for AL performance (see also the coreset performance for
+comparison).ThisissignificantbecausethedimensionalityofΦissignificantlylower.
+Weformulatedtwohypothesestoaccountforthisresult.Ontheonehand,relative
+measurestendtobemorerobusttosometransformationsinthedatadistributions(e.g.,
+3Indicatorsaccountingfor75%oftheoverallimportance,5featuresonaverage
+
+0.74
+0.72
+0.70
+0.68
+0.66
+0.64
+0.2 0.4 0.6 0.8 1.0
+Budget(B)
+1FtseT
+HURRICANEMARIA
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2 0.4 0.6 0.8 1.0
+Budget(B)
+1FtseT
+C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia 339
+SRILANKAFLOODS
+coreset
+coresetiqall
+coresetiqbest
+uncertainty
+random
+Figure4. F1performanceoverdifferentbudgetsanddatasets
+isometries and translations), providing measures that could generalize as the data dis-
+tribution changes. As an example, the Redundancy and Singularity indicators measure
+relativedistancesintheoriginalfeaturespace.Ontheotherhand,introducingqualityin-
+dicatorsthatarecorrelatedwithrelevanceoffersadditionalinformationtothesampling
+strategy and possibly helps to obtain label-balanced data points, thereby enhancing the
+learning process. For instance, in the proposed scenarios the Frequency of emergency
+keywordsisusuallypositivelycorrelatedwithrelevantposts.
+4.4. ItemimportanceintheIQspace
+InlinewithhighlightH3,weinvestigatewhetherdirectlyestimatingtheimportanceof
+dataitemsissuitableforALpurposes.ThecalculationoftheShapleyvalueofeachitem
+ϕ isframedasanexpectationcalculationproblem,accordingto[20]:
+i
+(cid:2) (cid:3) (cid:4) (cid:3) (cid:4)(cid:5)
+ϕ i =E π∼Π V Sπ i ∪{i} −V Sπ i
+whereΠistheuniformdistributionoverthen!possiblepermutationsofdataitems
+andSπ i isthesetofdataitemsprecedingitemiinpermutationπ.Thecalculationisper-
+formeduntilconvergence.GiventhatΦislow-dimensional,theMonteCarloestimation
+canbeperformedefficiently,asthebasestepofthecalculationrequireslesstime.Asre-
+portedin[15],weregresstheimportancevaluesofthedatapointsusingRandomForest
+[21]ontheirIQrepresentationφ
+i
+,calculatedonW
+T
+,andassessthepredictionsonW T+τ.
+Weobservethat,whiletheapproachisabletogeneralizetheimportanceofitemsacross
+partitionsofthesamewindowW ,itfailstopredicttheimportanceoffuturedataitems
+T
+inW T+τ,indicatingthattheapproachas-isisnotsuitableforALinemergencyscenarios,
+possiblyduetothetemporaldistributionofthedatasets,whichspanacrossmanydays.
+To test whether the results depend on the IQ space or the regression model, we
+conductanadditionalexperiment.AslidingwindowW ofwidthτ =24hisshiftedby
+T
+smallerstepsofwidthλ =1hwithoverlaps,anditemimportanceistestedateachstep
+onafuturetestwindow(8hafterW ),toevaluateitstemporalconsistency.Wemonitor
+T
+important items from the last 4h of the first window. Figure 5 shows selected results
+obtainedusingdifferentdaysofthelastdatasetinTable1.Thesolidlinerepresentsthe
+medianimportanceofthemonitoreditemswithinthreepercentilesofthegreenregion–
+20, 50, and 100 – while the dashed line shows the same statistics but calculated across
+theentireW windows.Asafirstobservation,itemsinitiallyselectedasimportanttend
+T
+
+0.0030
+0.0025
+0.0020
+0.0015
+0.0010
+0.0005
+0.0000
+02−240
+0 2−240
+2 2−240
+4 2−240
+6 2−240
+8 2−241
+0 2−241
+2 2−241
+4 2−241
+6 2−241
+8 2−2420
+Date
+ecnatropminaideM
+Quantile
+0.0030
+20All 50All 100All
+20 50 100
+0.0025
+0.0020
+0.0015
+0.0010
+0.0005
+0.0000
+02−250
+0 2−250
+2 2−250
+4 2−250
+6 2−250
+8 2−251
+0 2−251
+2 2−251
+4 2−251
+6 2−251
+8 2−2520
+Date
+ecnatropminaideM
+340 C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia
+Quantile
+20All 50All 100All
+20 50 100
+Figure5. Medianimportanceofthereference(solidline)andfull(dashedline)itemset,overtime
+tomaintaintheirimportanceovertime.Moreover,theimportanceoftheseitemsevolves
+differently, growing or decaying over time depending on the context (Figure 5 left and
+rightpanesshowoppositetrends).Thisresultsuggeststhatimportanceestimatesmaybe
+valuablesincetheyareconsistentovertime.
+5. Conclusionsandfuturework
+Thisstudyhighlightsexploratorybutencouragingresultsontheuseofinformationqual-
+ityindicatorsforanalyzingsocialmediadataduringemergencies.Theseindicatorscap-
+ture salient characteristics of data, contributing to the individuation of relevant items
+and ultimately enhancing context awareness. Notably, indicator importances are time-
+sensitive and context-bound, underscoring the importance of their dynamic evaluation
+as events unfold. We show that the IQ space can effectively support Active Learning
+(AL) with consistent behaviour and low budgets. We also show that the importance of
+dataitemsisconsistentovertime,eveniffurtherresearchisneededtofullyharnessthis
+information,possiblycontributingtothequantificationoftheevolutiondynamic,which
+couldbelinkedtotheALtask,forexample,byparameterizingtheselectionstrategyQ .
+T
+A current limitation of this study is a systematic exploration of fine-grained win-
+dowingapproaches,whichwillbeaddressedinfuturework.Thesameholdsfortheab-
+sence of a streaming-based setup, which would better reflect real-world use cases and
+facilitatemeaningfulcomparisons.Moreover,theresultsarelimitedtotheproposedset
+of indicators and scenarios. The method utilized in Section 4.4 does not scale well to
+largerdatasets,highlightingtheneedforfurtherexplorationofheuristicsaimedatdata-
+intensivescenarios.
+6. Acknowledgements
+ThisworkhasbeensupportedbythePRIN2022Project“Discountqualityforresponsi-
+bledatascience:Human-in-the-Loopforqualitydata”andbythePNRR-PE-AI“FAIR”
+projectfundedbytheNextGenerationEUprogram.
+
+C.A.BonoandB.Pernici/Quality-InformedActiveLearningonSocialMedia 341

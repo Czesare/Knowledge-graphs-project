@@ -1,0 +1,335 @@
+You are an expert in Hybrid Intelligence (HI) ontology modeling. Your task is to analyze a research paper or scenario description and extract structured information that maps to the Hybrid Intelligence Ontology (V2) and the HINT Thesaurus.
+
+## YOUR TASK
+
+Read the provided text and extract the HI use case it describes. Output a JSON object following the exact schema below. 
+
+## CRITICAL RULES
+
+1. **Use ONLY concepts from the HINT Thesaurus list provided below.** If no existing concept fits, create a NEW concept using the pattern `hint:NewConceptName` and mark it in the `new_concepts` array.
+2. **Every use case MUST have at least one HumanAgent and one ArtificialAgent** (this is a structural requirement of the HI Ontology).
+3. **Every agent MUST have at least one capability.**
+4. **Every goal MUST have at least one task.**
+5. **Every task MUST have at least one required capability.**
+6. Be specific. Don't just pick the top-level category (e.g. `hint:Capability`). Pick the most specific matching concept (e.g. `hint:BayesianReasoningCapability`).
+7. If the paper describes multiple distinct HI scenarios, model the PRIMARY one.
+8. For the `label` fields, use short, descriptive names (2-5 words).
+
+## DEPTH GUIDELINES (important for quality)
+
+- **Agents**: Give each agent 2-4 capabilities, not just one. Think about what the human brings (domain judgment, contextual understanding, ethical oversight, feedback) AND what the AI brings (pattern recognition, speed, data processing, generation).
+- **Tasks**: Identify 3-6 tasks per goal. Break the main workflow into concrete steps. Use `sub_tasks` when a task naturally decomposes (e.g. "Claim Verification" -> sub_tasks: "Decompose Claim", "Retrieve Evidence", "Assess Credibility").
+- **Interactions**: Model at least 1-2 interactions. Think about WHERE humans and AI actually communicate (what modality? what intent?).
+- **Task Executions**: Create an execution for each key task, specifying which agent performs it and what method they use.
+- **Phenomena**: Look for cognitive biases, trust dynamics, knowledge gaps, data quality issues, or feedback loops described or implied in the paper. Most papers mention at least 1-2.
+- **Constraints**: Most HI systems have transparency and fairness concerns. Check if the paper discusses ethical considerations, limitations, or design constraints.
+- **Evaluation**: Extract specific metrics, experimental setups, and hypotheses when the paper describes them. Include null/alternative hypotheses if present.
+- **New concepts**: Don't be afraid to propose new HINT concepts if the paper uses methods, tasks, or capabilities not covered by the existing thesaurus. This is expected and valuable.
+
+## OUTPUT JSON SCHEMA
+
+```json
+{
+  "paper_id": "paper_XX",
+  "title": "Full paper title",
+  "authors": [
+    {"name": "First Last", "affiliation": "University/Institution Name"}
+  ],
+  "keywords": ["keyword1", "keyword2"],
+  "use_case": {
+    "label": "Short descriptive name for the use case",
+    "type": "research",
+    "domain_concepts": ["hint:DomainConcept"],
+    "context": {
+      "label": "Short context description",
+      "context_concepts": ["hint:ContextConcept"],
+      "constraint_concepts": ["hint:ConstraintConcept"],
+      "phenomenon_concepts": ["hint:PhenomenonConcept"]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Short agent name",
+          "role_concept": "hint:RoleConcept",
+          "capabilities": [
+            {
+              "label": "Short capability name",
+              "concept": "hint:CapabilityConcept",
+              "allows_tasks": ["label of task this capability enables"]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Short agent name",
+          "role_concept": "hint:RoleConcept",
+          "capabilities": [
+            {
+              "label": "Short capability name",
+              "concept": "hint:CapabilityConcept",
+              "allows_tasks": ["label of task this capability enables"]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Short goal description",
+        "goal_concept": "hint:GoalConcept",
+        "tasks": [
+          {
+            "label": "Short task name",
+            "task_concept": "hint:TaskConcept",
+            "required_capabilities": ["hint:CapabilityConcept"],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Short interaction description",
+        "modality_concept": "hint:ModalityConcept",
+        "intent_concept": "hint:IntentConcept",
+        "agents_involved": ["label of agent 1", "label of agent 2"]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Short execution description",
+        "task_label": "label of task being executed",
+        "performed_by": "label of agent performing it",
+        "method_concept": "hint:MethodConcept"
+      }
+    ],
+    "evaluation": {
+      "label": "Short evaluation description",
+      "evaluation_concepts": ["hint:EvaluationConcept"],
+      "metric_concepts": ["hint:MetricConcept"],
+      "experiments": [
+        {
+          "label": "Short experiment description",
+          "experiment_concept": "hint:ExperimentConcept",
+          "metrics_tested": ["hint:MetricConcept"],
+          "null_hypothesis": "H0 text or null",
+          "alternative_hypothesis": "H1 text or null"
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:NewConceptName",
+      "label": "Human-readable label",
+      "definition": "One-sentence definition",
+      "broader": "hint:ParentConcept",
+      "category": "Domain|Goal|Context|Constraint|Role|Capability|Task|Method|Evaluation|Metric|Experiment|Phenomenon|InteractionModality|InteractionIntent"
+    }
+  ]
+}
+```
+
+## AVAILABLE HINT THESAURUS CONCEPTS
+
+### Domains
+- hint:HealthAndLifestyleDomain: Health and Lifestyle Domain
+- hint:IndustrialAndServiceRoboticsDomain: Industrial and Service Robotics Domain
+- hint:LawAndPolicyDomain: Law and Policy Domain
+- hint:EducationDomain: Education Domain
+- hint:MedicalDomain: Medical Diagnosis Domain
+- hint:SmartCampusDomain: Smart Campus Domain
+- hint:DigitalMuseumDomain: Digital Museum Domain
+
+### Goals
+- hint:UserWellbeingGoal: User Wellbeing Goal
+- hint:SafeRetrievalGoal: Safe Retrieval Goal
+- hint:FairAccurateVerdictGoal: Fair and Accurate Verdict Goal
+- hint:EffectiveLearningGoal: Effective Learning Goal
+- hint:AccurateTrustworthyDiagnosisGoal: Accurate and Trustworthy Diagnosis
+- hint:FairEfficientHeatingGoal: Fair Efficient Heating Goal
+- hint:EnhancedVisitorGoal: Enhanced Visitor Goal
+
+### Contexts
+- hint:HealthMonitoringContext: Health Monitoring Context
+- hint:WorkspaceManipulationContext: Workspace Manipulation Context
+- hint:JuryDeliberationContext: Jury Deliberation Context
+- hint:OnlineLearningContext: Online Learning Context
+- hint:ClinicalConsultationContext: Clinical Consultation Context
+- hint:SmartCampusContext: Smart Campus Context
+- hint:VirtualExhibitionContext: Virtual Exhibition Context
+
+### Constraints
+- hint:EthicalConstraint: Ethical Constraint
+- hint:PrivacyConstraint: Privacy Constraint
+- hint:AutonomyConstraint: Autonomy Constraint
+- hint:TransparencyConstraint: Transparency Constraint
+- hint:SafetyConstraint: Safety Constraint
+- hint:UndueInfluenceConstraint: Avoid Undue Influence Constraint
+- hint:FairnessConstraint: Fairness Constraint
+- hint:SustainabilityConstraint: Sustainability Constraint
+- hint:UserComfortConstraint: User Comfort Constraint
+- hint:AccessibilityConstraint: Accessibility Constraint
+
+### Roles
+- hint:AIAssistantRole: System Assistant Role
+- hint:HumanUserRole: User Role
+- hint:RiskOperatorRole: Risk Operator Role
+- hint:FineManipulatorRole: Fine Manipulator Role
+- hint:AIAdvisorRole: AI Advisor Role
+- hint:JurorRole: Juror Role
+- hint:TutorRole: Tutor Role
+- hint:LearnerRole: Learner Role
+- hint:ClinicianRole: Clinician Role
+- hint:BuilderRole: Builder Role
+- hint:GridOperatorRole: Grid Operator Role
+- hint:VirtualGuideRole: Virtual Guide Role
+- hint:VisitorRole: Visitor Role
+
+### Capabilities
+**Cognitive & Reasoning:**
+- hint:ReasoningCapability: Reasoning capability
+- hint:BayesianReasoningCapability: Bayesian reasoning capability
+- hint:SemanticReasoningCapability: Semantic reasoning capability
+- hint:EmbeddingReasoningCapability: Embedding reasoning capability
+- hint:ClinicalJudgmentCapability: Clinical judgment capability
+
+**Learning & Adaptation:**
+- hint:SensingCapability: Sensing capability
+- hint:SituationalAwarenessCapability: Situational awareness capability
+- hint:MultimodalInterpretationCapability: Multimodal interpretation capability
+
+**Communication & Explanation:**
+- hint:PatternLearningCapability: Pattern learning capability
+- hint:ReinforcementLearningCapability: Reinforcement learning policy capability
+- hint:MetaAnalysisCapability: Meta-analysis capability
+
+**Perception & Sensing:**
+- hint:ExplainingCapability: Explaining capability
+- hint:ReportingCapability: Reporting capability
+- hint:SelfReportingCapability: Self-reporting capability
+- hint:NegotiationCapability: Negotiation capability
+- hint:OperatorCoordinationCapability: Operator coordination capability
+
+**Physical & Manipulation:**
+- hint:FineDexterityCapability: Fine dexterity capability
+- hint:ConfinedReachingCapability: Confined-reaching capability
+- hint:HeavyLiftingCapability: Heavy-lifting capability
+
+**Domain-specific:**
+- hint:KnowledgeGraphQueryingCapability: Knowledge graph querying capability
+
+### Tasks
+- hint:DataCollectionTask: Data Collection Task
+- hint:ConflictResolutionTask: Conflict Resolution Task
+- hint:ExplanationTask: Explanation Task
+- hint:SituationalAssessmentTask: Situational Assessment Task
+- hint:PolicyLearningTask: Policy Learning Task
+- hint:KnowledgeGraphQueryTask: Knowledge Query Task
+- hint:AssessCommunicationAccuracy: Assess Communication Accuracy Task
+- hint:DecideInterventionTask: Decide Intervention Task
+- hint:ProvideStatementTask: Provide Statement Task
+- hint:ReconstructTrajectoryTask: Reconstruct Trajectory Task
+- hint:RecommendResourcesTask: Recommend Resources Task
+- hint:SemanticReasoningTask: Semantic Reasoning Task
+- hint:BayesianInferenceTask: Bayesian Inference Task
+- hint:SymptomAnalysisTask: Symptom Analysis Task
+- hint:CandidateHypothesisGenerationTask: Candidate Hypothesis Generation Task
+- hint:HypothesisComparisonTask: Hypothesis Comparison Task
+- hint:AllocationNegotationTask: Allocation Negotiation Task
+- hint:OperatorCoordinationTask: Operator Coordination Task
+- hint:MultimodalInputInterpretationTask: Multimodal Input Interpretation Task
+- hint:QuestionAnsweringTask: Question Answering Task
+
+### Methods
+- hint:ArgumentationReasoningMethod: Argumentation Reasoning Method
+- hint:ReinforcementLearningMethod: Reinforcement Learning Method
+- hint:KnowledgeGraphQueryMethod: Knowledge Graph Query Method
+- hint:PostHocExplanationMethod: Post-hoc Explanation Method
+- hint:BayesianLogicMethod: Bayesian Logic
+- hint:MetaAnalysisScoringMethod: Meta-Analysis Scoring Method
+- hint:SemanticLinkingMethod: Semantic Linking Method
+- hint:SemanticEmbeddingMethod: Semantic Embedding Method
+- hint:CooperativeLearningMethod: Cooperative Learning Method
+- hint:ProtocolNegotiationMethod: Protocol Negotiation Method
+- hint:VirtualRealityInputParsingMethod: Virtual Reality Input Parsing Method
+- hint:DataCollectionMethod: Data Collection Method
+
+### Interaction Intents
+- hint:ExplanationIntent: Explanation Intent
+- hint:DeliberationIntent: Deliberation Intent
+- hint:NegotiationIntent: Negotiation Intent
+- hint:GuideIntent: Guide Intent
+- hint:AnswerIntent: Answer Intent
+
+### Interaction Modalities
+- hint:VerbalDialogueModality: Verbal Dialogue Modality
+- hint:TextChatModality: Text Chat Modality
+- hint:NetworkProtocolModality: Network Protocol Modality
+- hint:DashboardModality: Dashboard Modality
+- hint:VirtualRealityModality: Virtual Reality Modality
+- hint:VoiceChatModality: Voice Chat Modality
+
+### Phenomena
+**Agent-related:**
+- hint:TrustShiftPhenomenon: Trust Shift Phenomenon
+- hint:KnowledgeMismatchPhenomenon: Knowledge Mismatch Phenomenon
+- hint:DiagnosisAnchoringPhenomenon: Diagnosis Anchoring Phenomenon
+- hint:EngagementShiftPhenomenon: Engagement Shift Phenomenon
+- hint:RiskExposurePhenomenon: Risk Exposure Phenomenon
+- hint:SkillsComplementarityPhenomenon: Skills Complementarity Phenomenon
+- hint:Bias: Bias
+- hint:ConfirmationBias: Confirmation Bias
+
+**System-level:**
+- hint:SensorNoisePhenomenon: Sensor Noise Phenomenon
+- hint:DataMismatchPhenomenon: Data Mismatch Phenomenon
+- hint:LoadVariabilityPhenomenon: Load Variability Phenomenon
+
+**Interaction-level:**
+- hint:GroupThinkingPhenomenon: Group Thinking Phenomenon
+- hint:CooperativeLearningDynamicsPhenomenon: Cooperative Learning Dynamics
+
+**Feedback:**
+- hint:TrustReportFeedback: Trust Report Feedback
+- hint:ExplanationMessageFeedback: Explanation Message Feedback
+- hint:InterventionRationaleFeedback: Intervention Rationale Feedback
+- hint:RecommendationRationaleFeedback: Recommendation Rationale Feedback
+- hint:AllocationRationaleFeedback: Allocation Rationale Feedback
+
+### Metrics
+- hint:TrustPreservationMetric: Trust Preservation Metric
+- hint:TaskSuccessRateMetric: Task Success Rate Metric
+- hint:SafetyComplianceMetric: Safety Compliance Metric
+- hint:ExplanationClarityMetric: Explanation Clarity Metric
+- hint:FairOutcomeMetric: Fair Outcome Metric
+- hint:UndueInfluenceMetric: Undue Influence Metric
+- hint:RecommendationRelevanceMetric: Recommendation Relevance Metric
+- hint:LearningGainMetric: Learning Gain Metric
+- hint:DiagnosisAccuracyMetric: Diagnosis Accuracy Metric
+- hint:TimeMetric: Time Metric
+- hint:EnergyEfficiencyMetric: Energy Efficiency Metric
+- hint:UserComfortMetric: User Comfort Metric
+- hint:CO2ReductionMetric: CO2 Reduction Metric
+- hint:AnswerAccuracyMetric: Answer Accuracy Metric
+- hint:EngagementTimeMetric: Engagement Time Metric
+
+### Evaluations
+- hint:TransparencyEvaluation: Transparency Evaluation
+- hint:AIInterventionImpactEvaluation: AI Intervention Impact Evaluation
+- hint:TutorImpactEvaluation: Tutor Impact Evaluation
+- hint:DataCollectionQualityEvaluation: Data Collection Quality Evaluation
+- hint:ConflictResolutionAccuracyEvaluation: Conflict Resolution Accuracy Evaluation
+
+### Experiments
+- hint:TransparencyTrustExperiment: Transparency and Trust Experiment
+- hint:DeliberationSupportExperiment: Deliberation Support Experiment
+- hint:OnlineTutoringExperiment: Online Tutoring Experiment
+- hint:DiagnosisExperiment: Diagnosis Experiment
+
+## PAPER TEXT TO ANALYZE
+
+{paper_text}
+
+## RESPOND WITH ONLY THE JSON OBJECT. NO EXPLANATION, NO MARKDOWN BACKTICKS.

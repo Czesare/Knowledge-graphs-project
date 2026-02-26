@@ -1,0 +1,13 @@
+HI Competition Scenario
+Event: HI Comp @ HHAI 2024
+Date: 6/10/2024
+Team: T2. Child Education Team
+Outcome: worst case
+
+Scenario Description:
+In a school in the centre of a large European city, Leah, a supportive teacher passionate about new technologies, and Anna, a therapist, are assigned to follow Alex, a child with learning problems. The intervention includes several interactive sessions with NAO, a humanoid robot frequently used in these types of interventions. The duration of the intervention is one semester, at the end of which there are no particular improvements and the guidelines provided by the team, applied in a sample of schools in the suburbs of the city, seem to be equally ineffective. What happened? 
+First of all, the adults of the team had problems to identify the specific roles of each one (Team structure transparency): both of them are pedagogical figures and Leah, feeling devalued by Annaâ€™s socially recognized role, began to take initiatives without thinking about the childâ€™s welfare. 
+In addition, Leahâ€™s passion for new technologies has led her to increasingly use NAO, leaving the child for a long time to interact with the robot. What she didnâ€™t think was that, although NAO has a rudimentary AI that allows him to respond reactively to stimuli, he follows the Wizard of Oz paradigm (Green & Wei-Haas, 1985). The robot, in the absence of a human being to coordinate its actions, will always end up repeating the same actions, limiting the effectiveness of the intervention (Skill comprehensiveness).
+On the other hand, Anna is not without fault: her expert position did not allow her to understand that Alex was also an active part of the team, and instead of orienting her interests she adopted a behaviourist approach (Wheldall & Merrett, 2013) and, in fact, trying to "train" the child without taking into account its autonomy (Autonomy).
+The presence of a child in the team is, in any case, a very important challenge, especially if with difficulties to process auditory information: for example, this will lead him to have more difficulty in introjecting the norms of educators and interact with Paro (Norm awareness).
+Last, we must consider the socio-economic factor: the intervention takes place in a specific context, which is that of a school in a wealthy area of the city. Since the intervention aims to help children with learning development, account should be taken of the fact that children raised in poor families show this type of problem most (Bigelow, 2006). An intervention designed for a particular social class is difficult to extend in a situation where the possibilities of families are limited and the effects on children more serious (Objectives consequentiality).

@@ -1,0 +1,163 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_07 a hi:Paper ;
+    hi:describesUseCase inst:Paper_07_UseCase ;
+    hi:hasAuthor inst:Paper_07_Author1,
+        inst:Paper_07_Author2 ;
+    hi:hasKeyword "distributed cognition theory",
+        "industrial safety",
+        "knowledge representation",
+        "ontologies",
+        "risk assessment" ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Ontology-Based Risk Assessment in Smelting Plant Logistics"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_07_Evaluation a hi:Evaluation ;
+    rdfs:label "System Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_07_Experiment_Scenario-basedEvaluation ;
+    hi:hasMetricConcept hint:SafetyComplianceMetric,
+        hint:TaskSuccessRateMetric .
+
+inst:Paper_07_Interaction_Operator-driverCoordination a hi:Interaction ;
+    rdfs:label "Operator-Driver Coordination" ;
+    hi:hasAgentInvolved inst:Paper_07_Driver,
+        inst:Paper_07_Operator ;
+    hi:hasInteractionIntentConcept hint:DeliberationIntent ;
+    hi:hasInteractionModalityConcept hint:VerbalDialogueModality .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Paper_07_Author1 a hi:Author ;
+    foaf:name "John Granström" ;
+    hi:hasAffiliation inst:Affiliation_UmeåUniversity ;
+    hi:hasAuthorName "John Granström"^^xsd:string .
+
+inst:Paper_07_Author2 a hi:Author ;
+    foaf:name "Andreas Brännström" ;
+    hi:hasAffiliation inst:Affiliation_UmeåUniversity ;
+    hi:hasAuthorName "Andreas Brännström"^^xsd:string .
+
+inst:Paper_07_Context a hi:Context ;
+    rdfs:label "Molten Metal Handling" ;
+    hi:hasConstraintConcept hint:SafetyConstraint ;
+    hi:hasContextConcept hint:WorkspaceManipulationContext ;
+    hi:hasInfluenceOn inst:Paper_07_Team ;
+    hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_07_Driver_Cap_LogisticalManagement a hi:Capability ;
+    rdfs:label "Logistical Management" ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_07_Driver_Cap_Real-timeDecisionMaking a hi:Capability ;
+    rdfs:label "Real-time Decision Making" ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_07_Exec_ExecuteRiskAssessment a hi:TaskExecution ;
+    rdfs:label "Execute Risk Assessment" ;
+    hi:hasMethodConcept hint:SemanticLinkingMethod ;
+    hi:realizesTask inst:Paper_07_Task_RiskAssessment .
+
+inst:Paper_07_Experiment_Scenario-basedEvaluation a hi:Experiment ;
+    rdfs:label "Scenario-Based Evaluation" ;
+    hi:hasAlternativeHypothesis "The system improves safety compliance."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:SafetyComplianceMetric ;
+    hi:hasNullHypothesis "The system does not improve safety compliance."^^xsd:string .
+
+inst:Paper_07_Goal_ProactiveRiskManagement a hi:Goal ;
+    rdfs:label "Proactive Risk Management" ;
+    hi:hasGoalConcept hint:SafeRetrievalGoal ;
+    hi:requiresTask inst:Paper_07_Task_CoordinateWithDrivers,
+        inst:Paper_07_Task_RiskAssessment,
+        inst:Paper_07_Task_UpdateKnowledgeBase .
+
+inst:Paper_07_OntologySystem a hi:ArtificialAgent ;
+    rdfs:label "Ontology System" ;
+    hi:hasCapability inst:Paper_07_OntologySystem_Cap_KnowledgeIntegration,
+        inst:Paper_07_OntologySystem_Cap_RiskIdentification ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_07_Exec_ExecuteRiskAssessment .
+
+inst:Paper_07_OntologySystem_Cap_KnowledgeIntegration a hi:Capability ;
+    rdfs:label "Knowledge Integration" ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_07_OntologySystem_Cap_RiskIdentification a hi:Capability ;
+    rdfs:label "Risk Identification" ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
+
+inst:Paper_07_Operator_Cap_Communication a hi:Capability ;
+    rdfs:label "Communication" ;
+    hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
+
+inst:Paper_07_Task_EvaluateSafetyProtocols a hi:Task ;
+    rdfs:label "Evaluate Safety Protocols" .
+
+inst:Paper_07_Task_IdentifyHazards a hi:Task ;
+    rdfs:label "Identify Hazards" .
+
+inst:Paper_07_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Smelting Plant Risk Assessment" ;
+    hi:hasDomainConcept hint:IndustrialAndServiceRoboticsDomain ;
+    hi:hasHITeam inst:Paper_07_Team .
+
+inst:Affiliation_UmeåUniversity a hi:Affiliation ;
+    rdfs:label "Umeå University" ;
+    schema1:name "Umeå University" .
+
+inst:Paper_07_Driver a hi:HumanAgent ;
+    rdfs:label "Driver" ;
+    hi:hasCapability inst:Paper_07_Driver_Cap_LogisticalManagement,
+        inst:Paper_07_Driver_Cap_Real-timeDecisionMaking ;
+    hi:hasRoleConcept hint:RiskOperatorRole .
+
+inst:Paper_07_Operator a hi:HumanAgent ;
+    rdfs:label "Operator" ;
+    hi:hasCapability inst:Paper_07_Operator_Cap_Communication,
+        inst:Paper_07_Operator_Cap_SafetyProtocolAdherence ;
+    hi:hasRoleConcept hint:RiskOperatorRole .
+
+inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
+    rdfs:label "Coordinate with Drivers" ;
+    hi:hasTaskConcept hint:OperatorCoordinationTask ;
+    hi:requiresCapability inst:Paper_07_Operator_Cap_SafetyProtocolAdherence .
+
+inst:Paper_07_Task_UpdateKnowledgeBase a hi:Task ;
+    rdfs:label "Update Knowledge Base" ;
+    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
+    hi:requiresCapability inst:Paper_07_Operator_Cap_SafetyProtocolAdherence .
+
+inst:Paper_07_Team a hi:HITeam ;
+    rdfs:label "Smelting Plant Risk Assessment Team" ;
+    hi:hasGoal inst:Paper_07_Goal_ProactiveRiskManagement ;
+    hi:hasMember inst:Paper_07_Driver,
+        inst:Paper_07_OntologySystem,
+        inst:Paper_07_Operator ;
+    hi:isInfluencedBy inst:Paper_07_Context .
+
+inst:Paper_07_Task_RiskAssessment a hi:Task ;
+    rdfs:label "Risk Assessment" ;
+    hi:hasSubTask inst:Paper_07_Task_EvaluateSafetyProtocols,
+        inst:Paper_07_Task_IdentifyHazards ;
+    hi:hasTaskConcept hint:SituationalAssessmentTask ;
+    hi:requiresCapability inst:Paper_07_Operator_Cap_SafetyProtocolAdherence .
+
+inst:Paper_07_Operator_Cap_SafetyProtocolAdherence a hi:Capability ;
+    rdfs:label "Safety Protocol Adherence" ;
+    hi:allowsTask inst:Paper_07_Task_CoordinateWithDrivers,
+        inst:Paper_07_Task_RiskAssessment,
+        inst:Paper_07_Task_UpdateKnowledgeBase ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+

@@ -1,0 +1,212 @@
+{
+  "paper_id": "competition_HIComp_HHAI2024",
+  "title": "HI Competition Scenario: Child Education Team",
+  "authors": [],
+  "keywords": [
+    "child education",
+    "humanoid robot",
+    "learning intervention"
+  ],
+  "use_case": {
+    "label": "Child Education Intervention",
+    "type": "competition",
+    "domain_concepts": [
+      "hint:EducationDomain"
+    ],
+    "context": {
+      "label": "School Intervention Context",
+      "context_concepts": [
+        "hint:OnlineLearningContext"
+      ],
+      "constraint_concepts": [
+        "hint:TransparencyConstraint",
+        "hint:AutonomyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:SkillsComplementarityPhenomenon",
+        "hint:TrustShiftPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Leah",
+          "role_concept": "hint:TutorRole",
+          "capabilities": [
+            {
+              "label": "Technology Enthusiasm",
+              "concept": "hint:OperatorCoordinationCapability",
+              "allows_tasks": [
+                "Robot Interaction Task"
+              ]
+            },
+            {
+              "label": "Pedagogical Skills",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Educational Planning Task"
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Anna",
+          "role_concept": "hint:TutorRole",
+          "capabilities": [
+            {
+              "label": "Therapeutic Expertise",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Child Assessment Task"
+              ]
+            },
+            {
+              "label": "Behaviorist Approach",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Behavior Training Task"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "NAO Robot",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Reactive Response",
+              "concept": "hint:SensingCapability",
+              "allows_tasks": [
+                "Stimuli Response Task"
+              ]
+            },
+            {
+              "label": "Wizard of Oz Interaction",
+              "concept": "hint:OperatorCoordinationCapability",
+              "allows_tasks": [
+                "Guided Interaction Task"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Improve Learning Outcomes",
+        "goal_concept": "hint:EffectiveLearningGoal",
+        "tasks": [
+          {
+            "label": "Robot Interaction Task",
+            "task_concept": "hint:MultimodalInputInterpretationTask",
+            "required_capabilities": [
+              "hint:SensingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Educational Planning Task",
+            "task_concept": "hint:SemanticReasoningTask",
+            "required_capabilities": [
+              "hint:ReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Child Assessment Task",
+            "task_concept": "hint:SymptomAnalysisTask",
+            "required_capabilities": [
+              "hint:ClinicalJudgmentCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Behavior Training Task",
+            "task_concept": "hint:PolicyLearningTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Guided Interaction Task",
+            "task_concept": "hint:OperatorCoordinationTask",
+            "required_capabilities": [
+              "hint:OperatorCoordinationCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Teacher-Robot Interaction",
+        "modality_concept": "hint:VerbalDialogueModality",
+        "intent_concept": "hint:GuideIntent",
+        "agents_involved": [
+          "Leah",
+          "NAO Robot"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "NAO Stimuli Response",
+        "task_label": "Stimuli Response Task",
+        "performed_by": "NAO Robot",
+        "method_concept": "hint:DataCollectionMethod"
+      },
+      {
+        "label": "Leah's Educational Planning",
+        "task_label": "Educational Planning Task",
+        "performed_by": "Leah",
+        "method_concept": "hint:SemanticLinkingMethod"
+      },
+      {
+        "label": "Anna's Child Assessment",
+        "task_label": "Child Assessment Task",
+        "performed_by": "Anna",
+        "method_concept": "hint:MetaAnalysisScoringMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Intervention Outcome Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:LearningGainMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Learning Outcome Experiment",
+          "experiment_concept": "hint:OnlineTutoringExperiment",
+          "metrics_tested": [
+            "hint:LearningGainMetric"
+          ],
+          "null_hypothesis": "The intervention does not improve learning outcomes.",
+          "alternative_hypothesis": "The intervention improves learning outcomes."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:RobotInteractionTask",
+      "label": "Robot Interaction Task",
+      "definition": "Task involving interaction with a robot to facilitate learning.",
+      "broader": "hint:Task",
+      "category": "Task"
+    },
+    {
+      "uri": "hint:EducationalPlanningTask",
+      "label": "Educational Planning Task",
+      "definition": "Task involving planning educational activities and interventions.",
+      "broader": "hint:Task",
+      "category": "Task"
+    }
+  ]
+}

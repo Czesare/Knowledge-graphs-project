@@ -1,0 +1,203 @@
+{
+  "paper_id": "competition_01",
+  "title": "HI Competition Scenario: Cybersecurity Response Team",
+  "authors": [],
+  "keywords": [
+    "cybersecurity",
+    "DDoS",
+    "voting system",
+    "Estonia"
+  ],
+  "use_case": {
+    "label": "Cybersecurity Response for Voting System",
+    "type": "competition",
+    "domain_concepts": [
+      "hint:LawAndPolicyDomain"
+    ],
+    "context": {
+      "label": "Election Day Cybersecurity",
+      "context_concepts": [
+        "hint:WorkspaceManipulationContext"
+      ],
+      "constraint_concepts": [
+        "hint:TransparencyConstraint",
+        "hint:SafetyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:TrustShiftPhenomenon",
+        "hint:SkillsComplementarityPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Cybersecurity Expert",
+          "role_concept": "hint:RiskOperatorRole",
+          "capabilities": [
+            {
+              "label": "Contextual Understanding",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Cross-check Predictions"
+              ]
+            },
+            {
+              "label": "Decision Making",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Unblock IPs"
+              ]
+            },
+            {
+              "label": "Communication",
+              "concept": "hint:ExplainingCapability",
+              "allows_tasks": [
+                "Provide Feedback"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "AI Security System",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Block Suspected IPs"
+              ]
+            },
+            {
+              "label": "Quick Explanation",
+              "concept": "hint:ExplainingCapability",
+              "allows_tasks": [
+                "Provide Quick Explanation"
+              ]
+            },
+            {
+              "label": "Continuous Learning",
+              "concept": "hint:ReinforcementLearningCapability",
+              "allows_tasks": [
+                "Distinguish Attacks"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Ensure Voting System Security",
+        "goal_concept": "hint:SafeRetrievalGoal",
+        "tasks": [
+          {
+            "label": "Block Suspected IPs",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Unblock IPs",
+            "task_concept": "hint:ConflictResolutionTask",
+            "required_capabilities": [
+              "hint:ReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Cross-check Predictions",
+            "task_concept": "hint:SemanticReasoningTask",
+            "required_capabilities": [
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Provide Quick Explanation",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:ExplainingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Provide Feedback",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:ExplainingCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Explanation of Blocking",
+        "modality_concept": "hint:DashboardModality",
+        "intent_concept": "hint:ExplanationIntent",
+        "agents_involved": [
+          "AI Security System",
+          "Cybersecurity Expert"
+        ]
+      },
+      {
+        "label": "Feedback on Predictions",
+        "modality_concept": "hint:TextChatModality",
+        "intent_concept": "hint:DeliberationIntent",
+        "agents_involved": [
+          "Cybersecurity Expert",
+          "AI Security System"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Execute Blocking",
+        "task_label": "Block Suspected IPs",
+        "performed_by": "AI Security System",
+        "method_concept": "hint:DataCollectionMethod"
+      },
+      {
+        "label": "Execute Unblocking",
+        "task_label": "Unblock IPs",
+        "performed_by": "Cybersecurity Expert",
+        "method_concept": "hint:ArgumentationReasoningMethod"
+      },
+      {
+        "label": "Execute Cross-checking",
+        "task_label": "Cross-check Predictions",
+        "performed_by": "Cybersecurity Expert",
+        "method_concept": "hint:SemanticLinkingMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "System Effectiveness Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TrustPreservationMetric",
+        "hint:TaskSuccessRateMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Trust and Effectiveness Experiment",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:TrustPreservationMetric",
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "The system does not improve response time.",
+          "alternative_hypothesis": "The system improves response time."
+        }
+      ]
+    }
+  },
+  "new_concepts": []
+}

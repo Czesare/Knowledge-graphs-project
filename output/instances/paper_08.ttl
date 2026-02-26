@@ -1,0 +1,144 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_08 a hi:Paper ;
+    hi:describesUseCase inst:Paper_08_UseCase ;
+    hi:hasAuthor inst:Paper_08_Author1,
+        inst:Paper_08_Author2 ;
+    hi:hasKeyword "Active Learning",
+        "Information Quality",
+        "Situational Awareness" ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Quality-Informed Active Learning on Social Media in Crisis Scenarios"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_08_Evaluation a hi:Evaluation ;
+    rdfs:label "Active Learning Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_08_Experiment_CrisisScenarioTesting ;
+    hi:hasMetricConcept hint:TaskSuccessRateMetric,
+        hint:TrustPreservationMetric .
+
+inst:Paper_08_Interaction_DataValidationDiscussion a hi:Interaction ;
+    rdfs:label "Data Validation Discussion" ;
+    hi:hasAgentInvolved inst:Paper_08_ActiveLearningSystem,
+        inst:Paper_08_DataAnalyst ;
+    hi:hasInteractionIntentConcept hint:ExplanationIntent ;
+    hi:hasInteractionModalityConcept hint:TextChatModality .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Paper_08_ActiveLearningSystem_Cap_DataProcessing a hi:Capability ;
+    rdfs:label "Data Processing" ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_08_ActiveLearningSystem_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_08_Author1 a hi:Author ;
+    foaf:name "Carlo Alberto Bono" ;
+    hi:hasAffiliation inst:Affiliation_PolitecnicoDiMilano ;
+    hi:hasAuthorName "Carlo Alberto Bono"^^xsd:string .
+
+inst:Paper_08_Author2 a hi:Author ;
+    foaf:name "Barbara Pernici" ;
+    hi:hasAffiliation inst:Affiliation_PolitecnicoDiMilano ;
+    hi:hasAuthorName "Barbara Pernici"^^xsd:string .
+
+inst:Paper_08_Context a hi:Context ;
+    rdfs:label "Emergency Situational Awareness" ;
+    hi:hasConstraintConcept hint:PrivacyConstraint ;
+    hi:hasContextConcept hint:HealthMonitoringContext ;
+    hi:hasInfluenceOn inst:Paper_08_Team ;
+    hi:hasPhenomenonConcept hint:DataMismatchPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_08_DataAnalyst_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_08_Exec_ExecuteDataIdentification a hi:TaskExecution ;
+    rdfs:label "Execute Data Identification" ;
+    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
+    hi:realizesTask inst:Paper_08_Task_IdentifyRelevantData .
+
+inst:Paper_08_Exec_ExecuteDataValidation a hi:TaskExecution ;
+    rdfs:label "Execute Data Validation" ;
+    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
+    hi:realizesTask inst:Paper_08_Task_ValidateDataSelection .
+
+inst:Paper_08_Experiment_CrisisScenarioTesting a hi:Experiment ;
+    rdfs:label "Crisis Scenario Testing" ;
+    hi:hasAlternativeHypothesis "IQ indicators improve AL performance."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:TaskSuccessRateMetric ;
+    hi:hasNullHypothesis "IQ indicators do not improve AL performance."^^xsd:string .
+
+inst:Paper_08_Goal_EnhanceSituationalAwareness a hi:Goal ;
+    rdfs:label "Enhance Situational Awareness" ;
+    hi:hasGoalConcept hint:UserWellbeingGoal ;
+    hi:requiresTask inst:Paper_08_Task_IdentifyRelevantData,
+        inst:Paper_08_Task_ProcessSocialMediaData,
+        inst:Paper_08_Task_ValidateDataSelection .
+
+inst:Paper_08_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Crisis Data Relevance Identification" ;
+    hi:hasDomainConcept hint:HealthAndLifestyleDomain ;
+    hi:hasHITeam inst:Paper_08_Team .
+
+inst:Affiliation_PolitecnicoDiMilano a hi:Affiliation ;
+    rdfs:label "Politecnico di Milano" ;
+    schema1:name "Politecnico di Milano" .
+
+inst:Paper_08_ActiveLearningSystem a hi:ArtificialAgent ;
+    rdfs:label "Active Learning System" ;
+    hi:hasCapability inst:Paper_08_ActiveLearningSystem_Cap_DataProcessing,
+        inst:Paper_08_ActiveLearningSystem_Cap_PatternRecognition ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_08_Exec_ExecuteDataIdentification .
+
+inst:Paper_08_DataAnalyst a hi:HumanAgent ;
+    rdfs:label "Data Analyst" ;
+    hi:hasCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding,
+        inst:Paper_08_DataAnalyst_Cap_EthicalOversight ;
+    hi:hasRoleConcept hint:HumanUserRole ;
+    hi:performsExecution inst:Paper_08_Exec_ExecuteDataValidation .
+
+inst:Paper_08_Task_ProcessSocialMediaData a hi:Task ;
+    rdfs:label "Process Social Media Data" ;
+    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
+    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding .
+
+inst:Paper_08_Team a hi:HITeam ;
+    rdfs:label "Crisis Data Relevance Identification Team" ;
+    hi:hasGoal inst:Paper_08_Goal_EnhanceSituationalAwareness ;
+    hi:hasMember inst:Paper_08_ActiveLearningSystem,
+        inst:Paper_08_DataAnalyst ;
+    hi:isInfluencedBy inst:Paper_08_Context .
+
+inst:Paper_08_Task_IdentifyRelevantData a hi:Task ;
+    rdfs:label "Identify Relevant Data" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding .
+
+inst:Paper_08_Task_ValidateDataSelection a hi:Task ;
+    rdfs:label "Validate Data Selection" ;
+    hi:hasTaskConcept hint:DecideInterventionTask ;
+    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding .
+
+inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:allowsTask inst:Paper_08_Task_IdentifyRelevantData,
+        inst:Paper_08_Task_ProcessSocialMediaData,
+        inst:Paper_08_Task_ValidateDataSelection ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+

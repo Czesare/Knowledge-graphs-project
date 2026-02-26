@@ -1,0 +1,177 @@
+{
+  "paper_id": "paper_657",
+  "title": "Human Response to Decision Support in Face Matching: The Influence of Task Difficulty and Machine Accuracy",
+  "authors": [
+    {
+      "name": "Marina Estevez-Almenzar",
+      "affiliation": "Universitat Pompeu Fabra"
+    },
+    {
+      "name": "Ricardo Baeza-Yates",
+      "affiliation": "Universitat Pompeu Fabra"
+    },
+    {
+      "name": "Carlos Castillo",
+      "affiliation": "Universitat Pompeu Fabra, ICREA"
+    }
+  ],
+  "keywords": [
+    "Decision support systems",
+    "Face matching",
+    "Human factors"
+  ],
+  "use_case": {
+    "label": "Face Matching Decision Support",
+    "type": "research",
+    "domain_concepts": [
+      "hint:LawAndPolicyDomain"
+    ],
+    "context": {
+      "label": "Face Matching Context",
+      "context_concepts": [
+        "hint:WorkspaceManipulationContext"
+      ],
+      "constraint_concepts": [
+        "hint:EthicalConstraint",
+        "hint:TransparencyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:TrustShiftPhenomenon",
+        "hint:ConfirmationBias"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Human Operator",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Judgment Capability",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Evaluate Face Pair"
+              ]
+            },
+            {
+              "label": "Contextual Understanding",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Assess Task Difficulty"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Face Matching AI",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Provide Matching Suggestion"
+              ]
+            },
+            {
+              "label": "Accuracy Reporting",
+              "concept": "hint:ReportingCapability",
+              "allows_tasks": [
+                "Notify Accuracy Change"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Improve Face Matching Accuracy",
+        "goal_concept": "hint:FairAccurateVerdictGoal",
+        "tasks": [
+          {
+            "label": "Evaluate Face Pair",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:ReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Provide Matching Suggestion",
+            "task_concept": "hint:QuestionAnsweringTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Assess Task Difficulty",
+            "task_concept": "hint:SituationalAssessmentTask",
+            "required_capabilities": [
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Notify Accuracy Change",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:ReportingCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "AI Suggestion Notification",
+        "modality_concept": "hint:DashboardModality",
+        "intent_concept": "hint:ExplanationIntent",
+        "agents_involved": [
+          "Human Operator",
+          "Face Matching AI"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Human Evaluates Face Pair",
+        "task_label": "Evaluate Face Pair",
+        "performed_by": "Human Operator",
+        "method_concept": "hint:ArgumentationReasoningMethod"
+      },
+      {
+        "label": "AI Provides Suggestion",
+        "task_label": "Provide Matching Suggestion",
+        "performed_by": "Face Matching AI",
+        "method_concept": "hint:PatternLearningCapability"
+      }
+    ],
+    "evaluation": {
+      "label": "Face Matching Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric",
+        "hint:TrustPreservationMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Accuracy Impact Experiment",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "AI support does not improve human accuracy.",
+          "alternative_hypothesis": "AI support improves human accuracy."
+        }
+      ]
+    }
+  },
+  "new_concepts": []
+}

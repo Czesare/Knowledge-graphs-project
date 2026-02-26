@@ -1,0 +1,233 @@
+{
+  "paper_id": "paper_620",
+  "title": "Exploring Human-AI Synergy for Complex Claim Verification",
+  "authors": [
+    {
+      "name": "Shubhalaxmi Mukherjee",
+      "affiliation": "Delft University of Technology"
+    },
+    {
+      "name": "Catholijn M. Jonker",
+      "affiliation": "Delft University of Technology"
+    },
+    {
+      "name": "Pradeep K. Murukannaiah",
+      "affiliation": "Delft University of Technology"
+    }
+  ],
+  "keywords": [
+    "Fact checking",
+    "Claim decomposition",
+    "Large Language Models"
+  ],
+  "use_case": {
+    "label": "Complex Claim Verification",
+    "type": "research",
+    "domain_concepts": [
+      "hint:LawAndPolicyDomain"
+    ],
+    "context": {
+      "label": "Fact-checking context",
+      "context_concepts": [
+        "hint:JuryDeliberationContext"
+      ],
+      "constraint_concepts": [
+        "hint:TransparencyConstraint",
+        "hint:FairnessConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:TrustShiftPhenomenon",
+        "hint:KnowledgeMismatchPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Professional Fact-Checker",
+          "role_concept": "hint:JurorRole",
+          "capabilities": [
+            {
+              "label": "Domain Judgment",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Generate nuanced questions"
+              ]
+            },
+            {
+              "label": "Contextual Understanding",
+              "concept": "hint:SemanticReasoningCapability",
+              "allows_tasks": [
+                "Decompose claims"
+              ]
+            },
+            {
+              "label": "Ethical Oversight",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Assess evidence quality"
+              ]
+            },
+            {
+              "label": "Feedback Provision",
+              "concept": "hint:ExplainingCapability",
+              "allows_tasks": [
+                "Provide statement task"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Large Language Model",
+          "role_concept": "hint:AIAdvisorRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Generate questions"
+              ]
+            },
+            {
+              "label": "Data Processing",
+              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "allows_tasks": [
+                "Retrieve evidence"
+              ]
+            },
+            {
+              "label": "Speed",
+              "concept": "hint:ReinforcementLearningCapability",
+              "allows_tasks": [
+                "Veracity prediction"
+              ]
+            },
+            {
+              "label": "Generation",
+              "concept": "hint:MultimodalInterpretationCapability",
+              "allows_tasks": [
+                "Generate nuanced questions"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Accurate Claim Verification",
+        "goal_concept": "hint:FairAccurateVerdictGoal",
+        "tasks": [
+          {
+            "label": "Question Generation",
+            "task_concept": "hint:QuestionAnsweringTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Evidence Retrieval",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:KnowledgeGraphQueryingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Veracity Prediction",
+            "task_concept": "hint:SemanticReasoningTask",
+            "required_capabilities": [
+              "hint:SemanticReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Claim Decomposition",
+            "task_concept": "hint:CandidateHypothesisGenerationTask",
+            "required_capabilities": [
+              "hint:SemanticReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Evidence Assessment",
+            "task_concept": "hint:AssessCommunicationAccuracy",
+            "required_capabilities": [
+              "hint:ReasoningCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Human-AI Question Generation",
+        "modality_concept": "hint:TextChatModality",
+        "intent_concept": "hint:DeliberationIntent",
+        "agents_involved": [
+          "Professional Fact-Checker",
+          "Large Language Model"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Generate Questions",
+        "task_label": "Question Generation",
+        "performed_by": "Large Language Model",
+        "method_concept": "hint:ReinforcementLearningMethod"
+      },
+      {
+        "label": "Retrieve Evidence",
+        "task_label": "Evidence Retrieval",
+        "performed_by": "Large Language Model",
+        "method_concept": "hint:KnowledgeGraphQueryMethod"
+      },
+      {
+        "label": "Predict Veracity",
+        "task_label": "Veracity Prediction",
+        "performed_by": "Large Language Model",
+        "method_concept": "hint:SemanticEmbeddingMethod"
+      },
+      {
+        "label": "Decompose Claim",
+        "task_label": "Claim Decomposition",
+        "performed_by": "Professional Fact-Checker",
+        "method_concept": "hint:ArgumentationReasoningMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Fact-checking Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric",
+        "hint:ExplanationClarityMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Question Generation Impact",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:ExplanationClarityMetric"
+          ],
+          "null_hypothesis": "LLM-generated questions do not improve veracity prediction.",
+          "alternative_hypothesis": "LLM-generated questions improve veracity prediction."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:ComplexClaimVerification",
+      "label": "Complex Claim Verification",
+      "definition": "The process of verifying claims that involve multiple sub-claims and require nuanced questioning.",
+      "broader": "hint:FairAccurateVerdictGoal",
+      "category": "Goal"
+    }
+  ]
+}

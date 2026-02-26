@@ -1,0 +1,62 @@
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+hint:AdaptiveAutonomyCapability a skos:Concept ;
+    skos:broader hint:LearningAdaptationCapability ;
+    skos:definition "The ability of a system to adjust its level of autonomy based on user preferences and contextual factors."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Adaptive Autonomy Capability"@en .
+
+hint:BilingualMappingCapability a skos:Concept ;
+    skos:broader hint:CommunicationExplanationCapability ;
+    skos:definition "The ability to map and translate between two languages effectively."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Bilingual Mapping Capability"@en .
+
+hint:ComplexClaimVerification a skos:Concept ;
+    skos:broader hint:FairAccurateVerdictGoal ;
+    skos:definition "The process of verifying claims that involve multiple sub-claims and require nuanced questioning."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Complex Claim Verification"@en .
+
+hint:DigitalTwinCapability a skos:Concept ;
+    skos:broader hint:DomainSpecificCapability ;
+    skos:definition "The ability to create a real-time digital representation of physical processes."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Digital Twin Capability"@en .
+
+hint:EducationalPlanningTask a skos:Concept ;
+    skos:broader hint:Task ;
+    skos:definition "Task involving planning educational activities and interventions."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Educational Planning Task"@en .
+
+hint:ExplanationStreamPattern a skos:Concept ;
+    skos:broader hint:Interaction ;
+    skos:definition "Reusable solutions that govern the stream of explanations between users and systems."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Explanation Stream Pattern"@en .
+
+hint:InformationQualityMetric a skos:Concept ;
+    skos:broader hint:Metric ;
+    skos:definition "A measure used to assess the quality of data in terms of relevance and utility."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Information Quality Metric"@en .
+
+hint:OrthogonalityLossCapability a skos:Concept ;
+    skos:broader hint:LearningAdaptationCapability ;
+    skos:definition "Capability to enhance model robustness by enforcing orthogonality among latent representations."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Orthogonality Loss Capability"@en .
+
+hint:RobotInteractionTask a skos:Concept ;
+    skos:broader hint:Task ;
+    skos:definition "Task involving interaction with a robot to facilitate learning."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Robot Interaction Task"@en .
+
+hint:SocialConversationContext a skos:Concept ;
+    skos:broader hint:Context ;
+    skos:definition "A context involving exchanges of information in social settings."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Social Conversation Context"@en .

@@ -1,0 +1,531 @@
+262 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250644
+Formalizing Explanation Design Through
+Interaction Patterns in
+Human-AI Decision Support
+HenryMAATHUISa,b,1,DaanKOLKMANc,StefanLEIJNENaandDanielleSENTa,b
+aResearchGroupArtificialIntelligence,HUUniversityofAppliedSciencesUtrecht,
+Utrecht,TheNetherlands
+bJheronimusAcademyofDataScience,EindhovenUniversityofTechnology,
+TilburgUniversity,’s-Hertogenbosch,TheNetherlands
+cDepartmentofInformationandComputingSciences,UtrechtUniversity,
+Utrecht,TheNetherlands
+ORCiDID:HenryMaathuishttps://orcid.org/0009-0002-5542-0478,DaanKolkman
+https://orcid.org/0000-0001-9836-0212,StefanLeijnen
+https://orcid.org/0000-0002-4411-649X,DanielleSent
+https://orcid.org/0000-0002-4703-5345
+Abstract.TrustinAIiscrucialforeffectiveandresponsibleuseinhigh-stakes
+sectorslikehealthcareandfinance.Oneofthemostcommonlyusedtechniquesto
+mitigatemistrustinAIandevenincreasetrustistheuseofExplainableAImod-
+els,whichenableshumanunderstandingofcertaindecisionsmadebyAI-based
+systems.Interactiondesign,thepracticeofdesigninginteractivesystems,playsan
+importantroleinpromotingtrustbyimprovingexplainability,interpretability,and
+transparency,ultimatelyenablinguserstofeelmoreincontrolandconfidentinthe
+system’sdecisions.Thispaperintroduces,basedonanempiricalstudywithex-
+pertsfromvariousfields,theconceptofExplanationStreamPatterns,whichare
+interactionpatternsthatstructureandorganizetheflowofexplanationsindecision
+supportsystems.ExplanationStreamPatternsformalizeexplanationstreamsbyin-
+corporatingproceduressuchasprogressivedisclosureofexplanationsorinteract-
+ingwithexplanationsinamoredeliberatewaythroughcognitiveforcingfunctions.
+Wearguethatwell-definedExplanationStreamPatternsprovidepracticaltoolsfor
+designinginteractivesystemsthatenhancehuman-AIdecision-making.
+Keywords.ExplainableArtificialIntelligence,DecisionSupportSystems,
+InteractionDesign,Human-ComputerInteraction
+1. Introduction
+Decision support systems (DSSs), particularly those that incorporate eXplainable AI
+(XAI),inhigh-stakessectorslikehealthcareandfinance,mayimprovedecisionquality
+and speed. However, these decisions typically affect individuals [1,2] and can be clas-
+1CorrespondingAuthor:HenryMaathuis,E-mail:henry.maathuis@hu.nl
+
+H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns 263
+sified as ”high-risk” systems under the AI act. Consequently, effective design of DSSs
+mustgobeyondtechnicalrobustnesstopromoteuserunderstanding,enablemeaningful
+human-systeminteraction,andsupporthumanoversight[3].
+Effective design alone is not enough, effective use in practice requires that DSSs
+are trustworthy [4]. In the XAI literature, the relation between trust and explainability
+is a central theme. Ali et al. [5] developed a unified perspective on the key concepts.
+In this perspective, explainability relies on interpretability, which builds user trust by
+making the system’s decision-making process transparent. Trust, in turn, is reinforced
+byrobustnessandreliability,fosteringconfidenceinthesystem’soutputs.Furthermore,
+interactivity—acornerstoneofinterpretability—enablesuserstoactivelyengagewith
+thesystem,deepeningtheirunderstandingandtrust.
+Despite these advances, many current approaches to explainability rely on static,
+one-size-fits-allexplanationsthatfailtoaccountforthediversityofuserneeds[6].Static
+explanations risk overwhelming users with excessive information, triggering cognitive
+overloadandrelianceonheuristics,whichcanleadtobiaseddecisions.Thisunderscores
+the importance of dynamic, user-tailored explanations that adapt to individual require-
+mentsandfostermoreeffectivedecision-making.Wearguethatinteractiondesignpat-
+terns offer a promising framework for addressing this challenge. Patterns encapsulate
+best practices for recurring design problems, providing adaptable, reusable guidelines
+thatalignhigh-leveldesignprincipleswithpracticalinterfaceelements[7].
+Inthecontextofexplainability,thesepatternscanhelpstructureinformationdeliv-
+ery, quantify — or possibly mitigate — cognitive biases, improving decision accuracy
+[6]. For example, progressive disclosure patterns can prevent information overload by
+revealingexplanationsincrementally[8].Forexample,patternsrelatedtoprogressively
+disclosingexplanationsratherthanpresentingallinformationatoncecouldhelpprevent
+information overload, allowing users to process data more effectively and make fewer
+errors [8]. Likewise, patterns that encourage reflective thinking — prompting users to
+question their initial judgments or engage with conflicting information — can mitigate
+confirmationbiasandframingeffects[9].
+Beyondtheirimmediateroleinstructuringexplanations,interactionpatternsalsoof-
+fercross-contextre-usabilityandaframeworkforsystematicevaluation.Existingwork
+onbiasmitigationstrategiesandinteractionbyBertrandetal.[10]identifiedthreecat-
+egoriesofinteractivitythatcanserveasguidingprinciples:select,mutate,anddialogue
+with. For instance, select can be supported by interaction patterns such as filtering in-
+terfaces or contextual highlighting, helping users focus on the most relevant data. The
+mutate category can be linked to patterns such as interactive simulations or side-by-
+sidecomparisons,promotingdeeperengagementwithdifferentscenariosandoutcomes.
+Lastly,dialoguewithpatterns,suchasconversationaluserinterfaces,canenhanceuser-
+systeminteractionbycreatinganarrativeofinteractionsovertime.
+While these principles provide valuable insights, they remain too abstract to meet
+thespecificneedsofDSSdesignersandlackprecisedefinitionsfororganizingtheflow
+ofinformation,specificallyexplanations,betweenusersandsystems.Tobridgethisgap,
+weorganizedfourworkshops,bringingtogetheraround90expertsfromvariousfields,
+including user experience (UX) design, interaction design, and human-computer inter-
+action(HCI).Theworkshopshadtwoprimaryobjectives:First,tocollaborativelydefine
+interactivepatternsfocusedonexplanations—whatwetermexplanationstreampatterns
+(ESPs).Second,toidentifysuchpatternsthatsatisfythisdefinition.
+
+264 H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns
+This paper introduces the concept of ESPs and provides illustrative examples of
+thesepatterns.ByformalizinginteractionopportunitiesthroughESPs,wehopetolaythe
+groundworkforfutureresearchtosystematicallyquantifytheirimpactonuserdecision-
+making.Specifically,wearguethatcarefullydesignedESPs,alignedwithusers’cogni-
+tiveprocesses,couldhelpmitigatetheinfluenceofcognitivebiasesandenhancedecision
+accuracyinDSSsthatincorporateXAI.
+2. Preliminaries
+Research on interactivity in DSSs is inherently interdisciplinary. Information science
+providestheoriesfororganizingandstructuringdata[11],whileinteractiondesignem-
+phasizesintuitiveinterfacesthatenhanceuserengagementandusability.HCIexamines
+user-systeminteractions[12],andXAIfocusesonmakingAIoutcomestransparentand
+interpretable[13,14].Cognitivepsychologylinkstheseareasbydescribinghowhumans
+perceive, interpret and act on information, and acknowledging that cognitive biases in-
+fluencedecision-making.Despitethisinterdisciplinarypotential,theintegrationofthese
+insightsremainsfragmented,particularlyindesigningandevaluatinginteractivesystems
+[15,16,17].Intheremainderofthissection,weexpandontheseaspects.
+2.1. ExplanationsandUserNeeds
+AccordingtotheDIKWhierarchy[18,19],whichintroducestheconceptsof‘data’,‘in-
+formation’, ‘knowledge’, and ‘wisdom’, information organizes data into a meaningful
+contexttosupportdecision-making.InAI-basedDSSs,explanationsplayacriticalrole
+in helping users understand how these systems function and arrive at specific conclu-
+sions.Explanationsprovideaspecificformofinformationthatclarifiesthereasoningbe-
+hindanAIsystem’soutputs,makingitsdecision-makingprocesstransparentandcom-
+prehensibletohumanusers.
+By bridging the gap between information and actionable knowledge, explanations
+inXAIactasnarrativesthatenhanceusercomprehensionandtrustinAIsystems.How-
+ever,[20]identifiedagapbetweenexistingXAImethodsanduserneeds.User-centered
+approaches,suchasthedevelopmentofquestionbankstoguidethedesignofeffective
+explanationscanhelpfillthisgap.
+2.2. Patterns
+Patternsareanexampleofsuchauser-centeredapproach,beingstructuredreusableso-
+lutionstorecurringdesignchallengesthatenhanceusabilityandaestheticsacrossinter-
+faces,websites,andprograms[7].Patternscapturebestpracticeswithinadesigndomain,
+offering adaptable solutions that designers can modify based on context. Patterns thus
+provideflexiblesolutionsthatbridgehigh-leveldesignprinciples(e.g.,“preventerrors”)
+withlow-levelelementslikebuttonsandtext.
+Interactionpatternsfocusonimprovinghowusersengagewithinterfaces,address-
+ingcommonissuesinuserflow,navigation,feedback,andcontrol.Theyhelpmakecom-
+plextasksintuitive,reducingcognitiveload[7].Webuildoninteractionpatternsandpro-
+poseESPs,whicharespecificallytailoredtoguidethestreamofexplanationsinDSSs.
+ESPsfocusonhowusersperceive,interpret,andactonexplanations,offeringstructured
+
+H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns 265
+yetadaptablesolutionsforexplanationdesign.Inthisstudy,wefocusspecificallyonpat-
+ternsrelatedtoindividualsystemoutcomes—thatis,thecontentandreasoningbehind
+specificdecisionsoroutputs—ratherthanexplainingthesystem’soverallinternallogic
+orgeneraldecision-makingprocesses.
+2.3. DecisionSupportSystems
+DSSsaredevelopedinresponsetotheunderstandingthatmanydecision-makingscenar-
+iosaretoocomplextobeentirelypredefined[21,22,23].Insteadofprovidingfixedso-
+lutions,thesesystemsfunctionascollaborativetools,aidingusersinanalyzingcomplex
+information. Numerous works have shown the importance of aligning the advice of a
+DSSwiththecognitiveprocessofuserstomitigatebiases[24,25,26,27].Bysupporting
+thiscollaborativeprocess,DSSsenableuserstomakewell-informeddecisions.
+ToalignaDSSwiththecognitiveprocessofauser,onecan,forinstance,chooseto
+designanactiveorpassivesystem[21,28],whereactiveDSSsproactivelyofferadvice
+totheuser,whilepassivesystemsrespondonlytoexplicituserrequestsforanalysisor
+recommendations. When using a critiquing mode, feedback is provided only when a
+user’s decision deviates from the advice or recommendations generated by the system.
+This approach ensures that users receive alerts about potential discrepancies, facilitat-
+ingbetterdecisionmakingandlearning.Consultingmodesofadvicepresentadviceor
+recommendationsevenbeforethedecisionismadebytheuser[23][28].
+2.4. ExplanationTypes
+Explanationsareahuman-centeredconstruct,essentialforenhancingtransparencyand
+understandingofmodelpredictions,regardlessofthemodel’scomplexity.Theneedfor
+explanations remains constant for both simple white-box models like linear regression
+orcomplexblack-boxmodelslikeneuralnetworks.However,themethodsusedtopro-
+videexplanationsvarydependingonthemodel’scomplexityandthetypeofinformation
+required.Belowaresomecommonlyusedexplanationtypesasfoundin[17]:
+Feature importance techniques help identify how the input features influence the
+model’s predictions. This is particularly important for black-box models, as under-
+standing the contribution of each feature can be difficult without additional methods.
+TechniqueslikeSHAP(SHapleyAdditiveexPlanations)andLIME(LocalInterpretable
+Model-agnosticExplanations)arewidelyusedtomeasurethecontributionofeachfea-
+turetoaspecificprediction[29].Forwhite-boxmodels,featureimportanceistypically
+straightforward.Inlinearregression,forexample,thecoefficients(orweights)assigned
+toeachfeatureindicatethestrengthanddirectionofitsinfluenceonthemodel’soutput.
+Counterfactual explanations highlight how changes to an input could lead to a
+different outcome [30]. A counterfactual explanation for a loan approval model could
+indicatethatifanapplicant’sincomewere$10,000higher,theloanwouldbeapproved,
+eventhoughallotherfactors(e.g.creditscore,debtlevel)remainunchanged.Thistype
+of explanation is particularly useful for exploring decision boundaries and providing
+insightsthatcanhelpusersunderstandwhatactionstheycantaketoalteradecision.
+Similarexamplesprovideinsightsintohowthemodelbehavesforinstancesthatare
+similar,thoughnotidentical,totheoneinquestion.Forexample,ifamodelpredictsthat
+aloanapplicationwillbedenied,asimilarexamplemighthighlightotherapplicantswith
+
+266 H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns
+comparablefinancialprofileswhowerealsodeniedloans.Theseexplanationsfocuson
+patternsinthemodel’sbehaviorforsimilarinputs,helpingusersunderstandthedecision-
+makingprocesswithoutrelyingonexactfeaturematches[31].
+Contrastiveexamples,ontheotherhand,relatetoinstancesinwhichtheoutcome
+is different compared to the case at hand, highlighting key differences. For example,
+if an applicant’s loan is denied, a contrastive example could show that the loan would
+be approved if the applicant’s credit score were 20 points higher, highlighting how a
+specificchangeintheinputleadstoadifferentoutcome.Notethatsimilarandcontrastive
+examples are related to historical cases, whereas counterfactuals focus on what would
+happenifspecificinputsofthecurrentexamplewerechanged.
+Rule-basedexplanationstranslateamodel’sdecision-makingprocessintohuman-
+readablerulesthatdescribehowthemodelarrivesataparticularprediction.Forexam-
+ple,arule-basedexplanationmightstate,”Approvetheloaniftheapplicant’sincomeis
+greaterthan$50,000”or”Denytheloaniftheapplicant’sdebt-to-incomeratioexceeds
+0.4.”Theserulessimplifycomplexmodelbehaviorandmakeitmoreaccessibletousers
+whomaynothaveatechnicalbackground.
+Thegoalofexplanationtechniquesistoprovideuserswithinsightsintothemodel’s
+decision-makingprocess.Wearguethatforeachoftheseexplanationtypes,itisimpor-
+tant to model how users perceive, interpret, and act upon the explanations. We provide
+examplesofinteractiveinterventionsforthedifferentexplanationtypesinSection5.
+3. Methods
+GivenouraimtodefineandidentifyESPs,weadoptedaqualitativeresearchapproach,
+which is suited for exploring context-dependent phenomena in detail, allowing for the
+captureofrichinsightsandnuancedperspectives[32].Weorganizedfourworkshopsthat
+employed a moderated focus group-like format, facilitating discussions among diverse
+experts,enablingthecollectivegenerationandrefinementofideas.
+The first workshop was exploratory in nature and served to establish a consensus-
+drivendefinitionofESPstailoredforDSSs.Itwasorganizedintothreephases:anintro-
+ductiontorelevantconcepts,collaborativeactivitiestodefineanddiscussESPs,andtwo
+iterativefeedbackroundstorefinethedefinition.Afterthesefeedbackrounds,consensus
+wasreachedamongtheparticipants.Inthreefollow-upworkshops,equallydesigned,we
+identifiedpatternsthatalignwiththefinalESPdefinition.
+3.1. Workshop1:ExplanationStreamPatternsDefinition
+18researchers(aged24to53,average36)fromaresearchgrouponhumanexperience
+andmediadesigntherebyprofessionallyengagedinthestudyanddesignofuserinter-
+facesattendedtheworkshop.Mosthadexpertiseindesigndisciplines,cognitivescience,
+orhuman-computerinteraction.Theircombinedexperienceenabledamultidisciplinary
+approach to defining ESPs. The session lasted two hours, and participation was volun-
+taryanduncompensated.Participantsjoinedoutofpersonalinterestinthetopic.(X)AI
+researcherswerenotincluded,asthefocuswasoninteractionanduserengagementwith
+explanations,ratherthanthetechnicaldevelopmentofexplainabilitymethods.
+Theworkshopwasaimedatmovingfromawidearrayofaspectsrelatedtointerac-
+tiontowardsaspecificESPdefinition.Initially,participantsattendedapresentationthat
+
+H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns 267
+introduced DSSs with a human-in-the-loop. Furthermore, several examples of interac-
+tionpatternsrelatedtoprogressivedisclosureandcognitiveforcingwereshowntobuild
+asharedunderstandingofwhatpatternsare.
+3.1.1. AspectsRelatedtoControllingExplanationStreams
+Following the introduction, participants were asked to indicate important aspects that
+influencehowtheyengagewithandinterpretpresentedinformation.Thisstartedanopen
+discussiononthetemporal,spatialandgranularityofinformationpresentation,resulting
+in the keywords depicted in Table 1. The goal of this step was to allow participants to
+gainabetterunderstandingofaspectsinfluencingdecision-makingofusersinDSSs.
+Table1. Overviewofimportantaspectsrelatedtoengagingwithandinterpretingpresentedinformation.
+Accordion Chunking Comprehensibility Comprehensible Conversation
+Filter Framing Hierarchy InformationTree Language
+Order Presentation ProgressiveDisclosure Scaffolding Steps
+Styles Disclosure
+Storytelling Suggestions Timing Transparency Trustworthiness
+Structure
+Tutorials UICapabilities UserControl UserPersonalization Zoom
+3.1.2. InitialDefinitionsandIterativeRefinement
+In the next phase, a commonly used definition of Interaction Patterns, along with an
+initialdefinitionofESPswasgiventotheparticipants:
+InteractionPatternsarereusablesolutionstocommondesignchallengesencountered
+intheinteractionbetweenusersandsystems.Thesepatternsencapsulatebestprac-
+tices for structuring and facilitating user tasks, ensuring a consistent and intuitive
+userexperience.
+ExplanationStreamPatternsarereusablesolutionsthatgovernthestreamofexpla-
+nations between users and a system, particularly in the context of decision support
+tools.Thesepatternsdirectlyinfluencehowusersperceive,interpret,andactonex-
+planations.
+TorefinetheESPdefinition,wefacilitatedseveralroundsofopendiscussionandstruc-
+turedfeedback.Eachiterationenabledparticipantstocollaborativelyreflectonandcri-
+tiquetheevolvingdefinition.Theinitialroundemphasizedopencodingofbroadconcep-
+tualizationsofESPs,whilesubsequentroundsemployedmoreselectivecodingtohone
+inonissuesofclarityandcontextualapplicability.Thisrecursiveprocessofrefinement
+continued until thematic saturation was reached and participants expressed consensus.
+ThefinaloperationaliseddefinitionispresentedinSection4.
+3.1.3. Workshop2,3,4:BrainstormingonExplanationStreamPatterns
+ThreeworkshopswereconductedtoidentifypatternsalignedwiththefinalESPdefini-
+tion. Each three-hour session included around 24 of the total of 72 data-driven design
+master’s students with backgrounds in interaction design, UX, and data science. The
+
+268 H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns
+groupwasagedearly20stolate30s.Participantswerenotcompensatedandworkedin
+smallgroupsoffourtosixtoindependentlyidentifyESPs.Inphaseone,groupsanalyzed
+ten provided XAI articles, followed by an organizer-led discussion to share and com-
+pare findings. In the second phase, groups independently explored additional literature
+and analyzed other recommender or decision-support systems of their choice to iden-
+tifymoreESPsfollowedagainwithafinalgroupdiscussion.Identifiedpatternsincluded
+structureddatavisualization,adaptiveinformationpresentation,andreal-timefeedback
+mechanisms — each reflecting different approaches to conveying information to users.
+The aim was to compile an initial list of ESPs and categorize them by intended goals.
+ThesepatternsarelistedinTable2.
+4. Results
+Thissectionprovidestheresultsoftheworkshops.First,theresultingdefinitionisgiven,
+afterwhichtheidentifiedESPsaredescribed.
+4.1. DefinitionExplanationStreamPatterns
+Throughtheiterativeprocessdescribedabove,consensuswasreachedonadefinition:
+ExplanationStreamPatternsarereusablesolutionsthatgovernthestreamofexpla-
+nations between users and systems, specifically in the context of decision support
+tools.Thesepatternsaimtoinfluencehowusersperceive,interpret,andactonexpla-
+nations.
+4.2. CategoriesofExplanationStreamPatterns
+The workshop resulted in twelve ESPs for managing the flow of explanations between
+users and systems, as presented in Table 2. These patterns address diverse challenges
+inexplanationdesignandvaryintheirlevelofgranularity.Somepatterns,suchasPro-
+gressiveDisclosureandCognitiveForcing,providehigh-levelstrategiesforstructuring
+explanations and managing complexity, while others, like Tooltips and Mouse-Over or
+Breadcrumbs,focusonmorespecificinterfacecomponentsthatenhanceuserinteraction.
+Tobetterunderstandandsystematicallyorganizetheseemergingpatterns,weconducted
+thematic analysis using axial coding to identify key categories. This process led to the
+developmentofseveralcategories,eachreflectingdistinctinteractivitygoals.
+• Progressive Disclosure patterns focus on controlling how much information is
+shown and when it is revealed, incrementally providing detail at the right time.
+These patterns structure complexity by breaking explanations into manageable
+layers, allowing users to access deeper information on demand. Patterns such as
+Accordion,Breadcrumbs,andTooltipsandMouse-Over alignwiththiscategory.
+To date, limited research has been conducted on the effectiveness of progressive
+disclosure techniques, though existing studies suggest that these techniques sig-
+nificantlycontributetoenhancingtransparencyinsystems[33,8].
+
+H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns 269
+Table2. ExplanationStreamPatternsdistilledfromtheworkshops.
+Pattern Description
+ProgressiveDisclosure Informationispresentedprogressively,eithersequentially,hierarchically,or
+basedonuserinteraction.Itisdisclosedgraduallyinresponsetouseractions
+ordecisions.
+CognitiveForcing Strategies that involve prompting users or the system to engage in spe-
+cificactionsthatguidedecision-making.Thisincludesuser-basedstrategies
+suchasrankingfeatures,modifyinginputs,orexploringcounterfactuals,and
+system-basedstrategiessuchaslimitingnavigation,delayinginformation,
+orrequiringconfirmationbeforeproceeding.
+ZoomingandScaling Allowsuserstozoominformoredetailedviewsorzoomoutforbroader
+context,facilitatingbettercomprehensionofinformation.
+Filtering Enablesuserstonarrowdowndisplayedinformationbyselectingspecific
+criteria,aidingfocusonrelevantinformation.
+Tooltipsand Provides contextual information when the user hovers over UI elements,
+Mouse-Over offeringimmediate,supplementaryinformation.
+Breadcrumbs Displaystheuser’snavigationpathwithinthesystem,helpingthemtrack
+theirpositionandnavigatebackwards.
+Accordion Patternthatexpandsorcollapsessectionsofcontent,allowinguserstoex-
+ploreorhideinformationasneeded.
+UserInputs Allowsuserstoinputpredefinedcriteriaorpreferences,enablingthemto
+customizeboththesystem’sbehaviorandoutputs,aswellasmodifythe
+inputsprovidedtothemodel.
+LocalProximity Grouprelatedinformationorobjectscloselytogether.
+ContextBundling Presentsrelatedinformationtogetherinasinglecontext.
+HighlightingImportant Usesvisualemphasistodirecttheuser’sattentiontocriticalfeaturesorin-
+Regions/Features formationwithintheinterface.
+Defaults Bundletogetheractionsorsuggestionsfortheusers.
+• CognitiveForcingpatternsallowuserstoengagecognitivelywiththesystemby
+promptingthemtoquestionorreflectonitsoutputs,promotingcriticalthinking.
+PatternslikeHighlightingImportantRegions/FeaturesandDefaultsfitwithinthis
+categoryastheyencourageuserstocriticallyevaluatespecificaspectsoftheex-
+planationorconfirmtheirdecisions.UserInputsalsoalignwiththiscategoryby
+prompting users to engage actively in customizing inputs or selecting relevant
+features before proceeding. Numerous research articles have been published on
+cognitiveforcingtechniques[34,35,36].
+• Behavioral Nudging patterns aim at steering user behavior, including guiding
+exploration or promoting effective interaction with explanations. Non-coercive
+nudging guides individuals toward better choices while leaving them with the
+freedomtochoosedifferentlyiftheywish.Coercivenudging,ontheotherhand,
+forcesbehaviororimposespenaltiesforcertainchoices,creatingmorepressureon
+theindividualtocomplywiththedesiredbehavior.PatternssuchasHighlighting
+ImportantRegions/Features,Defaults,andFilteringareeffectivenudgingmech-
+anisms.Thesepatternsguideuserattentionandbehaviorbyemphasizingcritical
+or important elements, provide options, or narrowing the displayed information
+toreducecognitiveoverload.Limitedresearchhasbeenconductedonnudgingin
+AI-assisteddecision-making,withsomeexamplesprovidedin[36,37].
+
+270 H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns
+• User-DrivenCustomizationpatternsallowuserstoexplicitlyconfiguretheirpre-
+ferred explanation formats, types, or levels of detail. View-level customizations
+enableuserstoadjusthowexplanationsarepresented(e.g.,visualvs.textualfor-
+mats,detaildepth).Additionally,model-levelcustomizationsallowuserstomod-
+ify the operation of the system or model itself, such as adjusting inputs, altering
+parameters, or triggering updates to the model’s behavior. Patterns like User In-
+putsandFilteringprovideuserstoolstoexplicitlytailortheirexplanationneeds.
+• System-DrivenCustomizationpatternsinfertheuser’sunderstandinganddynam-
+icallyadaptexplanationstoalignwiththeirmentalmodel.PatternssuchasLocal
+ProximityandContextBundlingsupportthiscategorybydynamicallyorganizing
+information based on inferred user preferences. These patterns improve system
+adaptability by presenting related information in cohesive groupings, streamlin-
+inguserunderstandingwithoutrequiringexplicitinput.Manyresearcharticlesex-
+ists related to personalized XAI [38,39,40], mostly accounting for different user
+groups rather than taking into account user characteristics or adaptations of the
+explanationsthemselves.
+Thesecategoriesprovideacomprehensiveoverviewforunderstandinghowexplanation
+streamscanbemanaged,presented,andinteractedwithwithinDSSs.
+5. ExplanationTypesandExplanationStreamPatterns
+ESPscanhelpinstructuringandorganizingtheflowofexplanationsbasedontheexpla-
+nationtype.Thiscanbeachievedbyintegratingspecificexplanationtypeswithsuitable
+interactioninterventions.Severalexamplesarelistedinthissectionforeachexplanation
+type. It is important to highlight that research on dynamic, interactive explanations re-
+mainslargelyoverlooked.Themajorityofexistingstudiesfocusonstaticexplanations,
+offeringlimitedornoopportunitiesforuserinteraction.Assuch,itisgenerallynotpossi-
+bletoreferenceexamplesfromexistingstudies.Weproposeseveralinteractionstrategies
+forengagingwithexplanations.Futureworkshouldfocusonbuildingacomprehensive
+patternlibraryrelatedtowaystointeractwithexplanations.
+5.1. FeatureImportance
+Featureimportanceexplanationscanbecommunicatedbyusingprogressivedisclosure.
+Initially,showingonlythemostimportantfeatures(e.g.,thetop3or5)allowsusersto
+focusonkeyinformationfirst[41].Thesefeaturescanbepresentedinnumerousformats,
+suchasalistthatcanbeextendeduponrequest,commonlyreferredtoasanaccordion
+pattern.Thisapproachhelpsusersprocessinformationincrementally,whichinfluences
+howusersperceiveandinterprettheinformation.
+Tofurtherenhanceengagement,cognitiveforcingcanbeappliedbymakingusers
+expand the list themselves, which encourages them to think critically about the most
+important features before seeing the entire set. In addition, subtle forms of behavioral
+nudging—suchasvisuallyemphasizingthetopfeaturesorpre-selectingrecommended
+ones—cansteeruserattentionwithoutrestrictingtheirautonomy.Forpersonalization,
+user-drivencustomizationcanallowuserstoprioritizeorhidespecificfeatures,while
+system-driven customization can adjust the list dynamically based on historical user
+behavior,forexample,alwayspresentingthemostrelevantfeaturesfirst.
+
+H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns 271
+5.2. Counterfactuals
+Counterfactualscenarioscanbecommunicatedbystartingwithsimpleexplanationsil-
+lustratingtheeffectofasinglefeaturechange,thenexpandingtomorecomplexscenar-
+ios involving multiple changes. Using the accordion pattern, users can explore a single
+counterfactualscenarioinitiallyandexpandittorevealmorecounterfactualsasneeded.
+Progressivedisclosureensuresthatusersarenotoverloadedwithtoomanypossi-
+bilitiesatonce,presentingthemwithsimplechangesandthenrevealingmorecomplex
+alternativesstep-by-step.Byforcinguserstoexpandthescenariosthemselves,cognitive
+forcingensuresthattheyactivelyengagewiththepotentialimpactsofeachchange.Ad-
+ditionally,nudgingcansubtlysuggestthemostimpactfulcounterfactuals,helpingusers
+focusonthechangesthatcouldleadtobetteroutcomes.Tomaketheexplanationmore
+tailored,user-drivencustomizationallowsuserstoselectwhichaspectsofthecounter-
+factualstheywanttoexplore,whilesystem-drivencustomizationdynamicallyadjusts
+thescenariosbasedontheuser’spastbehaviororcurrentcontext.
+5.3. Similar/ContrastiveExamples
+Tomakecomparisonsbetweensimilarandcontrastingexamples,progressivedisclosure
+canbeeffective.Startbypresentingabasic,similarexample,andthenallowuserstoex-
+pandtheexplanationtoviewmorecontrastingexamples.Thishelpspreventinformation
+overloadwhilestillofferingtheopportunitytoexploredifferentoutcomesindepth.
+As with other explanation types, cognitive forcing can be employed by gradually
+increasingthecontrastbetweenexamples,promptinguserstoreflectonthedifferences
+and understand the impact of each decision. Nudging can be applied by highlighting
+examples that lead to the desired outcome, guiding the user towards the most relevant
+orbeneficialscenarios.User-drivencustomizationalsoplaysakeyrolehere,allowing
+userstosearchfororselectthetypesofexamplestheywishtosee,ensuringthattheex-
+amplesalignwiththeirneeds.Similarly,system-drivencustomizationcanrecommend
+themostpertinentexamplesbasedontheuser’sinteractionsandpreferences.
+5.4. Rule-BasedExplanations
+Forrule-basedexplanations,suchasdecisiontreesordecisionrules,progressivedisclo-
+surecanbeused.Anexamplecouldbetofirstpresenthigh-levelrulesafterwhichusers
+can then expand to reveal more detailed information about the decision tree or specific
+decision rules. This layered approach reduces cognitive load while still providing the
+depthrequiredforfullunderstanding.
+Cognitiveforcingcanbeusedhereaswell,ensuringthatusersengagewiththelogic
+of each rule step-by-step, rather than overwhelming them with the entire tree or set of
+rulesatonce.Nudgingcanhelpguideusersbyhighlightingkeydecisionpointsorrules
+that significantly impact the outcome, subtly steering them towards the most relevant
+partsofthelogic.Additionally,user-drivencustomizationallowsuserstoselectwhich
+parts of the decision tree or which rules they want to explore, making the explanation
+morerelevanttotheirinterests.System-drivencustomizationmightdynamicallyadapt
+the explanation based on the user’s past interactions, showing the most relevant rules
+basedontheirpreferencesordecisionhistory.
+
+272 H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns
+6. Discussion
+ESPsprovidepracticaltoolsforstructuringexplanationstreamsinDSSs.Byformalizing
+ESPs as reusable solutions that influence user interaction with explanations, a shared
+designspaceemergesthatbridgesthegapbetweeninteractiondesignersanddevelopers.
+6.1. FoundationforDesigningExplanationStreams
+The ESP framework provides a theoretical and practical foundation for analyzing and
+designing explanation flows within DSSs. By dissecting explanation streams into spe-
+cificpatterns,ESPsformalizeaspectsofinformationexchangethatwerepreviouslyun-
+structured or implicitly assumed. This approach may inspire new research into the im-
+pactsofdifferentESPs,particularlyregardinghowusersperceive,interpret,andacton
+explanations.InsightsgainedcouldleadtotherefinementofESPcategoriesorevennew
+patterns, further contributing to the discipline of decision support. By providing these
+theoreticalbuildingblocks,ESPscreateapathwayformorestructuredresearchintohow
+to effectively design and facilitate interactions between users and AI systems through
+explanations.Weenvisionacomprehensivepatternlibrarythatcouldfacilitatetheabove,
+potentiallysteeredbytheexplanationneedsasidentifiedin[20].
+6.2. CommonDesignSpaceforDecisionSupportSystemDevelopment
+ThedefinitionandcategorizationofESPscreateastandardizeddesignspacewherede-
+signersanddeveloperscanalignonexplanationflowsandinteractionwithinDSSs.This
+shared framework allows for clear communication of design intents, such as when to
+deploystaticordynamicflowsandwhentoguideorallowforexploratoryengagement.
+ESPs could help prevent misunderstandings that might otherwise arise from abstract
+goals,suchas”improvingdecisionquality”or”reducingcognitivebias.”Instead,these
+goalscouldbetiedtospecificpatterns,facilitatingaconcreteapproachforbothdesign
+andimplementation.
+6.3. BiasMitigationandAlignmentwithCognitiveNeeds
+ESPsofferopportunitiestomodelinteractivityinDSSdesigns,aligningthemwithhu-
+man cognitive needs and potentially improving decision-making effectiveness. A wide
+range of ESPs can be developed and evaluated in user-specific contexts to assess their
+impact on human-AI decision-making. Future research should explore to what extent
+ESPsmitigatecognitivebiasesandfurtherquantifytheirinfluenceonthequalityofuser
+decision-makinginvarioushuman-AIdecisionsupportcontexts.
+6.4. Decision-ContextandUserNeeds
+Inthispaper,weformalizedinteractivitythroughESPs.Whilenotcoveredinthispaper,
+itisimportanttonotethatexplanationsaredependentonthedecisioncontext,whichis
+shapedbyfactorssuchashighstakes,irreversibility,andtimepressure[42,43,44].Such
+factorssignificantlyinfluenceexplanationdesignbytailoringpatternssuchasgranular-
+ity and depth to align with the urgency, importance, and consequences of the decision.
+Forexample,intime-criticaldecisions,thesystemmayprioritizeconciseandactionable
+
+H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns 273
+explanations,whileinhigh-stakesorirreversibledecisions,itmayprovidedetailedex-
+planationsthatincludeethicalandlegaljustificationstosupportaccountabilityandtrust.
+Similarly,userneedsplayacrucialrole inexplanationdesignbyensuringthatthe
+information presented aligns with the user’s role, goals, and level of expertise [45,46].
+Explanationsmustbetailoredtoaddressspecificneeds,whethertheuserisadomainex-
+pertoralayperson,andwhethertheirfocusistask-orientedorexploratory.Forinstance,
+aclinicianmayrequireexplanationstodesignpersonalizedspeechtreatmentplansthat
+meetthespecificneedsofeachpatient,whilepatientsmayuseexplanationstostaymo-
+tivatedthroughouttreatment[47,48].
+Together, these contexts guide the customization of ESPs, ensuring they are both
+situationallyappropriateanduser-centered.Futureresearchshouldbuildonthesefoun-
+dationsbyconsideringthesecontextsinthedesignofESPstoensuretheirrelevanceand
+effectiveness.
+7. Conclusion
+Inthisresearch,weestablishedadefinitionforESPsandprovidedseveralexamplesof
+waystointeractwithexplanations.ThegoaloftheseESPsistoprovideamoreformal-
+ized approach to designing interactive explanations. ESPs address the current lack of
+standardizationinevaluatinganddesigningexplanations,whichhinderseffortstocom-
+municateexplanationseffectively.
+Intheworkshops,weidentifiedseveralESPsanddistilledthemintofivecategories
+that shape the intent by which explanations are communicated. Future work should in-
+volve a comprehensive analysis of the literature surrounding ESPs to uncover existing
+frameworks,methodologies,andfindingsthatcanenhanceourunderstandingofhowto
+communicateexplanationsinastructuredwayforDSSs.Amappingstudycouldbean
+interestingperspectivetoseehowESPsconnecttospecificexplanationneedsasfound
+in[20].Furthermore,developingapatternlibrarycouldserveasapracticalresourcefor
+standardizingandapplyingESPsacrossvariouscontexts.
+Future research is essential to investigate the effectiveness of ESPs in mitigating
+cognitive biases. While the proposed patterns offer a promising research perspective,
+empiricalstudiesareneededtoquantifytheirimpactondecision-makingoutcomes.Un-
+derstandinghowESPsinfluencehuman-AIdecision-makingaccuracywillbecrucialin
+validatingtheirpracticaluse.Specifically,researchshouldfocusonassessingchangesin
+decisionquality,userbehavior,andhowinteractivitywithexplanationsinDSSscanhelp
+mitigatecognitivebiases.
+Moreover, we suggest exploring the effectiveness of ESPs in different decision-
+making contexts/domains. Different domains present unique challenges and user needs
+[6].TailoringESPstoaddressthespecificcognitiverequirementsandcontextualfactors
+within these sectors can enhance their effectiveness. For instance, the decision-making
+processesinhealthcaremaydemanddifferentESPscomparedtothoseusedintelecom-
+municationsduetoconsiderationssuchasdifferingstakes,timeconstraintsfordecisions,
+stressful conditions, and the complexity of the information involved [49,50]. Context-
+dependentESPscouldbeemployedtoadjusttheexplanationstreambasedonsituational
+factors,suchaspresentingexplanationsdifferentlywhenthemodel’sconfidenceislow,
+intime-sensitivescenarios,orduringirreversibledecision-makingprocesses.
+
+274 H.Maathuisetal./FormalizingExplanationDesignThroughInteractionPatterns

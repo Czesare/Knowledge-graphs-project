@@ -1,0 +1,341 @@
+196 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250637
+Towards Building a Trustworthy
+RAG-Based Chatbot for the Italian Public
+Administration
+ChandanaSreeMALA*a,b,1 ,ChristianDIMAIO*a,c ,MattiaPROIETTId ,
+GizemGEZICIb ,FoscaGIANNOTTIb ,StefanoMELACCI c,
+AlessandroLENCId andMarcoGORIc
+aDepartmentofComputerScience,UniversityofPisa
+bDepartmentofInformatics,ScuolaNormaleSuperiore
+cDepartmentofInformationEngineering,UniversityofSiena
+dDepartmentofPhilology,LiteratureandLinguistics,UniversityofPisa
+Abstract.
+Building a Trustworthy Retrieval-Augmented Generation (RAG) chatbot for
+Italy’spublicsectorpresentschallengesthatgobeyondselectinganappropriate
+Large Language Model. A major issue is the retrieval phase, where Italian text
+embeddersoftenunderperformcomparedtoEnglishandmultilingualcounterparts,
+hinderingpreciseidentificationandcontextualizationofcriticalinformation.Regu-
+latoryconstraintsfurthercomplicatemattersbydisallowingclosedsourceorcloud
+basedmodels,forcingrelianceonon-premiseorfullyopensourcesolutionsthat
+maynotfullyaddressthelinguisticcomplexitiesofItaliandocuments.Inourstudy,
+weevaluatethreeembeddingapproachesusingapubliclyavailableItaliandataset:
+amonolingualItalianapproach,atranslationbasedmethodleveragingEnglishonly
+embedderswithbackwardreferencemapping,andamultilingualframeworkap-
+pliedtobothoriginalandtranslatedtexts.Ourmethodologyinvolveschunkingdoc-
+umentsintocoherentsegments,embeddingtheminahighdimensionalsemantic
+space,andmeasuringretrievalaccuracyviatop-ksimilaritysearches.Ourresults
+indicatethatthetranslationbasedapproachsignificantlyimprovesretrievalperfor-
+manceoverItalianspecificmodels,suggestingthatbilingualmappingcaneffec-
+tivelyaddressbothdomainspecificchallengesandregulatoryconstraintsindevel-
+opingRAGpipelinesforpublicadministration.
+Keywords.Trustworthiness,GenerativeAIChatbot,PublicSectorAI,Robustness,
+Reliability,Retrieval-AugmentedGeneration(RAG),LLM,DataPrivacy.
+1. Introduction
+The advent of Large Language Models (LLMs) built upon the Transformer architec-
+ture [1] has fundamentally reshaped how information is processed across text, vision,
+and audio modalities [2]. In particular, advancements in Generative AI have paved the
+*Theseauthorscontributedequallytothiswork.
+1CorrespondingAuthor:ChandanaSreeMALA,chandana.mala@sns.it
+
+C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot 197
+way for sophisticated chatbot systems [3], which are now widely implemented in both
+public and private sectors. However, despite their potential, these models are not with-
+outlimitations.Theyremainpronetohallucinations—generatingfalseorincoherentout-
+puts[4]—andoftenfacedifficultiesinhandlingdomain-specificknowledge,achallenge
+thatisespeciallycriticalinthepublicsector[5].
+Retrieval-AugmentedGeneration(RAG)[6]hasemergedasaneffectiveframework
+for enhancing the performance of LLMs by retrieving external knowledge and incor-
+porating it into the generation process, all without the need for additional model train-
+ing. However, its success is largely dependent on the quality of the underlying embed-
+dingmodels,whichmustaccuratelyrepresentsemanticmeaningtoensureeffectivere-
+trieval. Implementing RAG in non-English and domain-specific contexts, such as the
+Italian public sector, introduces additional challenges. Regulatory restrictions limit ac-
+cess to advanced proprietary models, while Italian-language embeddings generally un-
+derperform compared to their English counterparts. Moreover, public sector data often
+compriseslegal,administrative,andtechnicaldocumentsthatrequirehighlypreciseand
+context-awareretrieval.Thesechallengeshighlighttheneedforoptimizingbothembed-
+ding models and retrieval strategies to develop reliable and effective RAG applications
+inmultilingualandspecializeddomains.
+Inthisstudy,weexplorethreedifferentapproachesforembeddingItaliantextsfor
+retrievalpurposes.ThefirstapproachusesEnglish-onlyembeddingmodels,whereItal-
+iantextistranslatedintoEnglish,andembeddingsaregeneratedfromthetranslatedtext
+whilepreservingreferencestotheoriginalItalian.Thesecondapproachutilizesmodels
+specifically trained on Italian corpora, and the third approach applies multilingual em-
+beddingmodelsdirectlytotheItaliantext.Bysystematicallycomparingthesemethods,
+we aim to highlight their respective strengths and limitations, thereby contributing to
+moreeffectiveItaliantextretrievalinfutureAIapplications.
+2. Background:Challenges&Opportunities
+OurusecasecentersoncreatingagenerativeAI-poweredchatbotspecificallydesigned
+for employees of a Government Organization (GO), with the goal of offering accessi-
+bleanduser-friendlysupport.Thechatbotleveragesadatasetoftechnicalusermanuals
+for GO’s internal applications, with the primary objective of establishing a trustworthy
+generativeAIpipelinetoserveasanassistantforGO’semployees.Thispipelineisde-
+signedtogenerateclear,non-technical,andeasilyunderstandableresponsestoemployee
+queriesbyextractingrelevantinformationfromtheusermanuals.Acriticalrequirement
+istoensurethatthegeneratedanswersareaccessibleandcomprehensible,eventousers
+with no technical background, thereby improving both accessibility and usability. For
+thesereasons,thedevelopmentchoicesinsuchascenariomustbetheresultofatrade-off
+between performance, reliability, trustworthiness, and resource feasibility. Several ap-
+proaches andtechnologies couldbe considered toachieve thisgoal. The moststraight-
+forward and immediately available option would be to use a pre-trained LLM, poten-
+tiallyenhancingitsperformancethroughadvancedpromptingtechniqueslikeFew-Shot
+learningorChain-of-Thought.However,state-of-the-artmodelssuitablefortheseappli-
+cationsareoftenproprietaryandaccessibleonlyviaAPI,whichmakesthemunsuitable
+foruseinthepublicsector.Anotheroptionwouldbetofine-tuneanLLMtospecialize
+
+198 C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot
+inthetargetdomainandspecificdownstreamtasks.Whilethisapproachcouldaddress
+thelimitationsofoff-the-shelfmodels—especiallybyutilizingopen-sourcemodels—it
+isstilllargelyimpracticalduetothehighcomputationalandfinancialcostsinvolved.A
+morefeasiblealternativeisprovidedbyRAG,whichweexploreindetailbelow.
+Retrieval Augmented Generation. As outlined in Section 1, RAG frameworks have
+been developed to produce responses that extend beyond the pre-trained knowledge of
+the LLM, grounding the model’s output in factual knowledge stored within a curated
+knowledgebase.Moreformally,theRAGframeworkoperatesbyprocessingacollection
+of data (which we assume to be unstructured text documents), denoted as t ∈T, for
+i
+i=1,...,m(withmdocuments).Eacht isdividedintoasetofsmallerchunks,denoted
+i
+(cid:2)m
+asc ∈C ,for j=1,...,n (withnchunks),formingtheknowledgebaseK= C .
+j ti ti
+i=1
+Eachc istransformedintoahigh-dimensionalvectorthroughanembeddingmod-
+j
+ule,Enc,yieldinge
+j
+∈RdEnc.Alltheresultingvectorsarethenstoredinavectordatabase.
+Duringinference,auserqueryqisencodedasq=Enc(q)∈RdEnc,anditssimilarityto
+the stored vectors is assessed using similarity measures such as cosine similarity. The
+systemthenretrievesthetop-kmostrelevantchunks,denotedasC ,where|C |=k.Fi-
+q q
+nally,theLLM,denotedasM,usesthequeryqandtheretrievedchunksC togenerate
+q
+aresponsey.
+Thisframeworkoffersseveralpossibleusagecombinations:
+• RAG-only:ThesystemcanbeimplementedusingastandardRAGpipeline,relyingon
+off-the-shelfmodelsforbothretrievalandgeneration.
+• RAG + Fine-Tuning: Alternatively, the RAG framework can be enhanced by fine-
+tuningtheembeddingmodule(Enc),thegenerator(M),orbothcomponentstoimprove
+performanceforspecifictasksordomains.
+Considering the trade-offs in our use case, a RAG-only architecture stands out as
+the most effective solution. It facilitates the integration of external knowledge sources,
+such as user manuals, to generate accurate and up-to-date responses while minimizing
+reliance on proprietary models. This approach eliminates the need for large-scale fine-
+tuning, reducing both computational costs and the effort required for data preparation.
+RecentstudiesalsoindicatethatRAGcanoutperformtraditionalfine-tuningmethods[7],
+makingitapracticalandscalableoptionforreal-worlddeployments.
+3. RelatedWork
+Embedding models are essential in retrieval systems as they transform text into dense
+vectorrepresentationsthatcapturesemanticmeaning[8].Thedevelopmentofthesemod-
+elshasevolvedfromword-basedapproaches,suchasWord2Vec[9]andGloVe[10],to
+contextualizedmodelslikeBERT[11]andSentence-BERT(SBERT)[12],whichenable
+improved text representations. Multilingual embedding models, including MPNet [13]
+and Sentence-BERT [14], have demonstrated cross-lingual capabilities [15,16]. More
+recentmodels,suchasE5-Multilingual[17]andBGE-Multilingual[18],aretrainedon
+multilingual corpora and are specifically designed to generate embeddings that are ap-
+plicable across different languages. For Italian text retrieval, research has focused on
+
+C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot 199
+Chunk0 Chunk0 Index Chunk0
+Chunk1 Chunk1 Chunk1
+... ... ...
+ChunkN ChunkN IIItttaalliiaann-->>EEnngglliisshh ChunkN
+TTrraannssllaattoorr
+Figure1. ComparisonoftwovectorstoreconstructionstrategiesforaRAGpipelineinanItalian-language.
+Thestandardapproach(left)involveschunkingandembeddingdocumentsdirectlyinItalianbeforestoring
+theminavectordatabase.Incontrast,thebilingualapproach(right)translateschunksintoEnglish,computes
+embeddingsusingEnglish-languagemodels,andstoresthemalongsidebackwardreferencestotheoriginal
+Italiantextforlaterretrieval.
+Italian-specificembeddingmodels,suchasthosefine-tunedonItaliancorpora[19–21].
+TheItalianlanguagefeaturesdistinctlinguisticcharacteristics,includingcomplexmor-
+phology and syntax, which may not be fully captured by multilingual models. As em-
+beddingmodelscontinuetoevolve,ongoingresearchinbothmultilingualandlanguage-
+specific approaches is essential for refining text representations across diverse linguis-
+tic contexts [22]. When applied to the public sector, the challenge of developing reli-
+ableandtrustworthyAIsystemsisfurtheramplified.Thepublicadministrationdomain
+ischaracterizedbyspecializedandtechnicallanguage,demandinghighprecisioninin-
+formation retrieval and generation. Legal and regulatory documents, in particular, pose
+additionalchallengesforLLMs[23,24],highlightingthatfine-tunedmodelstailoredfor
+specificdomainstypicallyoutperformgeneral-purposemodels,albeitattheexpenseof
+largevolumesoftrainingdataandsubstantialcomputationalresources.
+4. Methodology
+ThesuccessofRAGpipelinesdependsontwocriticalfactors:theaccuracyoftextem-
+beddersinmappingchunksintoahigh-dimensionalsemanticspacethateffectivelycap-
+turestheirmeaning,andtheabilityoftheLLMtointerpretcontextualinformationand
+integrateittogenerateaccurateresponses.Toaddressthis,followingtheapproachpro-
+posedbyIscanetal.[25],weexplorewhethertranslatingItaliandocumentsintoEnglish
+andleveragingEnglish-languageembeddingmodelscanserveasaviablealternativeto
+usingafine-tunedmodelforItalian.Thisapproach(i)eliminatestheneedforlanguage-
+specificfine-tuning,and(ii)allowstheuseofwidelyavailableEnglishembeddingmod-
+els,whicharethemajorityofpubliclyreleasedresources.
+BilingualMappingApproach. LetT
+(it)
+beasetofmItaliandocumentstobestored.As
+illustratedinFigure1,ourgoalistoconstructaknowledgebaseoptimizedforEnglish-
+based retrieval, denoted as K
+(en)
+, while preserving a reliable mapping to the original-
+(it)
+language content for response generation. To this end, each document t is trans-
+i
+lated into English using a deterministic offline translation function, resulting int (en) =
+i
+Tr it→en (t i (it)).Thisofflineapproachensurestranslationconsistencyandsimplifiesdown-
+streamprocessingbystandardizingthepipelineinasinglelanguagefromtheoutset.Fol-
+(en)
+lowingthestandardRAGframework,eachtranslateddocumentt issegmentedintoa
+i
+setofchunksc (en)∈C (en), k=1,...,n,wherenisthenumberofchunksperdocument.
+k ti
+
+200 C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot
+CCoommeeppoossssooccaammbbiiaarreellaappaasssswwoorrddddeellmmiiooaaccccoouunntttt??
+IIttaalliiaann-->>EEnngglliisshh
+TTrraannssllaattoorr
+HHoowwccaannIIcchhaannggeetthheeppaasssswwoorrddffoorrmmyyaaccccoouunntttt??
+SSiimmiillaarriittyy
+SSiimmiillaarriittyy
+SSeeaarrcchh
+SSeeaarrcchh
+Chunk0
+Chunk1
+Top-K Top-K ... Inverted Top-K
+Chunks Chunks ChunkN Index Chunks
+Figure2. ComparisonoftworetrievalstrategiesinaRAGpipelineforanItalian-languagepublicadminis-
+trationchatbot.Thestandardapproach(left)embedstheItalianqueryandretrievesrelevantchunksfroman
+Italianembeddingspace.Thebilingualstrategy(right)translatesthequeryintoEnglish,embedsitusingan
+Englishencoder,andperformsretrievalinanEnglishvectorstore,mappingresultsbacktoItalianviaanin-
+vertedindex.
+(cid:2)
+The retrieval-ready knowledge base is then defined as K (en) = m C (en). Meanwhile,
+i=1 ti
+the corresponding original-language chunks are retained as c (it) ∈C (it), j=1,...,n.
+j ti
+(en)
+By design, each English chunk c has a one-to-one alignment with its Italian coun-
+k
+terpartc ( j it) inthesameposition,suchthat:c ( k en)=Tr it→en (c ( j it)).EachEnglishchunkis
+indexed and associated with a backward reference Ref(k)(cid:4)→c (it), preserving traceabil-
+j
+ity to the source content. All chunks in K
+(en)
+are embedded into a d-dimensional vec-
+torspaceusinganEnglishencoderEnc(en)
+,yieldinge
+(en)=Enc(en)(c (en))∈Rd.These
+(cid:3) (cid:4) k k
+pairs c
+(en),e (en)
+arestoredinavectordatabaseforefficientretrieval.Atinferencetime
+k k
+(Figure2),anItalianqueryq (it) istranslatedintoEnglishq (en)=Tr it→en (q (it)),andem-
+bedded asq
+(en) =Enc(en)(q (en)).
+Similarity iscomputed between q
+(en)
+and eachchunk
+embeddinge (en) usingcosinesimilarityor(cid:2) distance.Thetop-k mostrelevantchunks,
+k 2
+denotedC q(en),areretrievedandmappedbacktotheiroriginalItalianformviathestored
+references,allowingresponsesgroundedinthesourcelanguage.
+5. Experiments
+We conducted our evaluation using a synthetic dataset provided by ReDix Informat-
+ica[26],builtfromWikipediapassageswithquestionsautomaticallygeneratedbyapro-
+prietarymodel.Thedatasetcomprisesapproximately105kentries,eachconsistingofa
+question,context,andanswer.Toobtainabalancedandcomputationallyfeasiblesubset,
+we embedded all contexts using an oracle embedding model and applied a clustering
+algorithmwithk=10,fromwhichwesampled50completetripletspercluster,yielding
+afinalevaluationsetof1kentries.Thegoaloftheexperimentwastoassesstheretrieval
+performanceofmodelsnotexplicitlytrainedonItalian,particularlywhenworkingwith
+translatedcontent.Toisolatethisaspect,werestrictedtheevaluationtoquestion-context
+pairs,excludingtheanswerfield.AsshowninTable1,theselectedembeddingmodels
+weretrainedonItalian,English,ormultilingualcorpora,allowingforadirectcompari-
+sonacrosslanguage-specificandcross-lingualsettings.Retrievalwasevaluatedusingthe
+
+C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot 201
+Table1. Overviewofembeddingmodels
+Model Language Variant EmbeddingDims MaxTokens #Parameters Reference
+Bertino Italian base 768 512 66M [20]
+Gattina Italian base 768 512 109M [19]
+Mmarco Italian base 768 512 109M [21]
+GTE-EN English base 768 512 109M [27]
+BGE English base 768 512 109M [18]
+mGTE Multilingual base 768 8.192 305M [28]
+KaLM-E Multilingual – 896 131.072 494M [29]
+RetrievalAccuracymetric,whichassignsapositivescorewhentheground-truthcontext
+isretrievedastop-1foragivenquestion.Accordingly,eachmodelwastestedonthever-
+sionofthedatathatmatcheditstraining—originalItalianforItalianmodels,translated
+EnglishforEnglishmodels,andbothversionsformultilingualones.
+Table2. ComparisonofRetrievalAccuracy
+Model Original(IT) Translated(EN)
+BERTino 0.81 –
+Gattina 0.70 –
+Mmarco 0.66 –
+GTE-en – 0.88
+BGE – 0.79
+mGTE 0.88 0.89
+KaLM-E 0.86 0.72
+The results, summarized in Table 2, indicate that the best overall performance is
+achieved by the multilingual GTE model when applied to the translated version of the
+documents.Interestingly,thesamemodelalsoperformsbestontheoriginalItaliantexts,
+demonstratingstrongcross-lingualcapabilities.Closebehindisitsmonolingualvariant,
+GTE-en, which ranks second overall despite not being trained on Italian data. In con-
+trast,modelsspecificallytrainedonItalianconsistentlyunderperformcomparedtoboth
+English and multilingual alternatives. Although this outcome may appear counterintu-
+itive, it reinforces the relative strength of English and multilingual embedding models
+inretrievaltasks,evenwhenappliedtonon-Englishcorpora.Inthiscontext,anItalian-
+specific model ranks only as the fourth-best option for encoding the target document
+collection.
+At the same time, the results show how a bilingual-mapping approach as the one
+described in Sec. 4 is a promising route to cope with the shortcomings posed by the
+Italian-specificmodelslandscape.Infact,enablingtheuseofEnglish-onlytextembed-
+ders through the translate-and-map procedure enables access to a broader selection of
+open-sourcemodels,beyondthosespecificallytrainedonItalianorinamultilingualset-
+ting.
+
+202 C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot
+6. ConclusionandFuturedirections
+Inthiswork,wehaveaddressedkeychallengesindevelopingRAG-poweredsystemsfor
+the Italian language, particularly focusing on the retrieval module. We reviewed three
+possible approaches for embedding and retrieving Italian texts: (i) monolingual Italian
+models,(ii)monolingualEnglishmodelsviatranslationandbilingualmapping,and(iii)
+multilingualmodelsappliedtobothscenarios.OurresultsindicatethatmonolingualItal-
+ian models underperform compared to both English and multilingual alternatives. This
+highlightsthelimitationsofcurrentlyavailableItalian-specificmodelsbutalsosuggests
+bilingual mapping as a promising strategy. By leveraging bilingual representations, we
+can expand the pool of efficient open-source models, enhancing retrieval performance
+withoutresortingtocostlyfine-tuningonthetargetlanguage.
+Beyond embedding quality, the effectiveness of retrieval also depends on how text is
+chunked.InPublicAdministration,retrievalmustrespectlogicalorsequentialstructures
+(e.g., ordered tutorial steps: c ≺c ≺···≺c ). A purely vector-based approach may
+1 2 N
+fail to maintain these relationships, leading to two key issues: (i) retrieving a relevant
+chunkc j mayexcludeitslogicalsuccessorc j+1 ,and(ii)overlappingorbranchingstruc-
+tures may be lost. To address this, future work will focus on integrating structured re-
+trievalpoliciesintoRAG-basedagentstopreserveorderandlogicaldependencies.Addi-
+tionally,wewillexploreefficientofflinetranslationmethodstofurtherimproveretrieval
+robustnessinmultilingualsettings.
+7. Limitations
+Since the private dataset lacks ground-truth passages, we do not have corresponding
+results for it and rely solely on the WikipediaQA dataset. However, this approach may
+lead to discrepancies, as the private dataset contains domain-specific knowledge with
+specializedterminologythatmaynotmatchthegeneralknowledgefoundinWikipedia.
+Acknowledgements
+The authors gratefully acknowledge the Regione Toscana Team—especially Luca
+Ciprani, Marco Caldini, Silvio De Magistris, Davide Bruno, and Gianluca Vannuc-
+cini—for their valuable expertise and contributions to this work in the field of public
+administration.
+This work has been supported by the European Union under ERC-2018-ADG GA
+834756 (XAI), by the Partnership Extended PE00000013 - “FAIR - Future Artificial
+IntelligenceResearch”-Spoke1“Human-centeredAI”.
+The acknowledgment is extended to Rete SAIHUB (Siena, Italy), which, jointly
+withtheItalianMinistryofUniversityandResearch(DM117/2023,PNRR,Missione4,
+Componente2,Investimento3.3),fundedthescholarshipofChristianDiMaio.
+
+C.S.Malaetal./TowardsBuildingaTrustworthyRAG-BasedChatbot 203

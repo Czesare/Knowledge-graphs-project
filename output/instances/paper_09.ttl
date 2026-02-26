@@ -1,0 +1,197 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_09 a hi:Paper ;
+    hi:describesUseCase inst:Paper_09_UseCase ;
+    hi:hasAuthor inst:Paper_09_Author1,
+        inst:Paper_09_Author2,
+        inst:Paper_09_Author3,
+        inst:Paper_09_Author4,
+        inst:Paper_09_Author5,
+        inst:Paper_09_Author6,
+        inst:Paper_09_Author7,
+        inst:Paper_09_Author8 ;
+    hi:hasKeyword "Data Privacy",
+        "Generative AI Chatbot",
+        "LLM",
+        "Public Sector AI",
+        "Reliability",
+        "Retrieval-Augmented Generation (RAG)",
+        "Robustness",
+        "Trustworthiness" ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Towards Building a Trustworthy RAG-Based Chatbot for the Italian Public Administration"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_09_Evaluation a hi:Evaluation ;
+    rdfs:label "Evaluate Retrieval Performance" ;
+    hi:hasEvaluationConcept hint:DataCollectionQualityEvaluation ;
+    hi:hasExperiment inst:Paper_09_Experiment_EmbeddingModelComparison ;
+    hi:hasMetricConcept hint:TaskSuccessRateMetric .
+
+inst:Paper_09_Interaction_UserQueryInteraction a hi:Interaction ;
+    rdfs:label "User Query Interaction" ;
+    hi:hasAgentInvolved inst:Paper_09_PublicAdministrationEmployee,
+        inst:Paper_09_RagChatbot ;
+    hi:hasInteractionIntentConcept hint:AnswerIntent ;
+    hi:hasInteractionModalityConcept hint:TextChatModality .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Paper_09_Author1 a hi:Author ;
+    foaf:name "Chandana Sree Mala" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfInformaticsScuolaNormaleSuperiore ;
+    hi:hasAuthorName "Chandana Sree Mala"^^xsd:string .
+
+inst:Paper_09_Author2 a hi:Author ;
+    foaf:name "Christian Di Maio" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfInformationEngineeringUniversityOfSiena ;
+    hi:hasAuthorName "Christian Di Maio"^^xsd:string .
+
+inst:Paper_09_Author3 a hi:Author ;
+    foaf:name "Mattia Proietti" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfPhilologyLiteratureAndLinguisticsUniversityOfPisa ;
+    hi:hasAuthorName "Mattia Proietti"^^xsd:string .
+
+inst:Paper_09_Author4 a hi:Author ;
+    foaf:name "Gizem Gezici" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfInformaticsScuolaNormaleSuperiore ;
+    hi:hasAuthorName "Gizem Gezici"^^xsd:string .
+
+inst:Paper_09_Author5 a hi:Author ;
+    foaf:name "Fosca Giannotti" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfInformaticsScuolaNormaleSuperiore ;
+    hi:hasAuthorName "Fosca Giannotti"^^xsd:string .
+
+inst:Paper_09_Author6 a hi:Author ;
+    foaf:name "Stefano Melacci" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfInformationEngineeringUniversityOfSiena ;
+    hi:hasAuthorName "Stefano Melacci"^^xsd:string .
+
+inst:Paper_09_Author7 a hi:Author ;
+    foaf:name "Alessandro Lenci" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfPhilologyLiteratureAndLinguisticsUniversityOfPisa ;
+    hi:hasAuthorName "Alessandro Lenci"^^xsd:string .
+
+inst:Paper_09_Author8 a hi:Author ;
+    foaf:name "Marco Gori" ;
+    hi:hasAffiliation inst:Affiliation_DepartmentOfInformationEngineeringUniversityOfSiena ;
+    hi:hasAuthorName "Marco Gori"^^xsd:string .
+
+inst:Paper_09_Context a hi:Context ;
+    rdfs:label "Italian Public Administration Context" ;
+    hi:hasConstraintConcept hint:PrivacyConstraint,
+        hint:TransparencyConstraint ;
+    hi:hasContextConcept hint:JuryDeliberationContext ;
+    hi:hasInfluenceOn inst:Paper_09_Team ;
+    hi:hasPhenomenonConcept hint:KnowledgeMismatchPhenomenon .
+
+inst:Paper_09_Exec_ExecuteInformationRetrieval a hi:TaskExecution ;
+    rdfs:label "Execute Information Retrieval" ;
+    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
+    hi:realizesTask inst:Paper_09_Task_ExtractInformation .
+
+inst:Paper_09_Exec_ExecuteResponseGeneration a hi:TaskExecution ;
+    rdfs:label "Execute Response Generation" ;
+    hi:hasMethodConcept hint:PostHocExplanationMethod ;
+    hi:realizesTask inst:Paper_09_Task_GenerateResponses .
+
+inst:Paper_09_Experiment_EmbeddingModelComparison a hi:Experiment ;
+    rdfs:label "Embedding Model Comparison" ;
+    hi:hasAlternativeHypothesis "English models outperform Italian-specific models."^^xsd:string ;
+    hi:hasExperimentConcept hint:DiagnosisExperiment ;
+    hi:hasMetricTested hint:TaskSuccessRateMetric ;
+    hi:hasNullHypothesis "Italian-specific models perform equally well as English models."^^xsd:string .
+
+inst:Paper_09_Goal_ProvideAccessibleSupport a hi:Goal ;
+    rdfs:label "Provide Accessible Support" ;
+    hi:hasGoalConcept hint:UserWellbeingGoal ;
+    hi:requiresTask inst:Paper_09_Task_EnsureComprehensibility,
+        inst:Paper_09_Task_ExtractInformation,
+        inst:Paper_09_Task_GenerateResponses .
+
+inst:Paper_09_PublicAdministrationEmployee_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_09_RagChatbot_Cap_InformationRetrieval a hi:Capability ;
+    rdfs:label "Information Retrieval" ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_09_RagChatbot_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_09_RagChatbot_Cap_SemanticEmbedding a hi:Capability ;
+    rdfs:label "Semantic Embedding" ;
+    hi:hasCapabilityConcept hint:EmbeddingReasoningCapability .
+
+inst:Paper_09_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Trustworthy RAG Chatbot for Public Administration" ;
+    hi:hasDomainConcept hint:LawAndPolicyDomain ;
+    hi:hasHITeam inst:Paper_09_Team .
+
+inst:Affiliation_DepartmentOfPhilologyLiteratureAndLinguisticsUniversityOfPisa a hi:Affiliation ;
+    rdfs:label "Department of Philology, Literature and Linguistics, University of Pisa" ;
+    schema1:name "Department of Philology, Literature and Linguistics, University of Pisa" .
+
+inst:Paper_09_PublicAdministrationEmployee a hi:HumanAgent ;
+    rdfs:label "Public Administration Employee" ;
+    hi:hasCapability inst:Paper_09_PublicAdministrationEmployee_Cap_ContextualUnderstanding,
+        inst:Paper_09_PublicAdministrationEmployee_Cap_DomainJudgment ;
+    hi:hasRoleConcept hint:HumanUserRole .
+
+inst:Paper_09_RagChatbot a hi:ArtificialAgent ;
+    rdfs:label "RAG Chatbot" ;
+    hi:hasCapability inst:Paper_09_RagChatbot_Cap_InformationRetrieval,
+        inst:Paper_09_RagChatbot_Cap_PatternRecognition,
+        inst:Paper_09_RagChatbot_Cap_SemanticEmbedding ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_09_Exec_ExecuteInformationRetrieval,
+        inst:Paper_09_Exec_ExecuteResponseGeneration .
+
+inst:Paper_09_Task_EnsureComprehensibility a hi:Task ;
+    rdfs:label "Ensure Comprehensibility" ;
+    hi:hasTaskConcept hint:AssessCommunicationAccuracy ;
+    hi:requiresCapability inst:Paper_09_PublicAdministrationEmployee_Cap_DomainJudgment .
+
+inst:Paper_09_Team a hi:HITeam ;
+    rdfs:label "Trustworthy RAG Chatbot for Public Administration Team" ;
+    hi:hasGoal inst:Paper_09_Goal_ProvideAccessibleSupport ;
+    hi:hasMember inst:Paper_09_PublicAdministrationEmployee,
+        inst:Paper_09_RagChatbot ;
+    hi:isInfluencedBy inst:Paper_09_Context .
+
+inst:Affiliation_DepartmentOfInformaticsScuolaNormaleSuperiore a hi:Affiliation ;
+    rdfs:label "Department of Informatics, Scuola Normale Superiore" ;
+    schema1:name "Department of Informatics, Scuola Normale Superiore" .
+
+inst:Affiliation_DepartmentOfInformationEngineeringUniversityOfSiena a hi:Affiliation ;
+    rdfs:label "Department of Information Engineering, University of Siena" ;
+    schema1:name "Department of Information Engineering, University of Siena" .
+
+inst:Paper_09_Task_ExtractInformation a hi:Task ;
+    rdfs:label "Extract Information" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_09_PublicAdministrationEmployee_Cap_DomainJudgment .
+
+inst:Paper_09_Task_GenerateResponses a hi:Task ;
+    rdfs:label "Generate Responses" ;
+    hi:hasTaskConcept hint:ExplanationTask ;
+    hi:requiresCapability inst:Paper_09_PublicAdministrationEmployee_Cap_DomainJudgment .
+
+inst:Paper_09_PublicAdministrationEmployee_Cap_DomainJudgment a hi:Capability ;
+    rdfs:label "Domain Judgment" ;
+    hi:allowsTask inst:Paper_09_Task_EnsureComprehensibility,
+        inst:Paper_09_Task_ExtractInformation,
+        inst:Paper_09_Task_GenerateResponses ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+

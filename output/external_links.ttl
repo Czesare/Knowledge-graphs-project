@@ -1,0 +1,377 @@
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+inst:Affiliation_DelftUniversityOfTechnology owl:sameAs wd:Q752663 .
+
+inst:Affiliation_HuUniversityOfAppliedSciencesUtrecht owl:sameAs wd:Q4372693 .
+
+inst:Affiliation_PolitecnicoDiMilano owl:sameAs wd:Q392904 .
+
+inst:Affiliation_UmeåUniversity owl:sameAs wd:Q1144565 .
+
+inst:Affiliation_UniversitatPompeuFabra owl:sameAs wd:Q24543 .
+
+inst:Affiliation_UniversityOfPisa owl:sameAs wd:Q645663 .
+
+inst:Affiliation_UtrechtUniversity owl:sameAs wd:Q221653 .
+
+inst:Affiliation_VrijeUniversiteitAmsterdam owl:sameAs wd:Q1065414 .
+
+inst:HHAI2025 owl:sameAs wd:Q113466830 .
+
+inst:Paper03_Author3 owl:sameAs wd:Q130933180 .
+
+inst:Paper03_Author4 owl:sameAs wd:Q86502137 .
+
+inst:Paper04_Author2 owl:sameAs wd:Q7322550 .
+
+inst:Paper05_Author3 owl:sameAs wd:Q62559988 .
+
+inst:Paper05_Author4 owl:sameAs wd:Q59560987 .
+
+inst:Paper06_Author1 owl:sameAs wd:Q56855274 .
+
+inst:Paper09_Author5 owl:sameAs wd:Q108133611 .
+
+hint:AccessibilityConstraint rdfs:seeAlso dbr:Accessibility ;
+    skos:closeMatch wd:Q555097 .
+
+hint:AccurateTrustworthyDiagnosisGoal rdfs:seeAlso dbr:Medical_diagnosis ;
+    skos:closeMatch wd:Q16644043 .
+
+hint:Agent rdfs:seeAlso dbr:Intelligent_agent ;
+    skos:closeMatch wd:Q16735822 .
+
+hint:AnswerAccuracyMetric skos:relatedMatch wd:Q13479982 .
+
+hint:ArgumentationReasoningMethod rdfs:seeAlso dbr:Argumentation_theory ;
+    skos:closeMatch wd:Q815741 .
+
+hint:ArtificialAgent rdfs:seeAlso dbr:Artificial_intelligence ;
+    skos:closeMatch wd:Q11660 .
+
+hint:AutonomousTutoringUseCase skos:closeMatch wd:Q2251299 .
+
+hint:AutonomyConstraint rdfs:seeAlso dbr:Autonomy ;
+    skos:closeMatch wd:Q4120621 .
+
+hint:BayesianInferenceTask skos:closeMatch wd:Q44432 .
+
+hint:BayesianLogicMethod rdfs:seeAlso dbr:Bayesian_network ;
+    skos:closeMatch wd:Q44432 .
+
+hint:BayesianReasoningCapability rdfs:seeAlso dbr:Bayesian_inference ;
+    skos:closeMatch wd:Q44432 .
+
+hint:Bias rdfs:seeAlso dbr:Cognitive_bias ;
+    skos:closeMatch wd:Q1482135 .
+
+hint:CO2ReductionMetric skos:relatedMatch wd:Q167336 .
+
+hint:Capability skos:relatedMatch wd:Q1137655 .
+
+hint:ClinicalConsultationContext skos:relatedMatch wd:Q39631 .
+
+hint:ClinicalJudgmentCapability rdfs:seeAlso dbr:Clinical_decision_support_system ;
+    skos:closeMatch wd:Q16644043 .
+
+hint:ClinicianRole skos:closeMatch wd:Q39631 .
+
+hint:CognitiveReasoningCapability rdfs:seeAlso dbr:Cognition ;
+    skos:closeMatch wd:Q3966542 .
+
+hint:CollaborativeManipulationUseCase skos:relatedMatch wd:Q11012 .
+
+hint:CommunicationExplanationCapability rdfs:seeAlso dbr:Communication ;
+    skos:closeMatch wd:Q11024 .
+
+hint:ConfirmationBias rdfs:seeAlso dbr:Confirmation_bias ;
+    skos:closeMatch wd:Q175646 .
+
+hint:ConflictResolutionTask skos:closeMatch wd:Q1194317 .
+
+hint:CooperativeLearningMethod rdfs:seeAlso dbr:Collaborative_learning ;
+    skos:closeMatch wd:Q1535726 .
+
+hint:DashboardModality skos:closeMatch wd:Q1072917 .
+
+hint:DataCollectionMethod rdfs:seeAlso dbr:Data_collection ;
+    skos:closeMatch wd:Q1783551 .
+
+hint:DataCollectionTask skos:closeMatch wd:Q1783551 .
+
+hint:DataMismatchPhenomenon skos:relatedMatch wd:Q310202 .
+
+hint:DecideInterventionTask skos:relatedMatch wd:Q1426711 .
+
+hint:DeliberationSupportExperiment skos:relatedMatch wd:Q1201750 .
+
+hint:DiagnosisAccuracyMetric skos:relatedMatch wd:Q13479982 .
+
+hint:DiagnosisAnchoringPhenomenon rdfs:seeAlso dbr:Anchoring_\(cognitive_bias\) ;
+    skos:closeMatch wd:Q360537 .
+
+hint:DiagnosisExperiment skos:relatedMatch wd:Q16644043 .
+
+hint:DigitalMuseumDomain rdfs:seeAlso dbr:Virtual_museum ;
+    skos:closeMatch wd:Q33506 .
+
+hint:EducationDomain rdfs:seeAlso dbr:Education ;
+    skos:closeMatch wd:Q8434 .
+
+hint:EffectiveLearningGoal rdfs:seeAlso dbr:Learning ;
+    skos:closeMatch wd:Q133500 .
+
+hint:EmbeddingReasoningCapability rdfs:seeAlso dbr:Word_embedding ;
+    skos:closeMatch wd:Q65076586 .
+
+hint:EnergyEfficiencyMetric skos:relatedMatch wd:Q185043 .
+
+hint:EnergyNegotiationUseCase skos:relatedMatch wd:Q12739 .
+
+hint:EngagementShiftPhenomenon skos:relatedMatch wd:Q15401930 .
+
+hint:EngagementTimeMetric skos:relatedMatch wd:Q15401930 .
+
+hint:EnhancedVisitorGoal rdfs:seeAlso dbr:User_experience ;
+    skos:relatedMatch wd:Q15401930 .
+
+hint:EthicalConstraint rdfs:seeAlso dbr:Ethics ;
+    skos:closeMatch wd:Q9465 .
+
+hint:Evaluation skos:relatedMatch wd:Q1379672 .
+
+hint:Experiment skos:closeMatch wd:Q101965 .
+
+hint:ExplainingCapability rdfs:seeAlso dbr:Explainable_artificial_intelligence ;
+    skos:closeMatch wd:Q487395 .
+
+hint:ExplanationClarityMetric skos:relatedMatch wd:Q487395 .
+
+hint:ExplanationMessageFeedback skos:relatedMatch wd:Q487395 .
+
+hint:ExplanationTask skos:closeMatch wd:Q487395 .
+
+hint:FairAccurateVerdictGoal rdfs:seeAlso dbr:Fact-checking ;
+    skos:relatedMatch wd:Q189786 .
+
+hint:FairEfficientHeatingGoal rdfs:seeAlso dbr:Energy_conservation ;
+    skos:relatedMatch wd:Q185043 .
+
+hint:FairOutcomeMetric skos:relatedMatch wd:Q189786 .
+
+hint:FairnessConstraint rdfs:seeAlso dbr:Fairness_\(disambiguation\) ;
+    skos:closeMatch wd:Q189786 .
+
+hint:Feedback skos:closeMatch wd:Q184199 .
+
+hint:FineDexterityCapability rdfs:seeAlso dbr:Fine_motor_skill ;
+    skos:closeMatch wd:Q223638 .
+
+hint:GroupDeliberationUseCase skos:closeMatch wd:Q1201750 .
+
+hint:GroupThinkingPhenomenon rdfs:seeAlso dbr:Groupthink ;
+    skos:closeMatch wd:Q331556 .
+
+hint:HealthAndLifestyleDomain rdfs:seeAlso dbr:Health ;
+    skos:closeMatch wd:Q12147 .
+
+hint:HealthMonitoringContext skos:relatedMatch wd:Q743034 .
+
+hint:HeavyLiftingCapability skos:relatedMatch wd:Q11012 .
+
+hint:HumanAgent skos:closeMatch wd:Q5 .
+
+hint:IndustrialAndServiceRoboticsDomain rdfs:seeAlso dbr:Robotics ;
+    skos:closeMatch wd:Q11012 .
+
+hint:Interaction rdfs:seeAlso dbr:Human%E2%80%93computer_interaction ;
+    skos:closeMatch wd:Q80919 .
+
+hint:InterventionRationaleFeedback skos:relatedMatch wd:Q1426711 .
+
+hint:JurorRole skos:closeMatch wd:Q319141 .
+
+hint:JuryDeliberationContext skos:relatedMatch wd:Q1201750 .
+
+hint:KnowledgeGraphQueryMethod rdfs:seeAlso dbr:SPARQL ;
+    skos:closeMatch wd:Q33002955 .
+
+hint:KnowledgeGraphQueryTask skos:closeMatch wd:Q33002955 .
+
+hint:KnowledgeGraphQueryingCapability rdfs:seeAlso dbr:Knowledge_graph ;
+    skos:closeMatch wd:Q33002955 .
+
+hint:KnowledgeMismatchPhenomenon rdfs:seeAlso dbr:Information_asymmetry ;
+    skos:relatedMatch wd:Q1125806 .
+
+hint:LawAndPolicyDomain rdfs:seeAlso dbr:Law ;
+    skos:closeMatch wd:Q7748 .
+
+hint:LearnerRole skos:closeMatch wd:Q48282 .
+
+hint:LearningGainMetric skos:relatedMatch wd:Q133500 .
+
+hint:MedicalDiagnosisUseCase skos:closeMatch wd:Q16644043 .
+
+hint:MedicalDomain rdfs:seeAlso dbr:Medicine ;
+    skos:closeMatch wd:Q11190 .
+
+hint:MetaAnalysisCapability rdfs:seeAlso dbr:Meta-analysis ;
+    skos:closeMatch wd:Q815382 .
+
+hint:MetaAnalysisScoringMethod rdfs:seeAlso dbr:Meta-analysis ;
+    skos:closeMatch wd:Q815382 .
+
+hint:MultimodalInputInterpretationTask skos:closeMatch wd:Q107190418 .
+
+hint:MultimodalInterpretationCapability rdfs:seeAlso dbr:Multimodal_learning ;
+    skos:closeMatch wd:Q107190418 .
+
+hint:NegotiationCapability rdfs:seeAlso dbr:Negotiation ;
+    skos:closeMatch wd:Q14982 .
+
+hint:NetworkProtocolModality skos:relatedMatch wd:Q15836568 .
+
+hint:OnlineLearningContext skos:closeMatch wd:Q1412953 .
+
+hint:OnlineTutoringExperiment skos:relatedMatch wd:Q2251299 .
+
+hint:OperatorCoordinationCapability skos:relatedMatch wd:Q205892 .
+
+hint:PatternLearningCapability rdfs:seeAlso dbr:Machine_learning ;
+    skos:closeMatch wd:Q2539 .
+
+hint:PerceptionSensingCapability rdfs:seeAlso dbr:Perception ;
+    skos:closeMatch wd:Q1080148 .
+
+hint:PersonalAssistantUseCase skos:closeMatch wd:Q2539925 .
+
+hint:Phenomenon skos:closeMatch wd:Q483247 .
+
+hint:PolicyLearningTask skos:relatedMatch wd:Q830688 .
+
+hint:PostHocExplanationMethod rdfs:seeAlso dbr:Explainable_artificial_intelligence ;
+    skos:closeMatch wd:Q487395 .
+
+hint:PrivacyConstraint rdfs:seeAlso dbr:Privacy ;
+    skos:closeMatch wd:Q8492 .
+
+hint:QuestionAnsweringTask rdfs:seeAlso dbr:Question_answering ;
+    skos:closeMatch wd:Q7271743 .
+
+hint:ReasoningCapability rdfs:seeAlso dbr:Reasoning ;
+    skos:closeMatch wd:Q130901 .
+
+hint:RecommendResourcesTask skos:closeMatch wd:Q860488 .
+
+hint:RecommendationRationaleFeedback skos:relatedMatch wd:Q860488 .
+
+hint:RecommendationRelevanceMetric skos:relatedMatch wd:Q860488 .
+
+hint:ReinforcementLearningCapability rdfs:seeAlso dbr:Reinforcement_learning ;
+    skos:closeMatch wd:Q830688 .
+
+hint:ReinforcementLearningMethod rdfs:seeAlso dbr:Reinforcement_learning ;
+    skos:closeMatch wd:Q830688 .
+
+hint:ReportingCapability skos:relatedMatch wd:Q32907 .
+
+hint:RiskExposurePhenomenon rdfs:seeAlso dbr:Risk ;
+    skos:relatedMatch wd:Q104493 .
+
+hint:SafeRetrievalGoal rdfs:seeAlso dbr:Information_retrieval ;
+    skos:relatedMatch wd:Q3054889 .
+
+hint:SafetyComplianceMetric skos:relatedMatch wd:Q3054889 .
+
+hint:SafetyConstraint rdfs:seeAlso dbr:Safety ;
+    skos:closeMatch wd:Q3054889 .
+
+hint:SemanticEmbeddingMethod rdfs:seeAlso dbr:Word_embedding ;
+    skos:closeMatch wd:Q65076586 .
+
+hint:SemanticLinkingMethod rdfs:seeAlso dbr:Semantic_Web ;
+    skos:closeMatch wd:Q1621273 .
+
+hint:SemanticReasoningCapability rdfs:seeAlso dbr:Semantic_reasoner ;
+    skos:closeMatch wd:Q1656682 .
+
+hint:SemanticReasoningTask skos:closeMatch wd:Q1656682 .
+
+hint:SensingCapability rdfs:seeAlso dbr:Sensor ;
+    skos:closeMatch wd:Q167676 .
+
+hint:SensorNoisePhenomenon rdfs:seeAlso dbr:Noise_\(signal_processing\) ;
+    skos:closeMatch wd:Q498845 .
+
+hint:SituationalAssessmentTask skos:closeMatch wd:Q1752640 .
+
+hint:SituationalAwarenessCapability rdfs:seeAlso dbr:Situation_awareness ;
+    skos:closeMatch wd:Q1752640 .
+
+hint:SmartCampusContext skos:relatedMatch wd:Q3918 .
+
+hint:SmartCampusDomain rdfs:seeAlso dbr:Smart_campus ;
+    skos:closeMatch wd:Q3918 .
+
+hint:SustainabilityConstraint rdfs:seeAlso dbr:Sustainability ;
+    skos:closeMatch wd:Q219416 .
+
+hint:SymptomAnalysisTask skos:closeMatch wd:Q169872 .
+
+hint:Task skos:relatedMatch wd:Q759676 .
+
+hint:TaskSuccessRateMetric skos:relatedMatch wd:Q3992824 .
+
+hint:TextChatModality skos:closeMatch wd:Q15077303 .
+
+hint:TimeMetric skos:relatedMatch wd:Q11471 .
+
+hint:TransparencyConstraint rdfs:seeAlso dbr:Transparency_\(behavior\) ;
+    skos:closeMatch wd:Q535347 .
+
+hint:TransparencyTrustExperiment skos:relatedMatch wd:Q535347 .
+
+hint:TrustPreservationMetric skos:relatedMatch wd:Q47461 .
+
+hint:TrustReportFeedback skos:relatedMatch wd:Q47461 .
+
+hint:TrustShiftPhenomenon rdfs:seeAlso dbr:Trust_\(social_science\) ;
+    skos:relatedMatch wd:Q47461 .
+
+hint:TutorRole skos:closeMatch wd:Q37226 .
+
+hint:UndueInfluenceConstraint rdfs:seeAlso dbr:Undue_influence ;
+    skos:closeMatch wd:Q1479126 .
+
+hint:UndueInfluenceMetric skos:relatedMatch wd:Q1479126 .
+
+hint:UserComfortConstraint rdfs:seeAlso dbr:Usability ;
+    skos:relatedMatch wd:Q373432 .
+
+hint:UserComfortMetric skos:relatedMatch wd:Q373432 .
+
+hint:UserWellbeingGoal rdfs:seeAlso dbr:Well-being ;
+    skos:closeMatch wd:Q332717 .
+
+hint:VerbalDialogueModality skos:closeMatch wd:Q131395 .
+
+hint:VirtualExhibitionContext skos:relatedMatch wd:Q464980 .
+
+hint:VirtualMuseumGuideUseCase skos:relatedMatch wd:Q33506 .
+
+hint:VirtualRealityModality rdfs:seeAlso dbr:Virtual_reality ;
+    skos:closeMatch wd:Q170519 .
+
+hint:VisitorRole skos:relatedMatch wd:Q15401930 .
+
+hint:VoiceChatModality skos:relatedMatch wd:Q1569397 .
+
+hint:WorkspaceManipulationContext skos:relatedMatch wd:Q11012 .
+

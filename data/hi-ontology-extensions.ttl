@@ -1,0 +1,288 @@
+@prefix hi:       <https://w3id.org/hi-ontology#> .
+@prefix hint:     <https://w3id.org/hi-thesaurus/> .
+@prefix dc:       <http://purl.org/dc/elements/1.1/> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema:   <http://schema.org/> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix bibo:     <http://purl.org/ontology/bibo/> .
+
+
+#################################################################
+#
+# TBox Extensions for the HI Ontology (V2)
+# 
+# PURPOSE: Extends the HI Ontology with a publication metadata
+# layer (Paper, Author, Conference) and additional OWL features
+# to support modeling HHAI 2025 papers and HI Competition scenarios.
+#
+# DESIGN DECISIONS:
+# - Paper/Author/Conference are lightweight classes that bridge
+#   bibliographic metadata to the HI scenario structure via
+#   hi:describesUseCase.
+# - We reuse Dublin Core (dcterms:), FOAF, and BIBO where possible
+#   rather than inventing new properties for standard metadata.
+# - New OWL features (restrictions, transitivity, functional props)
+#   are added to demonstrate ontology engineering competence.
+# - UseCase is split into disjoint subclasses to distinguish
+#   research-derived scenarios from competition scenarios.
+#
+#################################################################
+
+
+#################################################################
+# New Classes
+#################################################################
+
+### hi:Paper - A research publication describing one or more HI use cases.
+### We link to external vocabulary bibo:AcademicArticle via rdfs:subClassOf
+### to reuse the established bibliographic ontology.
+hi:Paper a owl:Class ;
+    rdfs:subClassOf bibo:AcademicArticle ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty hi:hasAuthor ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass hi:Author
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty hi:describesUseCase ;
+        owl:someValuesFrom hi:UseCase
+    ] ;
+    owl:disjointWith hi:Agent, hi:HITeam, hi:Task ;
+    rdfs:label "Paper"@en ;
+    rdfs:comment "A research publication (e.g. conference paper) that describes one or more Hybrid Intelligence use cases. Every paper must have at least one author and describe at least one use case."@en .
+
+### hi:Author - A person who authored a paper. Subclass of foaf:Person
+### (already declared in V2), connected to the publication layer.
+hi:Author a owl:Class ;
+    rdfs:subClassOf foaf:Person ;
+    rdfs:label "Author"@en ;
+    rdfs:comment "A person who authored a research paper about Hybrid Intelligence."@en .
+
+### hi:Conference - An academic event where papers are presented.
+### Subclass of schema:Event for external vocabulary reuse.
+hi:Conference a owl:Class ;
+    rdfs:subClassOf schema:Event ;
+    rdfs:label "Conference"@en ;
+    rdfs:comment "An academic conference or workshop where HI research papers are presented."@en .
+
+### hi:Affiliation - An institution or organization an author belongs to.
+### Reuses schema:Organization which is already declared in V2.
+hi:Affiliation a owl:Class ;
+    rdfs:subClassOf schema:Organization ;
+    rdfs:label "Affiliation"@en ;
+    rdfs:comment "An institution or organization that an author is affiliated with."@en .
+
+### Declare bibo:AcademicArticle and schema:Event as OWL classes
+### so they are properly recognized in this ontology.
+bibo:AcademicArticle a owl:Class ;
+    rdfs:label "Academic Article"@en ;
+    rdfs:comment "An academic article from the BIBO ontology."@en .
+
+schema:Event a owl:Class ;
+    rdfs:label "Event"@en ;
+    rdfs:comment "An event from Schema.org vocabulary."@en .
+
+
+#################################################################
+# UseCase Subclasses (disjoint - for richer TBox)
+#
+# This distinguishes use cases derived from research papers
+# from those derived from HI competition scenarios. A reasoner
+# can infer which type a use case is based on how it was created.
+#################################################################
+
+hi:ResearchUseCase a owl:Class ;
+    rdfs:subClassOf hi:UseCase ;
+    owl:disjointWith hi:CompetitionUseCase ;
+    rdfs:label "Research Use Case"@en ;
+    rdfs:comment "A use case derived from a research paper, typically describing a studied or proposed HI system."@en .
+
+hi:CompetitionUseCase a owl:Class ;
+    rdfs:subClassOf hi:UseCase ;
+    owl:disjointWith hi:ResearchUseCase ;
+    rdfs:label "Competition Use Case"@en ;
+    rdfs:comment "A use case derived from an HI Competition scenario, describing a concrete real-world or hypothetical HI situation."@en .
+
+
+#################################################################
+# New Object Properties
+#################################################################
+
+### hi:describesUseCase - Links a paper to the HI use case(s) it describes.
+hi:describesUseCase a owl:ObjectProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range hi:UseCase ;
+    rdfs:label "describes use case"@en ;
+    rdfs:comment "Links a research paper to the HI use case it describes or studies."@en .
+
+### hi:hasAuthor - Links a paper to its author(s).
+hi:hasAuthor a owl:ObjectProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range hi:Author ;
+    rdfs:label "has author"@en ;
+    rdfs:comment "Links a paper to one of its authors."@en .
+
+### hi:publishedAt - Links a paper to the conference where it was published.
+### Functional property: a paper is published at exactly one conference.
+hi:publishedAt a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range hi:Conference ;
+    rdfs:label "published at"@en ;
+    rdfs:comment "Links a paper to the conference where it was published. A paper is published at exactly one conference."@en .
+
+### hi:hasAffiliation - Links an author to their institution.
+hi:hasAffiliation a owl:ObjectProperty ;
+    rdfs:domain hi:Author ;
+    rdfs:range hi:Affiliation ;
+    rdfs:label "has affiliation"@en ;
+    rdfs:comment "Links an author to their institutional affiliation."@en .
+
+### hi:hasKeyword - Links a paper to keyword concepts from the thesaurus.
+hi:hasKeyword a owl:ObjectProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range skos:Concept ;
+    rdfs:label "has keyword"@en ;
+    rdfs:comment "Links a paper to a keyword concept, typically from the HINT thesaurus."@en .
+
+### hi:hasSubTask - Allows task decomposition (transitive).
+### This enables richer task modeling: a Goal requires a top-level Task
+### which may have sub-tasks, and transitivity means if A hasSubTask B
+### and B hasSubTask C, then A hasSubTask C.
+hi:hasSubTask a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:domain hi:Task ;
+    rdfs:range hi:Task ;
+    rdfs:label "has sub-task"@en ;
+    rdfs:comment "Decomposes a task into sub-tasks. Transitive: if task A has sub-task B, and B has sub-task C, then A has sub-task C."@en .
+
+### hi:introducesTeam - Inverse of hasHITeam for bidirectional navigation.
+hi:introducesTeam a owl:ObjectProperty ;
+    owl:inverseOf hi:hasHITeam ;
+    rdfs:domain hi:HITeam ;
+    rdfs:range hi:UseCase ;
+    rdfs:label "introduces team"@en ;
+    rdfs:comment "Inverse of hasHITeam. Links a team back to the use case that introduces it."@en .
+
+### hi:isMemberOf - Inverse of hasMember for bidirectional navigation.
+hi:isMemberOf a owl:ObjectProperty ;
+    owl:inverseOf hi:hasMember ;
+    rdfs:domain hi:Agent ;
+    rdfs:range hi:HITeam ;
+    rdfs:label "is member of"@en ;
+    rdfs:comment "Inverse of hasMember. Links an agent to the HI team they belong to."@en .
+
+
+#################################################################
+# New Data Properties
+#################################################################
+
+### Paper metadata - reusing Dublin Core terms where possible,
+### adding HI-specific ones where DC doesn't cover it.
+
+hi:hasTitle a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range xsd:string ;
+    rdfs:label "has title"@en ;
+    rdfs:comment "The title of a research paper. Functional: a paper has exactly one title."@en .
+
+hi:hasAbstract a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range xsd:string ;
+    rdfs:label "has abstract"@en ;
+    rdfs:comment "The abstract text of a research paper."@en .
+
+hi:hasDOI a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range xsd:string ;
+    rdfs:label "has DOI"@en ;
+    rdfs:comment "The Digital Object Identifier of a paper. Functional: a paper has at most one DOI."@en .
+
+hi:hasPublicationYear a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Paper ;
+    rdfs:range xsd:gYear ;
+    rdfs:label "has publication year"@en ;
+    rdfs:comment "The year a paper was published."@en .
+
+hi:hasAuthorName a owl:DatatypeProperty ;
+    rdfs:domain hi:Author ;
+    rdfs:range xsd:string ;
+    rdfs:label "has author name"@en ;
+    rdfs:comment "The full name of an author."@en .
+
+hi:hasConferenceName a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Conference ;
+    rdfs:range xsd:string ;
+    rdfs:label "has conference name"@en ;
+    rdfs:comment "The name of an academic conference."@en .
+
+hi:hasConferenceYear a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain hi:Conference ;
+    rdfs:range xsd:gYear ;
+    rdfs:label "has conference year"@en ;
+    rdfs:comment "The year a conference took place."@en .
+
+hi:hasScenarioDescription a owl:DatatypeProperty ;
+    rdfs:domain hi:CompetitionUseCase ;
+    rdfs:range xsd:string ;
+    rdfs:label "has scenario description"@en ;
+    rdfs:comment "A textual description of a competition scenario."@en .
+
+hi:hasScenarioOutcome a owl:DatatypeProperty ;
+    rdfs:domain hi:CompetitionUseCase ;
+    rdfs:range xsd:string ;
+    rdfs:label "has scenario outcome"@en ;
+    rdfs:comment "Whether this is a best-case or worst-case scenario outcome."@en .
+
+
+#################################################################
+# Additional OWL Axioms for Rubric Points
+#################################################################
+
+### Additional disjointness axioms.
+### Paper, Agent, Task, HITeam are fundamentally different things.
+### This helps a reasoner catch errors (e.g. accidentally typing
+### a Paper as an Agent).
+
+hi:UseCase owl:disjointWith hi:Agent .
+hi:UseCase owl:disjointWith hi:Task .
+hi:UseCase owl:disjointWith hi:Capability .
+hi:Goal owl:disjointWith hi:Agent .
+hi:Goal owl:disjointWith hi:Task .
+hi:Context owl:disjointWith hi:Agent .
+hi:Evaluation owl:disjointWith hi:Task .
+hi:Experiment owl:disjointWith hi:Evaluation .
+
+### UseCase must have at least one HITeam (existential restriction).
+hi:UseCase rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty hi:hasHITeam ;
+    owl:someValuesFrom hi:HITeam
+] .
+
+### Every HITeam must have at least one Goal.
+hi:HITeam rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty hi:hasGoal ;
+    owl:someValuesFrom hi:Goal
+] .
+
+### Agent must have at least one capability.
+hi:Agent rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty hi:hasCapability ;
+    owl:someValuesFrom hi:Capability
+] .
+
+### TaskExecution must realize exactly one Task.
+hi:TaskExecution rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty hi:realizesTask ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass hi:Task
+] .

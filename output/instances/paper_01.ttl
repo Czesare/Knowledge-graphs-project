@@ -1,0 +1,197 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_01 a hi:Paper ;
+    hi:describesUseCase inst:Paper_01_UseCase ;
+    hi:hasAuthor inst:Paper_01_Author1,
+        inst:Paper_01_Author2,
+        inst:Paper_01_Author3 ;
+    hi:hasKeyword "Claim decomposition",
+        "Fact checking",
+        "Large Language Models" ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Exploring Human-AI Synergy for Complex Claim Verification"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_01_Evaluation a hi:Evaluation ;
+    rdfs:label "Fact-checking Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_01_Experiment_QuestionGenerationImpact ;
+    hi:hasMetricConcept hint:ExplanationClarityMetric,
+        hint:TaskSuccessRateMetric .
+
+inst:Paper_01_Interaction_Human-aiQuestionGeneration a hi:Interaction ;
+    rdfs:label "Human-AI Question Generation" ;
+    hi:hasAgentInvolved inst:Paper_01_LargeLanguageModel,
+        inst:Paper_01_ProfessionalFact-checker ;
+    hi:hasInteractionIntentConcept hint:DeliberationIntent ;
+    hi:hasInteractionModalityConcept hint:TextChatModality .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Paper_01_Author1 a hi:Author ;
+    foaf:name "Shubhalaxmi Mukherjee" ;
+    hi:hasAffiliation inst:Affiliation_DelftUniversityOfTechnology ;
+    hi:hasAuthorName "Shubhalaxmi Mukherjee"^^xsd:string .
+
+inst:Paper_01_Author2 a hi:Author ;
+    foaf:name "Catholijn M. Jonker" ;
+    hi:hasAffiliation inst:Affiliation_DelftUniversityOfTechnology ;
+    hi:hasAuthorName "Catholijn M. Jonker"^^xsd:string .
+
+inst:Paper_01_Author3 a hi:Author ;
+    foaf:name "Pradeep K. Murukannaiah" ;
+    hi:hasAffiliation inst:Affiliation_DelftUniversityOfTechnology ;
+    hi:hasAuthorName "Pradeep K. Murukannaiah"^^xsd:string .
+
+inst:Paper_01_Context a hi:Context ;
+    rdfs:label "Fact-checking context" ;
+    hi:hasConstraintConcept hint:FairnessConstraint,
+        hint:TransparencyConstraint ;
+    hi:hasContextConcept hint:JuryDeliberationContext ;
+    hi:hasInfluenceOn inst:Paper_01_Team ;
+    hi:hasPhenomenonConcept hint:KnowledgeMismatchPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_01_Exec_DecomposeClaim a hi:TaskExecution ;
+    rdfs:label "Decompose Claim" ;
+    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
+    hi:realizesTask inst:Paper_01_Task_ClaimDecomposition .
+
+inst:Paper_01_Exec_GenerateQuestions a hi:TaskExecution ;
+    rdfs:label "Generate Questions" ;
+    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
+    hi:realizesTask inst:Paper_01_Task_QuestionGeneration .
+
+inst:Paper_01_Exec_PredictVeracity a hi:TaskExecution ;
+    rdfs:label "Predict Veracity" ;
+    hi:hasMethodConcept hint:SemanticEmbeddingMethod ;
+    hi:realizesTask inst:Paper_01_Task_VeracityPrediction .
+
+inst:Paper_01_Exec_RetrieveEvidence a hi:TaskExecution ;
+    rdfs:label "Retrieve Evidence" ;
+    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
+    hi:realizesTask inst:Paper_01_Task_EvidenceRetrieval .
+
+inst:Paper_01_Experiment_QuestionGenerationImpact a hi:Experiment ;
+    rdfs:label "Question Generation Impact" ;
+    hi:hasAlternativeHypothesis "LLM-generated questions improve veracity prediction."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:ExplanationClarityMetric ;
+    hi:hasNullHypothesis "LLM-generated questions do not improve veracity prediction."^^xsd:string .
+
+inst:Paper_01_Goal_AccurateClaimVerification a hi:Goal ;
+    rdfs:label "Accurate Claim Verification" ;
+    hi:hasGoalConcept hint:FairAccurateVerdictGoal ;
+    hi:requiresTask inst:Paper_01_Task_ClaimDecomposition,
+        inst:Paper_01_Task_EvidenceAssessment,
+        inst:Paper_01_Task_EvidenceRetrieval,
+        inst:Paper_01_Task_QuestionGeneration,
+        inst:Paper_01_Task_VeracityPrediction .
+
+inst:Paper_01_LargeLanguageModel_Cap_DataProcessing a hi:Capability ;
+    rdfs:label "Data Processing" ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_01_LargeLanguageModel_Cap_Generation a hi:Capability ;
+    rdfs:label "Generation" ;
+    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
+
+inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_01_LargeLanguageModel_Cap_Speed a hi:Capability ;
+    rdfs:label "Speed" ;
+    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+
+inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
+
+inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_01_ProfessionalFact-checker_Cap_FeedbackProvision a hi:Capability ;
+    rdfs:label "Feedback Provision" ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
+inst:Paper_01_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Complex Claim Verification" ;
+    hi:hasDomainConcept hint:LawAndPolicyDomain ;
+    hi:hasHITeam inst:Paper_01_Team .
+
+inst:Paper_01_LargeLanguageModel a hi:ArtificialAgent ;
+    rdfs:label "Large Language Model" ;
+    hi:hasCapability inst:Paper_01_LargeLanguageModel_Cap_DataProcessing,
+        inst:Paper_01_LargeLanguageModel_Cap_Generation,
+        inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition,
+        inst:Paper_01_LargeLanguageModel_Cap_Speed ;
+    hi:hasRoleConcept hint:AIAdvisorRole ;
+    hi:performsExecution inst:Paper_01_Exec_GenerateQuestions,
+        inst:Paper_01_Exec_PredictVeracity,
+        inst:Paper_01_Exec_RetrieveEvidence .
+
+inst:Paper_01_ProfessionalFact-checker a hi:HumanAgent ;
+    rdfs:label "Professional Fact-Checker" ;
+    hi:hasCapability inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding,
+        inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment,
+        inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight,
+        inst:Paper_01_ProfessionalFact-checker_Cap_FeedbackProvision ;
+    hi:hasRoleConcept hint:JurorRole ;
+    hi:performsExecution inst:Paper_01_Exec_DecomposeClaim .
+
+inst:Paper_01_Task_EvidenceAssessment a hi:Task ;
+    rdfs:label "Evidence Assessment" ;
+    hi:hasTaskConcept hint:AssessCommunicationAccuracy ;
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+
+inst:Paper_01_Team a hi:HITeam ;
+    rdfs:label "Complex Claim Verification Team" ;
+    hi:hasGoal inst:Paper_01_Goal_AccurateClaimVerification ;
+    hi:hasMember inst:Paper_01_LargeLanguageModel,
+        inst:Paper_01_ProfessionalFact-checker ;
+    hi:isInfluencedBy inst:Paper_01_Context .
+
+inst:Affiliation_DelftUniversityOfTechnology a hi:Affiliation ;
+    rdfs:label "Delft University of Technology" ;
+    schema1:name "Delft University of Technology" .
+
+inst:Paper_01_Task_ClaimDecomposition a hi:Task ;
+    rdfs:label "Claim Decomposition" ;
+    hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+
+inst:Paper_01_Task_EvidenceRetrieval a hi:Task ;
+    rdfs:label "Evidence Retrieval" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+
+inst:Paper_01_Task_QuestionGeneration a hi:Task ;
+    rdfs:label "Question Generation" ;
+    hi:hasTaskConcept hint:QuestionAnsweringTask ;
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+
+inst:Paper_01_Task_VeracityPrediction a hi:Task ;
+    rdfs:label "Veracity Prediction" ;
+    hi:hasTaskConcept hint:SemanticReasoningTask ;
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+
+inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment a hi:Capability ;
+    rdfs:label "Domain Judgment" ;
+    hi:allowsTask inst:Paper_01_Task_ClaimDecomposition,
+        inst:Paper_01_Task_EvidenceAssessment,
+        inst:Paper_01_Task_EvidenceRetrieval,
+        inst:Paper_01_Task_QuestionGeneration,
+        inst:Paper_01_Task_VeracityPrediction ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+

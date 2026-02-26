@@ -1,0 +1,173 @@
+{
+  "paper_id": "paper_179",
+  "title": "Extracting Triples from Dialogues for Conversational Social Agents",
+  "authors": [
+    {
+      "name": "Piek Vossen",
+      "affiliation": "Vrije Universiteit Amsterdam"
+    },
+    {
+      "name": "Selene Báez Santamaría",
+      "affiliation": "Vrije Universiteit Amsterdam"
+    },
+    {
+      "name": "Lenka Bajcetic",
+      "affiliation": "Inovacioni Centar ETF: Belgrade, RS"
+    },
+    {
+      "name": "Thomas Belluci",
+      "affiliation": "Vrije Universiteit Amsterdam"
+    }
+  ],
+  "keywords": [
+    "Information extraction",
+    "Social Conversations",
+    "Conversational AI"
+  ],
+  "use_case": {
+    "label": "Triple Extraction in Social Conversations",
+    "type": "research",
+    "domain_concepts": [
+      "hint:DigitalMuseumDomain"
+    ],
+    "context": {
+      "label": "Social Conversation Context",
+      "context_concepts": [
+        "hint:VirtualExhibitionContext"
+      ],
+      "constraint_concepts": [
+        "hint:TransparencyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:KnowledgeMismatchPhenomenon",
+        "hint:TrustShiftPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Dialogue Annotator",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Annotation Capability",
+              "concept": "hint:ExplainingCapability",
+              "allows_tasks": [
+                "Annotate Dialogue Turns"
+              ]
+            },
+            {
+              "label": "Judgment Capability",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Evaluate Triple Extraction"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Triple Extraction Model",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Triple Extraction Capability",
+              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "allows_tasks": [
+                "Extract Triples from Dialogue"
+              ]
+            },
+            {
+              "label": "Pattern Recognition Capability",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Identify Dialogue Patterns"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Extract Knowledge from Conversations",
+        "goal_concept": "hint:EnhancedVisitorGoal",
+        "tasks": [
+          {
+            "label": "Annotate Dialogue Turns",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:ExplainingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Extract Triples from Dialogue",
+            "task_concept": "hint:KnowledgeGraphQueryTask",
+            "required_capabilities": [
+              "hint:KnowledgeGraphQueryingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Evaluate Triple Extraction",
+            "task_concept": "hint:ConflictResolutionTask",
+            "required_capabilities": [
+              "hint:ClinicalJudgmentCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Human-AI Dialogue Annotation",
+        "modality_concept": "hint:TextChatModality",
+        "intent_concept": "hint:ExplanationIntent",
+        "agents_involved": [
+          "Dialogue Annotator",
+          "Triple Extraction Model"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Triple Extraction Execution",
+        "task_label": "Extract Triples from Dialogue",
+        "performed_by": "Triple Extraction Model",
+        "method_concept": "hint:KnowledgeGraphQueryMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Triple Extraction Evaluation",
+      "evaluation_concepts": [
+        "hint:DataCollectionQualityEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Triple Extraction Precision Test",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "Triple extraction models do not improve precision over baseline.",
+          "alternative_hypothesis": "Triple extraction models improve precision over baseline."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:SocialConversationContext",
+      "label": "Social Conversation Context",
+      "definition": "A context involving exchanges of information in social settings.",
+      "broader": "hint:ContextConcept",
+      "category": "Context"
+    }
+  ]
+}

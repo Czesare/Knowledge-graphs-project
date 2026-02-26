@@ -1,0 +1,198 @@
+{
+  "paper_id": "paper_641",
+  "title": "Multi-Head Networks for Missing Modalities: A Study on Robustness in Multimodal Learning",
+  "authors": [
+    {
+      "name": "Giovanni Felici",
+      "affiliation": "Institute for Systems Analysis and Computer Science CNR, National Research Council of Italy"
+    },
+    {
+      "name": "Diego Maria Pinto",
+      "affiliation": "Institute for Systems Analysis and Computer Science CNR, National Research Council of Italy"
+    },
+    {
+      "name": "Antonio Vicinanza",
+      "affiliation": "Spindox S.p.A."
+    }
+  ],
+  "keywords": [
+    "Multi-Head Deep Learning",
+    "Multimodal AI",
+    "Robust AI",
+    "High Quality AI"
+  ],
+  "use_case": {
+    "label": "Robust Multimodal Learning",
+    "type": "research",
+    "domain_concepts": [
+      "hint:HealthAndLifestyleDomain"
+    ],
+    "context": {
+      "label": "Multimodal Learning Context",
+      "context_concepts": [
+        "hint:HealthMonitoringContext"
+      ],
+      "constraint_concepts": [
+        "hint:TransparencyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:DataMismatchPhenomenon",
+        "hint:SkillsComplementarityPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Research Scientist",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Domain Judgment",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Evaluate Model Robustness"
+              ]
+            },
+            {
+              "label": "Contextual Understanding",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Assess Feature Importance"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Multi-Head Network",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Feature Extraction"
+              ]
+            },
+            {
+              "label": "Data Processing",
+              "concept": "hint:MultimodalInterpretationCapability",
+              "allows_tasks": [
+                "Handle Missing Modalities"
+              ]
+            },
+            {
+              "label": "Robustness Enhancement",
+              "concept": "hint:ReinforcementLearningCapability",
+              "allows_tasks": [
+                "Apply Orthogonality Loss"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Enhance Model Robustness",
+        "goal_concept": "hint:UserWellbeingGoal",
+        "tasks": [
+          {
+            "label": "Feature Extraction",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Apply Orthogonality Loss",
+            "task_concept": "hint:SemanticReasoningTask",
+            "required_capabilities": [
+              "hint:ReinforcementLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Evaluate Model Robustness",
+            "task_concept": "hint:ConflictResolutionTask",
+            "required_capabilities": [
+              "hint:ClinicalJudgmentCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Assess Feature Importance",
+            "task_concept": "hint:SemanticReasoningTask",
+            "required_capabilities": [
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Model Evaluation Discussion",
+        "modality_concept": "hint:VerbalDialogueModality",
+        "intent_concept": "hint:ExplanationIntent",
+        "agents_involved": [
+          "Research Scientist",
+          "Multi-Head Network"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Execute Feature Extraction",
+        "task_label": "Feature Extraction",
+        "performed_by": "Multi-Head Network",
+        "method_concept": "hint:DataCollectionMethod"
+      },
+      {
+        "label": "Execute Orthogonality Loss",
+        "task_label": "Apply Orthogonality Loss",
+        "performed_by": "Multi-Head Network",
+        "method_concept": "hint:ReinforcementLearningMethod"
+      },
+      {
+        "label": "Conduct Model Evaluation",
+        "task_label": "Evaluate Model Robustness",
+        "performed_by": "Research Scientist",
+        "method_concept": "hint:MetaAnalysisScoringMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Model Robustness Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric",
+        "hint:DiagnosisAccuracyMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Ablation Study",
+          "experiment_concept": "hint:DiagnosisExperiment",
+          "metrics_tested": [
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "Orthogonality loss does not improve robustness.",
+          "alternative_hypothesis": "Orthogonality loss improves robustness."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:OrthogonalityLossCapability",
+      "label": "Orthogonality Loss Capability",
+      "definition": "Capability to enhance model robustness by enforcing orthogonality among latent representations.",
+      "broader": "hint:ReinforcementLearningCapability",
+      "category": "Capability"
+    }
+  ]
+}

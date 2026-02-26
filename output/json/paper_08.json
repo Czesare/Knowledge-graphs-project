@@ -1,0 +1,172 @@
+{
+  "paper_id": "paper_333",
+  "title": "Quality-Informed Active Learning on Social Media in Crisis Scenarios",
+  "authors": [
+    {
+      "name": "Carlo Alberto Bono",
+      "affiliation": "Politecnico di Milano"
+    },
+    {
+      "name": "Barbara Pernici",
+      "affiliation": "Politecnico di Milano"
+    }
+  ],
+  "keywords": [
+    "Active Learning",
+    "Information Quality",
+    "Situational Awareness"
+  ],
+  "use_case": {
+    "label": "Crisis Data Relevance Identification",
+    "type": "research",
+    "domain_concepts": [
+      "hint:HealthAndLifestyleDomain"
+    ],
+    "context": {
+      "label": "Emergency Situational Awareness",
+      "context_concepts": [
+        "hint:HealthMonitoringContext"
+      ],
+      "constraint_concepts": [
+        "hint:PrivacyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:DataMismatchPhenomenon",
+        "hint:TrustShiftPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Data Analyst",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Contextual Understanding",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Identify Relevant Data"
+              ]
+            },
+            {
+              "label": "Ethical Oversight",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Validate Data Selection"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Active Learning System",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Identify Relevant Data"
+              ]
+            },
+            {
+              "label": "Data Processing",
+              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "allows_tasks": [
+                "Process Social Media Data"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Enhance Situational Awareness",
+        "goal_concept": "hint:UserWellbeingGoal",
+        "tasks": [
+          {
+            "label": "Identify Relevant Data",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Validate Data Selection",
+            "task_concept": "hint:DecideInterventionTask",
+            "required_capabilities": [
+              "hint:ReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Process Social Media Data",
+            "task_concept": "hint:KnowledgeGraphQueryTask",
+            "required_capabilities": [
+              "hint:KnowledgeGraphQueryingCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Data Validation Discussion",
+        "modality_concept": "hint:TextChatModality",
+        "intent_concept": "hint:ExplanationIntent",
+        "agents_involved": [
+          "Data Analyst",
+          "Active Learning System"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Execute Data Identification",
+        "task_label": "Identify Relevant Data",
+        "performed_by": "Active Learning System",
+        "method_concept": "hint:ReinforcementLearningMethod"
+      },
+      {
+        "label": "Execute Data Validation",
+        "task_label": "Validate Data Selection",
+        "performed_by": "Data Analyst",
+        "method_concept": "hint:ArgumentationReasoningMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Active Learning Evaluation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric",
+        "hint:TrustPreservationMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Crisis Scenario Testing",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "IQ indicators do not improve AL performance.",
+          "alternative_hypothesis": "IQ indicators improve AL performance."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:InformationQualityIndicator",
+      "label": "Information Quality Indicator",
+      "definition": "A measure used to assess the quality of data in terms of relevance and utility.",
+      "broader": "hint:Capability",
+      "category": "Capability"
+    }
+  ]
+}

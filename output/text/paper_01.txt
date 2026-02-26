@@ -1,0 +1,541 @@
+2 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250620
+Exploring Human-AI Synergy for
+Complex Claim Verification
+ShubhalaxmiMUKHERJEE a,1,CatholijnM.JONKER aand
+PradeepK.MURUKANNAIAH a
+aDelftUniversityofTechnology
+ORCiDID:ShubhalaxmiMukherjee
+https://orcid.org/https://orcid.org/0009-0004-0856-4107,CatholijnM.Jonker
+https://orcid.org/https://orcid.org/0000-0003-4780-7461,PradeepK.Murukannaiah
+https://orcid.org/https://orcid.org/0000-0002-1261-6908
+Abstract.Combatingwidespreadmisinformationrequiresscalableandreliable
+fact-checkingmethods.Fact-checkinginvolvesseveralsteps,includingquestion
+generation,evidenceretrieval,andveracityprediction.Importantly,fact-checking
+iswell-suitedtoexploithybridintelligencesinceitrequiresbothhumanexpertise
+andAI’slarge-scaleinformationprocessingabilities.Thus,constructinganeffective
+fact-checkingpipelinerequiresasystematicunderstandingoftherelativestrengths
+andweaknessesofhumansandAIindifferentstepsofthefact-checkingprocess.
+WeinvestigatetheabilityofLLMstoperformthefirststepoftheprocess,i.e.,
+togeneratepertinentquestionsforanalyzingaclaim.Toevaluatethequalityof
+theLLM-generatedquestions,wecrowdsourceadatasetinwhich150claimsare
+annotatedwithquestions(1)anovicefact-checkerwouldaskand(2)aprofessional
+fact-checkerwouldaskwhenfact-checkingthoseclaims.Westudytheeffectsofthe
+human-andLLM-generatedquestionsonevidenceretrievalandveracityprediction.
+WefindthatLLMsareabletogeneratenuancedquestionstoverifyacomplexclaim,
+butthefinallabelpredictiondependsonthequalityoftheevidencecorpus.However,
+theevidencecollectedbyautomatedmethodsyieldsloweraccuracyintheveracity
+predictiontaskthantheevidencecuratedbyexperts.
+Keywords.Factchecking,Claimdecomposition,LargeLanguageModels
+1. Introduction
+Theprevalenceoffakenewsandmisinformationisamajorsocietalproblem.Traditionally,
+detectingmisinformationhasbeencarriedoutexclusivelybyexpertfact-checkers.How-
+ever,fact-checkingbyexpertsisaslowandexpensiveprocessthatdoesnotscalewiththe
+rapidlygrowingvolumeofonlinemisinformation.Toaddressthischallenge,researchers
+areworkingonautomatedmethodstoidentifymisinformation,withsubstantialprogress
+being made in developing fast, scalable, and cutting-edge Artificial Intelligence (AI)
+methods[1,2,3,4].However,theperformanceoffullyautomatedmethodsremainssubpar
+comparedtoexperts,especiallyforcomplexreal-worldclaims[5,6].
+1CorrespondingAuthor:ShubhalaxmiMukherjee,S.Mukherjee-2@tudelft.nl.
+
+S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification 3
+Weexplorefact-checkingasahuman-AIcollaborativeprocessasopposedtoafully
+manualorfullyautomatedprocess.AsFigure1shows,factcheckinginvolvesseveral
+steps,requiringdifferentskillsorcapacities.Forexample,questiongenerationrequires
+creativity and domain understanding, whereas evidence retrieval requires large-scale
+informationprocessing.Accordingly,sometasksinafact-checkingpipelinearebetter
+suitedforhumansandothersforAI.Thus,fact-checkingis,inherently,aprocessthat
+requireshybridintelligence[7].However,thereisalackofsystematicstudiesinvestigating
+therelativestrengthsofhumansandAIinfact-checkingsteps.
+To fact check a claim, one must first know what evidence to look for. It requires
+knowledgeofthesubjectmatterandabilitytodecomposetheimplicitandexplicitsub
+claims within the original claim. Recent works [8,9] propose to decompose complex
+claimsintologicalformsusingLLMsbeforeverification.Butthisdoesn’taddressthe
+implicitclaimsorintentionofthespeaker.Consider,forexample,theclaiminFigure1.To
+verifythisclaim,afactcheckermustask(1)whetherthenationaldebtreallyincreasedby
+$3trilliondollarsunderPresidentTrump,(2)whetherthetaxcutexclusivelybenefitedthe
+wealthiestfew,and(3)whetherthetaxcutissolelytoblamefortheincreaseinthedebt.
+Adecompositionofthisclaimtextyieldsthefirsttwoquestionsbutnotthethird,which
+isnotexplicitintheclaimtext.Asitturnsout,inthiscase,theanswerstothefirsttwo
+questionssupporttheclaim,buttheanswertothethird(i.e.,theimplicitblameassigned
+bythespeaker)isuntrue,makingtheclaim‘halftrue.’Asthisexampledemonstrates,the
+abilitytoaskfine-grainedquestionsisthecruxofcomplexfactchecking.
+Veracity Prediction
+Claim Detection Question Generation Evidence Retrieval
+Justiification Generation
+The president has Is the $3 trillion figure verifiable? (cid:2)(cid:3)(cid:4)(cid:5)(cid:6)(cid:7)(cid:8)(cid:9)(cid:10)
+exploded the debt by
+more than $3 trillion — ... Trump's tax law did add 3 trillion
+all to give billion-dollar Did Trump’s tax cut exclusively dollars to the debt, and most of the
+tax cuts to the benefit the wealthiest few? benefites went to the wealthiest few, but
+wealthiest few. two others spending bills supported by
+-- Veronica Escobar Is Trump’s tax cut soley to Democrats also added similar amount to
+(Feb 4, 2020) blame for the debt increase? the debt, before Trump's tax bill ...
+Figure1. Anexampleshowingtheimportanceofquestiongenerationinacomplexclaimverificationpipeline.
+In this work, we compare the performance of humans and LLMs to ask nuanced
+questionsandtheeffectofthesequestionsontheveracitypredictionaccuracy.Tothis
+end,first,wecontributeanoveldatasetinwhich150claimsareannotatedwithquestions
+necessarytofact-checktheclaims.Theanalysisincludesthreetypesofquestionsforeach
+claim:(1)questionsgeneratedbyanLLM,(2)questionsanovicefact-checkerwouldask
+(crowdsourced),and(3)questionsaprofessionalfact-checkerwouldask(crowdsourced
+afterthecrowdworkersreadajournalist’sfact-checkingarticleoftheclaim).
+Then,weperformacomprehensiveanalysisofhowthethreequestionsetsdiffer,
+andimportantly,howtheyaffectthedownstreamtaskofveracityprediction.Wefindthat
+LLMsarecapableofgeneratingquestionsthatcapturebothimplicitandexplicitaspects
+ofaclaim.Promptingwithexampleshelpstoreducetheunnecessaryquestions,which
+leadstoamoreconciseevidencesetandbetterveracityprediction.Yet,thequestions
+generatedbyprofessionalfact-checkersyieldthebestresultsbyasignificantmargin.
+
+4 S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification
+Once the questions are generated, answering these questions requires gathering
+evidence from different documents. This is a very challenging task to automate. For
+real-world claims, such as political claims, evidence retrieval is challenging even for
+journalists.Westudytwovariationsoftheevidenceretrievaltask.(1)Weusetheanalysis
+articlewrittenbythejournalistsatPolitifactastheevidencecorpus.Weassumethatallthe
+necessaryinformationiscontainedinthearticle,soquestionsfromallgenerationmethods
+areansweredfromthisarticle.Thishelpsuscomparetheeffectofquestiongeneration,
+withouttheconfoundingeffectofevidenceretrievalfromsearchengines.(2)Weextract
+keywordsfromeachclaimandcollecttherelevantresultsfromGooglesearchtocompile
+theevidenceset.Thenthequestionsareansweredfromthiscorpus.
+We find that noisy evidence collected from Google leads to a significant drop in
+veracitypredictionaccuracy.Thus,althoughLLMshaveimpressiveabilitiestoanalyze
+largevolumesoftext,theystrugglewithreasoningwhenpresentedwithnoisyevidence.
+Subtledifferencesintheevidenceset,suchasorderingofsupportingandrefutingevidence,
+interfereswithveracityprediction.Evenwhenallthenecessaryinformationiscollected
+inthequestion-answeringphase,thepresenceofredundantorrepeatedinformationinthe
+evidenceparagraphthrowsoffthereasoningprocess.
+Contributions. First,wecontributeanoveldataset.(1)Itcontainsquestionsgeneratedby
+novicefact-checkers,establishinganewbaselineforapriorireasoningabilitiesforhuman
+factcheckers.(2)Wereverseengineerquestionsfromprofessionalfact-checkersbased
+onthefullarticlepublishedbyPolitifact.Thesetwoquestionsetsserveasabenchmark
+forevaluatingLLM-generatedquestions.Second,weevaluateacompletefact-checking
+pipelineusingGPT-4oandLlama-8b,providingkeyinsightsonLLM’scapabilitiestoask
+andreasonaboutnuancedquestionsaboutcomplexclaims.Weperformourevaluation
+bothinperfectandnoisyevidencesettings.Ourfindings—onquestiongenerationand
+evidenceretrieval—suggestthatfullyautomatingfact-checkingisfarfromidealandthat
+ahybridhuman-AIapproachisessentialforreliablefact-checking.
+DataandCode Thedataset,prompts,code,andcrowdsourcingstudymaterialsusedin
+thispaperareavailableathttps://github.com/ShubhalaxmiM/HHAI_2025.git.
+2. RelatedWork
+Manyfact-checkingdatasetshavebeenproposedtoevaluateclaimverificationaccuracyof
+models,suchasFEVER[10],HoVeR[11],andFactorFiction[12].However,retrieving
+evidencetoverifytheclaimsinthesedatasetsiseasy—often,thereisdirectevidenceto
+supportorrefuteaclaim.Theevidenceforclaimsinthesedatasetscanoftenbefound
+simplyinWikipedia.However,real-worldfactcheckingisrarelythateasy.Itrequires
+subjectivejudgmentandexpertise.
+Earlyfact-checkingsystemssimplyusedtheclaimasthequerytoretrieveevidence.
+Many datasets have been proposed [13,14,15,16], where only the text of the claim is
+used to query a search engine. However, in such cases, the search engine may access
+fact-checkingwebsitesthathavepublishedverdictsabouttheclaims.Thisisnotviable
+fornewclaims.Inourwork,wequeryGoogleusingrelevantkeywordsonlyandfilterout
+factcheckingwebsitesfromGooglesearchresultstopreventdataleakage.
+Further, natural claims, like those made by public figures or the ones found on
+socialmedia,tendtobecomplex.Therefore,claimdecompositionhasbecomeafocusof
+
+S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification 5
+researchinnaturallanguageprocessing[5].Chenetal.[17]showedthatgenerativemodels
+canlearntodecomposeclaimsintoexplicitandimplicitquestions.Compilingbackground
+informationaboutvariouspartsofaclaimhasbeenshowntohelpcrowdworkersanalyze
+complexclaims[18].Questionansweringalsohelpstotracethereasoningpathtoreacha
+verdict[19].However,theseworksrestrictthetypeofquestionsthatcanbeaskedand
+answeredintheannotationprocess,tosimplifythereasoningprocess.Incontrast,weask
+annotatorstogenerateasmanyquestionsastheycanthinkof.
+Finally,acomprehensivereviewhighlightsthatdespiteadvancements,NLP-based
+fact-checking tools still face challenges in effectively assisting human fact-checkers,
+particularlywithcomplexclaims[6].Recently,Human-In-The-Loopapproacheshave
+gainedimportanceinNLPresearch[20,21,22,23,24].However,thereisalackofinsights
+ontherelativestrengthsandweaknessesofhumansandAIindifferentpartsofafact-
+checkingpipeline.Weseektofillthisgapbysystematicallyevaluatingtheperformanceof
+humans(novicesandexperts)andLLMsinthequestiongenerationandevidenceretrieval
+phases,andhowthisaffectsdownstreamveracityprediction.
+3. Dataset
+WeselectclaimsforquestiongenerationfromPolitiHop[16].Weexcludeclaimsthat
+requireverifyingthecontentofaphotograph,video,orsomeone’ssocialmediapostas
+thatmakescrowdsourcedquestiongenerationdifficult.Wereplacetheseclaimswithother
+claimsfromPolitifactcollectedinasimilartimeframeasPolitiHop.SimilartoWangetal.
+[9],weconsiderthreeclasses:True,HalfTrue,andFalse.Ultimately,wehaveabalanced
+datasetof50claimsineachclass.
+3.1. CrowdsourcedTask
+We employed annotators from the Prolific platform. Our data collection process was
+approvedbyaHumanResearchEthicsCommittee.
+WerestrictedthepoolofannotatorstothosewhoseemploymentroleinProlificwas
+‘Journalist’. This was done in order to enhance the quality of the questions generated.
+However,wecouldnotestablishthenatureoftheworkers’journalisticexperience.Fur-
+ther,theseworkersspentashortamountoftimeinfact-checkingaclaimcomparedto
+professionalfact-checkers.Thus,wetreatthecrowdworkersasnovicefact-checkers.
+PolitiFact Claim Analysis Verdict
+Crowd Worker Task 1 Task 2
+Question Set Human: Novice Human: Journalist
+Figure2. Crowdsourcingtaskworkflow
+Figure2showsanoverviewofourdatacollectionprocessinvolvingtwotasks.
+
+6 S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification
+Task1 Theannotatorwasshownclaim,speakerorsourceoftheclaim,andthedatewhen
+the claim was made. They were asked to start with a neutral stance on the claim and
+generatequestionstheywouldaskinordertoproveordisprovetheclaim.
+Task2 Theannotator(whohascompletedTask1)isnowshownthefact-checkingarticle
+writtenbythePolitifactjournalists,andaskedtoreverseengineerthequestionstheoriginal
+journalistshadconsideredwhenwritingtheanalysis.
+ThePolitifactlabelwasnevershowntotheannotatorsasitmightbiastheirquestions.
+Eachannotatorwasgiventhreeclaimstoannotate,andeachclaimwasannotatedbyat
+leasttwoannotators.Theaveragedurationforanannotatortocompletebothtaskswas
+approximately50minutes.Additionaldetails,includingtheinstructionsprovidedtothe
+annotators,areincludedintherepository.
+4. Experiments
+4.1. QuestionGeneration
+Weexperimentwiththefollowingvariantsforquestiongeneration.
+LLM:Direct TheLLMispromptedtocomeupwithquestions.Noexamplesarepro-
+vided.Figure3showsthepromptused.
+LLM:FewShot TheLLMispromptedwithexamplesofclaimsandthequestionsthat
+wereaskedbyprofessionaljournalists(obtainedinthecrowdsourcingtask)toverifythe
+claim.Figure4showsthepromptused.
+Human:Novice WeusethenovicequestionsobtainedfromTask1(Figure2).
+Human:Journalists Weusethejournalists’questionsobtainedfromTask2(Figure2).
+LLM:DirectPrompt
+Pleasetellmethenecessaryquestionsthatneedtobeansweredinordertoverify
+thefollowingclaim.Takeintoaccountthespeakerandthedateoftheclaim,if
+necessary.Generateasmanyquestionsasyoucanthinkof:
+—–
+Claim:90%ofpolicemenareforexpandingbackgroundcheckstoallgunsales.
+Speaker/Source:RichardDurbin
+Date:September23,2019
+Figure3. DirectPromptusedtogeneratequestions,withoutanyexamples.
+WeexperimentwithGPT-4oandLlama-3.1-8b-Instructinthiswork,forquestion
+generationandotherstepsofthepipeline.Wesetthetemperatureto0forGPT-4oand0.1
+forLLama-3.1-8b-Instruct(theLLamamodelweuseddidnotallowsettingtemperature
+to0).Weuselowtemperaturesettingstoreducevariabilityinthemodel’sresponses.We
+setthemaximumtokenlengthto1024forbothmodels.
+
+S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification 7
+LLM:FewShotPrompt
+Pleasetellmethenecessaryquestionsthatneedtobeansweredinordertoverify
+thefollowingclaim.Takeintoaccountthespeakerandthedateoftheclaim,if
+necessary.Generateasmanyquestionsasyoucanthinkof:
+Claim: BackwhenIwasstudyingit,twooutofthreefamiliesthatendedup
+inbankruptcyafteraseriousmedicalproblemhadhealthinsurance.
+Speaker: ElizabethWarren
+Date: October15,2019
+»»»
+FollowupQuestion: Isthereanypublishedresearchontherelationshipbetween
+medicaldebtandbankruptcy?
+FollowupQuestion: Whatdopeopleciteasreasonsforbankruptcyinbankruptcy
+applications?
+FollowupQuestion: WhenwasWarrenstudyingtheissueofmedicaldebtand
+bankruptcy?
+FollowupQuestion: Hassomethingchangedinhealthinsurancepolicybetween
+Warren’sresearchperiodandwhenthisclaimwasmade?
+FollowupQuestion: Howmanyfamiliesendedupinbankruptcyafteraserious
+medicalproblemhavinghealthinsurance?
+——
+Claim:{}
+Figure4. Fewshotpromptusedtogeneratequestions.Whereasthispromptshowsoneclaimasin-context
+example,thefullpromptconsistsofsixin-contextexamples.
+4.2. EvidenceRetrieval
+Toanswerthequestions,weexperimentwithtwomethodsofevidencecollection.
+ClosedDomain: WeusethefullanalysisarticlepublishedbyPolitifactasthesourceof
+allevidence.Thisisarticlewaswrittenafterthoroughresearchbyprofessionaljournalists.
+Therefore,weassumethatallthenecessaryinformationtoverifyaclaimareavailable.
+OpenDomain: We first extract keywords from each claim using GPT-4o and submit
+themtoGooglethroughSERPAPI.Wesetthedatefiltertosearchresultsonlyavailable
+beforethedateoftheclaim,topreventtemporalleakage.Wecollectthetop10resultsper
+claimandstrictlyfilteroutanyresultsfromover150fact-checkingdomainstoprevent
+anyleakagefromtheirjustification.Then,wescrapethefulltextfromeachoftheURLs
+tocompiletheevidenceset.
+ThesamesetofquestionsgeneratedinSection4.1areusedinbothcases.Thus,we
+studytheimportanceofevidencecuratedbyexpertsversusautomatedevidencecollection.
+
+8 S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification
+4.3. VeracityPrediction
+EachquestionfromthequestiongenerationstepisansweredbytheLLMbasedonthe
+evidencecorpus.Theanswertoeachquestionisconcatenatedtothepromptasasingle
+paragraph.Sincetherationaleforthelabelmustbethesameinallcircumstances,the
+same prompt is used for label prediction, regardless of the variations in the question
+generationprompts.
+Thedifferentquestionsetsobtainedinthequestiongenerationsetleadstodifferent
+evidencesets.Wemeasuretheeffectofthedifferentevidencesetsbythelabelaccuracy.
+Wealsodeterminethehighestachievableresultforthe‘entailment’task,i.e.,themodel
+predicts the veracity label based on the full evidence article from Politifact. We call
+thistheFullEviden(cid:2)cesetting.WealsomeasuretheRMSEbetweentheactual(y
+i
+)and
+predictedlabel(yˆ), ∑150(y −yˆ)2)/150wherey,yˆ ∈{0,1,2}.
+i i=1 i i i i
+5. ResultsandDiscussion
+First,weperformaquantitativeevaluationontheeffectofdifferentquestiongeneration
+methodsonthedownstreamtaskofveracitypredictioninclosedandopendomainsettings.
+However,thequantitativeevaluationdoesnotrevealthecomplexitiesintheintermediate
+stepsofthefact-checkingpipeline.Thus,wepresentsomenotableobservationsobtained
+bymanualinspectionoftheresultsofeachstepofthepipelineasqualitativeevaluation.
+5.1. QuantitativeEvaluation:ClosedDomainEvidenceRetrieval
+GPT-4o: Table1showstheF1scoresforveracitypredictionforGPT-4o.Weseethatthe
+GPT-4obasedpipelineismosteffectiveforTrueclaims,forallvariationsoftheprompt.
+OnoverallF score,LLM:FewShotandHuman:Noviceperformsimilarlybutslightly
+betterthanLLM:Direct.However,thequestionsetfromHuman:Journalistoutperforms
+theothervariationswithalargemargin.ThispatternalsoholdsforRMSE.
+Method
+Per-ClassF1 ↑
+MacroF1 ↑ RMSE↓
+True HalfTrue False
+GPT-4o:Direct 72.05 43.67 70.58 62.10 0.699
+GPT-4o:FewShot 71.60 49.90 68.02 63.17 0.710
+Human:Novice 68.31 51.77 68.83 62.97 0.717
+Human:Journalist 74.95 58.95 70.85 68.25 0.628
+Topline:FullEvidence 71.7 65.81 75.05 70.85 0.579
+Table1. F1scoresofthelabelpredictiontaskwithGPT-4o.
+The confusion matrices in Table 2 confirm that there is a significant True bias in
+thepredictionsmadebyGPT-4o.However,thisbiasisreducedwhenquestionsarenot
+generatedbyGPT-4o,asdemonstratedintheconfusionmatrices2cand2d.
+
+Predicted
+T H F
+lautcA
+Predicted
+T H F
+T 42 7 1
+H 21 18 11
+F 6 10 33
+(a)GPT-4o:Direct
+lautcA
+T 39 8 3
+H 16 22 12
+F 4 13 33
+(b)GPT-4o:FewShot
+Predicted
+T H F
+lautcA
+Predicted
+T H F
+T 37 9 4
+H 15 26 9
+F 4 13 33
+(c)Human:Novice
+lautcA
+S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification 9
+T 35 13 2
+H 7 29 14
+F 2 13 35
+(d)Human:Journalist
+Table2. ConfusionmatricesshowingtheTruebiasandlabelmismatchesforGPT-4o
+Llama-8b: Table3showstheF1scoresforveracitypredictionforLlama-3.1-8b-Instruct.
+TheLlamabasedpipelineperformssignificantlyworsethanGPT-4oinoverallF1score,
+likelyduetothesmallersizeofthemodel.However,unlikeGPT-4obasedpipeline,in
+theLlamabasedpipeline,LLM:FewShotperformsbetterthantheothervariationsof
+thequestiongenerationpromptincludingtheHumanvariants.However,sincetheoverall
+performanceisquitelow,wecannotdrawstrongconclusionsontherelativeperformances.
+Method
+Per-ClassF1 ↑
+MacroF1 ↑ RMSE↓
+True HalfTrue False
+Llama-3.1-8b-Instruct:Direct 31.03 53.63 26.23 36.96 0.764
+Llama-3.1-8b-Instruct:FewShot 33.33 52.98 53.93 46.64 0.779
+Human:Novice 21.05 51.69 36.93 36.56 0.757
+Human:Journalist 32.79 55.49 39.39 43.65 0.753
+Topline:FullEvidence 36.06 58.14 50.75 48.32 0.693
+Table3. F1scoresofthelabelpredictiontaskwithLlama-8b.
+TheconfusionmatricesinTable4alsorevealadifferentpatternthanTable2.Whereas
+GPT-4oshowedaTruebias,Llama-3.1-8b-Instructshowsasignificantbiastopredict
+mostclaimsasHalfTrue.However,similartoGPT-4o,theFewshotpromptandHuman:
+Journalistpromptsreducethisbias,asseeninmatricesTables4band4d.
+NumberofQuestions: To further analyze the differences between the performances
+differentquestiongenerationpipelines,weanalyzethenumberofquestionsgeneratedas
+showninTable5.First,itisstrikingthatLlama-8bgeneratesalargenumberofquestions
+intheLLM:Directvariationcomparedallothervariants.Thisprovidesanintuitiononthe
+Half-Truebiasofthisvariant.Thatis,whentheLlama-8bmodelcannotfindanswerstoall
+thequestionsaskedfromthegivenevidencecorpus,ithasatendencytolabeltheclaimas
+HalfTrue.Second,wenoticethattheHuman:Noviceyieldstheleastnumberofquestions
+amongthevariants.Thisshowsthatquestiongenerationisdifficultfornon-professionals.
+
+Predicted
+T H F
+lautcA
+Predicted
+T H F
+T 9 39 2
+H 0 48 2
+F 0 42 8
+(a)Llama-3.1-8b-Instruct:Direct
+lautcA
+T 10 35 5
+H 0 40 10
+F 0 26 24
+(b)Llama-3.1-8b-Instruct:FewShot
+Predicted
+T H F
+lautcA
+Predicted
+T H F
+T 6 44 0
+H 1 46 3
+F 0 38 12
+(c)Human:Novice
+lautcA
+10 S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification
+T 10 38 2
+H 1 48 1
+F 0 37 13
+(d)Human:Journalist
+Table4. ConfusionmatricesshowingtheTruebiasandlabelmismatchesforLlama-8b
+QuestionGenerationSource NumberofQuestions
+GPT-4o:Direct 21.6±3.1
+GPT-4o:FewShot 15.1±1.9
+Llama-3.1-8b-Instruct:Direct 56.3±49.2
+Llama-3.1-8b-Instruct:FewShot 8.6±7.7
+Human:Novice 5.8±2.4
+Human:Journalist 13.5±0.03
+Table5. Numberofquestionsgeneratedperclaim.
+SinceGPT-4o’saccuracyissubstantiallybetterthanLlama-3.1-8b-Instructinthe
+closeddomainsetting,weconducttheremainingexperimentsonlyontheGPT-4obased
+pipeline.
+5.2. QuantitativeEvaluation:OpenDomainEvidenceRetrieval
+Table6showstheF1scoresforveracitypredictionforGPT-4ointheopendomainsetting.
+TheoverallF1scoresaresignificantlylowerintheopenthanthecloseddomainsetting.
+Theseresultsshowthatevidenceretrievalhasanimportantroleinfact-checking.
+Method
+Per-ClassF1 ↑
+MacroF1 ↑ RMSE↓
+True HalfTrue False
+GPT-4o:Direct 46.58 54.55 56.25 52.46 0.983
+GPT-4o:FewShot 50.63 51.49 63.33 55.15 0.883
+Human:Novice 55.26 49.54 57.39 54.06 0.860
+Human:Journalist 48.64 50.45 64.35 54.48 0.828
+Table6. F1scoresofthelabelpredictiontaskwithGPT-4owithopendomainquestionevidenceretrieval.
+Table7showstheconfusionmatricesfortheopendomainsetting.Inthiscase,we
+findagreatertendencytopredictFalse.Whiletheoverallperformanceispoorerthan
+closeddomain,theclassificationaccuracyforHalfTrueclassishigherinthissetting.
+
+Predicted
+T H F
+lautcA
+Predicted
+T H F
+T 17 12 21
+H 2 27 21
+F 4 10 36
+(a)GPT-4o:Direct
+lautcA
+T 20 16 14
+H 6 26 18
+F 3 9 38
+(b)GPT-4o:FewShot
+Predicted
+T H F
+lautcA
+Predicted
+T H F
+T 21 16 13
+H 4 27 19
+F 1 16 33
+(c)Human:Novice
+lautcA
+S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification 11
+T 18 21 11
+H 17 28 17
+F 1 12 37
+(d)Human:Journalist
+Table7. ConfusionmatricesforGPT-4obasedpipelineandopendomainevidenceretrieval.
+5.3. QualitativeEvaluation
+WebeginouranalysisbyexaminingtheLLM-generatedquestions.Wemanuallyanalyzed
+thequestionsgeneratedfor50claimsandcategorizedeachquestionas‘relevant’ifit
+ispertinenttotheverificationrationaleandisanswerablefromthePolitifactarticle,or
+‘irrelevant’,otherwise.WefindthenumberofrelevantquestionsintheLLM:Directand
+LLM:FewShotsettingsas55.6%and59.6%,respectively.Theproblemwithalarge
+number of irrelevant questions is that, when a question cannot be answered from the
+availableevidence,theLLMsometimeshallucinatestheanswer(asalsoobservedbyJiet
+al.[25]),whichinturnleadstoinaccurateveracityprediction.
+By further examining the LLM-generated questions, we find that some questions
+assumeapartoftheclaimtobetrue.Forexample,fortheclaim:“TheMachinistsUnion
+doesnot(supporttheUSMCAtradedeal).Andeveryenvironmentalorganizationinthis
+country(also)opposesit,”oneofthequestionsaskedbyLLMisWhatspecificreasons
+doestheMachinistsUnionhavefornotsupportingtheUSMCAtradedeal?Thisassumes
+thattheformerpartoftheclaimistrue.
+WetookacloserlookatthemisclassifiedclaimsintheDirectandFewShotsettings.
+Wefindthatmorequestionsretrievethesupportingevidencethanthefalsifyingevidence.
+Therefore,atthereasoningstep,thesupportingevidenceispresentedmorenumberof
+times,whilethefalsifyingevidenceislostinthemiddle.Withamoreconcisequestion
+set,asinHuman:Journalist,thereislesserrepetitionofevidence,whichweconjecture
+yieldsbetteraccuracy,especiallyforHalfTrueclaims.
+Wealsoobservethat,whenthequestionsareansweredbyagenerativemodellike
+GPT-4o,itintroducesjudgmentsabouttheevidenceinthesentencestructure.Forexample,
+for the claim “Gov. Tony Evers proposed raising taxes on the agriculture industry to
+pay for expanded welfare programs,” a question from the Direct set is answered as
+“Specifically,heproposedlimitingthecreditformanufacturingto$300,000pertaxyear,
+whichwouldhavereducedthetaxcreditforagricultureaswell.”However,thePolitifact
+articlespecificallysaysthattheagriculturalportionoftheManufacturingandAgriculture
+TaxCreditwasunchanged.So,thissentenceintheLLM’sanswerintroducesincorrect
+reasoningintheevidence.
+
+12 S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification
+Finally,wetakeacloserlookatsomeoftheclaimsindividually.Specifically,we
+focusonsomeexamplesthatareconsistentlymisclassifiedacrossalltheruns.First,we
+observe that a large majority of these examples are Half True claims, demonstrating
+thecomplexityofthisclass.Then,weidentifythepotentialreasonforthemistakesin
+LLM reasoning going by the justification produced. Consider the claim “Lead levels
+in Milwaukee’s water are higher than Flint, MI.” Journalists of Politifact rate this as
+HalfTrue,because,whileleadlevelsinMilwaukee’swateristruestrictlyintermsof
+thenumbers,butthereasonsaredifferentinthetwocities.Thisreasonispickedupin
+theevidenceretrievalphase,buttheLLMdoesnotconsiderthis,thereforelabelingit
+True. In another claim, “One in three women is sexually assaulted on the dangerous
+journey north,” the claim is supported by a single survey. When evidence for a claim
+issurveydata,journalistslookattheparametersofthesurveytoseeiftherearesevere
+limitations.Thesurveythatsupportsthisclaimhasaseverelimitationthatthemajorityof
+400migrantssurveyedweremen.TheLLM’sjustificationmentionsthislimitation,yet
+thelabelispredictedasTrue.
+6. Conclusion
+We study the utility of Large Language Models in the question generation phase in a
+fact-checkingpipeline.Tofacilitateresearchonthisphase,wecontributeanoveldataset
+of150complexpoliticalclaims,annotatedwithacomprehensivesetofquestions.We
+alsoevaluateafact-checkingpipeline,fromquestiongenerationtolabelprediction,that
+exploitshuman-LLMsynergy.AsLLMsarebeingutilizedineveryprofession,itiscrucial
+thatweunderstandtherelativestrengthsofthesemodelsandwheretheycouldaugment
+human intelligence. Our experiments show that the LLMs perform quite well on the
+questiongeneration,buttheirreasoningabilityiswellbelowthatofjournalists’.Different
+LLMs have different biases, so one must be cautious while using results from any of
+them.So,LLMscouldplayaroleincompilingevidence,butexperthumanjudgmentis
+indispensablewhenitcomestodeterminingtruthandfalsehood.
+6.1. Limitations
+Weidentifyfourkeylimitationsofourwork.
+DiversityofClaims Theclaimsinourdatasetareallfromonesource(Politifact),which
+mainlyincludesclaimsfrompoliticiansintheUnitedStates.Thisservesourpurposeas
+mostsuchclaimsarecomplex,butlimitsthediversityoftheclaims.Claimsfromother
+domains, e.g., health claims or scientific claims, and claims from other countries and
+languages,maybringnuancestocomplexitythatwehavenotconsideredinthispaper.A
+systematicanalysisofhowdifferentsourcesofdiversityinfluencefact-checkingsystems,
+e.g.,asdoneinotherNLPtasks[26,27],isaninterestingavenueforfuturework.
+ExplainabilityandFaithfulness Explainabilityisaseriousissuewithblackboxmodels
+byGPT-4o."Chain-of-Thought"reasoning[28]hasbeenverysuccessfulinimproving
+LLMreasoningandexplainability.Yet,faithfulnessofthemodel’sexplanationonground-
+ingdocumentsisquestionable[29].Infactchecking,eventhoughweprovideexternal
+knowledgesources,LLMsmayintroduceunfaithfulartefactsinthequestionanswering
+step,whichaffectthelabelprediction.
+
+S.Mukherjeeetal./ExploringHuman-AISynergyforComplexClaimVerification 13
+RelevanceAnalysis Therelevancyofaquestion,asdefinedinsection4isdecidedby
+manualevaluationbyasingleindividual.Automatedmethodslikecosinesimilaritydid
+notyieldmeaningfulresults.Forexample,thecosinesimilaritybetweenthequestions
+“WhatisthepurposeoftheUnitedNations’supposedplantoimplanteveryonewitha
+biometricID?”and“WhatistheaimfortheUnitedNationprecisely?”is0.83,which
+isveryhighfortwoquestionsarenotsimilaratall.Duetothelimitationsofevaluation
+metricslikecosinesimilarity,finegrainedevaluationofLLMoutputsisaverychallenging
+task,andmanualevaluationisoftenunfeasible.
+JustificationAnalysis Inadditiontoveracityprediction,ourfact-checkingpipelinealso
+generatesjustificationsforthepredictions.Inthequalitativeanalysis,weexaminedsome
+ofthesejustificationstounderstandwhysomeclaimsweremisclassified.However,we
+do not systematically evaluate the quality of the justifications. We conjecture that the
+question-generationphasenotonlyaffectsveracitypredictionbutalsothejustifications
+produced.Wedefertheanalysisofthisconjecturetofuturework.
+6.2. EthicsStatement
+AIisbeingusedinnefariouswaystodrivepoliticalopinion.Automatedfactchecking
+hasthepotentialtobeveryusefulforpoliticalfact-checking.Wehavedemonstratedthe
+abilityofLLMstoasknuancedquestionsaboutaclaim,buttheoverallaccuracyisstill
+low.ThetendencyofLLMstolabelclaimsasTrueisparticularlyalarming.Wehave
+highlightedexampleswhereLLMsdonotappropriatelyconsiderfalsifyingevidencethat
+shouldhaveledtoaFalseprediction.Insomecases,theLLMevenhallucinatesanswers
+forquestionsthatcannotbeansweredfromtheknowledgebaseprovided.Theseinsights
+suggestthatLLMsshouldbeusedcautiouslyinpracticalfact-checkingapplications.
+Acknowledgements
+ThisresearchwaspartiallyfundedbytheNetherlandsOrganisationforScientificResearch
+(NWO)throughtheHybridIntelligenceCentreviatheZwaartekrachtgrant(024.004.022).
