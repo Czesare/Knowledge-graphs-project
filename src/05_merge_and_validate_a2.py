@@ -148,13 +148,15 @@ def main():
     same_as = len(list(merged.triples((None, OWL.sameAs, None))))
     close_match = len(list(merged.triples((None, SKOS.closeMatch, None))))
     related_match = len(list(merged.triples((None, SKOS.relatedMatch, None))))
+    exact_match = len(list(merged.triples((None, SKOS.exactMatch, None))))
     see_also = len(list(merged.triples((None, RDFS.seeAlso, None))))
     print(f"\n  External links:")
     print(f"    owl:sameAs:       {same_as}")
     print(f"    skos:closeMatch:  {close_match}")
     print(f"    skos:relatedMatch:{related_match}")
+    print(f"    skos:exactMatch:  {exact_match}")
     print(f"    rdfs:seeAlso:     {see_also}")
-    print(f"    TOTAL:            {same_as + close_match + related_match + see_also}")
+    print(f"    TOTAL:            {same_as + close_match + related_match + exact_match + see_also}")
 
     # ── Validation ────────────────────────────────────────────
     print("\n=== Validation ===")

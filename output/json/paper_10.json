@@ -1,0 +1,211 @@
+{
+  "paper_id": "paper_626",
+  "title": "Hybrid Human-AI Systems for Preserving Cultural Heritage and Craftsmanship",
+  "authors": [
+    {
+      "name": "Alexandra McDougall",
+      "affiliation": "SmartBear Software"
+    },
+    {
+      "name": "Hortense Gerardo",
+      "affiliation": "University of California, San Diego"
+    }
+  ],
+  "keywords": [
+    "Artificial Intelligence",
+    "craftsmanship",
+    "salvage ethnography",
+    "robotics"
+  ],
+  "use_case": {
+    "label": "Cultural Heritage & Craftsmanship Preservation",
+    "type": "research",
+    "domain_concepts": [
+      "hint:DigitalMuseumDomain"
+    ],
+    "context": {
+      "label": "Archival footage training context",
+      "context_concepts": [
+        "hint:VirtualExhibitionContext"
+      ],
+      "constraint_concepts": [
+        "hint:EthicalConstraint",
+        "hint:PrivacyConstraint",
+        "hint:AutonomyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:SkillsComplementarityPhenomenon",
+        "hint:TrustShiftPhenomenon",
+        "hint:RiskExposurePhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Cultural Heritage Steward",
+          "role_concept": "hint:BuilderRole",
+          "capabilities": [
+            {
+              "label": "Cultural Stewardship",
+              "concept": "hint:DomainSpecificCapability",
+              "allows_tasks": [
+                "Archival Footage Collection",
+                "Ethical Data Governance & Consent"
+              ]
+            },
+            {
+              "label": "Ethical Oversight",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Assess risks of misuse/misappropriation",
+                "Approve data sharing rules"
+              ]
+            },
+            {
+              "label": "Negotiation",
+              "concept": "hint:NegotiationCapability",
+              "allows_tasks": [
+                "Negotiate rights, consent, and access rules"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "Archival Footage AI System",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Multimodal Understanding (Video)",
+              "concept": "hint:MultimodalInterpretationCapability",
+              "allows_tasks": [
+                "Video segmentation",
+                "Metadata tagging"
+              ]
+            },
+            {
+              "label": "Perception / Sensing",
+              "concept": "hint:PerceptionSensingCapability",
+              "allows_tasks": [
+                "Depth estimation from video"
+              ]
+            },
+            {
+              "label": "Pattern Learning",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Learn patterns of craft processes"
+              ]
+            },
+            {
+              "label": "Reinforcement Learning",
+              "concept": "hint:ReinforcementLearningCapability",
+              "allows_tasks": [
+                "Learn from demonstrations for robotic skill"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Ethical Preservation of Cultural Heritage",
+        "goal_concept": "hint:EnhancedVisitorGoal",
+        "tasks": [
+          {
+            "label": "Archival Footage Collection",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:DomainSpecificCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Video Segmentation & Metadata Tagging",
+            "task_concept": "hint:MultimodalInputInterpretationTask",
+            "required_capabilities": [
+              "hint:MultimodalInterpretationCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Ethical Data Governance & Consent",
+            "task_concept": "hint:AllocationNegotationTask",
+            "required_capabilities": [
+              "hint:NegotiationCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Skill Learning from Archival Video",
+            "task_concept": "hint:PolicyLearningTask",
+            "required_capabilities": [
+              "hint:ReinforcementLearningCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "Consent & Governance Negotiation",
+        "modality_concept": "hint:DashboardModality",
+        "intent_concept": "hint:NegotiationIntent",
+        "agents_involved": [
+          "Cultural Heritage Steward",
+          "Archival Footage AI System"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Collect Footage",
+        "task_label": "Archival Footage Collection",
+        "performed_by": "Cultural Heritage Steward",
+        "method_concept": "hint:KnowledgeGraphQueryMethod"
+      },
+      {
+        "label": "Process Video (Segment/Tag/Depth)",
+        "task_label": "Video Segmentation & Metadata Tagging",
+        "performed_by": "Archival Footage AI System",
+        "method_concept": "hint:SemanticEmbeddingMethod"
+      },
+      {
+        "label": "Negotiate Governance Rules",
+        "task_label": "Ethical Data Governance & Consent",
+        "performed_by": "Cultural Heritage Steward",
+        "method_concept": "hint:ArgumentationReasoningMethod"
+      },
+      {
+        "label": "Learn Skills from Demonstrations",
+        "task_label": "Skill Learning from Archival Video",
+        "performed_by": "Archival Footage AI System",
+        "method_concept": "hint:ReinforcementLearningMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Ethical Data Governance Evaluation",
+      "evaluation_concepts": [
+        "hint:TransparencyEvaluation",
+        "hint:NegotationImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TrustPreservationMetric",
+        "hint:InformationQualityMetric"
+      ],
+      "experiments": []
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:EthicalArchivalFootageTraining",
+      "label": "Ethical Archival Footage Training",
+      "definition": "Training AI systems from archival documentary footage under explicit governance rules to preserve community ownership, consent, and control.",
+      "broader": "hint:DataCollectionTask",
+      "category": "Method"
+    }
+  ]
+}
