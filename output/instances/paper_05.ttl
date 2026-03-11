@@ -4,6 +4,7 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_05 a hi:Paper ;
@@ -12,9 +13,9 @@ inst:Paper_05 a hi:Paper ;
         inst:Paper_05_Author2,
         inst:Paper_05_Author3,
         inst:Paper_05_Author4 ;
-    hi:hasKeyword "Adaptive Systems",
-        "Ethical Trust",
-        "Hybrid Autonomy" ;
+    hi:hasKeyword inst:Keyword_AdaptiveSystems,
+        inst:Keyword_EthicalTrust,
+        inst:Keyword_HybridAutonomy ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Hybrid Autonomy: Towards a Unified Framework on Adaptability and Ethical Trust in Autonomous Systems"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
@@ -38,21 +39,17 @@ inst:HHAI2025 a hi:Conference ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
 
-inst:Paper_05_AssistiveRobot_Cap_AdaptiveAutonomy a hi:Capability ;
-    rdfs:label "Adaptive Autonomy" ;
-    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+inst:Keyword_AdaptiveSystems a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Adaptive Systems"@en .
 
-inst:Paper_05_AssistiveRobot_Cap_SituationalAwareness a hi:Capability ;
-    rdfs:label "Situational Awareness" ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+inst:Keyword_EthicalTrust a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Ethical Trust"@en .
 
-inst:Paper_05_AssistiveRobot_Cap_TaskExecution a hi:Capability ;
-    rdfs:label "Task Execution" ;
-    hi:hasCapabilityConcept hint:FineDexterityCapability .
-
-inst:Paper_05_AssistiveRobot_Cap_VerbalGuidance a hi:Capability ;
-    rdfs:label "Verbal Guidance" ;
-    hi:hasCapabilityConcept hint:ExplainingCapability .
+inst:Keyword_HybridAutonomy a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Hybrid Autonomy"@en .
 
 inst:Paper_05_Author1 a hi:Author ;
     foaf:name "Beatrice Melis" ;
@@ -136,16 +133,41 @@ inst:Paper_05_AssistiveRobot a hi:ArtificialAgent ;
     hi:performsExecution inst:Paper_05_Exec_AdjustAutonomyLevel,
         inst:Paper_05_Exec_ExecuteHygieneTask .
 
+inst:Paper_05_AssistiveRobot_Cap_AdaptiveAutonomy a hi:Capability ;
+    rdfs:label "Adaptive Autonomy" ;
+    hi:allowsTask inst:Paper_05_Task_AutonomyAdjustment ;
+    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+
+inst:Paper_05_AssistiveRobot_Cap_SituationalAwareness a hi:Capability ;
+    rdfs:label "Situational Awareness" ;
+    hi:allowsTask inst:Paper_05_Task_MonitorPatientState ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_05_AssistiveRobot_Cap_TaskExecution a hi:Capability ;
+    rdfs:label "Task Execution" ;
+    hi:allowsTask inst:Paper_05_Task_HygieneAssistance ;
+    hi:hasCapabilityConcept hint:FineDexterityCapability .
+
+inst:Paper_05_AssistiveRobot_Cap_VerbalGuidance a hi:Capability ;
+    rdfs:label "Verbal Guidance" ;
+    hi:allowsTask inst:Paper_05_Task_ProvideInstructions ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
 inst:Paper_05_Patient a hi:HumanAgent ;
     rdfs:label "Patient" ;
     hi:hasCapability inst:Paper_05_Patient_Cap_FeedbackProvision,
         inst:Paper_05_Patient_Cap_ProvidePreferences ;
     hi:hasRoleConcept hint:HumanUserRole .
 
+inst:Paper_05_Patient_Cap_ProvidePreferences a hi:Capability ;
+    rdfs:label "Provide Preferences" ;
+    hi:allowsTask inst:Paper_05_Task_PreferenceCommunication ;
+    hi:hasCapabilityConcept hint:SelfReportingCapability .
+
 inst:Paper_05_Task_MonitorPatientState a hi:Task ;
     rdfs:label "Monitor Patient State" ;
     hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_05_Patient_Cap_ProvidePreferences .
+    hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_SituationalAwareness .
 
 inst:Paper_05_Task_PreferenceCommunication a hi:Task ;
     rdfs:label "Preference Communication" ;
@@ -155,7 +177,7 @@ inst:Paper_05_Task_PreferenceCommunication a hi:Task ;
 inst:Paper_05_Task_ProvideInstructions a hi:Task ;
     rdfs:label "Provide Instructions" ;
     hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Paper_05_Patient_Cap_ProvidePreferences .
+    hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_VerbalGuidance .
 
 inst:Paper_05_Team a hi:HITeam ;
     rdfs:label "Adaptive Autonomy in Care Robots Team" ;
@@ -167,19 +189,10 @@ inst:Paper_05_Team a hi:HITeam ;
 inst:Paper_05_Task_AutonomyAdjustment a hi:Task ;
     rdfs:label "Autonomy Adjustment" ;
     hi:hasTaskConcept hint:DecideInterventionTask ;
-    hi:requiresCapability inst:Paper_05_Patient_Cap_ProvidePreferences .
+    hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_AdaptiveAutonomy .
 
 inst:Paper_05_Task_HygieneAssistance a hi:Task ;
     rdfs:label "Hygiene Assistance" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_05_Patient_Cap_ProvidePreferences .
-
-inst:Paper_05_Patient_Cap_ProvidePreferences a hi:Capability ;
-    rdfs:label "Provide Preferences" ;
-    hi:allowsTask inst:Paper_05_Task_AutonomyAdjustment,
-        inst:Paper_05_Task_HygieneAssistance,
-        inst:Paper_05_Task_MonitorPatientState,
-        inst:Paper_05_Task_PreferenceCommunication,
-        inst:Paper_05_Task_ProvideInstructions ;
-    hi:hasCapabilityConcept hint:SelfReportingCapability .
+    hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_TaskExecution .
 

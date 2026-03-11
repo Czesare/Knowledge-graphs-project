@@ -4,6 +4,7 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_02 a hi:Paper ;
@@ -12,9 +13,9 @@ inst:Paper_02 a hi:Paper ;
         inst:Paper_02_Author2,
         inst:Paper_02_Author3,
         inst:Paper_02_Author4 ;
-    hi:hasKeyword "Conversational AI",
-        "Information extraction",
-        "Social Conversations" ;
+    hi:hasKeyword inst:Keyword_ConversationalAi,
+        inst:Keyword_InformationExtraction,
+        inst:Keyword_SocialConversations ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Extracting Triples from Dialogues for Conversational Social Agents"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
@@ -40,6 +41,18 @@ inst:HHAI2025 a hi:Conference ;
     rdfs:label "HHAI 2025" ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Keyword_ConversationalAi a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Conversational AI"@en .
+
+inst:Keyword_InformationExtraction a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Information extraction"@en .
+
+inst:Keyword_SocialConversations a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Social Conversations"@en .
 
 inst:Paper_02_Author1 a hi:Author ;
     foaf:name "Piek Vossen" ;
@@ -69,10 +82,6 @@ inst:Paper_02_Context a hi:Context ;
     hi:hasPhenomenonConcept hint:KnowledgeMismatchPhenomenon,
         hint:TrustShiftPhenomenon .
 
-inst:Paper_02_DialogueAnnotator_Cap_JudgmentCapability a hi:Capability ;
-    rdfs:label "Judgment Capability" ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
-
 inst:Paper_02_Exec_TripleExtractionExecution a hi:TaskExecution ;
     rdfs:label "Triple Extraction Execution" ;
     hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
@@ -96,10 +105,6 @@ inst:Paper_02_TripleExtractionModel_Cap_PatternRecognitionCapability a hi:Capabi
     rdfs:label "Pattern Recognition Capability" ;
     hi:hasCapabilityConcept hint:PatternLearningCapability .
 
-inst:Paper_02_TripleExtractionModel_Cap_TripleExtractionCapability a hi:Capability ;
-    rdfs:label "Triple Extraction Capability" ;
-    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
-
 inst:Paper_02_UseCase a hi:ResearchUseCase ;
     rdfs:label "Triple Extraction in Social Conversations" ;
     hi:hasDomainConcept hint:DigitalMuseumDomain ;
@@ -111,6 +116,16 @@ inst:Paper_02_DialogueAnnotator a hi:HumanAgent ;
         inst:Paper_02_DialogueAnnotator_Cap_JudgmentCapability ;
     hi:hasRoleConcept hint:HumanUserRole .
 
+inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability a hi:Capability ;
+    rdfs:label "Annotation Capability" ;
+    hi:allowsTask inst:Paper_02_Task_AnnotateDialogueTurns ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
+inst:Paper_02_DialogueAnnotator_Cap_JudgmentCapability a hi:Capability ;
+    rdfs:label "Judgment Capability" ;
+    hi:allowsTask inst:Paper_02_Task_EvaluateTripleExtraction ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+
 inst:Paper_02_Task_AnnotateDialogueTurns a hi:Task ;
     rdfs:label "Annotate Dialogue Turns" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
@@ -119,7 +134,7 @@ inst:Paper_02_Task_AnnotateDialogueTurns a hi:Task ;
 inst:Paper_02_Task_EvaluateTripleExtraction a hi:Task ;
     rdfs:label "Evaluate Triple Extraction" ;
     hi:hasTaskConcept hint:ConflictResolutionTask ;
-    hi:requiresCapability inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability .
+    hi:requiresCapability inst:Paper_02_DialogueAnnotator_Cap_JudgmentCapability .
 
 inst:Paper_02_Team a hi:HITeam ;
     rdfs:label "Triple Extraction in Social Conversations Team" ;
@@ -135,6 +150,11 @@ inst:Paper_02_TripleExtractionModel a hi:ArtificialAgent ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Paper_02_Exec_TripleExtractionExecution .
 
+inst:Paper_02_TripleExtractionModel_Cap_TripleExtractionCapability a hi:Capability ;
+    rdfs:label "Triple Extraction Capability" ;
+    hi:allowsTask inst:Paper_02_Task_ExtractTriplesFromDialogue ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
 inst:Affiliation_VrijeUniversiteitAmsterdam a hi:Affiliation ;
     rdfs:label "Vrije Universiteit Amsterdam" ;
     schema1:name "Vrije Universiteit Amsterdam" .
@@ -142,12 +162,5 @@ inst:Affiliation_VrijeUniversiteitAmsterdam a hi:Affiliation ;
 inst:Paper_02_Task_ExtractTriplesFromDialogue a hi:Task ;
     rdfs:label "Extract Triples from Dialogue" ;
     hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
-    hi:requiresCapability inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability .
-
-inst:Paper_02_DialogueAnnotator_Cap_AnnotationCapability a hi:Capability ;
-    rdfs:label "Annotation Capability" ;
-    hi:allowsTask inst:Paper_02_Task_AnnotateDialogueTurns,
-        inst:Paper_02_Task_EvaluateTripleExtraction,
-        inst:Paper_02_Task_ExtractTriplesFromDialogue ;
-    hi:hasCapabilityConcept hint:ExplainingCapability .
+    hi:requiresCapability inst:Paper_02_TripleExtractionModel_Cap_TripleExtractionCapability .
 

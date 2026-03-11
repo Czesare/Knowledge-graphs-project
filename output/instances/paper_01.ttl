@@ -4,6 +4,7 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_01 a hi:Paper ;
@@ -11,9 +12,9 @@ inst:Paper_01 a hi:Paper ;
     hi:hasAuthor inst:Paper_01_Author1,
         inst:Paper_01_Author2,
         inst:Paper_01_Author3 ;
-    hi:hasKeyword "Claim decomposition",
-        "Fact checking",
-        "Large Language Models" ;
+    hi:hasKeyword inst:Keyword_ClaimDecomposition,
+        inst:Keyword_FactChecking,
+        inst:Keyword_LargeLanguageModels ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Exploring Human-AI Synergy for Complex Claim Verification"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
@@ -36,6 +37,18 @@ inst:HHAI2025 a hi:Conference ;
     rdfs:label "HHAI 2025" ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Keyword_ClaimDecomposition a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Claim decomposition"@en .
+
+inst:Keyword_FactChecking a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Fact checking"@en .
+
+inst:Keyword_LargeLanguageModels a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Large Language Models"@en .
 
 inst:Paper_01_Author1 a hi:Author ;
     foaf:name "Shubhalaxmi Mukherjee" ;
@@ -97,29 +110,17 @@ inst:Paper_01_Goal_AccurateClaimVerification a hi:Goal ;
         inst:Paper_01_Task_QuestionGeneration,
         inst:Paper_01_Task_VeracityPrediction .
 
-inst:Paper_01_LargeLanguageModel_Cap_DataProcessing a hi:Capability ;
-    rdfs:label "Data Processing" ;
-    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
-
 inst:Paper_01_LargeLanguageModel_Cap_Generation a hi:Capability ;
     rdfs:label "Generation" ;
     hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
-
-inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition a hi:Capability ;
-    rdfs:label "Pattern Recognition" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
 
 inst:Paper_01_LargeLanguageModel_Cap_Speed a hi:Capability ;
     rdfs:label "Speed" ;
     hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
 
-inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
-
-inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight a hi:Capability ;
-    rdfs:label "Ethical Oversight" ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
+inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment a hi:Capability ;
+    rdfs:label "Domain Judgment" ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
 
 inst:Paper_01_ProfessionalFact-checker_Cap_FeedbackProvision a hi:Capability ;
     rdfs:label "Feedback Provision" ;
@@ -141,6 +142,16 @@ inst:Paper_01_LargeLanguageModel a hi:ArtificialAgent ;
         inst:Paper_01_Exec_PredictVeracity,
         inst:Paper_01_Exec_RetrieveEvidence .
 
+inst:Paper_01_LargeLanguageModel_Cap_DataProcessing a hi:Capability ;
+    rdfs:label "Data Processing" ;
+    hi:allowsTask inst:Paper_01_Task_EvidenceRetrieval ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:allowsTask inst:Paper_01_Task_QuestionGeneration ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
 inst:Paper_01_ProfessionalFact-checker a hi:HumanAgent ;
     rdfs:label "Professional Fact-Checker" ;
     hi:hasCapability inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding,
@@ -150,10 +161,15 @@ inst:Paper_01_ProfessionalFact-checker a hi:HumanAgent ;
     hi:hasRoleConcept hint:JurorRole ;
     hi:performsExecution inst:Paper_01_Exec_DecomposeClaim .
 
+inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:allowsTask inst:Paper_01_Task_EvidenceAssessment ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
 inst:Paper_01_Task_EvidenceAssessment a hi:Task ;
     rdfs:label "Evidence Assessment" ;
     hi:hasTaskConcept hint:AssessCommunicationAccuracy ;
-    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight .
 
 inst:Paper_01_Team a hi:HITeam ;
     rdfs:label "Complex Claim Verification Team" ;
@@ -166,32 +182,29 @@ inst:Affiliation_DelftUniversityOfTechnology a hi:Affiliation ;
     rdfs:label "Delft University of Technology" ;
     schema1:name "Delft University of Technology" .
 
+inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:allowsTask inst:Paper_01_Task_ClaimDecomposition,
+        inst:Paper_01_Task_VeracityPrediction ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
+
 inst:Paper_01_Task_ClaimDecomposition a hi:Task ;
     rdfs:label "Claim Decomposition" ;
     hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
-    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding .
 
 inst:Paper_01_Task_EvidenceRetrieval a hi:Task ;
     rdfs:label "Evidence Retrieval" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_DataProcessing .
 
 inst:Paper_01_Task_QuestionGeneration a hi:Task ;
     rdfs:label "Question Generation" ;
     hi:hasTaskConcept hint:QuestionAnsweringTask ;
-    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition .
 
 inst:Paper_01_Task_VeracityPrediction a hi:Task ;
     rdfs:label "Veracity Prediction" ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment .
-
-inst:Paper_01_ProfessionalFact-checker_Cap_DomainJudgment a hi:Capability ;
-    rdfs:label "Domain Judgment" ;
-    hi:allowsTask inst:Paper_01_Task_ClaimDecomposition,
-        inst:Paper_01_Task_EvidenceAssessment,
-        inst:Paper_01_Task_EvidenceRetrieval,
-        inst:Paper_01_Task_QuestionGeneration,
-        inst:Paper_01_Task_VeracityPrediction ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+    hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_ContextualUnderstanding .
 

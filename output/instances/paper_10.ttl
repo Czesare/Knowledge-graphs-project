@@ -4,189 +4,193 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_10 a hi:Paper ;
     hi:describesUseCase inst:Paper_10_UseCase ;
     hi:hasAuthor inst:Paper_10_Author1,
         inst:Paper_10_Author2 ;
-    hi:hasKeyword "Artificial Intelligence",
-        "craftsmanship",
-        "salvage ethnography",
-        "robotics" ;
+    hi:hasKeyword inst:Keyword_ArtificialIntelligence,
+        inst:Keyword_Craftsmanship,
+        inst:Keyword_Robotics,
+        inst:Keyword_SalvageEthnography ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Hybrid Human-AI Systems for Preserving Cultural Heritage and Craftsmanship"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_10_Evaluation a hi:Evaluation ;
+    rdfs:label "Ethical Data Governance Evaluation" ;
+    hi:hasEvaluationConcept hint:NegotationImpactEvaluation,
+        hint:TransparencyEvaluation ;
+    hi:hasMetricConcept hint:InformationQualityMetric,
+        hint:TrustPreservationMetric .
+
+inst:Paper_10_Interaction_ConsentGovernanceNegotiation a hi:Interaction ;
+    rdfs:label "Consent & Governance Negotiation" ;
+    hi:hasAgentInvolved inst:Paper_10_ArchivalFootageAiSystem,
+        inst:Paper_10_CulturalHeritageSteward ;
+    hi:hasInteractionIntentConcept hint:NegotiationIntent ;
+    hi:hasInteractionModalityConcept hint:DashboardModality .
+
+inst:Affiliation_SmartbearSoftware a hi:Affiliation ;
+    rdfs:label "SmartBear Software" ;
+    schema1:name "SmartBear Software" .
+
+inst:Affiliation_UniversityOfCaliforniaSanDiego a hi:Affiliation ;
+    rdfs:label "University of California, San Diego" ;
+    schema1:name "University of California, San Diego" .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Keyword_ArtificialIntelligence a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Artificial Intelligence"@en .
+
+inst:Keyword_Craftsmanship a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "craftsmanship"@en .
+
+inst:Keyword_Robotics a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "robotics"@en .
+
+inst:Keyword_SalvageEthnography a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "salvage ethnography"@en .
+
+inst:Paper_10_ArchivalFootageAiSystem_Cap_PatternLearning a hi:Capability ;
+    rdfs:label "Pattern Learning" ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_10_ArchivalFootageAiSystem_Cap_PerceptionSensing a hi:Capability ;
+    rdfs:label "Perception / Sensing" ;
+    hi:hasCapabilityConcept hint:PerceptionSensingCapability .
+
+inst:Paper_10_Author1 a hi:Author ;
+    foaf:name "Alexandra McDougall" ;
+    hi:hasAffiliation inst:Affiliation_SmartbearSoftware ;
+    hi:hasAuthorName "Alexandra McDougall"^^xsd:string .
+
+inst:Paper_10_Author2 a hi:Author ;
+    foaf:name "Hortense Gerardo" ;
+    hi:hasAffiliation inst:Affiliation_UniversityOfCaliforniaSanDiego ;
+    hi:hasAuthorName "Hortense Gerardo"^^xsd:string .
+
+inst:Paper_10_Context a hi:Context ;
+    rdfs:label "Archival footage training context" ;
+    hi:hasConstraintConcept hint:AutonomyConstraint,
+        hint:EthicalConstraint,
+        hint:PrivacyConstraint ;
+    hi:hasContextConcept hint:VirtualExhibitionContext ;
+    hi:hasInfluenceOn inst:Paper_10_Team ;
+    hi:hasPhenomenonConcept hint:RiskExposurePhenomenon,
+        hint:SkillsComplementarityPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_10_CulturalHeritageSteward_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_10_Exec_CollectFootage a hi:TaskExecution ;
+    rdfs:label "Collect Footage" ;
+    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
+    hi:realizesTask inst:Paper_10_Task_ArchivalFootageCollection .
+
+inst:Paper_10_Exec_LearnSkillsFromDemonstrations a hi:TaskExecution ;
+    rdfs:label "Learn Skills from Demonstrations" ;
+    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
+    hi:realizesTask inst:Paper_10_Task_SkillLearningFromArchivalVideo .
+
+inst:Paper_10_Exec_NegotiateGovernanceRules a hi:TaskExecution ;
+    rdfs:label "Negotiate Governance Rules" ;
+    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
+    hi:realizesTask inst:Paper_10_Task_EthicalDataGovernanceConsent .
+
+inst:Paper_10_Exec_ProcessVideoSegmenttagdepth a hi:TaskExecution ;
+    rdfs:label "Process Video (Segment/Tag/Depth)" ;
+    hi:hasMethodConcept hint:SemanticEmbeddingMethod ;
+    hi:realizesTask inst:Paper_10_Task_VideoSegmentationMetadataTagging .
+
+inst:Paper_10_Goal_EthicalPreservationOfCulturalHeritage a hi:Goal ;
+    rdfs:label "Ethical Preservation of Cultural Heritage" ;
+    hi:hasGoalConcept hint:EnhancedVisitorGoal ;
+    hi:requiresTask inst:Paper_10_Task_ArchivalFootageCollection,
+        inst:Paper_10_Task_EthicalDataGovernanceConsent,
+        inst:Paper_10_Task_SkillLearningFromArchivalVideo,
+        inst:Paper_10_Task_VideoSegmentationMetadataTagging .
 
 inst:Paper_10_UseCase a hi:ResearchUseCase ;
     rdfs:label "Cultural Heritage & Craftsmanship Preservation" ;
     hi:hasDomainConcept hint:DigitalMuseumDomain ;
     hi:hasHITeam inst:Paper_10_Team .
 
-inst:Paper_10_Context a hi:Context ;
-    rdfs:label "Archival footage training context" ;
-    hi:hasContextConcept hint:VirtualExhibitionContext ;
-    hi:hasConstraintConcept hint:EthicalConstraint,
-        hint:PrivacyConstraint,
-        hint:AutonomyConstraint ;
-    hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
-        hint:TrustShiftPhenomenon,
-        hint:RiskExposurePhenomenon ;
-    hi:hasInfluenceOn inst:Paper_10_Team .
+inst:Paper_10_ArchivalFootageAiSystem a hi:ArtificialAgent ;
+    rdfs:label "Archival Footage AI System" ;
+    hi:hasCapability inst:Paper_10_ArchivalFootageAiSystem_Cap_MultimodalUnderstandingVideo,
+        inst:Paper_10_ArchivalFootageAiSystem_Cap_PatternLearning,
+        inst:Paper_10_ArchivalFootageAiSystem_Cap_PerceptionSensing,
+        inst:Paper_10_ArchivalFootageAiSystem_Cap_ReinforcementLearning ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_10_Exec_LearnSkillsFromDemonstrations,
+        inst:Paper_10_Exec_ProcessVideoSegmenttagdepth .
+
+inst:Paper_10_ArchivalFootageAiSystem_Cap_MultimodalUnderstandingVideo a hi:Capability ;
+    rdfs:label "Multimodal Understanding (Video)" ;
+    hi:allowsTask inst:Paper_10_Task_VideoSegmentationMetadataTagging ;
+    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
+
+inst:Paper_10_ArchivalFootageAiSystem_Cap_ReinforcementLearning a hi:Capability ;
+    rdfs:label "Reinforcement Learning" ;
+    hi:allowsTask inst:Paper_10_Task_SkillLearningFromArchivalVideo ;
+    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+
+inst:Paper_10_CulturalHeritageSteward a hi:HumanAgent ;
+    rdfs:label "Cultural Heritage Steward" ;
+    hi:hasCapability inst:Paper_10_CulturalHeritageSteward_Cap_CulturalStewardship,
+        inst:Paper_10_CulturalHeritageSteward_Cap_EthicalOversight,
+        inst:Paper_10_CulturalHeritageSteward_Cap_Negotiation ;
+    hi:hasRoleConcept hint:BuilderRole ;
+    hi:performsExecution inst:Paper_10_Exec_CollectFootage,
+        inst:Paper_10_Exec_NegotiateGovernanceRules .
+
+inst:Paper_10_CulturalHeritageSteward_Cap_CulturalStewardship a hi:Capability ;
+    rdfs:label "Cultural Stewardship" ;
+    hi:allowsTask inst:Paper_10_Task_ArchivalFootageCollection ;
+    hi:hasCapabilityConcept hint:DomainSpecificCapability .
+
+inst:Paper_10_CulturalHeritageSteward_Cap_Negotiation a hi:Capability ;
+    rdfs:label "Negotiation" ;
+    hi:allowsTask inst:Paper_10_Task_EthicalDataGovernanceConsent ;
+    hi:hasCapabilityConcept hint:NegotiationCapability .
 
 inst:Paper_10_Team a hi:HITeam ;
-    rdfs:label "Cultural Heritage Preservation Team" ;
-    hi:hasGoal inst:Paper_10_Goal_EthicalHeritagePreservation ;
-    hi:hasMember inst:Paper_10_ArchivalFootageAISystem,
+    rdfs:label "Cultural Heritage & Craftsmanship Preservation Team" ;
+    hi:hasGoal inst:Paper_10_Goal_EthicalPreservationOfCulturalHeritage ;
+    hi:hasMember inst:Paper_10_ArchivalFootageAiSystem,
         inst:Paper_10_CulturalHeritageSteward ;
     hi:isInfluencedBy inst:Paper_10_Context .
 
-inst:Paper_10_Goal_EthicalHeritagePreservation a hi:Goal ;
-    rdfs:label "Ethical Preservation of Cultural Heritage" ;
-    hi:hasGoalConcept hint:EnhancedVisitorGoal ;
-    hi:requiresTask inst:Paper_10_Task_ArchivalFootageCollection,
-        inst:Paper_10_Task_VideoSegmentationAndTagging,
-        inst:Paper_10_Task_DataGovernanceNegotiation,
-        inst:Paper_10_Task_SkillLearningFromVideo .
-
-# -------------------------
-# Authors + affiliations
-# -------------------------
-inst:Paper_10_Author1 a hi:Author ;
-    foaf:name "Alexandra McDougall" ;
-    hi:hasAffiliation inst:Affiliation_SmartBearSoftware ;
-    hi:hasAuthorName "Alexandra McDougall"^^xsd:string .
-
-inst:Paper_10_Author2 a hi:Author ;
-    foaf:name "Hortense Gerardo" ;
-    hi:hasAffiliation inst:Affiliation_UCSD ;
-    hi:hasAuthorName "Hortense Gerardo"^^xsd:string .
-
-inst:Affiliation_SmartBearSoftware a hi:Affiliation ;
-    rdfs:label "SmartBear Software" ;
-    schema1:name "SmartBear Software" .
-
-inst:Affiliation_UCSD a hi:Affiliation ;
-    rdfs:label "University of California, San Diego" ;
-    schema1:name "University of California, San Diego" .
-
-# -------------------------
-# Agents
-# -------------------------
-inst:Paper_10_CulturalHeritageSteward a hi:HumanAgent ;
-    rdfs:label "Cultural Heritage Steward" ;
-    hi:hasRoleConcept hint:BuilderRole ;
-    hi:hasCapability inst:Paper_10_HumanCap_CulturalStewardship,
-        inst:Paper_10_HumanCap_EthicalOversight,
-        inst:Paper_10_HumanCap_Negotiation ;
-    hi:performsExecution inst:Paper_10_Exec_CollectFootage,
-        inst:Paper_10_Exec_NegotiateGovernance .
-
-inst:Paper_10_ArchivalFootageAISystem a hi:ArtificialAgent ;
-    rdfs:label "Archival Footage AI System" ;
-    hi:hasRoleConcept hint:AIAssistantRole ;
-    hi:hasCapability inst:Paper_10_AICap_MultimodalUnderstanding,
-        inst:Paper_10_AICap_PerceptionSensing,
-        inst:Paper_10_AICap_PatternLearning,
-        inst:Paper_10_AICap_ReinforcementLearning ;
-    hi:performsExecution inst:Paper_10_Exec_ProcessVideo,
-        inst:Paper_10_Exec_LearnSkills .
-
-# -------------------------
-# Capabilities
-# -------------------------
-inst:Paper_10_HumanCap_CulturalStewardship a hi:Capability ;
-    rdfs:label "Cultural Stewardship" ;
-    hi:hasCapabilityConcept hint:DomainSpecificCapability ;
-    hi:allowsTask inst:Paper_10_Task_ArchivalFootageCollection,
-        inst:Paper_10_Task_DataGovernanceNegotiation .
-
-inst:Paper_10_HumanCap_EthicalOversight a hi:Capability ;
-    rdfs:label "Ethical Oversight" ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
-
-inst:Paper_10_HumanCap_Negotiation a hi:Capability ;
-    rdfs:label "Negotiation" ;
-    hi:hasCapabilityConcept hint:NegotiationCapability .
-
-inst:Paper_10_AICap_MultimodalUnderstanding a hi:Capability ;
-    rdfs:label "Multimodal Understanding (Video)" ;
-    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
-
-inst:Paper_10_AICap_PerceptionSensing a hi:Capability ;
-    rdfs:label "Perception / Sensing" ;
-    hi:hasCapabilityConcept hint:PerceptionSensingCapability .
-
-inst:Paper_10_AICap_PatternLearning a hi:Capability ;
-    rdfs:label "Pattern Learning" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
-
-inst:Paper_10_AICap_ReinforcementLearning a hi:Capability ;
-    rdfs:label "Reinforcement Learning" ;
-    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
-
-# -------------------------
-# Tasks
-# -------------------------
 inst:Paper_10_Task_ArchivalFootageCollection a hi:Task ;
     rdfs:label "Archival Footage Collection" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_10_HumanCap_CulturalStewardship .
+    hi:requiresCapability inst:Paper_10_CulturalHeritageSteward_Cap_CulturalStewardship .
 
-inst:Paper_10_Task_VideoSegmentationAndTagging a hi:Task ;
-    rdfs:label "Video Segmentation & Metadata Tagging" ;
-    hi:hasTaskConcept hint:MultimodalInputInterpretationTask ;
-    hi:requiresCapability inst:Paper_10_AICap_MultimodalUnderstanding .
-
-inst:Paper_10_Task_DataGovernanceNegotiation a hi:Task ;
+inst:Paper_10_Task_EthicalDataGovernanceConsent a hi:Task ;
     rdfs:label "Ethical Data Governance & Consent" ;
     hi:hasTaskConcept hint:AllocationNegotationTask ;
-    hi:requiresCapability inst:Paper_10_HumanCap_Negotiation .
+    hi:requiresCapability inst:Paper_10_CulturalHeritageSteward_Cap_Negotiation .
 
-inst:Paper_10_Task_SkillLearningFromVideo a hi:Task ;
+inst:Paper_10_Task_SkillLearningFromArchivalVideo a hi:Task ;
     rdfs:label "Skill Learning from Archival Video" ;
     hi:hasTaskConcept hint:PolicyLearningTask ;
-    hi:requiresCapability inst:Paper_10_AICap_ReinforcementLearning .
+    hi:requiresCapability inst:Paper_10_ArchivalFootageAiSystem_Cap_ReinforcementLearning .
 
-# -------------------------
-# Task executions (linked to methods that already exist in the thesaurus)
-# -------------------------
-inst:Paper_10_Exec_CollectFootage a hi:TaskExecution ;
-    rdfs:label "Collect Footage" ;
-    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
-    hi:realizesTask inst:Paper_10_Task_ArchivalFootageCollection .
+inst:Paper_10_Task_VideoSegmentationMetadataTagging a hi:Task ;
+    rdfs:label "Video Segmentation & Metadata Tagging" ;
+    hi:hasTaskConcept hint:MultimodalInputInterpretationTask ;
+    hi:requiresCapability inst:Paper_10_ArchivalFootageAiSystem_Cap_MultimodalUnderstandingVideo .
 
-inst:Paper_10_Exec_ProcessVideo a hi:TaskExecution ;
-    rdfs:label "Process Video (Segment/Tag/Depth)" ;
-    hi:hasMethodConcept hint:SemanticEmbeddingMethod ;
-    hi:realizesTask inst:Paper_10_Task_VideoSegmentationAndTagging .
-
-inst:Paper_10_Exec_NegotiateGovernance a hi:TaskExecution ;
-    rdfs:label "Negotiate Governance Rules" ;
-    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
-    hi:realizesTask inst:Paper_10_Task_DataGovernanceNegotiation .
-
-inst:Paper_10_Exec_LearnSkills a hi:TaskExecution ;
-    rdfs:label "Learn Skills from Demonstrations" ;
-    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
-    hi:realizesTask inst:Paper_10_Task_SkillLearningFromVideo .
-
-# -------------------------
-# Interaction
-# -------------------------
-inst:Paper_10_Interaction_GovernanceNegotiation a hi:Interaction ;
-    rdfs:label "Consent & Governance Negotiation" ;
-    hi:hasAgentInvolved inst:Paper_10_ArchivalFootageAISystem,
-        inst:Paper_10_CulturalHeritageSteward ;
-    hi:hasInteractionIntentConcept hint:NegotiationIntent ;
-    hi:hasInteractionModalityConcept hint:DashboardModality .
-
-# -------------------------
-# Evaluation (proposal-level; keep lightweight)
-# -------------------------
-inst:Paper_10_Evaluation a hi:Evaluation ;
-    rdfs:label "Ethical Data Governance Evaluation" ;
-    hi:hasEvaluationConcept hint:TransparencyEvaluation,
-        hint:NegotationImpactEvaluation ;
-    hi:hasMetricConcept hint:TrustPreservationMetric,
-        hint:InformationQualityMetric .

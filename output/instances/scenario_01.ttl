@@ -35,14 +35,6 @@ inst:Scenario_01_AiSecuritySystem_Cap_ContinuousLearning a hi:Capability ;
     rdfs:label "Continuous Learning" ;
     hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
 
-inst:Scenario_01_AiSecuritySystem_Cap_PatternRecognition a hi:Capability ;
-    rdfs:label "Pattern Recognition" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
-
-inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation a hi:Capability ;
-    rdfs:label "Quick Explanation" ;
-    hi:hasCapabilityConcept hint:ExplainingCapability .
-
 inst:Scenario_01_Context a hi:Context ;
     rdfs:label "Election Day Cybersecurity" ;
     hi:hasConstraintConcept hint:SafetyConstraint,
@@ -55,10 +47,6 @@ inst:Scenario_01_Context a hi:Context ;
 inst:Scenario_01_CybersecurityExpert_Cap_Communication a hi:Capability ;
     rdfs:label "Communication" ;
     hi:hasCapabilityConcept hint:ExplainingCapability .
-
-inst:Scenario_01_CybersecurityExpert_Cap_DecisionMaking a hi:Capability ;
-    rdfs:label "Decision Making" ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
 
 inst:Scenario_01_Exec_ExecuteBlocking a hi:TaskExecution ;
     rdfs:label "Execute Blocking" ;
@@ -92,15 +80,30 @@ inst:Scenario_01_Goal_EnsureVotingSystemSecurity a hi:Goal ;
         inst:Scenario_01_Task_ProvideQuickExplanation,
         inst:Scenario_01_Task_UnblockIps .
 
+inst:Scenario_01_AiSecuritySystem_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:allowsTask inst:Scenario_01_Task_BlockSuspectedIps ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:allowsTask inst:Scenario_01_Task_Cross-checkPredictions ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Scenario_01_CybersecurityExpert_Cap_DecisionMaking a hi:Capability ;
+    rdfs:label "Decision Making" ;
+    hi:allowsTask inst:Scenario_01_Task_UnblockIps ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
 inst:Scenario_01_Task_ProvideFeedback a hi:Task ;
     rdfs:label "Provide Feedback" ;
     hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation .
 
 inst:Scenario_01_Task_ProvideQuickExplanation a hi:Task ;
     rdfs:label "Provide Quick Explanation" ;
     hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation .
 
 inst:Scenario_01_Team a hi:HITeam ;
     rdfs:label "Cybersecurity Response for Voting System Team" ;
@@ -117,6 +120,12 @@ inst:Scenario_01_AiSecuritySystem a hi:ArtificialAgent ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Scenario_01_Exec_ExecuteBlocking .
 
+inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation a hi:Capability ;
+    rdfs:label "Quick Explanation" ;
+    hi:allowsTask inst:Scenario_01_Task_ProvideFeedback,
+        inst:Scenario_01_Task_ProvideQuickExplanation ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
 inst:Scenario_01_CybersecurityExpert a hi:HumanAgent ;
     rdfs:label "Cybersecurity Expert" ;
     hi:hasCapability inst:Scenario_01_CybersecurityExpert_Cap_Communication,
@@ -129,7 +138,7 @@ inst:Scenario_01_CybersecurityExpert a hi:HumanAgent ;
 inst:Scenario_01_Task_BlockSuspectedIps a hi:Task ;
     rdfs:label "Block Suspected IPs" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_PatternRecognition .
 
 inst:Scenario_01_Task_Cross-checkPredictions a hi:Task ;
     rdfs:label "Cross-check Predictions" ;
@@ -139,14 +148,5 @@ inst:Scenario_01_Task_Cross-checkPredictions a hi:Task ;
 inst:Scenario_01_Task_UnblockIps a hi:Task ;
     rdfs:label "Unblock IPs" ;
     hi:hasTaskConcept hint:ConflictResolutionTask ;
-    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding .
-
-inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:allowsTask inst:Scenario_01_Task_BlockSuspectedIps,
-        inst:Scenario_01_Task_Cross-checkPredictions,
-        inst:Scenario_01_Task_ProvideFeedback,
-        inst:Scenario_01_Task_ProvideQuickExplanation,
-        inst:Scenario_01_Task_UnblockIps ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_DecisionMaking .
 

@@ -1,0 +1,18 @@
+predicate,subject,object,subject_label,object_label
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Agent,https://w3id.org/hi-ontology#Agent,,Agent
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Interaction,https://w3id.org/hi-ontology#Interaction,,Interaction
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/InteractionIntent,https://w3id.org/hi-ontology#InteractionIntent,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Capability,https://w3id.org/hi-ontology#Capability,,Capability
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/InteractionModality,https://w3id.org/hi-ontology#InteractionModality,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Domain,https://w3id.org/hi-ontology#Domain,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Goal,https://w3id.org/hi-ontology#Goal,,Goal
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/UseCase,https://w3id.org/hi-ontology#UseCase,,Use Case
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Context,https://w3id.org/hi-ontology#Context,,Context
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Experiment,https://w3id.org/hi-ontology#Experiment,,Experiment
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/EthicalConstraint,https://w3id.org/hi-ontology#EthicalConstraint,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Method,https://w3id.org/hi-ontology#Method,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Role,https://w3id.org/hi-ontology#Role,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Evaluation,https://w3id.org/hi-ontology#Evaluation,,Evaluation
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Metric,https://w3id.org/hi-ontology#Metric,,
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/TaskExecution,https://w3id.org/hi-ontology#TaskExecution,,Task Execution
+http://www.w3.org/2004/02/skos/core#exactMatch,https://w3id.org/hi-thesaurus/Task,https://w3id.org/hi-ontology#Task,,Task

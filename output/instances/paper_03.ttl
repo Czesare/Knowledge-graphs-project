@@ -4,6 +4,7 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_03 a hi:Paper ;
@@ -12,10 +13,10 @@ inst:Paper_03 a hi:Paper ;
         inst:Paper_03_Author2,
         inst:Paper_03_Author3,
         inst:Paper_03_Author4 ;
-    hi:hasKeyword "Decision Support Systems",
-        "Explainable Artificial Intelligence",
-        "Human-Computer Interaction",
-        "Interaction Design" ;
+    hi:hasKeyword inst:Keyword_DecisionSupportSystems,
+        inst:Keyword_ExplainableArtificialIntelligence,
+        inst:Keyword_Human-computerInteraction,
+        inst:Keyword_InteractionDesign ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Formalizing Explanation Design Through Interaction Patterns in Human-AI Decision Support"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
@@ -46,6 +47,22 @@ inst:HHAI2025 a hi:Conference ;
     rdfs:label "HHAI 2025" ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Keyword_DecisionSupportSystems a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Decision Support Systems"@en .
+
+inst:Keyword_ExplainableArtificialIntelligence a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Explainable Artificial Intelligence"@en .
+
+inst:Keyword_Human-computerInteraction a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Human-Computer Interaction"@en .
+
+inst:Keyword_InteractionDesign a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Interaction Design"@en .
 
 inst:Paper_03_Author1 a hi:Author ;
     foaf:name "Henry Maathuis" ;
@@ -94,10 +111,6 @@ inst:Paper_03_Experiment_ExplanationEffectivenessExperiment a hi:Experiment ;
         hint:TrustPreservationMetric ;
     hi:hasNullHypothesis "Explanation patterns do not improve decision-making."^^xsd:string .
 
-inst:Paper_03_ExplainableAiSystem_Cap_ExplanationGeneration a hi:Capability ;
-    rdfs:label "Explanation Generation" ;
-    hi:hasCapabilityConcept hint:ExplainingCapability .
-
 inst:Paper_03_ExplainableAiSystem_Cap_PatternRecognition a hi:Capability ;
     rdfs:label "Pattern Recognition" ;
     hi:hasCapabilityConcept hint:PatternLearningCapability .
@@ -108,10 +121,6 @@ inst:Paper_03_Goal_EnhanceDecision-making a hi:Goal ;
     hi:requiresTask inst:Paper_03_Task_AssessUserNeeds,
         inst:Paper_03_Task_DesignExplanationPatterns,
         inst:Paper_03_Task_GenerateExplanations .
-
-inst:Paper_03_InteractionDesigner_Cap_UserEngagementUnderstanding a hi:Capability ;
-    rdfs:label "User Engagement Understanding" ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
 
 inst:Paper_03_UseCase a hi:ResearchUseCase ;
     rdfs:label "Explanation Stream Patterns in DSS" ;
@@ -130,6 +139,11 @@ inst:Paper_03_ExplainableAiSystem a hi:ArtificialAgent ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Paper_03_Exec_GenerateExplanationsExecution .
 
+inst:Paper_03_ExplainableAiSystem_Cap_ExplanationGeneration a hi:Capability ;
+    rdfs:label "Explanation Generation" ;
+    hi:allowsTask inst:Paper_03_Task_GenerateExplanations ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
 inst:Paper_03_InteractionDesigner a hi:HumanAgent ;
     rdfs:label "Interaction Designer" ;
     hi:hasCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment,
@@ -137,10 +151,20 @@ inst:Paper_03_InteractionDesigner a hi:HumanAgent ;
     hi:hasRoleConcept hint:HumanUserRole ;
     hi:performsExecution inst:Paper_03_Exec_DesignExplanationPatternsExecution .
 
+inst:Paper_03_InteractionDesigner_Cap_DesignJudgment a hi:Capability ;
+    rdfs:label "Design Judgment" ;
+    hi:allowsTask inst:Paper_03_Task_DesignExplanationPatterns ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_03_InteractionDesigner_Cap_UserEngagementUnderstanding a hi:Capability ;
+    rdfs:label "User Engagement Understanding" ;
+    hi:allowsTask inst:Paper_03_Task_AssessUserNeeds ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
 inst:Paper_03_Task_AssessUserNeeds a hi:Task ;
     rdfs:label "Assess User Needs" ;
     hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment .
+    hi:requiresCapability inst:Paper_03_InteractionDesigner_Cap_UserEngagementUnderstanding .
 
 inst:Paper_03_Team a hi:HITeam ;
     rdfs:label "Explanation Stream Patterns in DSS Team" ;
@@ -157,12 +181,5 @@ inst:Paper_03_Task_DesignExplanationPatterns a hi:Task ;
 inst:Paper_03_Task_GenerateExplanations a hi:Task ;
     rdfs:label "Generate Explanations" ;
     hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Paper_03_InteractionDesigner_Cap_DesignJudgment .
-
-inst:Paper_03_InteractionDesigner_Cap_DesignJudgment a hi:Capability ;
-    rdfs:label "Design Judgment" ;
-    hi:allowsTask inst:Paper_03_Task_AssessUserNeeds,
-        inst:Paper_03_Task_DesignExplanationPatterns,
-        inst:Paper_03_Task_GenerateExplanations ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
+    hi:requiresCapability inst:Paper_03_ExplainableAiSystem_Cap_ExplanationGeneration .
 

@@ -30,14 +30,6 @@ inst:Scenario_03_Anna a hi:HumanAgent ;
     hi:hasRoleConcept hint:TutorRole ;
     hi:performsExecution inst:Scenario_03_Exec_AnnasChildAssessment .
 
-inst:Scenario_03_Anna_Cap_BehavioristApproach a hi:Capability ;
-    rdfs:label "Behaviorist Approach" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
-
-inst:Scenario_03_Anna_Cap_TherapeuticExpertise a hi:Capability ;
-    rdfs:label "Therapeutic Expertise" ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
-
 inst:Scenario_03_Context a hi:Context ;
     rdfs:label "School Intervention Context" ;
     hi:hasConstraintConcept hint:AutonomyConstraint,
@@ -59,7 +51,8 @@ inst:Scenario_03_Exec_LeahsEducationalPlanning a hi:TaskExecution ;
 
 inst:Scenario_03_Exec_NaoStimuliResponse a hi:TaskExecution ;
     rdfs:label "NAO Stimuli Response" ;
-    hi:hasMethodConcept hint:DataCollectionMethod .
+    hi:hasMethodConcept hint:DataCollectionMethod ;
+    hi:realizesTask inst:Scenario_03_Task_RobotInteractionTask .
 
 inst:Scenario_03_Experiment_LearningOutcomeExperiment a hi:Experiment ;
     rdfs:label "Learning Outcome Experiment" ;
@@ -77,17 +70,19 @@ inst:Scenario_03_Goal_ImproveLearningOutcomes a hi:Goal ;
         inst:Scenario_03_Task_GuidedInteractionTask,
         inst:Scenario_03_Task_RobotInteractionTask .
 
-inst:Scenario_03_Leah_Cap_PedagogicalSkills a hi:Capability ;
-    rdfs:label "Pedagogical Skills" ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
-
-inst:Scenario_03_NaoRobot_Cap_ReactiveResponse a hi:Capability ;
-    rdfs:label "Reactive Response" ;
-    hi:hasCapabilityConcept hint:SensingCapability .
-
-inst:Scenario_03_NaoRobot_Cap_WizardOfOzInteraction a hi:Capability ;
-    rdfs:label "Wizard of Oz Interaction" ;
+inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm a hi:Capability ;
+    rdfs:label "Technology Enthusiasm" ;
     hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
+
+inst:Scenario_03_Anna_Cap_BehavioristApproach a hi:Capability ;
+    rdfs:label "Behaviorist Approach" ;
+    hi:allowsTask inst:Scenario_03_Task_BehaviorTrainingTask ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Scenario_03_Anna_Cap_TherapeuticExpertise a hi:Capability ;
+    rdfs:label "Therapeutic Expertise" ;
+    hi:allowsTask inst:Scenario_03_Task_ChildAssessmentTask ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
 
 inst:Scenario_03_Leah a hi:HumanAgent ;
     rdfs:label "Leah" ;
@@ -96,6 +91,11 @@ inst:Scenario_03_Leah a hi:HumanAgent ;
     hi:hasRoleConcept hint:TutorRole ;
     hi:performsExecution inst:Scenario_03_Exec_LeahsEducationalPlanning .
 
+inst:Scenario_03_Leah_Cap_PedagogicalSkills a hi:Capability ;
+    rdfs:label "Pedagogical Skills" ;
+    hi:allowsTask inst:Scenario_03_Task_EducationalPlanningTask ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
 inst:Scenario_03_NaoRobot a hi:ArtificialAgent ;
     rdfs:label "NAO Robot" ;
     hi:hasCapability inst:Scenario_03_NaoRobot_Cap_ReactiveResponse,
@@ -103,20 +103,25 @@ inst:Scenario_03_NaoRobot a hi:ArtificialAgent ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Scenario_03_Exec_NaoStimuliResponse .
 
+inst:Scenario_03_NaoRobot_Cap_ReactiveResponse a hi:Capability ;
+    rdfs:label "Reactive Response" ;
+    hi:allowsTask inst:Scenario_03_Task_RobotInteractionTask ;
+    hi:hasCapabilityConcept hint:SensingCapability .
+
+inst:Scenario_03_NaoRobot_Cap_WizardOfOzInteraction a hi:Capability ;
+    rdfs:label "Wizard of Oz Interaction" ;
+    hi:allowsTask inst:Scenario_03_Task_GuidedInteractionTask ;
+    hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
+
 inst:Scenario_03_Task_BehaviorTrainingTask a hi:Task ;
     rdfs:label "Behavior Training Task" ;
     hi:hasTaskConcept hint:PolicyLearningTask ;
-    hi:requiresCapability inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm .
+    hi:requiresCapability inst:Scenario_03_Anna_Cap_BehavioristApproach .
 
 inst:Scenario_03_Task_GuidedInteractionTask a hi:Task ;
     rdfs:label "Guided Interaction Task" ;
     hi:hasTaskConcept hint:OperatorCoordinationTask ;
-    hi:requiresCapability inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm .
-
-inst:Scenario_03_Task_RobotInteractionTask a hi:Task ;
-    rdfs:label "Robot Interaction Task" ;
-    hi:hasTaskConcept hint:MultimodalInputInterpretationTask ;
-    hi:requiresCapability inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm .
+    hi:requiresCapability inst:Scenario_03_NaoRobot_Cap_WizardOfOzInteraction .
 
 inst:Scenario_03_Team a hi:HITeam ;
     rdfs:label "Child Education Intervention Team" ;
@@ -129,19 +134,15 @@ inst:Scenario_03_Team a hi:HITeam ;
 inst:Scenario_03_Task_ChildAssessmentTask a hi:Task ;
     rdfs:label "Child Assessment Task" ;
     hi:hasTaskConcept hint:SymptomAnalysisTask ;
-    hi:requiresCapability inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm .
+    hi:requiresCapability inst:Scenario_03_Anna_Cap_TherapeuticExpertise .
 
 inst:Scenario_03_Task_EducationalPlanningTask a hi:Task ;
     rdfs:label "Educational Planning Task" ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm .
+    hi:requiresCapability inst:Scenario_03_Leah_Cap_PedagogicalSkills .
 
-inst:Scenario_03_Leah_Cap_TechnologyEnthusiasm a hi:Capability ;
-    rdfs:label "Technology Enthusiasm" ;
-    hi:allowsTask inst:Scenario_03_Task_BehaviorTrainingTask,
-        inst:Scenario_03_Task_ChildAssessmentTask,
-        inst:Scenario_03_Task_EducationalPlanningTask,
-        inst:Scenario_03_Task_GuidedInteractionTask,
-        inst:Scenario_03_Task_RobotInteractionTask ;
-    hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
+inst:Scenario_03_Task_RobotInteractionTask a hi:Task ;
+    rdfs:label "Robot Interaction Task" ;
+    hi:hasTaskConcept hint:MultimodalInputInterpretationTask ;
+    hi:requiresCapability inst:Scenario_03_NaoRobot_Cap_ReactiveResponse .
 

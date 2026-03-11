@@ -2,13 +2,13 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 hint:AdaptiveAutonomyCapability a skos:Concept ;
-    skos:broader hint:LearningAdaptationCapability ;
+    skos:broader hint:ReinforcementLearningCapability ;
     skos:definition "The ability of a system to adjust its level of autonomy based on user preferences and contextual factors."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Adaptive Autonomy Capability"@en .
 
 hint:BilingualMappingCapability a skos:Concept ;
-    skos:broader hint:CommunicationExplanationCapability ;
+    skos:broader hint:Capability ;
     skos:definition "The ability to map and translate between two languages effectively."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Bilingual Mapping Capability"@en .
@@ -20,7 +20,7 @@ hint:ComplexClaimVerification a skos:Concept ;
     skos:prefLabel "Complex Claim Verification"@en .
 
 hint:DigitalTwinCapability a skos:Concept ;
-    skos:broader hint:DomainSpecificCapability ;
+    skos:broader hint:Capability ;
     skos:definition "The ability to create a real-time digital representation of physical processes."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Digital Twin Capability"@en .
@@ -31,20 +31,26 @@ hint:EducationalPlanningTask a skos:Concept ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Educational Planning Task"@en .
 
+hint:EthicalArchivalFootageTraining a skos:Concept ;
+    skos:broader hint:DataCollectionTask ;
+    skos:definition "Training AI systems from archival documentary footage under explicit governance rules to preserve community ownership, consent, and control."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Ethical Archival Footage Training"@en .
+
 hint:ExplanationStreamPattern a skos:Concept ;
-    skos:broader hint:Interaction ;
+    skos:broader hint:InteractionPattern ;
     skos:definition "Reusable solutions that govern the stream of explanations between users and systems."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Explanation Stream Pattern"@en .
 
-hint:InformationQualityMetric a skos:Concept ;
-    skos:broader hint:Metric ;
+hint:InformationQualityIndicator a skos:Concept ;
+    skos:broader hint:Capability ;
     skos:definition "A measure used to assess the quality of data in terms of relevance and utility."@en ;
     skos:inScheme hint:HIScheme ;
-    skos:prefLabel "Information Quality Metric"@en .
+    skos:prefLabel "Information Quality Indicator"@en .
 
 hint:OrthogonalityLossCapability a skos:Concept ;
-    skos:broader hint:LearningAdaptationCapability ;
+    skos:broader hint:ReinforcementLearningCapability ;
     skos:definition "Capability to enhance model robustness by enforcing orthogonality among latent representations."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Orthogonality Loss Capability"@en .
@@ -56,7 +62,8 @@ hint:RobotInteractionTask a skos:Concept ;
     skos:prefLabel "Robot Interaction Task"@en .
 
 hint:SocialConversationContext a skos:Concept ;
-    skos:broader hint:Context ;
+    skos:broader hint:ContextConcept ;
     skos:definition "A context involving exchanges of information in social settings."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Social Conversation Context"@en .
+

@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 try:
-    from rdflib import Graph, Namespace
+    from rdflib import Graph, Namespace, Literal
     from rdflib.namespace import RDF, RDFS, OWL, SKOS
 except ImportError:
     print("Install rdflib: pip install rdflib")
@@ -73,6 +73,54 @@ def validate_use_cases(g: Graph) -> list[str]:
             if not teams:
                 uc_label = str(list(g.objects(uc, RDFS.label))[0]) if list(g.objects(uc, RDFS.label)) else str(uc)
                 issues.append(f"UseCase '{uc_label}' has no HITeam")
+    return issues
+
+
+def validate_keywords(g: Graph) -> list[str]:
+    """Check that hi:hasKeyword values are IRIs (skos:Concept), not literals."""
+    issues = []
+    for paper, _, obj in g.triples((None, HI.hasKeyword, None)):
+        if isinstance(obj, Literal):
+            paper_label = str(paper).split("/")[-1]
+            issues.append(
+                f"KEYWORD-AS-LITERAL: {paper_label} has hasKeyword "
+                f"\"{obj}\" (string). Must be a skos:Concept IRI."
+            )
+    return issues
+
+
+def validate_tasks_capability(g: Graph) -> list[str]:
+    """Check that every hi:Task has at least one hi:requiresCapability."""
+    issues = []
+    for task in g.subjects(RDF.type, HI.Task):
+        caps = list(g.objects(task, HI.requiresCapability))
+        if not caps:
+            task_label = str(list(g.objects(task, RDFS.label))[0]) if list(g.objects(task, RDFS.label)) else str(task)
+            issues.append(f"Task '{task_label}' has no requiresCapability")
+    return issues
+
+
+def validate_executions(g: Graph) -> list[str]:
+    """Check that every TaskExecution has exactly one realizesTask."""
+    issues = []
+    for exec_uri in g.subjects(RDF.type, HI.TaskExecution):
+        tasks = list(g.objects(exec_uri, HI.realizesTask))
+        exec_label = str(list(g.objects(exec_uri, RDFS.label))[0]) if list(g.objects(exec_uri, RDFS.label)) else str(exec_uri)
+        if not tasks:
+            issues.append(f"TaskExecution '{exec_label}' has no realizesTask")
+        elif len(tasks) > 1:
+            issues.append(f"TaskExecution '{exec_label}' has {len(tasks)} realizesTask (expected 1)")
+    return issues
+
+
+def validate_evaluations(g: Graph) -> list[str]:
+    """Check that every Evaluation has at least one Experiment (warning only)."""
+    issues = []
+    for eval_uri in g.subjects(RDF.type, HI.Evaluation):
+        experiments = list(g.objects(eval_uri, HI.hasExperiment))
+        if not experiments:
+            eval_label = str(list(g.objects(eval_uri, RDFS.label))[0]) if list(g.objects(eval_uri, RDFS.label)) else str(eval_uri)
+            issues.append(f"INFO: Evaluation '{eval_label}' has no hasExperiment")
     return issues
 
 
@@ -155,16 +203,38 @@ def main():
     # ── Validation ────────────────────────────────────────────
     print("\n=== Validation ===")
     all_issues = []
+
+    # Structural checks (from original)
     all_issues.extend(validate_teams(merged))
     all_issues.extend(validate_goals(merged))
     all_issues.extend(validate_use_cases(merged))
 
-    if all_issues:
-        print(f"  {len(all_issues)} issues found:")
-        for issue in all_issues:
-            print(f"    - {issue}")
-    else:
-        print("  All validation checks passed!")
+    # OWL consistency checks (new)
+    kw_issues = validate_keywords(merged)
+    cap_issues = validate_tasks_capability(merged)
+    exec_issues = validate_executions(merged)
+    eval_issues = validate_evaluations(merged)
+
+    all_issues.extend(kw_issues)
+    all_issues.extend(cap_issues)
+    all_issues.extend(exec_issues)
+    all_issues.extend(eval_issues)
+
+    errors = [i for i in all_issues if not i.startswith("INFO:")]
+    warnings = [i for i in all_issues if i.startswith("INFO:")]
+
+    if errors:
+        print(f"\n  {len(errors)} ERROR(s) found:")
+        for issue in errors:
+            print(f"    ❌ {issue}")
+    if warnings:
+        print(f"\n  {len(warnings)} WARNING(s):")
+        for issue in warnings:
+            print(f"    ⚠️  {issue}")
+    if not errors and not warnings:
+        print("  ✅ All validation checks passed!")
+    elif not errors:
+        print(f"\n  ✅ No errors. {len(warnings)} informational warning(s) only.")
 
     # ── Save ──────────────────────────────────────────────────
     MERGED_KG_FILE.parent.mkdir(parents=True, exist_ok=True)

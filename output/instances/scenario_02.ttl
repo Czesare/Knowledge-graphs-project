@@ -24,17 +24,9 @@ inst:Scenario_02_UseCase a hi:CompetitionUseCase ;
     hi:hasHITeam inst:Scenario_02_Team ;
     hi:hasScenarioDescription "Pharmaceutical Lab Research"^^xsd:string .
 
-inst:Scenario_02_Alphafold_Cap_3dModelGeneration a hi:Capability ;
-    rdfs:label "3D Model Generation" ;
-    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
-
 inst:Scenario_02_Alphafold_Cap_DataProcessing a hi:Capability ;
     rdfs:label "Data Processing" ;
     hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
-
-inst:Scenario_02_Alphafold_Cap_ProteinStructurePrediction a hi:Capability ;
-    rdfs:label "Protein Structure Prediction" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
 
 inst:Scenario_02_Context a hi:Context ;
     rdfs:label "Pharmaceutical Lab Research" ;
@@ -44,14 +36,6 @@ inst:Scenario_02_Context a hi:Context ;
     hi:hasInfluenceOn inst:Scenario_02_Team ;
     hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
         hint:TrustShiftPhenomenon .
-
-inst:Scenario_02_DrEmilyChen_Cap_LiteratureReview a hi:Capability ;
-    rdfs:label "Literature Review" ;
-    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
-
-inst:Scenario_02_DrEmilyChen_Cap_ResearchCoordination a hi:Capability ;
-    rdfs:label "Research Coordination" ;
-    hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
 
 inst:Scenario_02_Exec_ConductLiteratureReview a hi:TaskExecution ;
     rdfs:label "Conduct Literature Review" ;
@@ -78,13 +62,16 @@ inst:Scenario_02_Goal_IdentifyNeuroprotectiveProteins a hi:Goal ;
         inst:Scenario_02_Task_TeamOptimization .
 
 inst:Scenario_02_Task_3dModelGeneration a hi:Task ;
-    rdfs:label "3D Model Generation" .
+    rdfs:label "3D Model Generation" ;
+    hi:requiresCapability inst:Scenario_02_Alphafold_Cap_3dModelGeneration .
 
 inst:Scenario_02_Task_BindingSiteIdentification a hi:Task ;
-    rdfs:label "Binding Site Identification" .
+    rdfs:label "Binding Site Identification" ;
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_LiteratureReview .
 
 inst:Scenario_02_Task_SequenceInput a hi:Task ;
-    rdfs:label "Sequence Input" .
+    rdfs:label "Sequence Input" ;
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
 
 inst:Scenario_02_Alphafold a hi:ArtificialAgent ;
     rdfs:label "AlphaFold" ;
@@ -94,6 +81,11 @@ inst:Scenario_02_Alphafold a hi:ArtificialAgent ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Scenario_02_Exec_ExecuteProteinAnalysis .
 
+inst:Scenario_02_Alphafold_Cap_ProteinStructurePrediction a hi:Capability ;
+    rdfs:label "Protein Structure Prediction" ;
+    hi:allowsTask inst:Scenario_02_Task_ProteinAnalysis ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
 inst:Scenario_02_DrEmilyChen a hi:HumanAgent ;
     rdfs:label "Dr. Emily Chen" ;
     hi:hasCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment,
@@ -102,10 +94,19 @@ inst:Scenario_02_DrEmilyChen a hi:HumanAgent ;
     hi:hasRoleConcept hint:ClinicianRole ;
     hi:performsExecution inst:Scenario_02_Exec_ConductLiteratureReview .
 
+inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment a hi:Capability ;
+    rdfs:label "Clinical Judgment" ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+
+inst:Scenario_02_DrEmilyChen_Cap_ResearchCoordination a hi:Capability ;
+    rdfs:label "Research Coordination" ;
+    hi:allowsTask inst:Scenario_02_Task_TeamOptimization ;
+    hi:hasCapabilityConcept hint:OperatorCoordinationCapability .
+
 inst:Scenario_02_Task_TeamOptimization a hi:Task ;
     rdfs:label "Team Optimization" ;
     hi:hasTaskConcept hint:OperatorCoordinationTask ;
-    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ResearchCoordination .
 
 inst:Scenario_02_Team a hi:HITeam ;
     rdfs:label "Neurodegeneration Protein Analysis Team" ;
@@ -114,10 +115,20 @@ inst:Scenario_02_Team a hi:HITeam ;
         inst:Scenario_02_DrEmilyChen ;
     hi:isInfluencedBy inst:Scenario_02_Context .
 
+inst:Scenario_02_Alphafold_Cap_3dModelGeneration a hi:Capability ;
+    rdfs:label "3D Model Generation" ;
+    hi:allowsTask inst:Scenario_02_Task_ProteinAnalysis ;
+    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
+
+inst:Scenario_02_DrEmilyChen_Cap_LiteratureReview a hi:Capability ;
+    rdfs:label "Literature Review" ;
+    hi:allowsTask inst:Scenario_02_Task_Cross-referenceLiterature ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
+
 inst:Scenario_02_Task_Cross-referenceLiterature a hi:Task ;
     rdfs:label "Cross-reference Literature" ;
     hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
-    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
+    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_LiteratureReview .
 
 inst:Scenario_02_Task_ProteinAnalysis a hi:Task ;
     rdfs:label "Protein Analysis" ;
@@ -125,12 +136,6 @@ inst:Scenario_02_Task_ProteinAnalysis a hi:Task ;
         inst:Scenario_02_Task_BindingSiteIdentification,
         inst:Scenario_02_Task_SequenceInput ;
     hi:hasTaskConcept hint:SymptomAnalysisTask ;
-    hi:requiresCapability inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment .
-
-inst:Scenario_02_DrEmilyChen_Cap_ClinicalJudgment a hi:Capability ;
-    rdfs:label "Clinical Judgment" ;
-    hi:allowsTask inst:Scenario_02_Task_Cross-referenceLiterature,
-        inst:Scenario_02_Task_ProteinAnalysis,
-        inst:Scenario_02_Task_TeamOptimization ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+    hi:requiresCapability inst:Scenario_02_Alphafold_Cap_3dModelGeneration,
+        inst:Scenario_02_Alphafold_Cap_ProteinStructurePrediction .
 

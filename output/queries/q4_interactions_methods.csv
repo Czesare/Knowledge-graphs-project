@@ -1,0 +1,27 @@
+Paper,Interaction,Modality,Intent,Agents,Method
+Exploring Human-AI Synergy for Complex C,Human-AI Question Generation,Text Chat Modality,Deliberation Intent,Large Language Model,Reinforcement Learning Method
+Exploring Human-AI Synergy for Complex C,Human-AI Question Generation,Text Chat Modality,Deliberation Intent,Large Language Model,Semantic Embedding Method
+Exploring Human-AI Synergy for Complex C,Human-AI Question Generation,Text Chat Modality,Deliberation Intent,Large Language Model,Knowledge Graph Query Method
+Exploring Human-AI Synergy for Complex C,Human-AI Question Generation,Text Chat Modality,Deliberation Intent,Professional Fact-Checker,Argumentation Reasoning Method
+Extracting Triples from Dialogues for Co,Human-AI Dialogue Annotation,Text Chat Modality,Explanation Intent,Dialogue Annotator,—
+Extracting Triples from Dialogues for Co,Human-AI Dialogue Annotation,Text Chat Modality,Explanation Intent,Triple Extraction Model,Knowledge Graph Query Method
+Formalizing Explanation Design Through I,User-System Explanation Intera,Dashboard Modality,Explanation Intent,Explainable AI System,Post-hoc Explanation Method
+Formalizing Explanation Design Through I,User-System Explanation Intera,Dashboard Modality,Explanation Intent,Interaction Designer,Cooperative Learning Method
+Human Response to Decision Support in Fa,AI Suggestion Notification,Dashboard Modality,Explanation Intent,Face Matching AI,Pattern learning capability
+Human Response to Decision Support in Fa,AI Suggestion Notification,Dashboard Modality,Explanation Intent,Human Operator,Argumentation Reasoning Method
+Hybrid Autonomy: Towards a Unified Frame,Patient-Robot Interaction,Voice Chat Modality,Guide Intent,Assistive Robot,Reinforcement Learning Method
+Hybrid Autonomy: Towards a Unified Frame,Patient-Robot Interaction,Voice Chat Modality,Guide Intent,Assistive Robot,Data Collection Method
+Hybrid Autonomy: Towards a Unified Frame,Patient-Robot Interaction,Voice Chat Modality,Guide Intent,Patient,—
+Hybrid Human-AI Systems for Preserving C,Consent & Governance Negotiati,Dashboard Modality,Negotiation Intent,Archival Footage AI System,Reinforcement Learning Method
+Hybrid Human-AI Systems for Preserving C,Consent & Governance Negotiati,Dashboard Modality,Negotiation Intent,Archival Footage AI System,Semantic Embedding Method
+Hybrid Human-AI Systems for Preserving C,Consent & Governance Negotiati,Dashboard Modality,Negotiation Intent,Cultural Heritage Steward,Knowledge Graph Query Method
+Hybrid Human-AI Systems for Preserving C,Consent & Governance Negotiati,Dashboard Modality,Negotiation Intent,Cultural Heritage Steward,Argumentation Reasoning Method
+Multi-Head Networks for Missing Modaliti,Model Evaluation Discussion,Verbal Dialogue Modality,Explanation Intent,Multi-Head Network,Data Collection Method
+Multi-Head Networks for Missing Modaliti,Model Evaluation Discussion,Verbal Dialogue Modality,Explanation Intent,Multi-Head Network,Reinforcement Learning Method
+Multi-Head Networks for Missing Modaliti,Model Evaluation Discussion,Verbal Dialogue Modality,Explanation Intent,Research Scientist,Meta-Analysis Scoring Method
+Ontology-Based Risk Assessment in Smelti,Operator-Driver Coordination,Verbal Dialogue Modality,Deliberation Intent,Driver ↔ Operator,—
+Quality-Informed Active Learning on Soci,Data Validation Discussion,Text Chat Modality,Explanation Intent,Active Learning System,Reinforcement Learning Method
+Quality-Informed Active Learning on Soci,Data Validation Discussion,Text Chat Modality,Explanation Intent,Data Analyst,Argumentation Reasoning Method
+Towards Building a Trustworthy RAG-Based,User Query Interaction,Text Chat Modality,Answer Intent,Public Administration Employee,—
+Towards Building a Trustworthy RAG-Based,User Query Interaction,Text Chat Modality,Answer Intent,RAG Chatbot,Knowledge Graph Query Method
+Towards Building a Trustworthy RAG-Based,User Query Interaction,Text Chat Modality,Answer Intent,RAG Chatbot,Post-hoc Explanation Method

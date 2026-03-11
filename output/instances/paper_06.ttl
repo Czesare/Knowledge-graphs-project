@@ -4,6 +4,7 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_06 a hi:Paper ;
@@ -11,10 +12,10 @@ inst:Paper_06 a hi:Paper ;
     hi:hasAuthor inst:Paper_06_Author1,
         inst:Paper_06_Author2,
         inst:Paper_06_Author3 ;
-    hi:hasKeyword "High Quality AI",
-        "Multi-Head Deep Learning",
-        "Multimodal AI",
-        "Robust AI" ;
+    hi:hasKeyword inst:Keyword_HighQualityAi,
+        inst:Keyword_Multi-headDeepLearning,
+        inst:Keyword_MultimodalAi,
+        inst:Keyword_RobustAi ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Multi-Head Networks for Missing Modalities: A Study on Robustness in Multimodal Learning"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
@@ -41,6 +42,22 @@ inst:HHAI2025 a hi:Conference ;
     rdfs:label "HHAI 2025" ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Keyword_HighQualityAi a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "High Quality AI"@en .
+
+inst:Keyword_Multi-headDeepLearning a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Multi-Head Deep Learning"@en .
+
+inst:Keyword_MultimodalAi a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Multimodal AI"@en .
+
+inst:Keyword_RobustAi a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Robust AI"@en .
 
 inst:Paper_06_Author1 a hi:Author ;
     foaf:name "Giovanni Felici" ;
@@ -99,18 +116,6 @@ inst:Paper_06_Multi-headNetwork_Cap_DataProcessing a hi:Capability ;
     rdfs:label "Data Processing" ;
     hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
 
-inst:Paper_06_Multi-headNetwork_Cap_PatternRecognition a hi:Capability ;
-    rdfs:label "Pattern Recognition" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
-
-inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement a hi:Capability ;
-    rdfs:label "Robustness Enhancement" ;
-    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
-
-inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
-
 inst:Paper_06_UseCase a hi:ResearchUseCase ;
     rdfs:label "Robust Multimodal Learning" ;
     hi:hasDomainConcept hint:HealthAndLifestyleDomain ;
@@ -129,6 +134,16 @@ inst:Paper_06_Multi-headNetwork a hi:ArtificialAgent ;
     hi:performsExecution inst:Paper_06_Exec_ExecuteFeatureExtraction,
         inst:Paper_06_Exec_ExecuteOrthogonalityLoss .
 
+inst:Paper_06_Multi-headNetwork_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:allowsTask inst:Paper_06_Task_FeatureExtraction ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement a hi:Capability ;
+    rdfs:label "Robustness Enhancement" ;
+    hi:allowsTask inst:Paper_06_Task_ApplyOrthogonalityLoss ;
+    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+
 inst:Paper_06_ResearchScientist a hi:HumanAgent ;
     rdfs:label "Research Scientist" ;
     hi:hasCapability inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding,
@@ -136,10 +151,20 @@ inst:Paper_06_ResearchScientist a hi:HumanAgent ;
     hi:hasRoleConcept hint:HumanUserRole ;
     hi:performsExecution inst:Paper_06_Exec_ConductModelEvaluation .
 
+inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:allowsTask inst:Paper_06_Task_AssessFeatureImportance ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_06_ResearchScientist_Cap_DomainJudgment a hi:Capability ;
+    rdfs:label "Domain Judgment" ;
+    hi:allowsTask inst:Paper_06_Task_EvaluateModelRobustness ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+
 inst:Paper_06_Task_AssessFeatureImportance a hi:Task ;
     rdfs:label "Assess Feature Importance" ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding .
 
 inst:Paper_06_Team a hi:HITeam ;
     rdfs:label "Robust Multimodal Learning Team" ;
@@ -151,7 +176,7 @@ inst:Paper_06_Team a hi:HITeam ;
 inst:Paper_06_Task_ApplyOrthogonalityLoss a hi:Task ;
     rdfs:label "Apply Orthogonality Loss" ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement .
 
 inst:Paper_06_Task_EvaluateModelRobustness a hi:Task ;
     rdfs:label "Evaluate Model Robustness" ;
@@ -161,13 +186,5 @@ inst:Paper_06_Task_EvaluateModelRobustness a hi:Task ;
 inst:Paper_06_Task_FeatureExtraction a hi:Task ;
     rdfs:label "Feature Extraction" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment .
-
-inst:Paper_06_ResearchScientist_Cap_DomainJudgment a hi:Capability ;
-    rdfs:label "Domain Judgment" ;
-    hi:allowsTask inst:Paper_06_Task_ApplyOrthogonalityLoss,
-        inst:Paper_06_Task_AssessFeatureImportance,
-        inst:Paper_06_Task_EvaluateModelRobustness,
-        inst:Paper_06_Task_FeatureExtraction ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+    hi:requiresCapability inst:Paper_06_Multi-headNetwork_Cap_PatternRecognition .
 

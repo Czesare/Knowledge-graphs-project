@@ -4,15 +4,16 @@
 @prefix inst: <https://w3id.org/hi-ontology/instances/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 inst:Paper_08 a hi:Paper ;
     hi:describesUseCase inst:Paper_08_UseCase ;
     hi:hasAuthor inst:Paper_08_Author1,
         inst:Paper_08_Author2 ;
-    hi:hasKeyword "Active Learning",
-        "Information Quality",
-        "Situational Awareness" ;
+    hi:hasKeyword inst:Keyword_ActiveLearning,
+        inst:Keyword_InformationQuality,
+        inst:Keyword_SituationalAwareness ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Quality-Informed Active Learning on Social Media in Crisis Scenarios"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
@@ -36,13 +37,17 @@ inst:HHAI2025 a hi:Conference ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
 
-inst:Paper_08_ActiveLearningSystem_Cap_DataProcessing a hi:Capability ;
-    rdfs:label "Data Processing" ;
-    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+inst:Keyword_ActiveLearning a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Active Learning"@en .
 
-inst:Paper_08_ActiveLearningSystem_Cap_PatternRecognition a hi:Capability ;
-    rdfs:label "Pattern Recognition" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
+inst:Keyword_InformationQuality a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Information Quality"@en .
+
+inst:Keyword_SituationalAwareness a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Situational Awareness"@en .
 
 inst:Paper_08_Author1 a hi:Author ;
     foaf:name "Carlo Alberto Bono" ;
@@ -62,9 +67,9 @@ inst:Paper_08_Context a hi:Context ;
     hi:hasPhenomenonConcept hint:DataMismatchPhenomenon,
         hint:TrustShiftPhenomenon .
 
-inst:Paper_08_DataAnalyst_Cap_EthicalOversight a hi:Capability ;
-    rdfs:label "Ethical Oversight" ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
+inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
 
 inst:Paper_08_Exec_ExecuteDataIdentification a hi:TaskExecution ;
     rdfs:label "Execute Data Identification" ;
@@ -106,6 +111,16 @@ inst:Paper_08_ActiveLearningSystem a hi:ArtificialAgent ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Paper_08_Exec_ExecuteDataIdentification .
 
+inst:Paper_08_ActiveLearningSystem_Cap_DataProcessing a hi:Capability ;
+    rdfs:label "Data Processing" ;
+    hi:allowsTask inst:Paper_08_Task_ProcessSocialMediaData ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
+
+inst:Paper_08_ActiveLearningSystem_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:allowsTask inst:Paper_08_Task_IdentifyRelevantData ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
 inst:Paper_08_DataAnalyst a hi:HumanAgent ;
     rdfs:label "Data Analyst" ;
     hi:hasCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding,
@@ -113,10 +128,15 @@ inst:Paper_08_DataAnalyst a hi:HumanAgent ;
     hi:hasRoleConcept hint:HumanUserRole ;
     hi:performsExecution inst:Paper_08_Exec_ExecuteDataValidation .
 
+inst:Paper_08_DataAnalyst_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:allowsTask inst:Paper_08_Task_ValidateDataSelection ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
 inst:Paper_08_Task_ProcessSocialMediaData a hi:Task ;
     rdfs:label "Process Social Media Data" ;
     hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
-    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Paper_08_ActiveLearningSystem_Cap_DataProcessing .
 
 inst:Paper_08_Team a hi:HITeam ;
     rdfs:label "Crisis Data Relevance Identification Team" ;
@@ -128,17 +148,10 @@ inst:Paper_08_Team a hi:HITeam ;
 inst:Paper_08_Task_IdentifyRelevantData a hi:Task ;
     rdfs:label "Identify Relevant Data" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Paper_08_ActiveLearningSystem_Cap_PatternRecognition .
 
 inst:Paper_08_Task_ValidateDataSelection a hi:Task ;
     rdfs:label "Validate Data Selection" ;
     hi:hasTaskConcept hint:DecideInterventionTask ;
-    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding .
-
-inst:Paper_08_DataAnalyst_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:allowsTask inst:Paper_08_Task_IdentifyRelevantData,
-        inst:Paper_08_Task_ProcessSocialMediaData,
-        inst:Paper_08_Task_ValidateDataSelection ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+    hi:requiresCapability inst:Paper_08_DataAnalyst_Cap_EthicalOversight .
 
