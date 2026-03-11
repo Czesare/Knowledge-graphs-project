@@ -442,24 +442,31 @@ def run_q4(g: Graph):
 # "Given a goal, which experiments test which metrics, and
 #  what hypotheses do these experiments address?"
 #
-# SPARQL features: 8+ triple patterns, OPTIONAL (×2),
-#                  FILTER, ORDER BY
+# NOTE: Evaluations are not linked to papers/use-cases via an
+# explicit property (hi:evaluatedBy is unused in instances).
+# We join them using the shared URI prefix convention:
+#   inst:Paper01 → inst:Paper01_Evaluation → inst:Paper01_Experiment_...
+#
+# SPARQL features: 6+ triple patterns, OPTIONAL (×3), BIND,
+#                  STRSTARTS, STR, FILTER, ORDER BY
 # ══════════════════════════════════════════════════════════════
 Q5_SPARQL = PREFIXES + """
 SELECT ?paperTitle ?evalLabel ?expLabel ?metricName
        ?nullH ?altH
 WHERE {
     ?paper a hi:Paper ;
-           hi:hasTitle ?paperTitle ;
-           hi:describesUseCase ?uc .
-    ?uc hi:hasHITeam ?team .
-    ?team hi:hasGoal ?goal .
-    ?goal rdfs:label ?goalLabel .
+           hi:hasTitle ?paperTitle .
+
+    # Extract the paper URI prefix (e.g. "inst:Paper01")
+    BIND(STR(?paper) AS ?paperStr)
 
     ?eval a hi:Evaluation ;
           rdfs:label ?evalLabel ;
           hi:hasExperiment ?exp .
     ?exp rdfs:label ?expLabel .
+
+    # Join: evaluation URI must start with the same prefix as the paper
+    FILTER(STRSTARTS(STR(?eval), ?paperStr))
 
     OPTIONAL {
         ?exp hi:hasMetricTested ?metric .
@@ -467,11 +474,6 @@ WHERE {
     }
     OPTIONAL { ?exp hi:hasNullHypothesis ?nullH }
     OPTIONAL { ?exp hi:hasAlternativeHypothesis ?altH }
-
-    # Link evaluation to use case via execution
-    FILTER EXISTS {
-        ?exec hi:evaluatedBy ?eval .
-    }
 }
 ORDER BY ?paperTitle ?expLabel
 """
@@ -496,40 +498,7 @@ def run_q5(g: Graph):
             str(r.altH)[:50] if r.altH else "—",
         ])
 
-    if rows:
-        print_table(headers, rows)
-    else:
-        # Fallback: simpler evaluation query without the FILTER EXISTS
-        print("  (No results with execution link — running broader query)")
-        q5_fallback = PREFIXES + """
-        SELECT ?paperTitle ?evalLabel ?expLabel ?metricName ?nullH ?altH
-        WHERE {
-            ?paper a hi:Paper ;
-                   hi:hasTitle ?paperTitle .
-            ?eval a hi:Evaluation ;
-                  rdfs:label ?evalLabel ;
-                  hi:hasExperiment ?exp .
-            ?exp rdfs:label ?expLabel .
-            OPTIONAL {
-                ?exp hi:hasMetricTested ?metric .
-                ?metric skos:prefLabel ?metricName .
-            }
-            OPTIONAL { ?exp hi:hasNullHypothesis ?nullH }
-            OPTIONAL { ?exp hi:hasAlternativeHypothesis ?altH }
-        }
-        ORDER BY ?paperTitle
-        """
-        results = g.query(q5_fallback)
-        rows = []
-        for r in results:
-            rows.append([
-                str(r.paperTitle)[:40], str(r.evalLabel)[:30],
-                str(r.expLabel)[:30],
-                str(r.metricName) if r.metricName else "—",
-                str(r.nullH)[:50] if r.nullH else "—",
-                str(r.altH)[:50] if r.altH else "—",
-            ])
-        print_table(headers, rows)
+    print_table(headers, rows)
 
     save_csv(headers, rows, QUERIES_DIR / "q5_evaluations.csv")
     print(f"  → {len(rows)} results. Saved to queries/q5_evaluations.*")

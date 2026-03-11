@@ -1,0 +1,15 @@
+nodes: 1004
+edges: 2653
+density: 0.002635
+mean_degree: 5.28
+median_degree: 4.0
+max_degree: 304
+mean_in_degree: 2.64
+mean_out_degree: 2.64
+mean_degree_centrality: 0.005269
+avg_clustering_coefficient: 0.090260
+weakly_connected_components: 3
+largest_wcc_size: 998
+largest_wcc_pct: 0.9940
+strongly_connected_components: 941
+largest_scc_size: 4

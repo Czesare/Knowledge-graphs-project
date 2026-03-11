@@ -1,0 +1,83 @@
+Communities: 17
+Modularity: 0.6090
+Sizes: [103, 69, 52, 47, 42, 36, 35, 34, 31, 29, 28, 27, 23, 20, 20, 20, 14]
+
+Community 1 (103 nodes)
+  SKOS Concept: 84
+  Other: 9
+  Author: 4
+  Affiliation: 3
+  Paper: 2
+  Evaluation: 1
+  Sample: hint:CoordinationTaskExecution, inst:Keyword_SalvageEthnography, hint:HeavyLiftingTaskExecution, hint:ProvideProfileTaskExecution, hint:ConfinedReachSafetyEvaluation
+
+Community 2 (69 nodes)
+  Capability: 16
+  SKOS Concept: 13
+  Task: 13
+  Other: 7
+  Interaction: 5
+  Goal: 3
+  HITeam: 3
+  HumanAgent: 3
+  UseCase: 3
+  ArtificialAgent: 3
+  Sample: hint:ExplanationIntent, Enhance Decision-Making, Contextual Understanding, Judgment Capability, hint:SituationalAssessmentTask
+
+Community 3 (52 nodes)
+  SKOS Concept: 28
+  Experiment: 12
+  Evaluation: 12
+  Sample: hint:FineManipulationExperiment, Embedding Model Comparison, Triple Extraction Evaluation, Crisis Scenario Testing, Model Robustness Evaluation
+
+Community 4 (47 nodes)
+  SKOS Concept: 13
+  Task: 8
+  Capability: 7
+  Other: 6
+  HumanAgent: 3
+  ArtificialAgent: 2
+  Goal: 2
+  Interaction: 2
+  UseCase: 2
+  HITeam: 2
+  Sample: Behavior Training Task, NAO Robot, Enhance Model Robustness, Research Scientist, hint:SymptomAnalysisTask
+
+Community 5 (42 nodes)
+  SKOS Concept: 29
+  Context: 13
+  Sample: Multimodal Learning Context, hint:ClinicalConsultationContext, Molten Metal Handling, hint:JuryDeliberationContext, hint:TrustShiftPhenomenon
+
+Community 6 (36 nodes)
+  Other: 13
+  Author: 12
+  Affiliation: 6
+  Paper: 4
+  Conference: 1
+  Sample: inst:Keyword_RobustAi, inst:Paper_06_Author1, Politecnico di Milano, inst:Paper_01, inst:Keyword_ActiveLearning
+
+Community 7 (35 nodes)
+  Capability: 12
+  SKOS Concept: 8
+  Task: 7
+  HumanAgent: 2
+  Goal: 1
+  ArtificialAgent: 1
+  UseCase: 1
+  Interaction: 1
+  Other: 1
+  HITeam: 1
+  Sample: Knowledge Integration, Proactive Risk Management, Ontology System, Identify Hazards, Team Optimization
+
+Community 8 (34 nodes)
+  Capability: 7
+  SKOS Concept: 6
+  Task: 6
+  Other: 4
+  UseCase: 2
+  HumanAgent: 2
+  HITeam: 2
+  Goal: 2
+  ArtificialAgent: 2
+  Interaction: 1
+  Sample: hint:HumanUserRole, Preference Communication, Hygiene Assistance, Execute Hygiene Task, Crisis Data Relevance Identification
