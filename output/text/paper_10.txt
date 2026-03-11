@@ -1,0 +1,256 @@
+74 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250626
+Hybrid Human-AI Systems for Preserving
+Cultural Heritage and Craftsmanship
+Alexandra MCDOUGALLa, and Hortense GERARDOb1
+aSmartBear Software
+bUniversity of California, San Diego
+ORCiD ID: Alexandra McDougall https://orcid.org/0009-0006-4854-2353
+ORCiD ID: Hortense Gerardo https://orcid.org/0000-0002-3436-0763
+Abstract. The rapid advancement of Artificial Intelligence (AI) presents unique
+opportunities for preserving and revitalizing cultural heritage and traditional
+craftsmanship. This paper proposes a novel approach to training AI systems using
+archival documentary footage, specifically focusing on ensuring ethical data
+practices and empowering Indigenous communities. Our approach is grounded in
+the Global Indigenous Data Alliance's “Indigenous Peoples' Rights in Data”
+framework, which outlines 12 key principles for ethical data governance.[1] These
+principles, including “the rights to possess, consent, refuse, benefit, and use data
+originating from a given community,” inform our proposed methodology. By
+providing clear guidelines on data governance, we aim to encourage traditionally
+closed cultures to share their practices, ensuring that the preservation efforts benefit
+the communities themselves. AI systems trained on archival footage and informed
+by ethical data practices can be seen as a state-of-the-art form of salvage
+ethnography and empower communities to maintain control over their traditional
+knowledge and cultural heritage. This approach has the potential to ensure that
+diverse artistic practices and traditional craftsmanship continue to thrive in the age
+of AI.
+Keywords. Artificial Intelligence, craftsmanship, salvage ethnography, robotics
+1. Introduction
+“Every sensation of every being of the world is a mode through which the world lives
+and feels itself,” writes Vinciane Despret. “When a being is no more, the world narrows
+all of a sudden, and a part of reality collapses.”[2] This poignant observation underscores
+the urgency of our mission to preserve cultural heritage and traditional craftsmanship in
+the face of rapid technological change and cultural erosion.
+A prime example of a human-AI partnership in cultural preservation is the SkoBot
+project, developed by Danielle Boyer, an Ojibwe innovator.[3] This project utilizes AI
+models trained on language recordings from community Elders and experts to create
+interactive, wearable robots that help preserve indigenous languages and cultural
+practices. This approach demonstrates how AI can be a powerful tool for cultural
+continuity when developed in collaboration with and for the benefit of indigenous
+communities.
+1 Corresponding Author: Hortense Gerardo, hgerardo@ucsd.edu.
+
+A.McDougallandH.Gerardo/HybridHuman-AISystems 75
+Various data sources are crucial in developing diverse and culturally sensitive AI
+systems. AI companies are acquiring video footage from content creators to train their
+tools.[4] We propose extending this practice to include archival documentary footage,
+focusing on materials that document traditional craftsmanship and cultural practices.
+Recent developments in AI-powered visual recognition have allowed companies to
+dramatically improve searchability within video content libraries.[5] While this allows
+for bringing endangered cultural traditions into the AI age with relative technological
+ease, we must put guardrails in place to avoid alienating the peoples from whom the
+traditions originated.
+Data governance is the cornerstone of collaborating with those most at risk—
+Indigenous cultures and tradespeople—regarding monetizable skills that robotics
+companies will seek to emulate. Some skills—such as sewing—are so broadly practiced
+that no group claim them[6], and thus, data governance will do little to protect those
+whose livelihoods will be threatened.
+Crafts created by specialists without the next generation to take up the tradition are
+at risk of disappearance: this runs the gamut from Arizapana, the last in a 500-year
+lineage of Incan bridge weavers[7], to crafting parchment and vellum.[8]
+While thorough documentation can help researchers recreate lost traditions, such as
+Tim Severin’s “The Brendan Voyage,” which depicts him building a leather curragh to
+take him across the Atlantic[9], for complex processes, demonstration tends to be better
+than documentation because visual illustrations of complex concepts allow for easier
+understanding by breaking processes into manageable steps.
+We propose an on-premise knowledge base owned by the craftspeople or the culture
+from which the craft and any subsequent training materials originated. The knowledge
+base will be returned to humanity as a whole upon the retirement of the last trade
+practitioner or at a time of the originating culture’s choosing. We seek to eliminate data
+harm, “the adverse effects caused by uses of data that damage or set back a person, group,
+entity or society’s interests.”[10] For a comprehensive description of data harm, see
+Redden, Brand & Terzieva[11].
+2. Methodology for AI Training on Archival Footage
+2.1. Data Collection
+Identify and acquire documentary videos designed to preserve or teach craftsmanship,
+such as historical reenactment series. An excellent example of this is the historical
+documentary TV series Victorian Farm.[12] In the series, historian Ruth Goodman and
+archaeologists Peter Ginn and Alex Langlands move into a Victorian smallholding to
+live the life of Victorian farmers, wearing period clothes and only using materials that
+would have been available in 1885. The team recreated historical recipes, processes, and
+crafts by referencing period sources. Topics covered in the series include stain removal,
+threshing wheat, plowing fields, cider-making, pest control, cheese-making, straw
+plaiting, and brewing beer.
+
+76 A.McDougallandH.Gerardo/HybridHuman-AISystems
+2.2. Data Processing
+Utilize digital tools, such as Adobe Premiere’s Media Intelligence or Linius’ Whizzard
+Portal2, to name a few of the many such available resources, to scan and segment videos,
+tagging them with relevant metadata for efficient retrieval and analysis.
+2.3. Depth Perception Enhancement
+Process video clips through Scale-Invariant Monocular Depth Estimation tools to
+provide AI systems with crucial depth perception information, enhancing their
+understanding of physical processes. “Scale-Invariant Monocular Depth Estimation via
+SSI Depth” introduces a novel approach to estimating depth from a single image.[13][14]
+This method allows a computer to understand the 3D structure of a scene from just one
+2D picture without knowing the actual size of objects in the image. The key innovation
+of this approach is its ability to produce accurate depth maps without requiring
+information about the scale of objects in the scene.[14] This innovation is beneficial
+because it allows the system to work with a wide variety of images, even when the size
+of objects is unknown or varies significantly. While depth perception is valuable for
+object manipulation[15][16], environmental understanding, transfer learning, and data
+augmentation[17], it is not the only factor in training robots from video content.
+DeepMind's research demonstrates that other approaches, such as reinforcement learning
+and learning from demonstrations, can also be practical in developing dexterous robotic
+behaviors.[18] These methods can complement depth perception to create more robust
+and capable robotic systems.
+2.4. Ethical Data Governance
+Implement strict protocols based on the Indigenous Peoples' Rights in Data framework
+to ensure community ownership and control over cultural data. The rights outlined by
+the Global Indigenous Data Alliance fall under two categories: 1) ‘Data for Governance,’
+which primarily relates to the ability of Indigenous communities to access and use data
+themselves, and 2) ‘Governance of Data,’ which relates to the ability of Indigenous
+communities to steward and externally influence the use of data internally.[19]
+3. Potential Application and Benefits
+3.1. Ethical Data Governance
+AI systems trained on archival footage can help document and recreate traditional
+crafting techniques at risk of being lost. Some uncommon crafts may not seem
+immediately practical but may be the foundation upon which future cultural ratcheting
+can be based. One example is the South Pacific practice of spiderweb fishing, where a
+spider web is used as a fishing line. Often, the webs are attached to kites to create a “lure”
+that skims across the water's surface.[20]
+2 In the interest of full disclosure, one of the authors is a minor investor in Linius.
+
+A.McDougallandH.Gerardo/HybridHuman-AISystems 77
+3.2. Sustainable Production
+AI-assisted crafting could promote more sustainable production methods, reducing
+reliance on mass-produced goods and their associated environmental impacts. A prime
+example of this is pasta; if a robot kitchen can form various pasta shapes from scratch,
+then people with access to the robot kitchen will not need to purchase mass-produced
+boxes of dried pasta.
+3.3. Cultural Education
+Interactive AI systems could serve as educational tools, providing immersive
+experiences in traditional craftsmanship and cultural practices. An example of this
+concept put into practice for a more modern application is the use of humanoid Aura
+robots installed in the MSG Sphere in Las Vegas.[21] There is an opportunity to use
+humanoid robots as ambassadors of ethnographic salvage for celibate communities like
+the Shakers.[22] Only two practicing Shakers are left today, Brother Arnold Hadd and
+Sister June Carpenter; the younger of the two (Hadd) is 67.[23]
+3.4. Health and Safety
+By capturing the expertise of master craftspeople, AI could help mitigate the physical
+risks associated with specific crafts, preserving the knowledge while protecting
+practitioners from potential health hazards, such as silicosis in relation to
+stonemasonry[24], industrial hazards such as carcinogenic exposure to hexavalent
+chromium[25], and arthritis.[26]
+3.5. Co-Invention
+In Melissa A. Schilling’s book Quirky: The Remarkable Story of the Traits, Foibles, and
+Genius of Breakthrough Innovators Who Changed the World, she codifies the
+characteristics that tend to lead individual people to make extraordinary
+breakthroughs.[27] While some of the characteristics are not specifically relevant to a
+machine, for example, “opportunities and challenges of an era,” AI mimics essential
+attributes of human inventors. Hallucinations in AI are interpreted as unfavorable, but
+they can also be analyzed through the lens of a creative breakthrough.[28] The sense of
+“separateness” and extreme confidence described by Ms. Schilling are hallmarks of
+LLMs. Robots trained on a vast array of artifacts of human culture have a broader corpus
+of knowledge from which to draw. The collaboration of innovative humans with a robotic
+assistant trained on a broad set of data points yields a connection far more than the sum
+of its parts.
+4. Potential Unintended Effects
+4.1. Individual Autonomy and Withholding
+One possible complication is the decision by a “last practitioner” to withhold knowledge,
+even when predecessors may have consented to share. This choice should be
+
+78 A.McDougallandH.Gerardo/HybridHuman-AISystems
+acknowledged as a legitimate exercise of individual autonomy and may reflect complex
+intergenerational, political, or spiritual concerns. From an ethical standpoint, our
+methodology must not override such decisions. Doing so would not only violate the
+principle of consent but could also fracture community trust and disrupt nuanced
+traditions of knowledge stewardship.
+The right to refuse—outlined in the Global Indigenous Data Alliance framework—
+is not only collective but personal. AI systems must be designed with mechanisms that
+accommodate such refusals, including the possibility that no data may be available or
+appropriate for training. This, too, is a form of cultural preservation: one that honors the
+sovereignty of silence and restraint.
+4.2. Risks of Cultural Essentialism and Fixity
+There is also a risk that codifying traditional knowledge into an AI system could
+inadvertently fossilize practices that are, by nature, evolving and dynamic.
+Craftsmanship often involves improvisation, personal flair, and adaptation over time.
+When AI systems learn from archival footage or static documentation, they may reduce
+these practices to a fixed “style” or “form,” losing the living dimension of the craft. This
+essentialism may be particularly problematic if the AI-generated representations are later
+used without community oversight or recontextualization, leading to the creation of
+“authenticity standards” that were never meant to exist.
+4.3. Data Misuse and Misappropriation
+Despite the best efforts to follow ethical data governance principles, the possibility
+remains that once encoded, cultural knowledge could be used beyond its intended scope.
+For example, generative AI models may synthesize culturally significant artifacts
+without appropriate attribution or permissions. These outputs could then be
+commercialized or widely disseminated, leading to a new form of digital
+misappropriation. To mitigate this, ongoing oversight and enforceable safeguards must
+be developed in collaboration with the source communities. Ethical preservation is not a
+one-time agreement, but a sustained partnership grounded in trust, reciprocity, and
+respect for context.
+5. Challenges and Considerations
+While this approach offers significant potential for cultural preservation and AI
+advancement, it also presents challenges.
+5.1. Balancing Tradition and Technology
+Efforts must be made to ensure that AI assistance preserves rather than replaces
+traditional practices. When advancement rapidly changes processes, replacing manual
+labor with faster technology, income sources for the displaced workers may dry up.
+Historically, this has contributed to riots and social upheavals. “One implication is that
+redistribution matters…policymakers must consider how to support the people who are
+most affected. Otherwise, political and social unrest becomes more likely, perhaps
+
+A.McDougallandH.Gerardo/HybridHuman-AISystems 79
+inevitable.”[29] If “The underlying purpose of AI is to allow wealth to access skill while
+removing from the skilled the ability to access wealth,”[30] how do we as a society
+ensure that skilled workers continue to make a living wage?
+5.2. Data Sovereignty
+Informed and culturally sensitive adherence to ethical data practices is essential to
+earning trust and respect for cultural identity. It includes respecting cultural bearers'
+inclinations to withhold secrets of their craft, as exemplified by Chiara Vigo's stance
+against monetizing Byssus.[31] One way to address this might be to introduce AI literacy
+within Indigenous communities. The introduction of AI literacy programs that enable an
+understanding of its capabilities, limitations, and ethical risks, may encourage
+community members to recognize the proposed system as a tool of empowerment rather
+than a mechanism for digital colonialism.
+5.3. Technological Limitations
+Current AI systems may struggle to fully capture traditional craftsmanship's nuances and
+tacit knowledge. For example, machines cannot properly replicate specific pasta shapes.
+Trofie is a short, twisted pasta thick in the middle, with pointed ends. While it has pointed
+ends, machine-produced trofie has little difference in the width over the shape of each
+piece. Using the pad of one’s palm allows hand-made trofie to be shaped into a geometry
+resembling a conch shell.[32] Geometric differences are known to affect everything from
+cook times to sauce pairings. Since the pressure that a hand exerts against pasta dough
+being pressed into a cutting board is not easy to measure in video form, it is likely that
+our proposal will not capture some nuances.
+5.4. Ethical Dilemmas
+In cases where the last practitioner of a craft decides to invoke their right to refuse to
+share knowledge, that decision will inevitably be challenged. We must be prepared to
+honor such choices, even if it means losing connection to ancient traditions. For example,
+Chiara Vigo is the last person who makes Byssus (sea silk) from the spit of the
+endangered Pinna nobilis clam.[31] She is accompanied by the Italian coastguard in
+order for her to dive and harvest the thin fibers growing from the tips of the clams. While
+she has trained at least one of her grandchildren in the art of how to craft Byssus, her
+daughter Maddalena has seemingly chosen a different path in life. Mrs. Vigo’s nine-year-
+old granddaughter is being taught how to craft Byssus from raw materials, but training
+takes decades.[33] Chiara has repeatedly expressed her complete rejection of writing
+down certain parts of the process and profiting off the skill. “...tried to force me to charge
+entrance fees and write down my patterns and secrets. But I will defend this sacred oath
+with my fingernails as long as I breathe!”[34] Does the Italian coastguard have a moral
+right to the knowledge? What happens if the Pinna nobilis clam makes a comeback and
+has a thriving population? At what point does the cultural ownership of information end?
+
+80 A.McDougallandH.Gerardo/HybridHuman-AISystems
+6. Conclusion
+Our proposed approach offers a promising path to preserving cultural heritage through
+ethical AI-human collaboration. By judicious use of archival footage, abiding by strict
+principles that govern data, and honoring the rights and wishes of traditional craftspeople,
+we can train AI systems to document endangered practices and empower communities
+to maintain control over their cultural knowledge. This approach has the potential to
+enrich our collective human experience, ensuring that diverse cultural practices and
+traditional craftsmanship continue to thrive in the age of AI.

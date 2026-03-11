@@ -9,8 +9,8 @@ from owlready2 import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-TTL  = ROOT / "output" / "merged_kg_a2.ttl"
-NT   = ROOT / "output" / "merged_kg_a2.nt"
+TTL  = ROOT / "output" / "merged_kg.ttl"
+NT   = ROOT / "output" / "merged_kg.nt"
 
 # 1) Convert TTL -> NT (Pellet/Jena-friendly)
 g = Graph()
