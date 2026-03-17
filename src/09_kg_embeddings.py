@@ -12,21 +12,26 @@ Aligned with the ML4KG-tutorial.ipynb from the course (Exercise 7):
   5. Link Prediction: predict and score unseen triples
   6. Embedding Visualisation: PCA + t-SNE coloured by entity type
   7. Optional: Cluster embeddings
+  8. Ablation: compare training on own KG vs combined KG
+     (with hi-ontology-populated.ttl from all student groups)
 
 Dependencies:
     pip install pykeen torch scikit-learn matplotlib numpy pandas
 
 Output:
     output/embeddings/
-      ├── triples.tsv                <- Raw triples for inspection
-      ├── model_comparison.csv       <- MRR/Hits@k for each model
+      ├── triples.tsv                <- Raw triples (own KG)
+      ├── model_comparison.csv       <- MRR/Hits@k for each model (own KG)
       ├── model_comparison.png       <- Bar chart comparing models
       ├── loss_curves.png            <- Training loss curves
       ├── link_predictions.csv       <- Top predicted missing links
       ├── link_predictions_scored.csv <- Candidate triples with scores
       ├── embeddings_pca.png         <- PCA projection by entity type
       ├── embeddings_tsne.png        <- t-SNE projection by entity type
-      └── embedding_clusters.png     <- Clustered embeddings (optional)
+      ├── embedding_clusters.png     <- Clustered embeddings
+      ├── combined_kg_for_training.ttl <- Combined KG (own + populated)
+      ├── ablation_comparison.csv    <- Own vs Combined results
+      └── ablation_comparison.png    <- Ablation bar chart
 """
 import os
 import sys
@@ -541,6 +546,80 @@ def visualise_embeddings(best_result, train_tf: TriplesFactory):
 
 
 # ══════════════════════════════════════════════════════════════
+# HELPER: Load combined KG (own + populated)
+# ══════════════════════════════════════════════════════════════
+def load_combined_triples(kg_file: Path, populated_file: Path) -> tuple:
+    """
+    Load own KG + hi-ontology-populated.ttl into a combined graph.
+    Saves the combined graph as a new file (never overwrites originals).
+    Returns (triples_arr, combined_rdf_graph).
+    """
+    print("\n" + "=" * 70)
+    print("ABLATION — Loading Combined KG (own + populated)")
+    print("=" * 70)
+
+    g = RDFGraph()
+    g.parse(str(kg_file), format="turtle")
+    own_count = len(g)
+    print(f"  Own KG triples: {own_count}")
+
+    g.parse(str(populated_file), format="turtle")
+    combined_count = len(g)
+    print(f"  After adding populated: {combined_count} (+{combined_count - own_count})")
+
+    # Save combined graph as new file (never overwrite originals)
+    combined_path = EMB_DIR / "combined_kg_for_training.ttl"
+    g.serialize(destination=str(combined_path), format="turtle")
+    print(f"  Saved combined KG to: {combined_path}")
+
+    triples_list = []
+    for s, p, o in g:
+        if isinstance(s, URIRef) and isinstance(o, URIRef) and \
+           not isinstance(s, BNode) and not isinstance(o, BNode):
+            triples_list.append([str(s), str(p), str(o)])
+
+    triples_arr = np.array(triples_list, dtype=str)
+    print(f"  URI-only triples: {len(triples_arr)}")
+    print(f"  Unique entities:  {len(set(triples_arr[:, 0]) | set(triples_arr[:, 2]))}")
+    print(f"  Unique relations: {len(set(triples_arr[:, 1]))}")
+
+    return triples_arr, g
+
+
+# ══════════════════════════════════════════════════════════════
+# HELPER: Run a single training experiment (for ablation)
+# ══════════════════════════════════════════════════════════════
+def run_single_model(model_name: str, train_tf, test_tf,
+                     label: str = "") -> dict:
+    """Train one model and return metrics dict."""
+    prefix = f"[{label}] " if label else ""
+    print(f"\n  {prefix}--- Training {model_name} ---")
+    try:
+        res = pipeline(
+            random_seed=42,
+            model=model_name,
+            training=train_tf,
+            testing=test_tf,
+            training_kwargs=dict(num_epochs=NUM_EPOCHS),
+            dimensions=EMBEDDING_DIM,
+            optimizer="adam",
+            optimizer_kwargs={"lr": LEARNING_RATE},
+            negative_sampler="basic",
+            negative_sampler_kwargs=dict(filtered=True),
+        )
+        mrr = res.get_metric("mrr")
+        h1 = res.get_metric("hits_at_1")
+        h3 = res.get_metric("hits_at_3")
+        h10 = res.get_metric("hits_at_10")
+        print(f"  {prefix}MRR={mrr:.4f}  H@1={h1:.4f}  H@3={h3:.4f}  H@10={h10:.4f}")
+        return {"MRR": mrr, "Hits@1": h1, "Hits@3": h3, "Hits@10": h10,
+                "result": res}
+    except Exception as e:
+        print(f"  {prefix}ERROR: {e}")
+        return None
+
+
+# ══════════════════════════════════════════════════════════════
 # MAIN
 # ══════════════════════════════════════════════════════════════
 def main():
@@ -550,7 +629,6 @@ def main():
     # Locate merged KG
     candidates = [
         OUTPUT_DIR / "merged_kg.ttl",
-        OUTPUT_DIR / "merged_kg_a2.ttl",
     ]
     kg_file = None
     for c in candidates:
@@ -564,7 +642,31 @@ def main():
             print("ERROR: Cannot find merged KG.")
             sys.exit(1)
 
-    print(f"Using KG: {kg_file}\n")
+    # Locate populated file (optional — for ablation)
+    populated_candidates = [
+        OUTPUT_DIR.parent / "data" / "hi-ontology-populated.ttl",
+        OUTPUT_DIR / "hi-ontology-populated.ttl",
+        Path("../data/hi-ontology-populated.ttl"),
+        Path("data/hi-ontology-populated.ttl"),
+    ]
+    populated_file = None
+    for c in populated_candidates:
+        if c.exists():
+            populated_file = c
+            break
+
+    print(f"Using KG: {kg_file}")
+    if populated_file:
+        print(f"Populated file found: {populated_file} (will use for ablation)")
+    else:
+        print("Populated file not found (ablation will be skipped)")
+
+    # ══════════════════════════════════════════════════════════
+    # EXPERIMENT 1: Own KG only (primary experiment)
+    # ══════════════════════════════════════════════════════════
+    print(f"\n{'='*70}")
+    print("EXPERIMENT 1 — Own KG Only")
+    print(f"{'='*70}")
 
     # Section 1: Load triples
     triples_arr, g_rdf = load_triples(kg_file)
@@ -590,6 +692,111 @@ def main():
 
     # Section 6: Embedding Visualisation
     visualise_embeddings(best_result, train_tf)
+
+    # Collect own-KG metrics for ablation comparison
+    own_metrics = {}
+    for model_name, res in results.items():
+        own_metrics[model_name] = {
+            "MRR": round(res.get_metric("mrr"), 4),
+            "Hits@1": round(res.get_metric("hits_at_1"), 4),
+            "Hits@3": round(res.get_metric("hits_at_3"), 4),
+            "Hits@10": round(res.get_metric("hits_at_10"), 4),
+        }
+
+    # ══════════════════════════════════════════════════════════
+    # EXPERIMENT 2: Combined KG (own + populated) — Ablation
+    # ══════════════════════════════════════════════════════════
+    if populated_file:
+        print(f"\n{'='*70}")
+        print("EXPERIMENT 2 — Combined KG (own + all-groups populated)")
+        print(f"{'='*70}")
+
+        combined_triples, combined_rdf = load_combined_triples(
+            kg_file, populated_file)
+
+        # Split combined data
+        combined_tf = TriplesFactory.from_labeled_triples(combined_triples)
+        comb_train, comb_test = combined_tf.split([0.9, 0.1], random_state=42)
+        print(f"  Combined split: train={comb_train.num_triples} "
+              f"test={comb_test.num_triples}")
+
+        # Train best model on combined data
+        combined_metrics = {}
+        for model_name in MODELS_TO_TRAIN:
+            m = run_single_model(model_name, comb_train, comb_test,
+                                 label="Combined")
+            if m:
+                combined_metrics[model_name] = {
+                    "MRR": round(m["MRR"], 4),
+                    "Hits@1": round(m["Hits@1"], 4),
+                    "Hits@3": round(m["Hits@3"], 4),
+                    "Hits@10": round(m["Hits@10"], 4),
+                }
+
+        # ── Ablation comparison table ─────────────────────────
+        print(f"\n{'='*70}")
+        print("ABLATION COMPARISON — Own KG vs Combined KG")
+        print(f"{'='*70}")
+
+        ablation_rows = []
+        header = f"  {'Model':<10} {'Dataset':<12} {'MRR':>6} {'H@1':>6} {'H@3':>6} {'H@10':>6}"
+        print(header)
+        print("  " + "-" * (len(header) - 2))
+
+        for model_name in MODELS_TO_TRAIN:
+            if model_name in own_metrics:
+                om = own_metrics[model_name]
+                print(f"  {model_name:<10} {'Own KG':<12} "
+                      f"{om['MRR']:>6.4f} {om['Hits@1']:>6.4f} "
+                      f"{om['Hits@3']:>6.4f} {om['Hits@10']:>6.4f}")
+                ablation_rows.append({
+                    "Model": model_name, "Dataset": "Own KG",
+                    **om
+                })
+            if model_name in combined_metrics:
+                cm = combined_metrics[model_name]
+                print(f"  {model_name:<10} {'Combined':<12} "
+                      f"{cm['MRR']:>6.4f} {cm['Hits@1']:>6.4f} "
+                      f"{cm['Hits@3']:>6.4f} {cm['Hits@10']:>6.4f}")
+                ablation_rows.append({
+                    "Model": model_name, "Dataset": "Combined",
+                    **cm
+                })
+
+        # Save ablation CSV
+        df_ablation = pd.DataFrame(ablation_rows)
+        df_ablation.to_csv(EMB_DIR / "ablation_comparison.csv", index=False)
+
+        # Ablation bar chart
+        fig, axes = plt.subplots(1, 4, figsize=(16, 5))
+        metrics_list = ["MRR", "Hits@1", "Hits@3", "Hits@10"]
+        colors = {"Own KG": "#2196F3", "Combined": "#FF9800"}
+
+        for ax, metric in zip(axes, metrics_list):
+            models = [m for m in MODELS_TO_TRAIN
+                      if m in own_metrics and m in combined_metrics]
+            x = np.arange(len(models))
+            w = 0.35
+            own_vals = [own_metrics[m][metric] for m in models]
+            comb_vals = [combined_metrics[m][metric] for m in models]
+            ax.bar(x - w/2, own_vals, w, label="Own KG",
+                   color=colors["Own KG"])
+            ax.bar(x + w/2, comb_vals, w, label="Combined",
+                   color=colors["Combined"])
+            ax.set_xticks(x)
+            ax.set_xticklabels(models, fontsize=9)
+            ax.set_title(metric)
+            ax.set_ylim(0, max(max(own_vals + comb_vals) * 1.2, 0.1))
+            if ax == axes[0]:
+                ax.legend(fontsize=8)
+
+        plt.suptitle("Ablation: Own KG vs Combined KG (with all-groups data)",
+                     fontsize=12)
+        plt.tight_layout()
+        plt.savefig(EMB_DIR / "ablation_comparison.png", dpi=150)
+        plt.close()
+
+        print(f"\n  -> Saved ablation_comparison.csv, ablation_comparison.png")
 
     print("\n" + "=" * 70)
     print("Done! All embedding results saved in:")

@@ -1,0 +1,149 @@
+
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix hi:   <https://w3id.org/hi-ontology#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+
+###############################################################
+# 1. HITeam Shape (tutorial Exercise 3 + ESWC paper)
+###############################################################
+hi:HITeamShape
+    a sh:NodeShape ;
+    sh:targetClass hi:HITeam ;
+    sh:property [
+        sh:path hi:hasMember ;
+        sh:minCount 2 ;
+        sh:message "A HITeam must have at least two agents." ;
+    ] ;
+    sh:property [
+        sh:path hi:hasMember ;
+        sh:qualifiedValueShape [ sh:class hi:HumanAgent ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "A HITeam must include at least one HumanAgent." ;
+    ] ;
+    sh:property [
+        sh:path hi:hasMember ;
+        sh:qualifiedValueShape [ sh:class hi:ArtificialAgent ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "A HITeam must include at least one ArtificialAgent." ;
+    ] ;
+    sh:property [
+        sh:path hi:hasGoal ;
+        sh:minCount 1 ;
+        sh:message "A HITeam must have at least one goal." ;
+    ] .
+
+###############################################################
+# 2. Team members must have a role (tutorial Exercise 3)
+###############################################################
+hi:TeamMemberRoleShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf hi:hasMember ;
+    sh:property [
+        sh:path hi:hasRoleConcept ;
+        sh:minCount 1 ;
+        sh:message "Every team member must have at least one role concept." ;
+    ] .
+
+###############################################################
+# 3. Goal Shape (tutorial Exercise 3)
+###############################################################
+hi:GoalShape
+    a sh:NodeShape ;
+    sh:targetClass hi:Goal ;
+    sh:property [
+        sh:path hi:requiresTask ;
+        sh:minCount 1 ;
+        sh:message "Each Goal must require at least one Task." ;
+    ] .
+
+###############################################################
+# 4. Task Shape
+###############################################################
+hi:TaskShape
+    a sh:NodeShape ;
+    sh:targetClass hi:Task ;
+    sh:property [
+        sh:path hi:requiresCapability ;
+        sh:minCount 1 ;
+        sh:message "Each Task must require at least one Capability." ;
+    ] .
+
+###############################################################
+# 5. TaskExecution Shape (ESWC paper)
+###############################################################
+hi:TaskExecutionShape
+    a sh:NodeShape ;
+    sh:targetClass hi:TaskExecution ;
+    sh:property [
+        sh:path hi:realizesTask ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each TaskExecution must realise exactly one Task." ;
+    ] .
+
+###############################################################
+# 6. UseCase Shapes
+###############################################################
+hi:ResearchUseCaseShape
+    a sh:NodeShape ;
+    sh:targetClass hi:ResearchUseCase ;
+    sh:property [
+        sh:path hi:hasHITeam ;
+        sh:minCount 1 ;
+        sh:message "Each ResearchUseCase must have at least one HITeam." ;
+    ] .
+
+hi:CompetitionUseCaseShape
+    a sh:NodeShape ;
+    sh:targetClass hi:CompetitionUseCase ;
+    sh:property [
+        sh:path hi:hasHITeam ;
+        sh:minCount 1 ;
+        sh:message "Each CompetitionUseCase must have at least one HITeam." ;
+    ] .
+
+###############################################################
+# 7. Paper Shape (our extension)
+###############################################################
+hi:PaperShape
+    a sh:NodeShape ;
+    sh:targetClass hi:Paper ;
+    sh:property [
+        sh:path hi:hasAuthor ;
+        sh:minCount 1 ;
+        sh:message "Each Paper must have at least one Author." ;
+    ] ;
+    sh:property [
+        sh:path hi:hasTitle ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Each Paper must have exactly one title (xsd:string)." ;
+    ] ;
+    sh:property [
+        sh:path hi:publishedAt ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Paper must be published at exactly one Conference." ;
+    ] ;
+    sh:property [
+        sh:path hi:hasKeyword ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "Paper keywords must be IRIs (skos:Concept), not literals." ;
+    ] .
+
+###############################################################
+# 8. Interaction Shape (ESWC paper)
+###############################################################
+hi:InteractionShape
+    a sh:NodeShape ;
+    sh:targetClass hi:Interaction ;
+    sh:property [
+        sh:path hi:hasAgentInvolved ;
+        sh:minCount 2 ;
+        sh:message "Each Interaction must involve at least two agents." ;
+    ] .

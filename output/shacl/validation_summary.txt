@@ -1,0 +1,10 @@
+SHACL Validation Summary
+========================================
+Data graph: C:\Users\babes\OneDrive\Desktop\BA-CI\06_Knowledge_Graphs\Programming\Knowledge-graphs-project\output\merged_kg.ttl
+Triples: 3886
+Shapes: C:\Users\babes\OneDrive\Desktop\BA-CI\06_Knowledge_Graphs\Programming\Knowledge-graphs-project\output\shacl\hi_shapes.ttl
+
+Result: CONFORMS
+Violations: 0
+
+All SHACL shapes satisfied.

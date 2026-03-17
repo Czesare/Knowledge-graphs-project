@@ -1,83 +1,81 @@
-Communities: 17
-Modularity: 0.6090
-Sizes: [103, 69, 52, 47, 42, 36, 35, 34, 31, 29, 28, 27, 23, 20, 20, 20, 14]
+Communities: 16
+Modularity: 0.6097
+Sizes: [93, 75, 63, 56, 51, 45, 42, 39, 31, 28, 26, 20, 20, 17, 14, 10]
 
-Community 1 (103 nodes)
-  SKOS Concept: 84
+Community 1 (93 nodes)
+  SKOS Concept: 75
   Other: 9
   Author: 4
   Affiliation: 3
   Paper: 2
-  Evaluation: 1
-  Sample: hint:CoordinationTaskExecution, inst:Keyword_SalvageEthnography, hint:HeavyLiftingTaskExecution, hint:ProvideProfileTaskExecution, hint:ConfinedReachSafetyEvaluation
+  Sample: hint:ReinforcementLearningWithKnowledgeGraphEvaluation, hint:Task, inst:Paper_07, SmartBear Software, hint:SocialConversationContext
 
-Community 2 (69 nodes)
-  Capability: 16
+Community 2 (75 nodes)
+  SKOS Concept: 35
+  Capability: 19
+  Task: 10
+  Other: 4
+  ArtificialAgent: 3
+  HumanAgent: 1
+  UseCase: 1
+  Goal: 1
+  HITeam: 1
+  Sample: hint:CandidateHypothesisGenerationTask, hint:MetaAnalysisCapability, Reactive Response, Ethical Oversight, Professional Fact-Checker
+
+Community 3 (63 nodes)
+  Capability: 14
   SKOS Concept: 13
-  Task: 13
-  Other: 7
-  Interaction: 5
+  Task: 11
+  Other: 8
+  ArtificialAgent: 3
+  UseCase: 3
+  Goal: 3
+  HumanAgent: 3
+  HITeam: 3
+  Interaction: 2
+  Sample: Communication, Explainable AI System, hint:ExplanationTask, Pattern Recognition, Assess User Needs
+
+Community 4 (56 nodes)
+  SKOS Concept: 31
+  Evaluation: 13
+  Experiment: 12
+  Sample: hint:TaskSuccessRateMetric, Crisis Scenario Testing, hint:NegotationImpactEvaluation, Explanation Pattern Evaluation, Triple Extraction Evaluation
+
+Community 5 (51 nodes)
+  Capability: 11
+  Task: 10
+  SKOS Concept: 10
+  Other: 5
+  HumanAgent: 3
   Goal: 3
   HITeam: 3
-  HumanAgent: 3
-  UseCase: 3
-  ArtificialAgent: 3
-  Sample: hint:ExplanationIntent, Enhance Decision-Making, Contextual Understanding, Judgment Capability, hint:SituationalAssessmentTask
-
-Community 3 (52 nodes)
-  SKOS Concept: 28
-  Experiment: 12
-  Evaluation: 12
-  Sample: hint:FineManipulationExperiment, Embedding Model Comparison, Triple Extraction Evaluation, Crisis Scenario Testing, Model Robustness Evaluation
-
-Community 4 (47 nodes)
-  SKOS Concept: 13
-  Task: 8
-  Capability: 7
-  Other: 6
-  HumanAgent: 3
-  ArtificialAgent: 2
-  Goal: 2
-  Interaction: 2
   UseCase: 2
-  HITeam: 2
-  Sample: Behavior Training Task, NAO Robot, Enhance Model Robustness, Research Scientist, hint:SymptomAnalysisTask
+  ArtificialAgent: 2
+  Interaction: 2
+  Sample: Data Processing, Identify Relevant Data, Task Execution, Validate Data Selection, Ethical Oversight
 
-Community 5 (42 nodes)
+Community 6 (45 nodes)
+  SKOS Concept: 16
+  Task: 8
+  Capability: 8
+  HumanAgent: 3
+  HITeam: 2
+  Other: 2
+  UseCase: 2
+  Goal: 2
+  ArtificialAgent: 1
+  Interaction: 1
+  Sample: Neurodegeneration Protein Analysis Team, Evaluate Safety Protocols, Logistical Management, Ontology System, Safety Protocol Adherence
+
+Community 7 (42 nodes)
   SKOS Concept: 29
   Context: 13
-  Sample: Multimodal Learning Context, hint:ClinicalConsultationContext, Molten Metal Handling, hint:JuryDeliberationContext, hint:TrustShiftPhenomenon
+  Sample: hint:JuryDeliberationContext, hint:UndueInfluenceConstraint, Multimodal Learning Context, hint:SmartCampusContext, hint:ClinicalConsultationContext
 
-Community 6 (36 nodes)
-  Other: 13
-  Author: 12
-  Affiliation: 6
+Community 8 (39 nodes)
+  Author: 14
+  Other: 12
+  Affiliation: 8
   Paper: 4
   Conference: 1
-  Sample: inst:Keyword_RobustAi, inst:Paper_06_Author1, Politecnico di Milano, inst:Paper_01, inst:Keyword_ActiveLearning
-
-Community 7 (35 nodes)
-  Capability: 12
-  SKOS Concept: 8
-  Task: 7
-  HumanAgent: 2
-  Goal: 1
-  ArtificialAgent: 1
-  UseCase: 1
-  Interaction: 1
-  Other: 1
-  HITeam: 1
-  Sample: Knowledge Integration, Proactive Risk Management, Ontology System, Identify Hazards, Team Optimization
-
-Community 8 (34 nodes)
-  Capability: 7
-  SKOS Concept: 6
-  Task: 6
-  Other: 4
-  UseCase: 2
-  HumanAgent: 2
-  HITeam: 2
-  Goal: 2
-  ArtificialAgent: 2
-  Interaction: 1
-  Sample: hint:HumanUserRole, Preference Communication, Hygiene Assistance, Execute Hygiene Task, Crisis Data Relevance Identification
+  Sample: inst:Keyword_DecisionSupportSystems, inst:Keyword_InteractionDesign, Universitat Pompeu Fabra, ICREA, inst:Paper_01_Author3, inst:Keyword_SocialConversations

@@ -4,7 +4,7 @@ Step 7: SPARQL Queries and KG Metrics
 Usage:
     python 07_sparql_queries.py
 
-Loads merged_kg.ttl (or merged_kg_a2.ttl), runs SPARQL queries,
+Loads merged_kg.ttl, runs SPARQL queries,
 computes KG metrics, prints results tables, and saves visualisations.
 
 Queries are designed to address Competency Questions from the HI Ontology
@@ -606,7 +606,6 @@ def main():
     # Locate merged KG
     candidates = [
         OUTPUT_DIR / "merged_kg.ttl",
-        OUTPUT_DIR / "merged_kg_a2.ttl",
         Path("merged_kg.ttl"),
     ]
     kg_file = None

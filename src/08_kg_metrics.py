@@ -655,7 +655,6 @@ def main():
     # Locate merged KG
     candidates = [
         OUTPUT_DIR / "merged_kg.ttl",
-        OUTPUT_DIR / "merged_kg_a2.ttl",
         Path("merged_kg.ttl"),
     ]
     kg_file = None
