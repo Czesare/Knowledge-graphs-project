@@ -442,31 +442,28 @@ def run_q4(g: Graph):
 # "Given a goal, which experiments test which metrics, and
 #  what hypotheses do these experiments address?"
 #
-# NOTE: Evaluations are not linked to papers/use-cases via an
-# explicit property (hi:evaluatedBy is unused in instances).
-# We join them using the shared URI prefix convention:
-#   inst:Paper01 → inst:Paper01_Evaluation → inst:Paper01_Experiment_...
+# Evaluations are joined through the explicit hi:evaluatedBy relation
+# on task executions, rather than through URI naming conventions.
 #
-# SPARQL features: 6+ triple patterns, OPTIONAL (×3), BIND,
-#                  STRSTARTS, STR, FILTER, ORDER BY
+# SPARQL features: 6+ triple patterns, OPTIONAL (×3),
+#                  DISTINCT, ORDER BY
 # ══════════════════════════════════════════════════════════════
 Q5_SPARQL = PREFIXES + """
-SELECT ?paperTitle ?evalLabel ?expLabel ?metricName
+SELECT DISTINCT ?paperTitle ?evalLabel ?expLabel ?metricName
        ?nullH ?altH
 WHERE {
     ?paper a hi:Paper ;
-           hi:hasTitle ?paperTitle .
-
-    # Extract the paper URI prefix (e.g. "inst:Paper01")
-    BIND(STR(?paper) AS ?paperStr)
+           hi:hasTitle ?paperTitle ;
+           hi:describesUseCase ?uc .
+    ?uc hi:hasHITeam ?team .
+    ?team hi:hasMember ?agent .
+    ?agent hi:performsExecution ?exec .
+    ?exec hi:evaluatedBy ?eval .
 
     ?eval a hi:Evaluation ;
-          rdfs:label ?evalLabel ;
-          hi:hasExperiment ?exp .
+           rdfs:label ?evalLabel ;
+           hi:hasExperiment ?exp .
     ?exp rdfs:label ?expLabel .
-
-    # Join: evaluation URI must start with the same prefix as the paper
-    FILTER(STRSTARTS(STR(?eval), ?paperStr))
 
     OPTIONAL {
         ?exp hi:hasMetricTested ?metric .

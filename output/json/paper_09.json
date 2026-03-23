@@ -3,35 +3,35 @@
   "title": "Towards Building a Trustworthy RAG-Based Chatbot for the Italian Public Administration",
   "authors": [
     {
-      "name": "Chandana Sree Mala",
+      "name": "Chandana Sree MALA",
       "affiliation": "Department of Informatics, Scuola Normale Superiore"
     },
     {
-      "name": "Christian Di Maio",
+      "name": "Christian DIMAIO",
       "affiliation": "Department of Information Engineering, University of Siena"
     },
     {
-      "name": "Mattia Proietti",
+      "name": "Mattia PROIETTI",
       "affiliation": "Department of Philology, Literature and Linguistics, University of Pisa"
     },
     {
-      "name": "Gizem Gezici",
+      "name": "Gizem GEZICI",
       "affiliation": "Department of Informatics, Scuola Normale Superiore"
     },
     {
-      "name": "Fosca Giannotti",
+      "name": "Fosca GIANNOTTI",
       "affiliation": "Department of Informatics, Scuola Normale Superiore"
     },
     {
-      "name": "Stefano Melacci",
+      "name": "Stefano MELACCI",
       "affiliation": "Department of Information Engineering, University of Siena"
     },
     {
-      "name": "Alessandro Lenci",
+      "name": "Alessandro LENCI",
       "affiliation": "Department of Philology, Literature and Linguistics, University of Pisa"
     },
     {
-      "name": "Marco Gori",
+      "name": "Marco GORI",
       "affiliation": "Department of Information Engineering, University of Siena"
     }
   ],
@@ -52,7 +52,7 @@
       "hint:LawAndPolicyDomain"
     ],
     "context": {
-      "label": "Italian Public Administration Context",
+      "label": "Public Administration Support",
       "context_concepts": [
         "hint:JuryDeliberationContext"
       ],
@@ -67,7 +67,7 @@
     "team": {
       "human_agents": [
         {
-          "label": "Public Administration Employee",
+          "label": "Government Employee",
           "role_concept": "hint:HumanUserRole",
           "capabilities": [
             {
@@ -81,7 +81,7 @@
               "label": "Contextual Understanding",
               "concept": "hint:SituationalAwarenessCapability",
               "allows_tasks": [
-                "Decide Intervention Task"
+                "Situational Assessment Task"
               ]
             }
           ]
@@ -93,24 +93,24 @@
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
-              "label": "Pattern Recognition",
-              "concept": "hint:PatternLearningCapability",
-              "allows_tasks": [
-                "Data Collection Task"
-              ]
-            },
-            {
-              "label": "Semantic Embedding",
-              "concept": "hint:EmbeddingReasoningCapability",
+              "label": "Semantic Retrieval",
+              "concept": "hint:SemanticReasoningCapability",
               "allows_tasks": [
                 "Semantic Reasoning Task"
               ]
             },
             {
-              "label": "Information Retrieval",
-              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "label": "Multilingual Embedding",
+              "concept": "hint:EmbeddingReasoningCapability",
               "allows_tasks": [
                 "Knowledge Graph Query Task"
+              ]
+            },
+            {
+              "label": "Response Generation",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Question Answering Task"
               ]
             }
           ]
@@ -119,19 +119,19 @@
     },
     "goals": [
       {
-        "label": "Provide Accessible Support",
-        "goal_concept": "hint:UserWellbeingGoal",
+        "label": "Provide Accurate Information",
+        "goal_concept": "hint:FairAccurateVerdictGoal",
         "tasks": [
           {
-            "label": "Extract Information",
-            "task_concept": "hint:DataCollectionTask",
+            "label": "Retrieve Relevant Information",
+            "task_concept": "hint:KnowledgeGraphQueryTask",
             "required_capabilities": [
-              "hint:SensingCapability"
+              "hint:KnowledgeGraphQueryingCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Generate Responses",
+            "label": "Generate User-Friendly Responses",
             "task_concept": "hint:ExplanationTask",
             "required_capabilities": [
               "hint:ExplainingCapability"
@@ -139,10 +139,10 @@
             "sub_tasks": []
           },
           {
-            "label": "Ensure Comprehensibility",
-            "task_concept": "hint:AssessCommunicationAccuracy",
+            "label": "Ensure Data Privacy",
+            "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
-              "hint:ReportingCapability"
+              "hint:SensingCapability"
             ],
             "sub_tasks": []
           }
@@ -155,7 +155,7 @@
         "modality_concept": "hint:TextChatModality",
         "intent_concept": "hint:AnswerIntent",
         "agents_involved": [
-          "Public Administration Employee",
+          "Government Employee",
           "RAG Chatbot"
         ]
       }
@@ -163,34 +163,35 @@
     "task_executions": [
       {
         "label": "Execute Information Retrieval",
-        "task_label": "Extract Information",
+        "task_label": "Retrieve Relevant Information",
         "performed_by": "RAG Chatbot",
         "method_concept": "hint:KnowledgeGraphQueryMethod"
       },
       {
         "label": "Execute Response Generation",
-        "task_label": "Generate Responses",
+        "task_label": "Generate User-Friendly Responses",
         "performed_by": "RAG Chatbot",
         "method_concept": "hint:PostHocExplanationMethod"
       }
     ],
     "evaluation": {
-      "label": "Evaluate Retrieval Performance",
+      "label": "Chatbot Performance Evaluation",
       "evaluation_concepts": [
-        "hint:DataCollectionQualityEvaluation"
+        "hint:AIInterventionImpactEvaluation"
       ],
       "metric_concepts": [
+        "hint:TrustPreservationMetric",
         "hint:TaskSuccessRateMetric"
       ],
       "experiments": [
         {
-          "label": "Embedding Model Comparison",
-          "experiment_concept": "hint:DiagnosisExperiment",
+          "label": "RAG Chatbot Evaluation",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
           "metrics_tested": [
             "hint:TaskSuccessRateMetric"
           ],
-          "null_hypothesis": "Italian-specific models perform equally well as English models.",
-          "alternative_hypothesis": "English models outperform Italian-specific models."
+          "null_hypothesis": "The RAG chatbot does not improve task success rate.",
+          "alternative_hypothesis": "The RAG chatbot improves task success rate."
         }
       ]
     }
@@ -199,7 +200,7 @@
     {
       "uri": "hint:BilingualMappingCapability",
       "label": "Bilingual Mapping Capability",
-      "definition": "The ability to map and translate between two languages effectively.",
+      "definition": "The ability to map and translate information between two languages effectively.",
       "broader": "hint:Capability",
       "category": "Capability"
     }

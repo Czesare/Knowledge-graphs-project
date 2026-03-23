@@ -20,19 +20,12 @@ inst:Paper_07 a hi:Paper ;
     hi:hasTitle "Ontology-Based Risk Assessment in Smelting Plant Logistics"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
 
-inst:Paper_07_Evaluation a hi:Evaluation ;
-    rdfs:label "System Evaluation" ;
-    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
-    hi:hasExperiment inst:Paper_07_Experiment_Scenario-basedEvaluation ;
-    hi:hasMetricConcept hint:SafetyComplianceMetric,
-        hint:TaskSuccessRateMetric .
-
-inst:Paper_07_Interaction_Operator-driverCoordination a hi:Interaction ;
-    rdfs:label "Operator-Driver Coordination" ;
+inst:Paper_07_Interaction_Operator-driverCommunication a hi:Interaction ;
+    rdfs:label "Operator-Driver Communication" ;
     hi:hasAgentInvolved inst:Paper_07_Driver,
         inst:Paper_07_Operator ;
     hi:hasInteractionIntentConcept hint:DeliberationIntent ;
-    hi:hasInteractionModalityConcept hint:VerbalDialogueModality .
+    hi:hasInteractionModalityConcept hint:VoiceChatModality .
 
 inst:HHAI2025 a hi:Conference ;
     rdfs:label "HHAI 2025" ;
@@ -71,23 +64,31 @@ inst:Paper_07_Author2 a hi:Author ;
 
 inst:Paper_07_Context a hi:Context ;
     rdfs:label "Molten Metal Handling" ;
-    hi:hasConstraintConcept hint:SafetyConstraint ;
+    hi:hasConstraintConcept hint:SafetyConstraint,
+        hint:TransparencyConstraint ;
     hi:hasContextConcept hint:WorkspaceManipulationContext ;
     hi:hasInfluenceOn inst:Paper_07_Team ;
-    hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
-        hint:TrustShiftPhenomenon .
+    hi:hasPhenomenonConcept hint:KnowledgeMismatchPhenomenon,
+        hint:SkillsComplementarityPhenomenon .
 
-inst:Paper_07_Driver_Cap_LogisticalManagement a hi:Capability ;
-    rdfs:label "Logistical Management" ;
+inst:Paper_07_Driver_Cap_LogisticalCoordination a hi:Capability ;
+    rdfs:label "Logistical Coordination" ;
     hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_07_Exec_CoordinateLadleTransport a hi:TaskExecution ;
+    rdfs:label "Coordinate Ladle Transport" ;
+    hi:evaluatedBy inst:Paper_07_Evaluation ;
+    hi:hasMethodConcept hint:ProtocolNegotiationMethod ;
+    hi:realizesTask inst:Paper_07_Task_CoordinateWithDrivers .
 
 inst:Paper_07_Exec_ExecuteRiskAssessment a hi:TaskExecution ;
     rdfs:label "Execute Risk Assessment" ;
-    hi:hasMethodConcept hint:SemanticLinkingMethod ;
+    hi:evaluatedBy inst:Paper_07_Evaluation ;
+    hi:hasMethodConcept hint:SemanticReasoningMethod ;
     hi:realizesTask inst:Paper_07_Task_RiskAssessment .
 
-inst:Paper_07_Experiment_Scenario-basedEvaluation a hi:Experiment ;
-    rdfs:label "Scenario-Based Evaluation" ;
+inst:Paper_07_Experiment_Scenario-basedTesting a hi:Experiment ;
+    rdfs:label "Scenario-Based Testing" ;
     hi:hasAlternativeHypothesis "The system improves safety compliance."^^xsd:string ;
     hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
     hi:hasMetricTested hint:SafetyComplianceMetric ;
@@ -97,23 +98,23 @@ inst:Paper_07_Goal_ProactiveRiskManagement a hi:Goal ;
     rdfs:label "Proactive Risk Management" ;
     hi:hasGoalConcept hint:SafeRetrievalGoal ;
     hi:requiresTask inst:Paper_07_Task_CoordinateWithDrivers,
-        inst:Paper_07_Task_RiskAssessment,
-        inst:Paper_07_Task_UpdateKnowledgeBase .
+        inst:Paper_07_Task_MonitorLadlePlacement,
+        inst:Paper_07_Task_RiskAssessment .
 
 inst:Paper_07_OntologySystem a hi:ArtificialAgent ;
     rdfs:label "Ontology System" ;
-    hi:hasCapability inst:Paper_07_OntologySystem_Cap_KnowledgeIntegration,
+    hi:hasCapability inst:Paper_07_OntologySystem_Cap_DecisionSupport,
         inst:Paper_07_OntologySystem_Cap_RiskIdentification ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Paper_07_Exec_ExecuteRiskAssessment .
 
-inst:Paper_07_Task_EvaluateSafetyProtocols a hi:Task ;
-    rdfs:label "Evaluate Safety Protocols" ;
-    hi:requiresCapability inst:Paper_07_OntologySystem_Cap_RiskIdentification .
+inst:Paper_07_OntologySystem_Cap_DecisionSupport a hi:Capability ;
+    rdfs:label "Decision Support" ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
 
-inst:Paper_07_Task_IdentifyHazards a hi:Task ;
-    rdfs:label "Identify Hazards" ;
-    hi:requiresCapability inst:Paper_07_Operator_Cap_SafetyProtocolAdherence .
+inst:Paper_07_OntologySystem_Cap_RiskIdentification a hi:Capability ;
+    rdfs:label "Risk Identification" ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
 
 inst:Paper_07_UseCase a hi:ResearchUseCase ;
     rdfs:label "Smelting Plant Risk Assessment" ;
@@ -126,29 +127,28 @@ inst:Affiliation_UmeåUniversity a hi:Affiliation ;
 
 inst:Paper_07_Driver a hi:HumanAgent ;
     rdfs:label "Driver" ;
-    hi:hasCapability inst:Paper_07_Driver_Cap_LogisticalManagement,
-        inst:Paper_07_Driver_Cap_Real-timeDecisionMaking ;
+    hi:hasCapability inst:Paper_07_Driver_Cap_LogisticalCoordination,
+        inst:Paper_07_Driver_Cap_Real-timePositionAwareness ;
     hi:hasRoleConcept hint:RiskOperatorRole .
 
-inst:Paper_07_Driver_Cap_Real-timeDecisionMaking a hi:Capability ;
-    rdfs:label "Real-time Decision Making" ;
-    hi:allowsTask inst:Paper_07_Task_RiskAssessment ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
+inst:Paper_07_Driver_Cap_Real-timePositionAwareness a hi:Capability ;
+    rdfs:label "Real-time Position Awareness" ;
+    hi:allowsTask inst:Paper_07_Task_MonitorLadlePlacement ;
+    hi:hasCapabilityConcept hint:SensingCapability .
 
-inst:Paper_07_OntologySystem_Cap_KnowledgeIntegration a hi:Capability ;
-    rdfs:label "Knowledge Integration" ;
-    hi:allowsTask inst:Paper_07_Task_UpdateKnowledgeBase ;
-    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
-
-inst:Paper_07_OntologySystem_Cap_RiskIdentification a hi:Capability ;
-    rdfs:label "Risk Identification" ;
-    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
+inst:Paper_07_Evaluation a hi:Evaluation ;
+    rdfs:label "System Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_07_Experiment_Scenario-basedTesting ;
+    hi:hasMetricConcept hint:SafetyComplianceMetric,
+        hint:TaskSuccessRateMetric .
 
 inst:Paper_07_Operator a hi:HumanAgent ;
     rdfs:label "Operator" ;
     hi:hasCapability inst:Paper_07_Operator_Cap_Communication,
         inst:Paper_07_Operator_Cap_SafetyProtocolAdherence ;
-    hi:hasRoleConcept hint:RiskOperatorRole .
+    hi:hasRoleConcept hint:RiskOperatorRole ;
+    hi:performsExecution inst:Paper_07_Exec_CoordinateLadleTransport .
 
 inst:Paper_07_Operator_Cap_Communication a hi:Capability ;
     rdfs:label "Communication" ;
@@ -157,17 +157,13 @@ inst:Paper_07_Operator_Cap_Communication a hi:Capability ;
 
 inst:Paper_07_Operator_Cap_SafetyProtocolAdherence a hi:Capability ;
     rdfs:label "Safety Protocol Adherence" ;
+    hi:allowsTask inst:Paper_07_Task_RiskAssessment ;
     hi:hasCapabilityConcept hint:ReasoningCapability .
 
-inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
-    rdfs:label "Coordinate with Drivers" ;
-    hi:hasTaskConcept hint:OperatorCoordinationTask ;
-    hi:requiresCapability inst:Paper_07_Operator_Cap_Communication .
-
-inst:Paper_07_Task_UpdateKnowledgeBase a hi:Task ;
-    rdfs:label "Update Knowledge Base" ;
-    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
-    hi:requiresCapability inst:Paper_07_OntologySystem_Cap_KnowledgeIntegration .
+inst:Paper_07_Task_MonitorLadlePlacement a hi:Task ;
+    rdfs:label "Monitor Ladle Placement" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_07_Driver_Cap_Real-timePositionAwareness .
 
 inst:Paper_07_Team a hi:HITeam ;
     rdfs:label "Smelting Plant Risk Assessment Team" ;
@@ -177,10 +173,13 @@ inst:Paper_07_Team a hi:HITeam ;
         inst:Paper_07_Operator ;
     hi:isInfluencedBy inst:Paper_07_Context .
 
+inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
+    rdfs:label "Coordinate with Drivers" ;
+    hi:hasTaskConcept hint:OperatorCoordinationTask ;
+    hi:requiresCapability inst:Paper_07_Operator_Cap_Communication .
+
 inst:Paper_07_Task_RiskAssessment a hi:Task ;
     rdfs:label "Risk Assessment" ;
-    hi:hasSubTask inst:Paper_07_Task_EvaluateSafetyProtocols,
-        inst:Paper_07_Task_IdentifyHazards ;
     hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_07_Driver_Cap_Real-timeDecisionMaking .
+    hi:requiresCapability inst:Paper_07_Operator_Cap_SafetyProtocolAdherence .
 

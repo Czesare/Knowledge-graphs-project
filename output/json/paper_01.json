@@ -16,7 +16,7 @@
     }
   ],
   "keywords": [
-    "Fact checking",
+    "Fact-checking",
     "Claim decomposition",
     "Large Language Models"
   ],
@@ -33,7 +33,7 @@
       ],
       "constraint_concepts": [
         "hint:TransparencyConstraint",
-        "hint:FairnessConstraint"
+        "hint:EthicalConstraint"
       ],
       "phenomenon_concepts": [
         "hint:TrustShiftPhenomenon",
@@ -43,35 +43,28 @@
     "team": {
       "human_agents": [
         {
-          "label": "Professional Fact-Checker",
+          "label": "Professional Fact-checker",
           "role_concept": "hint:JurorRole",
           "capabilities": [
             {
               "label": "Domain Judgment",
               "concept": "hint:ClinicalJudgmentCapability",
               "allows_tasks": [
-                "Generate nuanced questions"
+                "Question Generation"
               ]
             },
             {
               "label": "Contextual Understanding",
-              "concept": "hint:SemanticReasoningCapability",
+              "concept": "hint:SituationalAwarenessCapability",
               "allows_tasks": [
-                "Decompose claims"
+                "Evidence Retrieval"
               ]
             },
             {
               "label": "Ethical Oversight",
               "concept": "hint:ReasoningCapability",
               "allows_tasks": [
-                "Assess evidence quality"
-              ]
-            },
-            {
-              "label": "Feedback Provision",
-              "concept": "hint:ExplainingCapability",
-              "allows_tasks": [
-                "Provide statement task"
+                "Veracity Prediction"
               ]
             }
           ]
@@ -80,34 +73,27 @@
       "artificial_agents": [
         {
           "label": "Large Language Model",
-          "role_concept": "hint:AIAdvisorRole",
+          "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
               "label": "Pattern Recognition",
               "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
-                "Generate questions"
+                "Question Generation"
               ]
             },
             {
               "label": "Data Processing",
               "concept": "hint:KnowledgeGraphQueryingCapability",
               "allows_tasks": [
-                "Retrieve evidence"
+                "Evidence Retrieval"
               ]
             },
             {
-              "label": "Speed",
-              "concept": "hint:ReinforcementLearningCapability",
+              "label": "Text Generation",
+              "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Veracity prediction"
-              ]
-            },
-            {
-              "label": "Generation",
-              "concept": "hint:MultimodalInterpretationCapability",
-              "allows_tasks": [
-                "Generate nuanced questions"
+                "Veracity Prediction"
               ]
             }
           ]
@@ -116,7 +102,7 @@
     },
     "goals": [
       {
-        "label": "Accurate Claim Verification",
+        "label": "Verify Claims",
         "goal_concept": "hint:FairAccurateVerdictGoal",
         "tasks": [
           {
@@ -139,22 +125,6 @@
             "label": "Veracity Prediction",
             "task_concept": "hint:SemanticReasoningTask",
             "required_capabilities": [
-              "hint:SemanticReasoningCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Claim Decomposition",
-            "task_concept": "hint:CandidateHypothesisGenerationTask",
-            "required_capabilities": [
-              "hint:SemanticReasoningCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Evidence Assessment",
-            "task_concept": "hint:AssessCommunicationAccuracy",
-            "required_capabilities": [
               "hint:ReasoningCapability"
             ],
             "sub_tasks": []
@@ -164,11 +134,11 @@
     ],
     "interactions": [
       {
-        "label": "Human-AI Question Generation",
+        "label": "Human-AI Question Review",
         "modality_concept": "hint:TextChatModality",
         "intent_concept": "hint:DeliberationIntent",
         "agents_involved": [
-          "Professional Fact-Checker",
+          "Professional Fact-checker",
           "Large Language Model"
         ]
       }
@@ -178,29 +148,23 @@
         "label": "Generate Questions",
         "task_label": "Question Generation",
         "performed_by": "Large Language Model",
-        "method_concept": "hint:ReinforcementLearningMethod"
+        "method_concept": "hint:CooperativeLearningMethod"
       },
       {
         "label": "Retrieve Evidence",
         "task_label": "Evidence Retrieval",
-        "performed_by": "Large Language Model",
-        "method_concept": "hint:KnowledgeGraphQueryMethod"
+        "performed_by": "Professional Fact-checker",
+        "method_concept": "hint:DataCollectionMethod"
       },
       {
         "label": "Predict Veracity",
         "task_label": "Veracity Prediction",
         "performed_by": "Large Language Model",
         "method_concept": "hint:SemanticEmbeddingMethod"
-      },
-      {
-        "label": "Decompose Claim",
-        "task_label": "Claim Decomposition",
-        "performed_by": "Professional Fact-Checker",
-        "method_concept": "hint:ArgumentationReasoningMethod"
       }
     ],
     "evaluation": {
-      "label": "Fact-checking Evaluation",
+      "label": "Fact-checking Pipeline Evaluation",
       "evaluation_concepts": [
         "hint:AIInterventionImpactEvaluation"
       ],
@@ -215,19 +179,19 @@
           "metrics_tested": [
             "hint:ExplanationClarityMetric"
           ],
-          "null_hypothesis": "LLM-generated questions do not improve veracity prediction.",
-          "alternative_hypothesis": "LLM-generated questions improve veracity prediction."
+          "null_hypothesis": "LLM-generated questions do not improve veracity prediction accuracy.",
+          "alternative_hypothesis": "LLM-generated questions improve veracity prediction accuracy."
         }
       ]
     }
   },
   "new_concepts": [
     {
-      "uri": "hint:ComplexClaimVerification",
-      "label": "Complex Claim Verification",
-      "definition": "The process of verifying claims that involve multiple sub-claims and require nuanced questioning.",
-      "broader": "hint:FairAccurateVerdictGoal",
-      "category": "Goal"
+      "uri": "hint:ComplexClaimVerificationTask",
+      "label": "Complex Claim Verification Task",
+      "definition": "A task involving the verification of claims with multiple implicit and explicit sub-claims.",
+      "broader": "hint:Task",
+      "category": "Task"
     }
   ]
 }

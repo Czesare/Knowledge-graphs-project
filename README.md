@@ -1,264 +1,290 @@
 # Hybrid Intelligence Knowledge Graph Pipeline
 
-## 1. Project Overview
+A knowledge engineering pipeline for building a **Hybrid Intelligence (HI) knowledge graph** from **research papers** and **competition scenarios**, using:
 
-This repository contains an academic-engineering pipeline for populating a
-Hybrid Intelligence (HI) knowledge graph from research papers and competition
-scenarios. The project is centered on the Hybrid Intelligence Ontology (V2)
-and the HINT thesaurus, and combines large language model extraction with
-deterministic RDF generation in Python.
+- **LLM-based structured extraction** into JSON
+- **deterministic Python-based RDF generation**
+- **external linking, validation, querying, metrics, and embeddings**
 
-The central design choice is deliberate:
+The project is built on top of the **Hybrid Intelligence Ontology** and the **HINT thesaurus** and was developed as an academic-engineering project for **Knowledge Graphs & Semantic Technologies**.
 
-- the LLM is used for structured semantic extraction into JSON
-- Python then converts that JSON into RDF/Turtle deterministically
+---
 
-This hybrid design makes the workflow easier to inspect, debug, and validate
-than direct LLM-to-RDF generation. It also keeps ontology serialization logic
-in code rather than in prompt behavior.
+## Final Snapshot
 
-In its current repository state, the project includes:
+Current checked-in repository state:
 
-- 10 paper PDFs in `papers/`
-- 3 HI competition scenarios in `scenarios/scenarios.csv`
-- generated outputs for all 13 sources in `output/`
-- a merged graph in `output/merged_kg.ttl`
-- SHACL validation artifacts in `output/shacl/`
+- **11 HHAI papers**
+- **3 HI competition scenarios**
+- **14 source artifacts**
+- **3819 triples** in the final merged graph
+- **641 individuals**
+- **218 external links**
+- **SHACL conformance: 0 violations**
+- **5 competency-question SPARQL query outputs**
+- **provenance / repair audit outputs** in `output/audit/`
 
-## 2. Motivation and Problem Setting
-
-Populating domain ontologies from unstructured documents is time-consuming and
-error-prone when done manually. Research papers and scenario descriptions often
-contain rich information about agents, tasks, goals, capabilities, contexts,
-interactions, and evaluation procedures, but that knowledge is embedded in free
-text rather than available in machine-readable form.
-
-This repository addresses that problem by providing a reproducible pipeline
-that:
-
-- extracts text from heterogeneous inputs
-- maps content to a shared ontology and thesaurus
-- generates inspectable RDF artifacts
-- supports validation, querying, graph analysis, and embedding-based
-  exploration
-
-The project is intended both as a knowledge engineering exercise and as a
-practical prototype for semi-automated ontology population in an academic
-setting.
-
-## 3. Data Sources
-
-The repository combines curated schema resources with document-level source
-material.
-
-### Core schema resources
-
-- `data/hi-ontology.ttl`: Hybrid Intelligence Ontology V2
-- `data/hi-thesaurus.ttl`: HINT thesaurus
-- `data/hi-ontology-extensions.ttl`: ontology extensions used by this project
-
-### Source documents
-
-- `papers/*.pdf`: 10 paper PDFs currently present in the repository
-- `scenarios/scenarios.csv`: 3 HI competition scenarios
-
-### Prompt resource
-
-- `prompts/extraction_prompt.txt`: prompt template used during LLM extraction
-
-## 4. End-to-End Pipeline
-
-The repository has one canonical build pipeline and several downstream analysis
-scripts.
-
-### Canonical build pipeline
-
-`01 -> 02 -> 03 -> 04 -> 05`
-
-`parse -> LLM -> inst -> link -> merge`
-
-This sequence is the only true end-to-end graph construction workflow in the
-codebase. It produces the canonical merged graph:
+Canonical merged graph:
 
 - `output/merged_kg.ttl`
 
-### Downstream analysis order used in this README
+---
+
+## Why This Project Matters
+
+Populating an ontology from research papers and scenario descriptions is slow and error-prone when done manually. Important knowledge about:
+
+- agents
+- goals
+- tasks
+- capabilities
+- contexts
+- interactions
+- evaluations
+- experiments
+
+is usually embedded in natural language rather than available in machine-readable form.
+
+This repository addresses that problem through a **hybrid workflow**:
+
+1. an LLM extracts structured semantic content from text
+2. Python turns that structured output into RDF/Turtle **deterministically**
+
+This design keeps the pipeline:
+
+- inspectable
+- debuggable
+- reproducible downstream
+- more academically defensible than direct LLM-to-RDF generation
+
+---
+
+## Main Results
+
+The current project pipeline produces a knowledge graph that:
+
+- integrates **11 research papers** and **3 competition scenarios**
+- links to external resources through **218 external links**
+- passes **SHACL validation with zero violations**
+- supports **five non-trivial competency-question queries**
+- includes **metrics, community analysis, embeddings, and ablation results**
+- explicitly reports **repaired** and **unresolved** ABox links instead of hiding them
+
+This makes the repository suitable both as:
+
+- an academic submission
+- a portfolio-ready knowledge graph engineering project
+
+---
+
+## Data Sources
+
+### Core schema resources
+
+- `data/hi-ontology.ttl` — Hybrid Intelligence Ontology
+- `data/hi-thesaurus.ttl` — HINT thesaurus
+- `data/hi-ontology-extensions.ttl` — project-specific ontology extensions
+
+### Source materials
+
+- `papers/*.pdf` — **11 HHAI paper PDFs**
+- `scenarios/scenarios.csv` — **3 HI competition scenarios**
+
+### Prompt resource
+
+- `prompts/extraction_prompt.txt` — prompt template used during structured extraction
+
+---
+
+## Canonical Pipeline
+
+### Core build pipeline
+
+`01 -> 02 -> 03 -> 04 -> 05`
+
+`parse -> LLM extraction -> RDF instances -> external linking -> merge`
+
+This is the canonical graph-construction workflow and produces:
+
+- `output/merged_kg.ttl`
+
+### Downstream analysis / validation
 
 `06 -> 10 -> 07 -> 08 -> 09`
 
-`reason -> SHACL validation -> SPARQL -> metrics -> embeddings (+ ablation)`
+`reasoning -> SHACL -> SPARQL -> metrics -> embeddings`
 
-These downstream scripts are useful, but they are not a strict chained
-dependency sequence. They operate as optional consumers of
-`output/merged_kg.ttl`.
+These stages are **downstream consumers** of the merged graph, not the core build path.
 
-### Core ingestion and graph construction
+---
 
-These stages build the knowledge graph from source material and form the main
-pipeline.
+## Pipeline Stages
 
-1. `01_parse_sources.py`
-   Extracts clean text from PDFs and converts scenario CSV rows into normalized
-   text files for downstream processing.
+### 01. `01_parse_sources.py`
+Parses PDFs and scenario rows into normalized text files.
 
-2. `02_extract_metadata.py`
-   Sends text to the OpenAI API and produces structured JSON describing papers,
-   use cases, agents, goals, tasks, interactions, evaluations, and proposed new
-   concepts.
+Output:
+- `output/text/*.txt`
 
-3. `03_generate_instances.py`
-   Converts the extracted JSON into RDF/Turtle instance graphs. This stage is
-   deterministic and does not call the LLM.
+### 02. `02_extract_metadata.py`
+Uses the OpenAI API to extract structured JSON from normalized text.
 
-4. `04_add_external_links.py`
-   Adds links to external resources such as Wikidata and DBpedia, combining
-   static concept mappings with query-based matching for authors and
-   affiliations.
+Output:
+- `output/json/*.json`
 
-5. `05_merge_and_validate.py`
-   Merges ontology files, thesaurus files, instance graphs, thesaurus
-   extensions, and external links into a single merged knowledge graph and runs
-   basic structural validation checks.
+### 03. `03_generate_instances.py`
+Deterministically converts JSON into RDF/Turtle instance graphs.
 
-### Optional downstream analysis and validation
+Outputs:
+- `output/instances/*.ttl`
+- `output/hi-thesaurus-extensions.ttl`
+- `output/audit/instance_generation/`
+- `output/audit/instance_generation_summary.json`
+- `output/audit/instance_generation_summary.csv`
 
-These stages operate on the merged graph and are best understood as downstream
-analysis rather than core ingestion.
+### 04. `04_add_external_links.py`
+Adds external links to concepts and instances using static mappings and query-based entity linking.
 
-6. `06_reasoning.py`
-   Converts the merged graph to N-Triples and runs OWL reasoning with
-   Pellet via Owlready2.
+Output:
+- `output/external_links.ttl`
 
-10. `10_shacl_validation.py`
-   Generates SHACL shapes and validates the merged graph against structural
-   constraints such as team composition, task-capability links, and execution
-   cardinality.
+### 05. `05_merge_and_validate.py`
+Merges schema, thesaurus, extensions, instances, and links into a canonical KG and performs structural validation checks.
 
-7. `07_sparql_queries.py`
-   Runs competency-question-oriented SPARQL queries and exports query results
-   and visualizations.
+Outputs:
+- `output/merged_kg.ttl`
+- `output/merged_kg.nt`
+- `output/audit/merge_validation_summary.json`
 
-8. `08_kg_metrics.py`
-   Computes ontology-level and graph-level metrics and produces graph analysis
-   visualizations using NetworkX and Matplotlib.
+### 06. `06_reasoning.py`
+Runs OWL reasoning with Pellet through Owlready2.
 
-9. `09_kg_embeddings.py`
-   Trains knowledge graph embedding models, performs link prediction, visualizes
-   embeddings, and optionally compares training on the project graph versus a
-   combined graph containing an additional populated ontology file.
+### 10. `10_shacl_validation.py`
+Builds SHACL shapes and validates the merged KG.
 
-### Processing logic at a glance
+Outputs:
+- `output/shacl/hi_shapes.ttl`
+- `output/shacl/validation_report.ttl`
+- `output/shacl/validation_summary.txt`
 
-```text
-papers/*.pdf + scenarios/scenarios.csv
-    -> 01_parse_sources.py
-    -> output/text/*.txt
-    -> 02_extract_metadata.py
-    -> output/json/*.json
-    -> 03_generate_instances.py
-    -> output/instances/*.ttl + output/hi-thesaurus-extensions.ttl
-    -> 04_add_external_links.py
-    -> output/external_links.ttl
-    -> 05_merge_and_validate.py
-    -> output/merged_kg.ttl
-    -> 06 / 10 / 07 / 08 / 09 (optional downstream stages)
-```
+### 07. `07_sparql_queries.py`
+Runs five competency-question-oriented SPARQL queries and exports result tables/charts.
 
-Legacy note: the older file `merged_kg_a2.ttl` is not part of the active
-workflow and has been archived for reference.
+Output:
+- `output/queries/`
 
-## 5. Repository Structure
+### 08. `08_kg_metrics.py`
+Computes ontology-level and graph-level metrics and produces visualizations.
+
+Output:
+- `output/metrics/`
+
+### 09. `09_kg_embeddings.py`
+Trains KG embedding models, performs link prediction, visualizes embeddings, and runs an ablation experiment using a combined KG.
+
+Output:
+- `output/embeddings/`
+
+---
+
+## Repository Structure
 
 ```text
 .
-├── data/                   # Ontology, thesaurus, and ontology extension files
-├── output/                 # Generated artifacts from ingestion and analysis
-│   ├── text/               # Extracted source text
-│   ├── json/               # LLM-generated structured extractions
-│   ├── instances/          # RDF instance graphs per source
-│   ├── queries/            # SPARQL query outputs and charts
-│   ├── metrics/            # Graph metrics and visualizations
-│   ├── embeddings/         # Embedding outputs, checkpoints, and ablation artifacts
-│   └── shacl/              # SHACL shapes and validation reports
-├── papers/                 # Source PDFs
-├── prompts/                # Prompt templates for extraction
-├── scenarios/              # Scenario CSV input
-├── src/                    # Pipeline and analysis scripts
-├── requirements.txt        # Minimal core dependencies
+├── data/                       # Ontology, thesaurus, populated KG, extensions
+├── docs/                       # Project contract / course guidance files
+├── output/
+│   ├── text/                   # Parsed source text
+│   ├── json/                   # LLM-generated structured metadata
+│   ├── instances/              # Per-source RDF instance graphs
+│   ├── audit/                  # Repair/provenance summaries
+│   ├── queries/                # SPARQL outputs
+│   ├── metrics/                # Graph metrics and visualisations
+│   ├── embeddings/             # KGE outputs and ablation artifacts
+│   ├── shacl/                  # SHACL shapes and validation reports
+│   ├── external_links.ttl      # External links
+│   ├── merged_kg.ttl           # Canonical merged graph
+│   └── merged_kg.nt            # N-Triples export for reasoning tools
+├── papers/                     # Source paper PDFs
+├── prompts/                    # Extraction prompt
+├── scenarios/                  # Scenario CSV input
+├── src/                        # Numbered pipeline scripts
+├── tests/                      # Lightweight canonical-path checks
+├── AGENTS.md                   # Repo rules for coding agents
+├── requirements.txt
 └── README.md
 ```
 
-## 6. Setup and Dependencies
+---
 
-### Core dependencies
+## Setup
 
-The checked-in `requirements.txt` covers the minimal dependencies needed for
-the core ingestion stages:
+Install Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Current core requirements:
+Current `requirements.txt` covers the main Python dependencies used by the numbered scripts, including:
 
-- `rdflib`
-- `openai`
-- `pdfplumber`
-- `requests`
+* `rdflib`
+* `openai`
+* `pdfplumber`
+* `requests`
+* `matplotlib`
+* `networkx`
+* `numpy`
+* `owlready2`
+* `pandas`
+* `pykeen`
+* `pyshacl`
+* `scikit-learn`
+* `scipy`
+* `torch`
 
-### Configuration
+### OpenAI API key
 
-Before running LLM extraction, configure the API key in:
+Stage `02_extract_metadata.py` requires an OpenAI API key.
 
-- `src/config.py`
+Set it in the environment before running extraction.
 
-The same configuration file also controls:
+PowerShell:
 
-- model selection
-- output paths
-- maximum paper length for extraction
-- whether reference sections are stripped before sending text to the LLM
+```powershell
+$env:OPENAI_API_KEY="your-key-here"
+```
 
-### Optional dependencies
+### Additional runtime requirements
 
-Several downstream scripts require additional packages that are not currently
-listed in `requirements.txt`. In particular:
+Some optional downstream stages require non-Python runtime support:
 
-- `06_reasoning.py`: `owlready2` and a working Pellet setup
-- `07_sparql_queries.py`: `matplotlib`
-- `08_kg_metrics.py`: `networkx`, `matplotlib`, `numpy`
-- `09_kg_embeddings.py`: `pykeen`, `torch`, `pandas`, `scikit-learn`,
-  `matplotlib`, `numpy`, `scipy`
-- `10_shacl_validation.py`: `pyshacl`
+* `06_reasoning.py` requires **Java** for Pellet / Owlready2 reasoning
+* `04_add_external_links.py` requires internet access for Wikidata lookups
 
-This is an important reproducibility consideration: the repository currently
-documents the core stack well, but the full analysis environment is broader
-than the base requirements file.
+---
 
-## 7. How to Run the Pipeline
+## How to Run
 
 Run commands from the `src/` directory.
 
-### Core ingestion pipeline
+### Core build pipeline
 
 ```bash
 cd src/
 
-# 01. Parse source documents into normalized text
+# 01. Parse PDFs and scenarios into normalized text
 python 01_parse_sources.py
 
-# 02. LLM-based structured extraction
+# 02. Extract structured metadata with the OpenAI API
 python 02_extract_metadata.py
-python 02_extract_metadata.py paper_01
-python 02_extract_metadata.py --skip-existing
 
-# 03. Deterministic RDF instance generation
+# 03. Generate deterministic RDF instance graphs
 python 03_generate_instances.py
 
-# 04. External linking (requires internet access for Wikidata queries)
+# 04. Add external links
 python 04_add_external_links.py
 
-# 05. Merge and basic validation
+# 05. Merge and validate
 python 05_merge_and_validate.py
 ```
 
@@ -274,177 +300,290 @@ python 10_shacl_validation.py
 # 07. SPARQL competency queries
 python 07_sparql_queries.py
 
-# 08. Graph metrics and visualizations
+# 08. KG metrics
 python 08_kg_metrics.py
 
-# 09. KG embeddings and optional ablation
+# 09. Embeddings + ablation
 python 09_kg_embeddings.py
 ```
 
-### Recommended inspection workflow
+---
 
-If you are iterating on the extraction quality, the most useful checkpoints are:
+## Reproducibility Modes
 
-1. `output/text/*.txt`
-2. `output/json/*.json`
-3. `output/instances/*.ttl`
-4. `output/hi-thesaurus-extensions.ttl`
-5. `output/merged_kg.ttl`
+This repository supports two practical reproducibility modes.
 
-## 8. Outputs / Artifacts
+### 1. Full rebuild
 
-The repository currently contains generated artifacts for the available 10
-papers and 3 scenarios.
+Rebuild the entire pipeline from raw papers and scenarios.
+
+Requires:
+
+* OpenAI API access for stage 02
+* internet access for stage 04
+* Java for stage 06
+
+### 2. Downstream reproducibility from checked outputs
+
+Reuse the checked intermediate outputs and rerun deterministic stages and analyses.
+
+This allows reproducibility of:
+
+* RDF generation
+* merging
+* validation
+* SPARQL querying
+* metrics
+* embeddings
+
+without repeating the LLM extraction step.
+
+This distinction is important: the project is **not fully self-contained from zero without API access**, but it is **substantially reproducible downstream from checked artifacts**.
+
+---
+
+## Outputs
 
 ### Core outputs
 
-- `output/text/`: extracted and normalized source text
-- `output/json/`: LLM-produced structured JSON files
-- `output/instances/`: deterministic RDF/Turtle instance files
-- `output/hi-thesaurus-extensions.ttl`: new HINT concepts proposed by the LLM
-- `output/external_links.ttl`: external entity and concept links
-- `output/merged_kg.ttl`: canonical merged knowledge graph
-- `output/merged_kg.nt`: N-Triples serialization for reasoning tools
+* `output/text/` — normalized text extracted from papers and scenarios
+* `output/json/` — structured LLM extraction outputs
+* `output/instances/` — deterministic RDF instance graphs
+* `output/hi-thesaurus-extensions.ttl` — proposed HINT concept extensions
+* `output/external_links.ttl` — external links
+* `output/merged_kg.ttl` — canonical merged KG
+* `output/merged_kg.nt` — N-Triples export
 
-### Validation and analysis outputs
+### Audit outputs
 
-- `output/shacl/`: SHACL shapes, validation report, validation summary
-- `output/queries/`: SPARQL query results and associated charts
-- `output/metrics/`: ontology-level and graph-level metrics, visualizations
-- `output/embeddings/`: model comparison tables, loss curves, predicted links,
-  embedding plots, checkpoints, and ablation artifacts
+* `output/audit/instance_generation/` — per-source repair / unresolved audit files
+* `output/audit/instance_generation_summary.json`
+* `output/audit/instance_generation_summary.csv`
+* `output/audit/merge_validation_summary.json`
 
-### Current repository state
+### Validation / analysis outputs
 
-At the time of this README update, the checked-in outputs include:
+* `output/shacl/` — SHACL shapes and reports
+* `output/queries/` — SPARQL outputs
+* `output/metrics/` — graph metrics and visualizations
+* `output/embeddings/` — model comparison, link prediction, embeddings, ablation outputs
 
-- 13 text files in `output/text/`
-- 13 JSON files in `output/json/`
-- 13 instance graphs in `output/instances/`
-- a merged graph in `output/merged_kg.ttl`
-- SHACL validation artifacts reporting conformance
+---
 
-The checked-in metrics report for `output/merged_kg.ttl` records:
+## Current Repository State
 
-- 3,886 triples
-- 626 individuals
-- 13 use cases in total
+The current checked-in snapshot includes:
 
-These numbers describe the current repository snapshot; they should not be read
-as benchmark claims.
+* **14** normalized text files in `output/text/`
+* **14** JSON extraction files in `output/json/`
+* **14** instance graphs in `output/instances/`
+* **1** canonical merged graph in `output/merged_kg.ttl`
 
-## 9. Validation and Quality Control
+Key current graph statistics:
 
-The project includes multiple validation layers, with different strengths.
+* **3819 triples**
+* **641 individuals**
+* **11 papers**
+* **3 competition scenarios**
+* **218 external links**
+
+These values describe the current repository snapshot and should not be interpreted as benchmark claims.
+
+---
+
+## Validation and Quality Control
+
+The project uses multiple quality-control layers.
 
 ### Deterministic RDF generation
 
-The most important quality-control decision in the repository is the separation
-between extraction and serialization:
+The most important quality-control design choice is the separation between:
 
-- the LLM generates structured JSON
-- Python code generates RDF deterministically
+* **LLM extraction**
+* **deterministic RDF serialization**
 
-This avoids direct LLM generation of Turtle and makes intermediate artifacts
-inspectable.
+This keeps the KG generation process inspectable and reduces prompt-driven RDF variability.
 
-### Merge-time structural checks
+### Structural validation
 
-`05_merge_and_validate.py` performs basic structural checks, including:
+`05_merge_and_validate.py` performs merge-time validation checks on key graph structures.
 
-- hybrid teams containing both human and artificial agents
-- goals linked to tasks
-- tasks linked to capabilities
-- executions linked to realized tasks
-- keyword values being modeled as IRIs rather than plain literals
+Current merged validation summary:
+
+* **3819 triples**
+* **0 validation errors**
+* **1 validation warning**
+* explicit counts for:
+
+  * extracted links
+  * repaired links
+  * unresolved matches
+  * linked external actions
 
 ### SHACL validation
 
-`10_shacl_validation.py` provides explicit SHACL-based validation of the merged
-graph. The checked-in validation summary currently reports conformance for the
-generated merged graph in `output/merged_kg.ttl`.
+`10_shacl_validation.py` validates the merged KG against SHACL constraints.
 
-### Manual review points
+Current status:
 
-In practice, the most important manual review points remain:
+* **CONFORMS**
+* **0 violations**
 
-- extracted JSON quality in `output/json/`
-- proposed thesaurus extensions in `output/hi-thesaurus-extensions.ttl`
-- external links in `output/external_links.ttl`
+### Canonical-path checks
 
-## 10. Known Limitations and Risks
+Lightweight regression checks exist in:
 
-This repository is designed to be inspectable and useful, but it is not free of
-semantic or reproducibility risk.
+* `tests/test_canonical_graph_contract.py`
 
-### LLM extraction risk
+These focus on key canonical relations and the explicit query path used in Query 5.
 
-The extraction prompt enforces structural completeness, which is helpful for
-ontology population but can encourage the model to infer plausible missing
-structure rather than extract only explicitly stated facts. This means that the
-resulting graph should be treated as a curated machine-assisted representation,
-not as a ground-truth transcription of the source text.
+---
 
-### Fuzzy repair logic in RDF generation
+## Provenance and Repair Transparency
 
-The RDF generation stage includes fallback and fuzzy matching behavior to repair
-missing task-capability and task-execution links. This improves structural
-validity but can reduce semantic reliability when labels do not align cleanly.
+A key late-stage improvement in this repository is that repaired and unresolved ABox links are no longer hidden.
 
-### External linking uncertainty
+Current audited counts from the instance-generation / merge summaries include:
 
-External links are a mix of static mappings and query-based matches. Query-based
-entity linking, especially for authors and affiliations, is inherently fallible
-and should be reviewed before being used as authoritative alignment.
+* **46** direct `task -> requiresCapability` links
+* **30** direct `execution -> realizesTask` links
+* **5** fallback `task -> requiresCapability` repairs
+* **1** fallback `execution -> realizesTask` repair
+* **5** unresolved capability matches
+* **1** unresolved execution-task match
 
-### Identifier stability
+This is important academically: the project now exposes structural repairs explicitly instead of silently masking them.
 
-Paper identifiers are assigned from sorted filenames during parsing. This makes
-the pipeline easy to run, but it also means that renaming or adding source
-files can shift identifiers and make cached outputs harder to compare across
-runs.
+---
 
-### Reproducibility constraints
+## Query and Insight Summary
 
-The full workflow depends on:
+The repository currently includes five competency-question-oriented SPARQL query outputs, covering:
 
-- an API-based extraction step
-- optional internet access for external linking
-- optional dependencies not fully captured in `requirements.txt`
+1. **team composition and roles per use case**
+2. **capability distribution across papers**
+3. **constraints and phenomena across use cases**
+4. **interaction patterns and methods**
+5. **evaluation and experiment structure**
 
-For those reasons, the repository is best understood as a reproducible
-engineering workflow with partial environment gaps, rather than as a completely
-self-contained one-command experiment.
+Current query stage highlights:
 
-## 11. Future Improvements
+* **15** results for team composition / roles
+* **11** capability-distribution results
+* **10** constraint / phenomenon results
+* **29** interaction / method results
+* **11** evaluation / experiment results
 
-The most valuable next steps for the repository would be:
+These outputs are available in:
 
-- improving configuration and secret handling so API credentials are not managed
-  through tracked source files
-- making source identifiers and rerun behavior more stable across incremental
-  updates
-- adding provenance and confidence metadata so extracted, inferred, and linked
-  facts are easier to distinguish
-- strengthening test coverage for the core stages, especially deterministic RDF
-  generation and validation
-- improving external linking confidence and review workflows
-- packaging optional dependencies more completely for full-environment
-  reproducibility
-- reducing reliance on naming conventions in downstream SPARQL and analytics
+* `output/queries/`
 
-## License and Academic Context
+---
 
-This repository is structured as an academic knowledge-engineering project with
-engineering-oriented implementation artifacts. It is suitable for demonstrating
-skills in:
+## Graph Metrics Summary
 
-- ontology population workflows
-- RDF and Turtle generation
-- LLM-assisted information extraction
-- graph validation and analysis
-- knowledge graph experimentation
+`08_kg_metrics.py` produced ontology-level and graph-level metrics, including:
 
-At the same time, it should be evaluated with the usual academic caution:
-automated semantic extraction is useful, but careful manual review remains
-important for high-confidence ontology population.
+* **25 OWL classes**
+* **48 object properties**
+* **11 datatype properties**
+* **292 SKOS concepts**
+* **921 graph nodes**
+* **2560 graph edges**
+* **largest weakly connected component: 98.3% of nodes**
+* **15 Louvain communities**
+* **modularity: 0.5883**
+
+This provides a useful graph-level view of cohesion, connectivity, and community structure.
+
+---
+
+## Embeddings Summary
+
+`09_kg_embeddings.py` was run successfully on the project KG and on a combined KG for ablation.
+
+Main result:
+
+* **DistMult** was the best-performing model
+
+Own KG:
+
+* **MRR = 0.3132**
+* **Hits@10 = 0.5564**
+
+Combined KG:
+
+* **MRR = 0.4226**
+* **Hits@10 = 0.5855**
+
+This suggests that enriching the training graph with the additional populated KG improved the embedding quality for the best-performing model.
+
+The raw predicted links should be interpreted cautiously because the training graph mixes instance-level, thesaurus-level, and schema-level structure.
+
+---
+
+## Known Limitations
+
+This repository is strong, but not perfect.
+
+### 1. External dependency in extraction
+
+Stage `02_extract_metadata.py` depends on an external LLM API and therefore is not fully self-contained without API access.
+
+### 2. External linking is heuristic
+
+Author and affiliation linking uses conservative query-based matching and does not guarantee perfect entity resolution.
+
+### 3. Some ABox repairs still exist
+
+A small number of fallback-generated and unresolved links remain. These are now explicitly audited.
+
+### 4. Embedding predictions are exploratory
+
+The embedding experiments are useful enrichment, but raw link prediction outputs include semantically noisy candidates and should not be overclaimed.
+
+### 5. Reasoning requires extra setup
+
+Pellet reasoning through Owlready2 requires Java and is more environment-sensitive than the rest of the pipeline.
+
+---
+
+## Submission-Oriented Summary
+
+This repository now contains a complete academic-engineering pipeline that:
+
+* builds a Hybrid Intelligence KG from **11 papers** and **3 scenarios**
+* produces a final graph of **3819 triples**
+* adds **218 external links**
+* passes **SHACL validation with zero violations**
+* answers **five competency questions**
+* provides graph metrics, community analysis, embeddings, and ablation results
+* exposes repaired and unresolved ABox cases through explicit audit outputs
+
+The strongest current deliverables for review are:
+
+* `output/merged_kg.ttl`
+* `output/shacl/validation_summary.txt`
+* `output/audit/merge_validation_summary.json`
+* `output/queries/`
+* `output/metrics/`
+* `output/embeddings/`
+
+---
+
+## Tech Stack
+
+* Python
+* RDF / Turtle / N-Triples
+* rdflib
+* OpenAI API
+* SHACL / pySHACL
+* Owlready2 / Pellet
+* NetworkX / Matplotlib
+* PyKEEN / PyTorch
+
+---
+
+## License / Use
+
+This repository was developed as a course project and research-engineering prototype. Reuse of included ontology resources, papers, or derived outputs should respect the original licenses and academic context.

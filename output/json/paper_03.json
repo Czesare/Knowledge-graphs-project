@@ -16,7 +16,7 @@
     },
     {
       "name": "Danielle Sent",
-      "affiliation": "Jheronimus Academy of Data Science"
+      "affiliation": "Jheronimus Academy of Data Science, Eindhoven University of Technology, Tilburg University"
     }
   ],
   "keywords": [
@@ -33,13 +33,12 @@
       "hint:LawAndPolicyDomain"
     ],
     "context": {
-      "label": "Decision Support Systems Context",
+      "label": "Designing Interactive Explanations",
       "context_concepts": [
         "hint:ClinicalConsultationContext"
       ],
       "constraint_concepts": [
-        "hint:TransparencyConstraint",
-        "hint:EthicalConstraint"
+        "hint:TransparencyConstraint"
       ],
       "phenomenon_concepts": [
         "hint:TrustShiftPhenomenon",
@@ -71,7 +70,7 @@
       ],
       "artificial_agents": [
         {
-          "label": "Explainable AI System",
+          "label": "XAI System",
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
@@ -94,7 +93,7 @@
     },
     "goals": [
       {
-        "label": "Enhance Decision-Making",
+        "label": "Enhance Decision Support",
         "goal_concept": "hint:AccurateTrustworthyDiagnosisGoal",
         "tasks": [
           {
@@ -115,7 +114,7 @@
           },
           {
             "label": "Assess User Needs",
-            "task_concept": "hint:SituationalAssessmentTask",
+            "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
               "hint:SituationalAwarenessCapability"
             ],
@@ -131,43 +130,35 @@
         "intent_concept": "hint:ExplanationIntent",
         "agents_involved": [
           "Interaction Designer",
-          "Explainable AI System"
+          "XAI System"
         ]
       }
     ],
     "task_executions": [
       {
-        "label": "Design Explanation Patterns Execution",
-        "task_label": "Design Explanation Patterns",
-        "performed_by": "Interaction Designer",
-        "method_concept": "hint:CooperativeLearningMethod"
-      },
-      {
         "label": "Generate Explanations Execution",
         "task_label": "Generate Explanations",
-        "performed_by": "Explainable AI System",
+        "performed_by": "XAI System",
         "method_concept": "hint:PostHocExplanationMethod"
       }
     ],
     "evaluation": {
-      "label": "Explanation Pattern Evaluation",
+      "label": "Explanation Effectiveness Evaluation",
       "evaluation_concepts": [
         "hint:TransparencyEvaluation"
       ],
       "metric_concepts": [
-        "hint:ExplanationClarityMetric",
-        "hint:TrustPreservationMetric"
+        "hint:ExplanationClarityMetric"
       ],
       "experiments": [
         {
-          "label": "Explanation Effectiveness Experiment",
+          "label": "User Engagement Experiment",
           "experiment_concept": "hint:DeliberationSupportExperiment",
           "metrics_tested": [
-            "hint:ExplanationClarityMetric",
-            "hint:TrustPreservationMetric"
+            "hint:ExplanationClarityMetric"
           ],
-          "null_hypothesis": "Explanation patterns do not improve decision-making.",
-          "alternative_hypothesis": "Explanation patterns improve decision-making."
+          "null_hypothesis": "User engagement does not improve with ESPs",
+          "alternative_hypothesis": "User engagement improves with ESPs"
         }
       ]
     }
@@ -177,7 +168,7 @@
       "uri": "hint:ExplanationStreamPattern",
       "label": "Explanation Stream Pattern",
       "definition": "Reusable solutions that govern the stream of explanations between users and systems.",
-      "broader": "hint:InteractionPattern",
+      "broader": "hint:InteractionModality",
       "category": "InteractionModality"
     }
   ]

@@ -25,7 +25,7 @@
     "Conversational AI"
   ],
   "use_case": {
-    "label": "Triple Extraction in Social Conversations",
+    "label": "Triple Extraction from Social Dialogues",
     "type": "research",
     "domain_concepts": [
       "hint:DigitalMuseumDomain"
@@ -33,7 +33,7 @@
     "context": {
       "label": "Social Conversation Context",
       "context_concepts": [
-        "hint:VirtualExhibitionContext"
+        "hint:OnlineLearningContext"
       ],
       "constraint_concepts": [
         "hint:TransparencyConstraint"
@@ -50,8 +50,8 @@
           "role_concept": "hint:HumanUserRole",
           "capabilities": [
             {
-              "label": "Annotation Capability",
-              "concept": "hint:ExplainingCapability",
+              "label": "Contextual Understanding",
+              "concept": "hint:SituationalAwarenessCapability",
               "allows_tasks": [
                 "Annotate Dialogue Turns"
               ]
@@ -72,17 +72,24 @@
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
-              "label": "Triple Extraction Capability",
-              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
-                "Extract Triples from Dialogue"
+                "Extract Triples"
               ]
             },
             {
-              "label": "Pattern Recognition Capability",
-              "concept": "hint:PatternLearningCapability",
+              "label": "Semantic Reasoning",
+              "concept": "hint:SemanticReasoningCapability",
               "allows_tasks": [
-                "Identify Dialogue Patterns"
+                "Interpret Dialogue Context"
+              ]
+            },
+            {
+              "label": "Language Processing",
+              "concept": "hint:MultimodalInterpretationCapability",
+              "allows_tasks": [
+                "Process Conversational Data"
               ]
             }
           ]
@@ -91,28 +98,28 @@
     },
     "goals": [
       {
-        "label": "Extract Knowledge from Conversations",
+        "label": "Extract Knowledge from Dialogues",
         "goal_concept": "hint:EnhancedVisitorGoal",
         "tasks": [
           {
-            "label": "Annotate Dialogue Turns",
-            "task_concept": "hint:DataCollectionTask",
-            "required_capabilities": [
-              "hint:ExplainingCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Extract Triples from Dialogue",
+            "label": "Triple Extraction",
             "task_concept": "hint:KnowledgeGraphQueryTask",
             "required_capabilities": [
-              "hint:KnowledgeGraphQueryingCapability"
+              "hint:SemanticReasoningCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Evaluate Triple Extraction",
-            "task_concept": "hint:ConflictResolutionTask",
+            "label": "Dialogue Annotation",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Model Evaluation",
+            "task_concept": "hint:ExplanationTask",
             "required_capabilities": [
               "hint:ClinicalJudgmentCapability"
             ],
@@ -123,7 +130,7 @@
     ],
     "interactions": [
       {
-        "label": "Human-AI Dialogue Annotation",
+        "label": "Human-AI Dialogue",
         "modality_concept": "hint:TextChatModality",
         "intent_concept": "hint:ExplanationIntent",
         "agents_involved": [
@@ -134,29 +141,29 @@
     ],
     "task_executions": [
       {
-        "label": "Triple Extraction Execution",
-        "task_label": "Extract Triples from Dialogue",
+        "label": "Execute Triple Extraction",
+        "task_label": "Triple Extraction",
         "performed_by": "Triple Extraction Model",
-        "method_concept": "hint:KnowledgeGraphQueryMethod"
+        "method_concept": "hint:SemanticLinkingMethod"
       }
     ],
     "evaluation": {
-      "label": "Triple Extraction Evaluation",
+      "label": "Model Performance Evaluation",
       "evaluation_concepts": [
-        "hint:DataCollectionQualityEvaluation"
+        "hint:TransparencyEvaluation"
       ],
       "metric_concepts": [
-        "hint:TaskSuccessRateMetric"
+        "hint:ExplanationClarityMetric"
       ],
       "experiments": [
         {
-          "label": "Triple Extraction Precision Test",
+          "label": "Triple Extraction Accuracy Test",
           "experiment_concept": "hint:DeliberationSupportExperiment",
           "metrics_tested": [
-            "hint:TaskSuccessRateMetric"
+            "hint:ExplanationClarityMetric"
           ],
-          "null_hypothesis": "Triple extraction models do not improve precision over baseline.",
-          "alternative_hypothesis": "Triple extraction models improve precision over baseline."
+          "null_hypothesis": "The model does not improve triple extraction accuracy.",
+          "alternative_hypothesis": "The model improves triple extraction accuracy."
         }
       ]
     }
@@ -165,8 +172,8 @@
     {
       "uri": "hint:SocialConversationContext",
       "label": "Social Conversation Context",
-      "definition": "A context involving exchanges of information in social settings.",
-      "broader": "hint:ContextConcept",
+      "definition": "A context involving informal exchanges between individuals, often involving personal perspectives and implicit information.",
+      "broader": "hint:OnlineLearningContext",
       "category": "Context"
     }
   ]

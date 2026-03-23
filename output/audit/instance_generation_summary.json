@@ -1,0 +1,290 @@
+{
+  "sources": [
+    {
+      "source_id": "paper_01",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 3,
+        "execution_realizesTask_direct_label": 3
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_02",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 3,
+        "execution_realizesTask_direct_label": 1
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_03",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 3,
+        "execution_realizesTask_direct_label": 1
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_04",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 4,
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_05",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 4,
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_06",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 1,
+        "execution_realizesTask_direct_label": 3
+      },
+      "repair_link_counts": {
+        "task_requiresCapability_fallback_first_capability": 2
+      },
+      "unresolved_counts": {
+        "task_requiresCapability_unmatched": 2
+      },
+      "repair_actions": [
+        {
+          "relation": "hi:requiresCapability",
+          "strategy": "fallback_first_capability",
+          "subject": "Apply Orthogonality Loss",
+          "target": "https://w3id.org/hi-ontology/instances/Paper_06_ResearchScientist_Cap_DomainJudgment",
+          "detail": ""
+        },
+        {
+          "relation": "hi:requiresCapability",
+          "strategy": "fallback_first_capability",
+          "subject": "Conduct Ablation Study",
+          "target": "https://w3id.org/hi-ontology/instances/Paper_06_ResearchScientist_Cap_DomainJudgment",
+          "detail": ""
+        }
+      ],
+      "unresolved_items": [
+        {
+          "relation": "hi:requiresCapability",
+          "subject": "Apply Orthogonality Loss",
+          "detail": "hint:SemanticReasoningCapability"
+        },
+        {
+          "relation": "hi:requiresCapability",
+          "subject": "Conduct Ablation Study",
+          "detail": "hint:MetaAnalysisCapability"
+        }
+      ],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_07",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 3,
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_08",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 3,
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_09",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {
+        "task_requiresCapability_fallback_first_capability": 3
+      },
+      "unresolved_counts": {
+        "task_requiresCapability_unmatched": 3
+      },
+      "repair_actions": [
+        {
+          "relation": "hi:requiresCapability",
+          "strategy": "fallback_first_capability",
+          "subject": "Retrieve Relevant Information",
+          "target": "https://w3id.org/hi-ontology/instances/Paper_09_GovernmentEmployee_Cap_DomainJudgment",
+          "detail": ""
+        },
+        {
+          "relation": "hi:requiresCapability",
+          "strategy": "fallback_first_capability",
+          "subject": "Generate User-Friendly Responses",
+          "target": "https://w3id.org/hi-ontology/instances/Paper_09_GovernmentEmployee_Cap_DomainJudgment",
+          "detail": ""
+        },
+        {
+          "relation": "hi:requiresCapability",
+          "strategy": "fallback_first_capability",
+          "subject": "Ensure Data Privacy",
+          "target": "https://w3id.org/hi-ontology/instances/Paper_09_GovernmentEmployee_Cap_DomainJudgment",
+          "detail": ""
+        }
+      ],
+      "unresolved_items": [
+        {
+          "relation": "hi:requiresCapability",
+          "subject": "Retrieve Relevant Information",
+          "detail": "hint:KnowledgeGraphQueryingCapability"
+        },
+        {
+          "relation": "hi:requiresCapability",
+          "subject": "Generate User-Friendly Responses",
+          "detail": "hint:ExplainingCapability"
+        },
+        {
+          "relation": "hi:requiresCapability",
+          "subject": "Ensure Data Privacy",
+          "detail": "hint:SensingCapability"
+        }
+      ],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_10",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 4,
+        "execution_realizesTask_direct_label": 4
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "paper_11",
+      "is_scenario": false,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 5,
+        "execution_realizesTask_direct_label": 3
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "scenario_01",
+      "is_scenario": true,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 4,
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "scenario_02",
+      "is_scenario": true,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 4,
+        "execution_realizesTask_direct_label": 2
+      },
+      "repair_link_counts": {},
+      "unresolved_counts": {},
+      "repair_actions": [],
+      "unresolved_items": [],
+      "new_concepts_proposed": 1
+    },
+    {
+      "source_id": "scenario_03",
+      "is_scenario": true,
+      "extracted_link_counts": {
+        "task_requiresCapability_direct_concept": 5,
+        "execution_realizesTask_direct_label": 1
+      },
+      "repair_link_counts": {
+        "execution_realizesTask_fallback_first_task": 1
+      },
+      "unresolved_counts": {
+        "execution_realizesTask_unmatched": 1
+      },
+      "repair_actions": [
+        {
+          "relation": "hi:realizesTask",
+          "strategy": "fallback_first_task",
+          "subject": "NAO Interactive Session",
+          "target": "https://w3id.org/hi-ontology/instances/Scenario_03_Task_RobotInteractionTask",
+          "detail": ""
+        }
+      ],
+      "unresolved_items": [
+        {
+          "relation": "hi:realizesTask",
+          "subject": "NAO Interactive Session",
+          "detail": "Interactive Session Task"
+        }
+      ],
+      "new_concepts_proposed": 2
+    }
+  ],
+  "totals": {
+    "extracted_link_counts": {
+      "task_requiresCapability_direct_concept": 46,
+      "execution_realizesTask_direct_label": 30
+    },
+    "repair_link_counts": {
+      "task_requiresCapability_fallback_first_capability": 5,
+      "execution_realizesTask_fallback_first_task": 1
+    },
+    "unresolved_counts": {
+      "task_requiresCapability_unmatched": 5,
+      "execution_realizesTask_unmatched": 1
+    },
+    "new_concepts_proposed": 15
+  }
+}

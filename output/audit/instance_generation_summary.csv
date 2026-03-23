@@ -1,0 +1,15 @@
+source_id,task_requiresCapability_direct_concept,task_requiresCapability_label_similarity,task_requiresCapability_safety_sweep,task_requiresCapability_fallback_first_capability,execution_realizesTask_direct_label,execution_realizesTask_normalized_match,execution_realizesTask_label_overlap,execution_realizesTask_fallback_first_task,task_requiresCapability_unmatched,execution_realizesTask_unmatched,new_concepts_proposed
+paper_01,3,0,0,0,3,0,0,0,0,0,1
+paper_02,3,0,0,0,1,0,0,0,0,0,1
+paper_03,3,0,0,0,1,0,0,0,0,0,1
+paper_04,4,0,0,0,2,0,0,0,0,0,1
+paper_05,4,0,0,0,2,0,0,0,0,0,1
+paper_06,1,0,0,2,3,0,0,0,2,0,1
+paper_07,3,0,0,0,2,0,0,0,0,0,1
+paper_08,3,0,0,0,2,0,0,0,0,0,1
+paper_09,0,0,0,3,2,0,0,0,3,0,1
+paper_10,4,0,0,0,4,0,0,0,0,0,1
+paper_11,5,0,0,0,3,0,0,0,0,0,1
+scenario_01,4,0,0,0,2,0,0,0,0,0,1
+scenario_02,4,0,0,0,2,0,0,0,0,0,1
+scenario_03,5,0,0,0,1,0,0,1,0,1,2

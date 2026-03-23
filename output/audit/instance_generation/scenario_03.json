@@ -1,0 +1,31 @@
+{
+  "source_id": "scenario_03",
+  "is_scenario": true,
+  "extracted_link_counts": {
+    "task_requiresCapability_direct_concept": 5,
+    "execution_realizesTask_direct_label": 1
+  },
+  "repair_link_counts": {
+    "execution_realizesTask_fallback_first_task": 1
+  },
+  "unresolved_counts": {
+    "execution_realizesTask_unmatched": 1
+  },
+  "repair_actions": [
+    {
+      "relation": "hi:realizesTask",
+      "strategy": "fallback_first_task",
+      "subject": "NAO Interactive Session",
+      "target": "https://w3id.org/hi-ontology/instances/Scenario_03_Task_RobotInteractionTask",
+      "detail": ""
+    }
+  ],
+  "unresolved_items": [
+    {
+      "relation": "hi:realizesTask",
+      "subject": "NAO Interactive Session",
+      "detail": "Interactive Session Task"
+    }
+  ],
+  "new_concepts_proposed": 2
+}

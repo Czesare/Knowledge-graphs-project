@@ -3,67 +3,91 @@
 
 hint:AdaptiveAutonomyCapability a skos:Concept ;
     skos:broader hint:ReinforcementLearningCapability ;
-    skos:definition "The ability of a system to adjust its level of autonomy based on user preferences and contextual factors."@en ;
+    skos:definition "The ability of a system to dynamically adjust its level of autonomy based on contextual and user-specific factors."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Adaptive Autonomy Capability"@en .
 
 hint:BilingualMappingCapability a skos:Concept ;
     skos:broader hint:Capability ;
-    skos:definition "The ability to map and translate between two languages effectively."@en ;
+    skos:definition "The ability to map and translate information between two languages effectively."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Bilingual Mapping Capability"@en .
 
-hint:ComplexClaimVerification a skos:Concept ;
-    skos:broader hint:FairAccurateVerdictGoal ;
-    skos:definition "The process of verifying claims that involve multiple sub-claims and require nuanced questioning."@en ;
-    skos:inScheme hint:HIScheme ;
-    skos:prefLabel "Complex Claim Verification"@en .
-
-hint:DigitalTwinCapability a skos:Concept ;
-    skos:broader hint:Capability ;
-    skos:definition "The ability to create a real-time digital representation of physical processes."@en ;
-    skos:inScheme hint:HIScheme ;
-    skos:prefLabel "Digital Twin Capability"@en .
-
-hint:EducationalPlanningTask a skos:Concept ;
+hint:ComplexClaimVerificationTask a skos:Concept ;
     skos:broader hint:Task ;
-    skos:definition "Task involving planning educational activities and interventions."@en ;
+    skos:definition "A task involving the verification of claims with multiple implicit and explicit sub-claims."@en ;
     skos:inScheme hint:HIScheme ;
-    skos:prefLabel "Educational Planning Task"@en .
+    skos:prefLabel "Complex Claim Verification Task"@en .
 
-hint:EthicalArchivalFootageTraining a skos:Concept ;
-    skos:broader hint:DataCollectionTask ;
-    skos:definition "Training AI systems from archival documentary footage under explicit governance rules to preserve community ownership, consent, and control."@en ;
+hint:CulturalPreservationTask a skos:Concept ;
+    skos:broader hint:Task ;
+    skos:definition "A task focused on preserving cultural heritage and practices."@en ;
     skos:inScheme hint:HIScheme ;
-    skos:prefLabel "Ethical Archival Footage Training"@en .
+    skos:prefLabel "Cultural Preservation Task"@en .
+
+hint:CybersecurityContext a skos:Concept ;
+    skos:broader hint:WorkspaceManipulationContext ;
+    skos:definition "A context involving the protection of systems, networks, and programs from digital attacks."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Cybersecurity Context"@en .
+
+hint:EmergencyResponseContext a skos:Concept ;
+    skos:broader hint:WorkspaceManipulationContext ;
+    skos:definition "The context in which emergency responders operate, characterized by dynamic and unpredictable environments."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Emergency Response Context"@en .
 
 hint:ExplanationStreamPattern a skos:Concept ;
-    skos:broader hint:InteractionPattern ;
+    skos:broader hint:InteractionModality ;
     skos:definition "Reusable solutions that govern the stream of explanations between users and systems."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Explanation Stream Pattern"@en .
 
+hint:FaceMatchingContext a skos:Concept ;
+    skos:broader hint:JuryDeliberationContext ;
+    skos:definition "A context where human operators use decision support systems to match faces."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Face Matching Context"@en .
+
 hint:InformationQualityIndicator a skos:Concept ;
     skos:broader hint:Capability ;
-    skos:definition "A measure used to assess the quality of data in terms of relevance and utility."@en ;
+    skos:definition "A metric used to assess the quality of information in data items."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Information Quality Indicator"@en .
 
+hint:MoltenMetalHandling a skos:Concept ;
+    skos:broader hint:WorkspaceManipulationContext ;
+    skos:definition "The process of managing and transporting molten metals in industrial settings."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Molten Metal Handling"@en .
+
 hint:OrthogonalityLossCapability a skos:Concept ;
-    skos:broader hint:ReinforcementLearningCapability ;
-    skos:definition "Capability to enhance model robustness by enforcing orthogonality among latent representations."@en ;
+    skos:broader hint:Capability ;
+    skos:definition "The ability to apply orthogonality constraints to enhance feature diversity and robustness."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Orthogonality Loss Capability"@en .
 
+hint:ProteinAnalysisTask a skos:Concept ;
+    skos:broader hint:SymptomAnalysisTask ;
+    skos:definition "Task involving the analysis of protein structures for therapeutic potential."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Protein Analysis Task"@en .
+
 hint:RobotInteractionTask a skos:Concept ;
     skos:broader hint:Task ;
-    skos:definition "Task involving interaction with a robot to facilitate learning."@en ;
+    skos:definition "A task involving interaction between a human and a robot to achieve educational goals."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Robot Interaction Task"@en .
 
 hint:SocialConversationContext a skos:Concept ;
-    skos:broader hint:ContextConcept ;
-    skos:definition "A context involving exchanges of information in social settings."@en ;
+    skos:broader hint:OnlineLearningContext ;
+    skos:definition "A context involving informal exchanges between individuals, often involving personal perspectives and implicit information."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Social Conversation Context"@en .
+
+hint:TaskPlanningTask a skos:Concept ;
+    skos:broader hint:Task ;
+    skos:definition "A task involving the planning and organization of educational activities."@en ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Task Planning Task"@en .
 

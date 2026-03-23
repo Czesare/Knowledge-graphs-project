@@ -28,7 +28,7 @@
         "hint:HealthMonitoringContext"
       ],
       "constraint_concepts": [
-        "hint:PrivacyConstraint"
+        "hint:TransparencyConstraint"
       ],
       "phenomenon_concepts": [
         "hint:DataMismatchPhenomenon",
@@ -38,21 +38,21 @@
     "team": {
       "human_agents": [
         {
-          "label": "Data Analyst",
+          "label": "Crisis Analyst",
           "role_concept": "hint:HumanUserRole",
           "capabilities": [
+            {
+              "label": "Judgment Capability",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Data Relevance Assessment"
+              ]
+            },
             {
               "label": "Contextual Understanding",
               "concept": "hint:SituationalAwarenessCapability",
               "allows_tasks": [
-                "Identify Relevant Data"
-              ]
-            },
-            {
-              "label": "Ethical Oversight",
-              "concept": "hint:ReasoningCapability",
-              "allows_tasks": [
-                "Validate Data Selection"
+                "Situational Assessment"
               ]
             }
           ]
@@ -67,14 +67,14 @@
               "label": "Pattern Recognition",
               "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
-                "Identify Relevant Data"
+                "Data Collection Task"
               ]
             },
             {
-              "label": "Data Processing",
-              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "label": "Information Quality Analysis",
+              "concept": "hint:MetaAnalysisCapability",
               "allows_tasks": [
-                "Process Social Media Data"
+                "Quality Indicator Evaluation"
               ]
             }
           ]
@@ -83,30 +83,30 @@
     },
     "goals": [
       {
-        "label": "Enhance Situational Awareness",
+        "label": "Identify Relevant Crisis Data",
         "goal_concept": "hint:UserWellbeingGoal",
         "tasks": [
           {
-            "label": "Identify Relevant Data",
+            "label": "Data Relevance Assessment",
             "task_concept": "hint:DataCollectionTask",
-            "required_capabilities": [
-              "hint:PatternLearningCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Validate Data Selection",
-            "task_concept": "hint:DecideInterventionTask",
             "required_capabilities": [
               "hint:ReasoningCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Process Social Media Data",
-            "task_concept": "hint:KnowledgeGraphQueryTask",
+            "label": "Situational Assessment",
+            "task_concept": "hint:SituationalAssessmentTask",
             "required_capabilities": [
-              "hint:KnowledgeGraphQueryingCapability"
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Quality Indicator Evaluation",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:MetaAnalysisCapability"
             ],
             "sub_tasks": []
           }
@@ -115,27 +115,27 @@
     ],
     "interactions": [
       {
-        "label": "Data Validation Discussion",
+        "label": "Analyst-System Dialogue",
         "modality_concept": "hint:TextChatModality",
         "intent_concept": "hint:ExplanationIntent",
         "agents_involved": [
-          "Data Analyst",
+          "Crisis Analyst",
           "Active Learning System"
         ]
       }
     ],
     "task_executions": [
       {
-        "label": "Execute Data Identification",
-        "task_label": "Identify Relevant Data",
-        "performed_by": "Active Learning System",
-        "method_concept": "hint:ReinforcementLearningMethod"
+        "label": "Execute Data Relevance Assessment",
+        "task_label": "Data Relevance Assessment",
+        "performed_by": "Crisis Analyst",
+        "method_concept": "hint:ArgumentationReasoningMethod"
       },
       {
-        "label": "Execute Data Validation",
-        "task_label": "Validate Data Selection",
-        "performed_by": "Data Analyst",
-        "method_concept": "hint:ArgumentationReasoningMethod"
+        "label": "Perform Quality Indicator Evaluation",
+        "task_label": "Quality Indicator Evaluation",
+        "performed_by": "Active Learning System",
+        "method_concept": "hint:MetaAnalysisScoringMethod"
       }
     ],
     "evaluation": {
@@ -144,12 +144,11 @@
         "hint:AIInterventionImpactEvaluation"
       ],
       "metric_concepts": [
-        "hint:TaskSuccessRateMetric",
-        "hint:TrustPreservationMetric"
+        "hint:TaskSuccessRateMetric"
       ],
       "experiments": [
         {
-          "label": "Crisis Scenario Testing",
+          "label": "Crisis Scenario Evaluation",
           "experiment_concept": "hint:DeliberationSupportExperiment",
           "metrics_tested": [
             "hint:TaskSuccessRateMetric"
@@ -164,7 +163,7 @@
     {
       "uri": "hint:InformationQualityIndicator",
       "label": "Information Quality Indicator",
-      "definition": "A measure used to assess the quality of data in terms of relevance and utility.",
+      "definition": "A metric used to assess the quality of information in data items.",
       "broader": "hint:Capability",
       "category": "Capability"
     }

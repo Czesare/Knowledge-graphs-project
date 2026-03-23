@@ -1,0 +1,43 @@
+{
+  "source_id": "paper_06",
+  "is_scenario": false,
+  "extracted_link_counts": {
+    "task_requiresCapability_direct_concept": 1,
+    "execution_realizesTask_direct_label": 3
+  },
+  "repair_link_counts": {
+    "task_requiresCapability_fallback_first_capability": 2
+  },
+  "unresolved_counts": {
+    "task_requiresCapability_unmatched": 2
+  },
+  "repair_actions": [
+    {
+      "relation": "hi:requiresCapability",
+      "strategy": "fallback_first_capability",
+      "subject": "Apply Orthogonality Loss",
+      "target": "https://w3id.org/hi-ontology/instances/Paper_06_ResearchScientist_Cap_DomainJudgment",
+      "detail": ""
+    },
+    {
+      "relation": "hi:requiresCapability",
+      "strategy": "fallback_first_capability",
+      "subject": "Conduct Ablation Study",
+      "target": "https://w3id.org/hi-ontology/instances/Paper_06_ResearchScientist_Cap_DomainJudgment",
+      "detail": ""
+    }
+  ],
+  "unresolved_items": [
+    {
+      "relation": "hi:requiresCapability",
+      "subject": "Apply Orthogonality Loss",
+      "detail": "hint:SemanticReasoningCapability"
+    },
+    {
+      "relation": "hi:requiresCapability",
+      "subject": "Conduct Ablation Study",
+      "detail": "hint:MetaAnalysisCapability"
+    }
+  ],
+  "new_concepts_proposed": 1
+}

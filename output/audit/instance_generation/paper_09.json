@@ -1,0 +1,54 @@
+{
+  "source_id": "paper_09",
+  "is_scenario": false,
+  "extracted_link_counts": {
+    "execution_realizesTask_direct_label": 2
+  },
+  "repair_link_counts": {
+    "task_requiresCapability_fallback_first_capability": 3
+  },
+  "unresolved_counts": {
+    "task_requiresCapability_unmatched": 3
+  },
+  "repair_actions": [
+    {
+      "relation": "hi:requiresCapability",
+      "strategy": "fallback_first_capability",
+      "subject": "Retrieve Relevant Information",
+      "target": "https://w3id.org/hi-ontology/instances/Paper_09_GovernmentEmployee_Cap_DomainJudgment",
+      "detail": ""
+    },
+    {
+      "relation": "hi:requiresCapability",
+      "strategy": "fallback_first_capability",
+      "subject": "Generate User-Friendly Responses",
+      "target": "https://w3id.org/hi-ontology/instances/Paper_09_GovernmentEmployee_Cap_DomainJudgment",
+      "detail": ""
+    },
+    {
+      "relation": "hi:requiresCapability",
+      "strategy": "fallback_first_capability",
+      "subject": "Ensure Data Privacy",
+      "target": "https://w3id.org/hi-ontology/instances/Paper_09_GovernmentEmployee_Cap_DomainJudgment",
+      "detail": ""
+    }
+  ],
+  "unresolved_items": [
+    {
+      "relation": "hi:requiresCapability",
+      "subject": "Retrieve Relevant Information",
+      "detail": "hint:KnowledgeGraphQueryingCapability"
+    },
+    {
+      "relation": "hi:requiresCapability",
+      "subject": "Generate User-Friendly Responses",
+      "detail": "hint:ExplainingCapability"
+    },
+    {
+      "relation": "hi:requiresCapability",
+      "subject": "Ensure Data Privacy",
+      "detail": "hint:SensingCapability"
+    }
+  ],
+  "new_concepts_proposed": 1
+}

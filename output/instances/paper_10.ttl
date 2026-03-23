@@ -19,19 +19,12 @@ inst:Paper_10 a hi:Paper ;
     hi:hasTitle "Hybrid Human-AI Systems for Preserving Cultural Heritage and Craftsmanship"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
 
-inst:Paper_10_Evaluation a hi:Evaluation ;
-    rdfs:label "Ethical Data Governance Evaluation" ;
-    hi:hasEvaluationConcept hint:NegotationImpactEvaluation,
-        hint:TransparencyEvaluation ;
-    hi:hasMetricConcept hint:InformationQualityMetric,
-        hint:TrustPreservationMetric .
-
-inst:Paper_10_Interaction_ConsentGovernanceNegotiation a hi:Interaction ;
-    rdfs:label "Consent & Governance Negotiation" ;
-    hi:hasAgentInvolved inst:Paper_10_ArchivalFootageAiSystem,
-        inst:Paper_10_CulturalHeritageSteward ;
-    hi:hasInteractionIntentConcept hint:NegotiationIntent ;
-    hi:hasInteractionModalityConcept hint:DashboardModality .
+inst:Paper_10_Interaction_Human-aiCollaboration a hi:Interaction ;
+    rdfs:label "Human-AI Collaboration" ;
+    hi:hasAgentInvolved inst:Paper_10_AiSystem,
+        inst:Paper_10_CulturalExpert ;
+    hi:hasInteractionIntentConcept hint:GuideIntent ;
+    hi:hasInteractionModalityConcept hint:VerbalDialogueModality .
 
 inst:Affiliation_SmartbearSoftware a hi:Affiliation ;
     rdfs:label "SmartBear Software" ;
@@ -62,13 +55,9 @@ inst:Keyword_SalvageEthnography a skos:Concept ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "salvage ethnography"@en .
 
-inst:Paper_10_ArchivalFootageAiSystem_Cap_PatternLearning a hi:Capability ;
-    rdfs:label "Pattern Learning" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
-
-inst:Paper_10_ArchivalFootageAiSystem_Cap_PerceptionSensing a hi:Capability ;
-    rdfs:label "Perception / Sensing" ;
-    hi:hasCapabilityConcept hint:PerceptionSensingCapability .
+inst:Paper_10_AiSystem_Cap_DataGovernance a hi:Capability ;
+    rdfs:label "Data Governance" ;
+    hi:hasCapabilityConcept hint:SemanticReasoningCapability .
 
 inst:Paper_10_Author1 a hi:Author ;
     foaf:name "Alexandra McDougall" ;
@@ -81,116 +70,126 @@ inst:Paper_10_Author2 a hi:Author ;
     hi:hasAuthorName "Hortense Gerardo"^^xsd:string .
 
 inst:Paper_10_Context a hi:Context ;
-    rdfs:label "Archival footage training context" ;
-    hi:hasConstraintConcept hint:AutonomyConstraint,
-        hint:EthicalConstraint,
+    rdfs:label "Cultural Preservation Context" ;
+    hi:hasConstraintConcept hint:EthicalConstraint,
         hint:PrivacyConstraint ;
     hi:hasContextConcept hint:VirtualExhibitionContext ;
     hi:hasInfluenceOn inst:Paper_10_Team ;
-    hi:hasPhenomenonConcept hint:RiskExposurePhenomenon,
-        hint:SkillsComplementarityPhenomenon,
+    hi:hasPhenomenonConcept hint:KnowledgeMismatchPhenomenon,
         hint:TrustShiftPhenomenon .
 
-inst:Paper_10_CulturalHeritageSteward_Cap_EthicalOversight a hi:Capability ;
-    rdfs:label "Ethical Oversight" ;
-    hi:hasCapabilityConcept hint:ReasoningCapability .
+inst:Paper_10_CulturalExpert_Cap_CulturalJudgment a hi:Capability ;
+    rdfs:label "Cultural Judgment" ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
 
-inst:Paper_10_Exec_CollectFootage a hi:TaskExecution ;
-    rdfs:label "Collect Footage" ;
-    hi:hasMethodConcept hint:KnowledgeGraphQueryMethod ;
-    hi:realizesTask inst:Paper_10_Task_ArchivalFootageCollection .
+inst:Paper_10_Exec_ExecuteDataCollection a hi:TaskExecution ;
+    rdfs:label "Execute Data Collection" ;
+    hi:evaluatedBy inst:Paper_10_Evaluation ;
+    hi:hasMethodConcept hint:DataCollectionMethod ;
+    hi:realizesTask inst:Paper_10_Task_DataCollectionTask .
 
-inst:Paper_10_Exec_LearnSkillsFromDemonstrations a hi:TaskExecution ;
-    rdfs:label "Learn Skills from Demonstrations" ;
-    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
-    hi:realizesTask inst:Paper_10_Task_SkillLearningFromArchivalVideo .
-
-inst:Paper_10_Exec_NegotiateGovernanceRules a hi:TaskExecution ;
-    rdfs:label "Negotiate Governance Rules" ;
-    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
-    hi:realizesTask inst:Paper_10_Task_EthicalDataGovernanceConsent .
-
-inst:Paper_10_Exec_ProcessVideoSegmenttagdepth a hi:TaskExecution ;
-    rdfs:label "Process Video (Segment/Tag/Depth)" ;
+inst:Paper_10_Exec_ExecuteDataProcessing a hi:TaskExecution ;
+    rdfs:label "Execute Data Processing" ;
+    hi:evaluatedBy inst:Paper_10_Evaluation ;
     hi:hasMethodConcept hint:SemanticEmbeddingMethod ;
-    hi:realizesTask inst:Paper_10_Task_VideoSegmentationMetadataTagging .
+    hi:realizesTask inst:Paper_10_Task_DataProcessing .
 
-inst:Paper_10_Goal_EthicalPreservationOfCulturalHeritage a hi:Goal ;
-    rdfs:label "Ethical Preservation of Cultural Heritage" ;
+inst:Paper_10_Exec_ExecuteDepthPerceptionEnhancement a hi:TaskExecution ;
+    rdfs:label "Execute Depth Perception Enhancement" ;
+    hi:evaluatedBy inst:Paper_10_Evaluation ;
+    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
+    hi:realizesTask inst:Paper_10_Task_DepthPerceptionEnhancement .
+
+inst:Paper_10_Exec_ExecuteEthicalDataGovernance a hi:TaskExecution ;
+    rdfs:label "Execute Ethical Data Governance" ;
+    hi:evaluatedBy inst:Paper_10_Evaluation ;
+    hi:hasMethodConcept hint:ProtocolNegotiationMethod ;
+    hi:realizesTask inst:Paper_10_Task_EthicalDataGovernance .
+
+inst:Paper_10_Experiment_CulturalDataGovernanceExperiment a hi:Experiment ;
+    rdfs:label "Cultural Data Governance Experiment" ;
+    hi:hasAlternativeHypothesis "Data governance enhances trust."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:TrustPreservationMetric ;
+    hi:hasNullHypothesis "Data governance does not affect trust."^^xsd:string .
+
+inst:Paper_10_Goal_PreserveCulturalPractices a hi:Goal ;
+    rdfs:label "Preserve Cultural Practices" ;
     hi:hasGoalConcept hint:EnhancedVisitorGoal ;
-    hi:requiresTask inst:Paper_10_Task_ArchivalFootageCollection,
-        inst:Paper_10_Task_EthicalDataGovernanceConsent,
-        inst:Paper_10_Task_SkillLearningFromArchivalVideo,
-        inst:Paper_10_Task_VideoSegmentationMetadataTagging .
+    hi:requiresTask inst:Paper_10_Task_DataCollectionTask,
+        inst:Paper_10_Task_DataProcessing,
+        inst:Paper_10_Task_DepthPerceptionEnhancement,
+        inst:Paper_10_Task_EthicalDataGovernance .
 
 inst:Paper_10_UseCase a hi:ResearchUseCase ;
-    rdfs:label "Cultural Heritage & Craftsmanship Preservation" ;
+    rdfs:label "Cultural Heritage Preservation" ;
     hi:hasDomainConcept hint:DigitalMuseumDomain ;
     hi:hasHITeam inst:Paper_10_Team .
 
-inst:Paper_10_ArchivalFootageAiSystem a hi:ArtificialAgent ;
-    rdfs:label "Archival Footage AI System" ;
-    hi:hasCapability inst:Paper_10_ArchivalFootageAiSystem_Cap_MultimodalUnderstandingVideo,
-        inst:Paper_10_ArchivalFootageAiSystem_Cap_PatternLearning,
-        inst:Paper_10_ArchivalFootageAiSystem_Cap_PerceptionSensing,
-        inst:Paper_10_ArchivalFootageAiSystem_Cap_ReinforcementLearning ;
+inst:Paper_10_AiSystem a hi:ArtificialAgent ;
+    rdfs:label "AI System" ;
+    hi:hasCapability inst:Paper_10_AiSystem_Cap_DataGovernance,
+        inst:Paper_10_AiSystem_Cap_DepthPerception,
+        inst:Paper_10_AiSystem_Cap_PatternRecognition ;
     hi:hasRoleConcept hint:AIAssistantRole ;
-    hi:performsExecution inst:Paper_10_Exec_LearnSkillsFromDemonstrations,
-        inst:Paper_10_Exec_ProcessVideoSegmenttagdepth .
+    hi:performsExecution inst:Paper_10_Exec_ExecuteDataProcessing,
+        inst:Paper_10_Exec_ExecuteDepthPerceptionEnhancement .
 
-inst:Paper_10_ArchivalFootageAiSystem_Cap_MultimodalUnderstandingVideo a hi:Capability ;
-    rdfs:label "Multimodal Understanding (Video)" ;
-    hi:allowsTask inst:Paper_10_Task_VideoSegmentationMetadataTagging ;
-    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
+inst:Paper_10_AiSystem_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:allowsTask inst:Paper_10_Task_DataProcessing ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
 
-inst:Paper_10_ArchivalFootageAiSystem_Cap_ReinforcementLearning a hi:Capability ;
-    rdfs:label "Reinforcement Learning" ;
-    hi:allowsTask inst:Paper_10_Task_SkillLearningFromArchivalVideo ;
-    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+inst:Paper_10_CulturalExpert a hi:HumanAgent ;
+    rdfs:label "Cultural Expert" ;
+    hi:hasCapability inst:Paper_10_CulturalExpert_Cap_CulturalJudgment,
+        inst:Paper_10_CulturalExpert_Cap_EthicalOversight ;
+    hi:hasRoleConcept hint:HumanUserRole ;
+    hi:performsExecution inst:Paper_10_Exec_ExecuteDataCollection,
+        inst:Paper_10_Exec_ExecuteEthicalDataGovernance .
 
-inst:Paper_10_CulturalHeritageSteward a hi:HumanAgent ;
-    rdfs:label "Cultural Heritage Steward" ;
-    hi:hasCapability inst:Paper_10_CulturalHeritageSteward_Cap_CulturalStewardship,
-        inst:Paper_10_CulturalHeritageSteward_Cap_EthicalOversight,
-        inst:Paper_10_CulturalHeritageSteward_Cap_Negotiation ;
-    hi:hasRoleConcept hint:BuilderRole ;
-    hi:performsExecution inst:Paper_10_Exec_CollectFootage,
-        inst:Paper_10_Exec_NegotiateGovernanceRules .
-
-inst:Paper_10_CulturalHeritageSteward_Cap_CulturalStewardship a hi:Capability ;
-    rdfs:label "Cultural Stewardship" ;
-    hi:allowsTask inst:Paper_10_Task_ArchivalFootageCollection ;
-    hi:hasCapabilityConcept hint:DomainSpecificCapability .
-
-inst:Paper_10_CulturalHeritageSteward_Cap_Negotiation a hi:Capability ;
-    rdfs:label "Negotiation" ;
-    hi:allowsTask inst:Paper_10_Task_EthicalDataGovernanceConsent ;
-    hi:hasCapabilityConcept hint:NegotiationCapability .
+inst:Paper_10_CulturalExpert_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:allowsTask inst:Paper_10_Task_EthicalDataGovernance ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
 
 inst:Paper_10_Team a hi:HITeam ;
-    rdfs:label "Cultural Heritage & Craftsmanship Preservation Team" ;
-    hi:hasGoal inst:Paper_10_Goal_EthicalPreservationOfCulturalHeritage ;
-    hi:hasMember inst:Paper_10_ArchivalFootageAiSystem,
-        inst:Paper_10_CulturalHeritageSteward ;
+    rdfs:label "Cultural Heritage Preservation Team" ;
+    hi:hasGoal inst:Paper_10_Goal_PreserveCulturalPractices ;
+    hi:hasMember inst:Paper_10_AiSystem,
+        inst:Paper_10_CulturalExpert ;
     hi:isInfluencedBy inst:Paper_10_Context .
 
-inst:Paper_10_Task_ArchivalFootageCollection a hi:Task ;
-    rdfs:label "Archival Footage Collection" ;
+inst:Paper_10_AiSystem_Cap_DepthPerception a hi:Capability ;
+    rdfs:label "Depth Perception" ;
+    hi:allowsTask inst:Paper_10_Task_DataCollectionTask,
+        inst:Paper_10_Task_DepthPerceptionEnhancement ;
+    hi:hasCapabilityConcept hint:SensingCapability .
+
+inst:Paper_10_Task_DataCollectionTask a hi:Task ;
+    rdfs:label "Data Collection Task" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_10_CulturalHeritageSteward_Cap_CulturalStewardship .
+    hi:requiresCapability inst:Paper_10_AiSystem_Cap_DepthPerception .
 
-inst:Paper_10_Task_EthicalDataGovernanceConsent a hi:Task ;
-    rdfs:label "Ethical Data Governance & Consent" ;
-    hi:hasTaskConcept hint:AllocationNegotationTask ;
-    hi:requiresCapability inst:Paper_10_CulturalHeritageSteward_Cap_Negotiation .
+inst:Paper_10_Task_DataProcessing a hi:Task ;
+    rdfs:label "Data Processing" ;
+    hi:hasTaskConcept hint:SemanticReasoningTask ;
+    hi:requiresCapability inst:Paper_10_AiSystem_Cap_PatternRecognition .
 
-inst:Paper_10_Task_SkillLearningFromArchivalVideo a hi:Task ;
-    rdfs:label "Skill Learning from Archival Video" ;
-    hi:hasTaskConcept hint:PolicyLearningTask ;
-    hi:requiresCapability inst:Paper_10_ArchivalFootageAiSystem_Cap_ReinforcementLearning .
+inst:Paper_10_Task_DepthPerceptionEnhancement a hi:Task ;
+    rdfs:label "Depth Perception Enhancement" ;
+    hi:hasTaskConcept hint:ReconstructTrajectoryTask ;
+    hi:requiresCapability inst:Paper_10_AiSystem_Cap_DepthPerception .
 
-inst:Paper_10_Task_VideoSegmentationMetadataTagging a hi:Task ;
-    rdfs:label "Video Segmentation & Metadata Tagging" ;
-    hi:hasTaskConcept hint:MultimodalInputInterpretationTask ;
-    hi:requiresCapability inst:Paper_10_ArchivalFootageAiSystem_Cap_MultimodalUnderstandingVideo .
+inst:Paper_10_Task_EthicalDataGovernance a hi:Task ;
+    rdfs:label "Ethical Data Governance" ;
+    hi:hasTaskConcept hint:ConflictResolutionTask ;
+    hi:requiresCapability inst:Paper_10_CulturalExpert_Cap_EthicalOversight .
+
+inst:Paper_10_Evaluation a hi:Evaluation ;
+    rdfs:label "Cultural Preservation Evaluation" ;
+    hi:hasEvaluationConcept hint:TransparencyEvaluation ;
+    hi:hasExperiment inst:Paper_10_Experiment_CulturalDataGovernanceExperiment ;
+    hi:hasMetricConcept hint:FairOutcomeMetric,
+        hint:TrustPreservationMetric .
 

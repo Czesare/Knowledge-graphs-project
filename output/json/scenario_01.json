@@ -15,7 +15,7 @@
       "hint:LawAndPolicyDomain"
     ],
     "context": {
-      "label": "Election Day Cybersecurity",
+      "label": "Cybersecurity Context",
       "context_concepts": [
         "hint:WorkspaceManipulationContext"
       ],
@@ -49,7 +49,7 @@
               ]
             },
             {
-              "label": "Communication",
+              "label": "Communication Clarity",
               "concept": "hint:ExplainingCapability",
               "allows_tasks": [
                 "Provide Feedback"
@@ -64,24 +64,24 @@
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
-              "label": "Pattern Recognition",
+              "label": "IP Blocking",
               "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
                 "Block Suspected IPs"
               ]
             },
             {
-              "label": "Quick Explanation",
-              "concept": "hint:ExplainingCapability",
+              "label": "Prediction Making",
+              "concept": "hint:BayesianReasoningCapability",
               "allows_tasks": [
-                "Provide Quick Explanation"
+                "Make Predictions"
               ]
             },
             {
-              "label": "Continuous Learning",
-              "concept": "hint:ReinforcementLearningCapability",
+              "label": "Explanation Generation",
+              "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Distinguish Attacks"
+                "Provide Quick Explanation"
               ]
             }
           ]
@@ -118,14 +118,6 @@
             "sub_tasks": []
           },
           {
-            "label": "Provide Quick Explanation",
-            "task_concept": "hint:ExplanationTask",
-            "required_capabilities": [
-              "hint:ExplainingCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
             "label": "Provide Feedback",
             "task_concept": "hint:ExplanationTask",
             "required_capabilities": [
@@ -138,18 +130,9 @@
     ],
     "interactions": [
       {
-        "label": "Explanation of Blocking",
+        "label": "Explanation Exchange",
         "modality_concept": "hint:DashboardModality",
         "intent_concept": "hint:ExplanationIntent",
-        "agents_involved": [
-          "AI Security System",
-          "Cybersecurity Expert"
-        ]
-      },
-      {
-        "label": "Feedback on Predictions",
-        "modality_concept": "hint:TextChatModality",
-        "intent_concept": "hint:DeliberationIntent",
         "agents_involved": [
           "Cybersecurity Expert",
           "AI Security System"
@@ -158,22 +141,16 @@
     ],
     "task_executions": [
       {
-        "label": "Execute Blocking",
+        "label": "AI Blocks IPs",
         "task_label": "Block Suspected IPs",
         "performed_by": "AI Security System",
-        "method_concept": "hint:DataCollectionMethod"
+        "method_concept": "hint:PatternLearningCapability"
       },
       {
-        "label": "Execute Unblocking",
+        "label": "Human Unblocks IPs",
         "task_label": "Unblock IPs",
         "performed_by": "Cybersecurity Expert",
-        "method_concept": "hint:ArgumentationReasoningMethod"
-      },
-      {
-        "label": "Execute Cross-checking",
-        "task_label": "Cross-check Predictions",
-        "performed_by": "Cybersecurity Expert",
-        "method_concept": "hint:SemanticLinkingMethod"
+        "method_concept": "hint:ReasoningCapability"
       }
     ],
     "evaluation": {
@@ -194,10 +171,18 @@
             "hint:TaskSuccessRateMetric"
           ],
           "null_hypothesis": "The system does not improve response time.",
-          "alternative_hypothesis": "The system improves response time."
+          "alternative_hypothesis": "The system improves response time and trust."
         }
       ]
     }
   },
-  "new_concepts": []
+  "new_concepts": [
+    {
+      "uri": "hint:CybersecurityContext",
+      "label": "Cybersecurity Context",
+      "definition": "A context involving the protection of systems, networks, and programs from digital attacks.",
+      "broader": "hint:WorkspaceManipulationContext",
+      "category": "Context"
+    }
+  ]
 }

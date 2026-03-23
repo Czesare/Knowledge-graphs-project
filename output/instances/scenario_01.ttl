@@ -4,39 +4,25 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-inst:Scenario_01_Evaluation a hi:Evaluation ;
-    rdfs:label "System Effectiveness Evaluation" ;
-    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
-    hi:hasExperiment inst:Scenario_01_Experiment_TrustAndEffectivenessExperiment ;
-    hi:hasMetricConcept hint:TaskSuccessRateMetric,
-        hint:TrustPreservationMetric .
-
-inst:Scenario_01_Interaction_ExplanationOfBlocking a hi:Interaction ;
-    rdfs:label "Explanation of Blocking" ;
+inst:Scenario_01_Interaction_ExplanationExchange a hi:Interaction ;
+    rdfs:label "Explanation Exchange" ;
     hi:hasAgentInvolved inst:Scenario_01_AiSecuritySystem,
         inst:Scenario_01_CybersecurityExpert ;
     hi:hasInteractionIntentConcept hint:ExplanationIntent ;
     hi:hasInteractionModalityConcept hint:DashboardModality .
 
-inst:Scenario_01_Interaction_FeedbackOnPredictions a hi:Interaction ;
-    rdfs:label "Feedback on Predictions" ;
-    hi:hasAgentInvolved inst:Scenario_01_AiSecuritySystem,
-        inst:Scenario_01_CybersecurityExpert ;
-    hi:hasInteractionIntentConcept hint:DeliberationIntent ;
-    hi:hasInteractionModalityConcept hint:TextChatModality .
-
 inst:Scenario_01_UseCase a hi:CompetitionUseCase ;
     rdfs:label "Cybersecurity Response for Voting System" ;
     hi:hasDomainConcept hint:LawAndPolicyDomain ;
     hi:hasHITeam inst:Scenario_01_Team ;
-    hi:hasScenarioDescription "Election Day Cybersecurity"^^xsd:string .
+    hi:hasScenarioDescription "Cybersecurity Context"^^xsd:string .
 
-inst:Scenario_01_AiSecuritySystem_Cap_ContinuousLearning a hi:Capability ;
-    rdfs:label "Continuous Learning" ;
-    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+inst:Scenario_01_AiSecuritySystem_Cap_PredictionMaking a hi:Capability ;
+    rdfs:label "Prediction Making" ;
+    hi:hasCapabilityConcept hint:BayesianReasoningCapability .
 
 inst:Scenario_01_Context a hi:Context ;
-    rdfs:label "Election Day Cybersecurity" ;
+    rdfs:label "Cybersecurity Context" ;
     hi:hasConstraintConcept hint:SafetyConstraint,
         hint:TransparencyConstraint ;
     hi:hasContextConcept hint:WorkspaceManipulationContext ;
@@ -44,28 +30,25 @@ inst:Scenario_01_Context a hi:Context ;
     hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
         hint:TrustShiftPhenomenon .
 
-inst:Scenario_01_CybersecurityExpert_Cap_Communication a hi:Capability ;
-    rdfs:label "Communication" ;
+inst:Scenario_01_CybersecurityExpert_Cap_CommunicationClarity a hi:Capability ;
+    rdfs:label "Communication Clarity" ;
     hi:hasCapabilityConcept hint:ExplainingCapability .
 
-inst:Scenario_01_Exec_ExecuteBlocking a hi:TaskExecution ;
-    rdfs:label "Execute Blocking" ;
-    hi:hasMethodConcept hint:DataCollectionMethod ;
+inst:Scenario_01_Exec_AiBlocksIps a hi:TaskExecution ;
+    rdfs:label "AI Blocks IPs" ;
+    hi:evaluatedBy inst:Scenario_01_Evaluation ;
+    hi:hasMethodConcept hint:PatternLearningCapability ;
     hi:realizesTask inst:Scenario_01_Task_BlockSuspectedIps .
 
-inst:Scenario_01_Exec_ExecuteCross-checking a hi:TaskExecution ;
-    rdfs:label "Execute Cross-checking" ;
-    hi:hasMethodConcept hint:SemanticLinkingMethod ;
-    hi:realizesTask inst:Scenario_01_Task_Cross-checkPredictions .
-
-inst:Scenario_01_Exec_ExecuteUnblocking a hi:TaskExecution ;
-    rdfs:label "Execute Unblocking" ;
-    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
+inst:Scenario_01_Exec_HumanUnblocksIps a hi:TaskExecution ;
+    rdfs:label "Human Unblocks IPs" ;
+    hi:evaluatedBy inst:Scenario_01_Evaluation ;
+    hi:hasMethodConcept hint:ReasoningCapability ;
     hi:realizesTask inst:Scenario_01_Task_UnblockIps .
 
 inst:Scenario_01_Experiment_TrustAndEffectivenessExperiment a hi:Experiment ;
     rdfs:label "Trust and Effectiveness Experiment" ;
-    hi:hasAlternativeHypothesis "The system improves response time."^^xsd:string ;
+    hi:hasAlternativeHypothesis "The system improves response time and trust."^^xsd:string ;
     hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
     hi:hasMetricTested hint:TaskSuccessRateMetric,
         hint:TrustPreservationMetric ;
@@ -77,13 +60,33 @@ inst:Scenario_01_Goal_EnsureVotingSystemSecurity a hi:Goal ;
     hi:requiresTask inst:Scenario_01_Task_BlockSuspectedIps,
         inst:Scenario_01_Task_Cross-checkPredictions,
         inst:Scenario_01_Task_ProvideFeedback,
-        inst:Scenario_01_Task_ProvideQuickExplanation,
         inst:Scenario_01_Task_UnblockIps .
 
-inst:Scenario_01_AiSecuritySystem_Cap_PatternRecognition a hi:Capability ;
-    rdfs:label "Pattern Recognition" ;
+inst:Scenario_01_AiSecuritySystem a hi:ArtificialAgent ;
+    rdfs:label "AI Security System" ;
+    hi:hasCapability inst:Scenario_01_AiSecuritySystem_Cap_ExplanationGeneration,
+        inst:Scenario_01_AiSecuritySystem_Cap_IpBlocking,
+        inst:Scenario_01_AiSecuritySystem_Cap_PredictionMaking ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Scenario_01_Exec_AiBlocksIps .
+
+inst:Scenario_01_AiSecuritySystem_Cap_ExplanationGeneration a hi:Capability ;
+    rdfs:label "Explanation Generation" ;
+    hi:allowsTask inst:Scenario_01_Task_ProvideFeedback ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
+inst:Scenario_01_AiSecuritySystem_Cap_IpBlocking a hi:Capability ;
+    rdfs:label "IP Blocking" ;
     hi:allowsTask inst:Scenario_01_Task_BlockSuspectedIps ;
     hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Scenario_01_CybersecurityExpert a hi:HumanAgent ;
+    rdfs:label "Cybersecurity Expert" ;
+    hi:hasCapability inst:Scenario_01_CybersecurityExpert_Cap_CommunicationClarity,
+        inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding,
+        inst:Scenario_01_CybersecurityExpert_Cap_DecisionMaking ;
+    hi:hasRoleConcept hint:RiskOperatorRole ;
+    hi:performsExecution inst:Scenario_01_Exec_HumanUnblocksIps .
 
 inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding a hi:Capability ;
     rdfs:label "Contextual Understanding" ;
@@ -95,15 +98,22 @@ inst:Scenario_01_CybersecurityExpert_Cap_DecisionMaking a hi:Capability ;
     hi:allowsTask inst:Scenario_01_Task_UnblockIps ;
     hi:hasCapabilityConcept hint:ReasoningCapability .
 
+inst:Scenario_01_Evaluation a hi:Evaluation ;
+    rdfs:label "System Effectiveness Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Scenario_01_Experiment_TrustAndEffectivenessExperiment ;
+    hi:hasMetricConcept hint:TaskSuccessRateMetric,
+        hint:TrustPreservationMetric .
+
+inst:Scenario_01_Task_Cross-checkPredictions a hi:Task ;
+    rdfs:label "Cross-check Predictions" ;
+    hi:hasTaskConcept hint:SemanticReasoningTask ;
+    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding .
+
 inst:Scenario_01_Task_ProvideFeedback a hi:Task ;
     rdfs:label "Provide Feedback" ;
     hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation .
-
-inst:Scenario_01_Task_ProvideQuickExplanation a hi:Task ;
-    rdfs:label "Provide Quick Explanation" ;
-    hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation .
+    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_ExplanationGeneration .
 
 inst:Scenario_01_Team a hi:HITeam ;
     rdfs:label "Cybersecurity Response for Voting System Team" ;
@@ -112,38 +122,10 @@ inst:Scenario_01_Team a hi:HITeam ;
         inst:Scenario_01_CybersecurityExpert ;
     hi:isInfluencedBy inst:Scenario_01_Context .
 
-inst:Scenario_01_AiSecuritySystem a hi:ArtificialAgent ;
-    rdfs:label "AI Security System" ;
-    hi:hasCapability inst:Scenario_01_AiSecuritySystem_Cap_ContinuousLearning,
-        inst:Scenario_01_AiSecuritySystem_Cap_PatternRecognition,
-        inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation ;
-    hi:hasRoleConcept hint:AIAssistantRole ;
-    hi:performsExecution inst:Scenario_01_Exec_ExecuteBlocking .
-
-inst:Scenario_01_AiSecuritySystem_Cap_QuickExplanation a hi:Capability ;
-    rdfs:label "Quick Explanation" ;
-    hi:allowsTask inst:Scenario_01_Task_ProvideFeedback,
-        inst:Scenario_01_Task_ProvideQuickExplanation ;
-    hi:hasCapabilityConcept hint:ExplainingCapability .
-
-inst:Scenario_01_CybersecurityExpert a hi:HumanAgent ;
-    rdfs:label "Cybersecurity Expert" ;
-    hi:hasCapability inst:Scenario_01_CybersecurityExpert_Cap_Communication,
-        inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding,
-        inst:Scenario_01_CybersecurityExpert_Cap_DecisionMaking ;
-    hi:hasRoleConcept hint:RiskOperatorRole ;
-    hi:performsExecution inst:Scenario_01_Exec_ExecuteCross-checking,
-        inst:Scenario_01_Exec_ExecuteUnblocking .
-
 inst:Scenario_01_Task_BlockSuspectedIps a hi:Task ;
     rdfs:label "Block Suspected IPs" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_PatternRecognition .
-
-inst:Scenario_01_Task_Cross-checkPredictions a hi:Task ;
-    rdfs:label "Cross-check Predictions" ;
-    hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Scenario_01_CybersecurityExpert_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Scenario_01_AiSecuritySystem_Cap_IpBlocking .
 
 inst:Scenario_01_Task_UnblockIps a hi:Task ;
     rdfs:label "Unblock IPs" ;

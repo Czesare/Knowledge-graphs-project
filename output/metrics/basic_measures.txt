@@ -1,27 +1,27 @@
 classes: 25
 object_properties: 48
 datatype_properties: 11
-individuals: 626
-triples: 3886
-entities: 714
+individuals: 641
+triples: 3819
+entities: 734
 blank_nodes: 29
-skos_concepts: 284
+skos_concepts: 292
 
 Class breakdown:
-  Paper: 10
-  Author: 35
+  Paper: 11
+  Author: 36
   Conference: 1
-  Affiliation: 19
-  ResearchUseCase: 10
+  Affiliation: 20
+  ResearchUseCase: 11
   CompetitionUseCase: 3
-  HITeam: 13
-  HumanAgent: 15
-  ArtificialAgent: 13
-  Capability: 71
-  Goal: 13
-  Task: 55
+  HITeam: 14
+  HumanAgent: 16
+  ArtificialAgent: 14
+  Capability: 73
+  Goal: 14
+  Task: 48
   TaskExecution: 31
   Interaction: 14
-  Evaluation: 13
-  Experiment: 12
-  Context: 13
+  Evaluation: 14
+  Experiment: 14
+  Context: 14

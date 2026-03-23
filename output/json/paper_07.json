@@ -1,5 +1,5 @@
 {
-  "paper_id": "paper_646",
+  "paper_id": "paper_289",
   "title": "Ontology-Based Risk Assessment in Smelting Plant Logistics",
   "authors": [
     {
@@ -30,11 +30,12 @@
         "hint:WorkspaceManipulationContext"
       ],
       "constraint_concepts": [
-        "hint:SafetyConstraint"
+        "hint:SafetyConstraint",
+        "hint:TransparencyConstraint"
       ],
       "phenomenon_concepts": [
-        "hint:SkillsComplementarityPhenomenon",
-        "hint:TrustShiftPhenomenon"
+        "hint:KnowledgeMismatchPhenomenon",
+        "hint:SkillsComplementarityPhenomenon"
       ]
     },
     "team": {
@@ -64,17 +65,17 @@
           "role_concept": "hint:RiskOperatorRole",
           "capabilities": [
             {
-              "label": "Logistical Management",
+              "label": "Logistical Coordination",
               "concept": "hint:SituationalAwarenessCapability",
               "allows_tasks": [
                 "Ladle Transport"
               ]
             },
             {
-              "label": "Real-time Decision Making",
-              "concept": "hint:ReasoningCapability",
+              "label": "Real-time Position Awareness",
+              "concept": "hint:SensingCapability",
               "allows_tasks": [
-                "Risk Assessment"
+                "Monitor Ladle Placement"
               ]
             }
           ]
@@ -89,14 +90,14 @@
               "label": "Risk Identification",
               "concept": "hint:SemanticReasoningCapability",
               "allows_tasks": [
-                "Risk Assessment"
+                "Identify Overlooked Risks"
               ]
             },
             {
-              "label": "Knowledge Integration",
-              "concept": "hint:KnowledgeGraphQueryingCapability",
+              "label": "Decision Support",
+              "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Update Knowledge Base"
+                "Support Decision-Making"
               ]
             }
           ]
@@ -114,22 +115,7 @@
             "required_capabilities": [
               "hint:ReasoningCapability"
             ],
-            "sub_tasks": [
-              {
-                "label": "Identify Hazards",
-                "task_concept": "hint:DataCollectionTask",
-                "required_capabilities": [
-                  "hint:SensingCapability"
-                ]
-              },
-              {
-                "label": "Evaluate Safety Protocols",
-                "task_concept": "hint:SemanticReasoningTask",
-                "required_capabilities": [
-                  "hint:SemanticReasoningCapability"
-                ]
-              }
-            ]
+            "sub_tasks": []
           },
           {
             "label": "Coordinate with Drivers",
@@ -140,10 +126,10 @@
             "sub_tasks": []
           },
           {
-            "label": "Update Knowledge Base",
-            "task_concept": "hint:KnowledgeGraphQueryTask",
+            "label": "Monitor Ladle Placement",
+            "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
-              "hint:KnowledgeGraphQueryingCapability"
+              "hint:SensingCapability"
             ],
             "sub_tasks": []
           }
@@ -152,8 +138,8 @@
     ],
     "interactions": [
       {
-        "label": "Operator-Driver Coordination",
-        "modality_concept": "hint:VerbalDialogueModality",
+        "label": "Operator-Driver Communication",
+        "modality_concept": "hint:VoiceChatModality",
         "intent_concept": "hint:DeliberationIntent",
         "agents_involved": [
           "Operator",
@@ -166,7 +152,13 @@
         "label": "Execute Risk Assessment",
         "task_label": "Risk Assessment",
         "performed_by": "Ontology System",
-        "method_concept": "hint:SemanticLinkingMethod"
+        "method_concept": "hint:SemanticReasoningMethod"
+      },
+      {
+        "label": "Coordinate Ladle Transport",
+        "task_label": "Coordinate with Drivers",
+        "performed_by": "Operator",
+        "method_concept": "hint:ProtocolNegotiationMethod"
       }
     ],
     "evaluation": {
@@ -180,7 +172,7 @@
       ],
       "experiments": [
         {
-          "label": "Scenario-Based Evaluation",
+          "label": "Scenario-Based Testing",
           "experiment_concept": "hint:DeliberationSupportExperiment",
           "metrics_tested": [
             "hint:SafetyComplianceMetric"
@@ -193,11 +185,11 @@
   },
   "new_concepts": [
     {
-      "uri": "hint:DigitalTwinCapability",
-      "label": "Digital Twin Capability",
-      "definition": "The ability to create a real-time digital representation of physical processes.",
-      "broader": "hint:Capability",
-      "category": "Capability"
+      "uri": "hint:MoltenMetalHandling",
+      "label": "Molten Metal Handling",
+      "definition": "The process of managing and transporting molten metals in industrial settings.",
+      "broader": "hint:WorkspaceManipulationContext",
+      "category": "Context"
     }
   ]
 }

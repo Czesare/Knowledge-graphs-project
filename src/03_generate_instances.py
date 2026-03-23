@@ -11,6 +11,7 @@ Also collects new HINT concepts and writes them to output/hi-thesaurus-extension
 This script is DETERMINISTIC - no LLM calls. It converts the structured
 JSON into valid RDF using rdflib, following the HI Ontology V2 schema.
 """
+import csv
 import json
 import re
 import sys
@@ -34,6 +35,8 @@ HINT = Namespace(HINT_NS)
 INST = Namespace(INST_NS)
 SCHEMA = Namespace("http://schema.org/")
 BIBO = Namespace("http://purl.org/ontology/bibo/")
+AUDIT_DIR = OUTPUT_DIR / "audit"
+INSTANCE_AUDIT_DIR = AUDIT_DIR / "instance_generation"
 
 
 def sanitize_uri(label: str) -> str:
@@ -61,10 +64,110 @@ def resolve_hint_concept(concept_str: str) -> URIRef:
     return HINT[sanitize_uri(concept_str)]
 
 
-def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
+def init_generation_audit(source_id: str, is_scenario: bool) -> dict:
+    """Initialise a lightweight per-source audit record."""
+    return {
+        "source_id": source_id,
+        "is_scenario": is_scenario,
+        "extracted_link_counts": {},
+        "repair_link_counts": {},
+        "unresolved_counts": {},
+        "repair_actions": [],
+        "unresolved_items": [],
+        "new_concepts_proposed": 0,
+    }
+
+
+def bump_count(bucket: dict, key: str):
+    """Increment a named counter inside an audit bucket."""
+    bucket[key] = bucket.get(key, 0) + 1
+
+
+def record_repair(audit: dict, key: str, relation: str, strategy: str,
+                  subject: str, target: str, detail: str = ""):
+    """Record a repair/fallback action in a machine-readable way."""
+    bump_count(audit["repair_link_counts"], key)
+    audit["repair_actions"].append({
+        "relation": relation,
+        "strategy": strategy,
+        "subject": subject,
+        "target": target,
+        "detail": detail,
+    })
+
+
+def record_unresolved(audit: dict, key: str, relation: str,
+                      subject: str, detail: str):
+    """Record an unresolved linking problem for later review."""
+    bump_count(audit["unresolved_counts"], key)
+    audit["unresolved_items"].append({
+        "relation": relation,
+        "subject": subject,
+        "detail": detail,
+    })
+
+
+def write_instance_generation_summary(audits: list[dict]):
+    """Write aggregated repair/unresolved counts for all generated sources."""
+    summary_path = AUDIT_DIR / "instance_generation_summary.json"
+    csv_path = AUDIT_DIR / "instance_generation_summary.csv"
+
+    totals = {
+        "extracted_link_counts": {},
+        "repair_link_counts": {},
+        "unresolved_counts": {},
+        "new_concepts_proposed": 0,
+    }
+    for audit in audits:
+        for section in ["extracted_link_counts", "repair_link_counts", "unresolved_counts"]:
+            for key, value in audit.get(section, {}).items():
+                totals[section][key] = totals[section].get(key, 0) + value
+        totals["new_concepts_proposed"] += audit.get("new_concepts_proposed", 0)
+
+    summary = {
+        "sources": audits,
+        "totals": totals,
+    }
+    summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+
+    csv_fields = [
+        "source_id",
+        "task_requiresCapability_direct_concept",
+        "task_requiresCapability_label_similarity",
+        "task_requiresCapability_safety_sweep",
+        "task_requiresCapability_fallback_first_capability",
+        "execution_realizesTask_direct_label",
+        "execution_realizesTask_normalized_match",
+        "execution_realizesTask_label_overlap",
+        "execution_realizesTask_fallback_first_task",
+        "task_requiresCapability_unmatched",
+        "execution_realizesTask_unmatched",
+        "new_concepts_proposed",
+    ]
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=csv_fields)
+        writer.writeheader()
+        for audit in audits:
+            writer.writerow({
+                "source_id": audit["source_id"],
+                "task_requiresCapability_direct_concept": audit["extracted_link_counts"].get("task_requiresCapability_direct_concept", 0),
+                "task_requiresCapability_label_similarity": audit["repair_link_counts"].get("task_requiresCapability_label_similarity", 0),
+                "task_requiresCapability_safety_sweep": audit["repair_link_counts"].get("task_requiresCapability_safety_sweep", 0),
+                "task_requiresCapability_fallback_first_capability": audit["repair_link_counts"].get("task_requiresCapability_fallback_first_capability", 0),
+                "execution_realizesTask_direct_label": audit["extracted_link_counts"].get("execution_realizesTask_direct_label", 0),
+                "execution_realizesTask_normalized_match": audit["repair_link_counts"].get("execution_realizesTask_normalized_match", 0),
+                "execution_realizesTask_label_overlap": audit["repair_link_counts"].get("execution_realizesTask_label_overlap", 0),
+                "execution_realizesTask_fallback_first_task": audit["repair_link_counts"].get("execution_realizesTask_fallback_first_task", 0),
+                "task_requiresCapability_unmatched": audit["unresolved_counts"].get("task_requiresCapability_unmatched", 0),
+                "execution_realizesTask_unmatched": audit["unresolved_counts"].get("execution_realizesTask_unmatched", 0),
+                "new_concepts_proposed": audit.get("new_concepts_proposed", 0),
+            })
+
+
+def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict], dict]:
     """
     Build an RDF graph from extracted JSON for one paper/scenario.
-    Returns (graph, new_concepts_list).
+    Returns (graph, new_concepts_list, audit_record).
     """
     g = Graph()
     g.bind("hi", HI)
@@ -80,6 +183,7 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
     uc_data = data.get("use_case", {})
     is_scenario = data.get("use_case", {}).get("type") == "competition"
     prefix = sanitize_uri(source_id)  # e.g. "Paper01" or "Scenario01"
+    audit = init_generation_audit(source_id, is_scenario)
 
     # ── Paper metadata (only for research papers) ─────────────
     if not is_scenario and data.get("title"):
@@ -249,6 +353,7 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
                     g.add((task_uri, HI.requiresCapability, cap_uri))
                     g.add((cap_uri, HI.allowsTask, task_uri))
                     matched = True
+                    bump_count(audit["extracted_link_counts"], "task_requiresCapability_direct_concept")
 
                 # Strategy 2: match by label similarity (fallback)
                 if not matched:
@@ -259,11 +364,27 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
                             g.add((task_uri, HI.requiresCapability, cap_uri))
                             g.add((cap_uri, HI.allowsTask, task_uri))
                             matched = True
+                            record_repair(
+                                audit,
+                                "task_requiresCapability_label_similarity",
+                                "hi:requiresCapability",
+                                "label_similarity",
+                                task_label,
+                                str(cap_uri),
+                                f"required_capability={rc}",
+                            )
                             break
 
                 if not matched:
                     print(f"    WARN: Task '{task_label}' requires capability "
                           f"'{rc}' but no matching capability found in agents.")
+                    record_unresolved(
+                        audit,
+                        "task_requiresCapability_unmatched",
+                        "hi:requiresCapability",
+                        task_label,
+                        rc,
+                    )
 
             # Sub-tasks
             for st in task.get("sub_tasks", []):
@@ -291,10 +412,12 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
             task_uris[task_label] = task_uri
 
     # ── Task Executions ───────────────────────────────────────
+    execution_uris = []
     for ei, exec_data in enumerate(uc_data.get("task_executions", []), 1):
         exec_label = exec_data.get("label", f"Execution{ei}")
         exec_id = sanitize_uri(exec_label)
         exec_uri = INST[f"{prefix}_Exec_{exec_id}"]
+        execution_uris.append(exec_uri)
 
         g.add((exec_uri, RDF.type, HI.TaskExecution))
         g.add((exec_uri, RDFS.label, Literal(exec_label)))
@@ -303,6 +426,7 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
         task_label = exec_data.get("task_label", "")
         if task_label in task_uris:
             g.add((exec_uri, HI.realizesTask, task_uris[task_label]))
+            bump_count(audit["extracted_link_counts"], "execution_realizesTask_direct_label")
         elif task_label:
             # Fuzzy match: try normalised comparison
             matched = False
@@ -311,10 +435,26 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
                 if sanitize_uri(tl).lower() == task_norm:
                     g.add((exec_uri, HI.realizesTask, tu))
                     matched = True
+                    record_repair(
+                        audit,
+                        "execution_realizesTask_normalized_match",
+                        "hi:realizesTask",
+                        "normalized_label_match",
+                        exec_label,
+                        tl,
+                        f"task_label={task_label}",
+                    )
                     break
             if not matched:
                 print(f"    WARN: Execution '{exec_label}' references task "
                       f"'{task_label}' but no matching task found.")
+                record_unresolved(
+                    audit,
+                    "execution_realizesTask_unmatched",
+                    "hi:realizesTask",
+                    exec_label,
+                    task_label,
+                )
 
         # Link to performing agent
         agent_label = exec_data.get("performed_by", "")
@@ -352,6 +492,11 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
         eval_uri = INST[f"{prefix}_Evaluation"]
         g.add((eval_uri, RDF.type, HI.Evaluation))
         g.add((eval_uri, RDFS.label, Literal(eval_data.get("label", "Evaluation"))))
+
+        # Link executions explicitly to the evaluation so downstream
+        # queries do not have to rely on URI naming conventions.
+        for exec_uri in execution_uris:
+            g.add((exec_uri, HI.evaluatedBy, eval_uri))
 
         for ec in eval_data.get("evaluation_concepts", []):
             g.add((eval_uri, HI.hasEvaluationConcept, resolve_hint_concept(ec)))
@@ -401,6 +546,14 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
                        cap_label.lower().replace(" ", "") in tl_norm:
                         g.add((task_s, HI.requiresCapability, cap_uri))
                         matched = True
+                        record_repair(
+                            audit,
+                            "task_requiresCapability_safety_sweep",
+                            "hi:requiresCapability",
+                            "safety_sweep_label_overlap",
+                            task_labels[0] if task_labels else str(task_s),
+                            str(cap_uri),
+                        )
                         break
                 if matched:
                     break
@@ -408,6 +561,14 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
             # Ultimate fallback: use first capability from same use case
             if not matched and all_caps:
                 g.add((task_s, HI.requiresCapability, all_caps[0]))
+                record_repair(
+                    audit,
+                    "task_requiresCapability_fallback_first_capability",
+                    "hi:requiresCapability",
+                    "fallback_first_capability",
+                    task_labels[0] if task_labels else str(task_s),
+                    str(all_caps[0]),
+                )
                 print(f"    FALLBACK: Task '{task_labels[0] if task_labels else task_s}' "
                       f"linked to fallback capability")
 
@@ -431,6 +592,14 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
                 if exec_words & task_words:
                     g.add((exec_s, HI.realizesTask, tu))
                     matched = True
+                    record_repair(
+                        audit,
+                        "execution_realizesTask_label_overlap",
+                        "hi:realizesTask",
+                        "label_overlap",
+                        exec_labels[0] if exec_labels else str(exec_s),
+                        tl,
+                    )
                     print(f"    SWEEP: Execution '{exec_labels[0]}' -> Task '{tl}'")
                     break
 
@@ -439,12 +608,21 @@ def build_paper_graph(data: dict, source_id: str) -> tuple[Graph, list[dict]]:
                 # Last resort: link to first task
                 first_task = list(task_uris.values())[0]
                 g.add((exec_s, HI.realizesTask, first_task))
+                record_repair(
+                    audit,
+                    "execution_realizesTask_fallback_first_task",
+                    "hi:realizesTask",
+                    "fallback_first_task",
+                    exec_labels[0] if exec_labels else str(exec_s),
+                    str(first_task),
+                )
                 print(f"    FALLBACK: Execution '{exec_labels[0] if exec_labels else exec_s}' "
                       f"linked to fallback task")
 
     # Collect new concepts
     new_concepts = data.get("new_concepts", [])
-    return g, new_concepts
+    audit["new_concepts_proposed"] = len(new_concepts)
+    return g, new_concepts, audit
 
 
 def generate_thesaurus_extensions(all_new_concepts: list[dict]) -> str:
@@ -479,6 +657,7 @@ def generate_thesaurus_extensions(all_new_concepts: list[dict]) -> str:
 
 def main():
     INSTANCES_DIR.mkdir(parents=True, exist_ok=True)
+    INSTANCE_AUDIT_DIR.mkdir(parents=True, exist_ok=True)
 
     # Parse arguments
     target = None
@@ -497,6 +676,7 @@ def main():
     print(f"=== Generating RDF instances ({len(json_files)} sources) ===\n")
 
     all_new_concepts = []
+    all_audits = []
     total_triples = 0
 
     for json_file in json_files:
@@ -511,8 +691,9 @@ def main():
 
         print(f"  [{source_id}] Generating RDF...")
 
-        g, new_concepts = build_paper_graph(data, source_id)
+        g, new_concepts, audit = build_paper_graph(data, source_id)
         all_new_concepts.extend(new_concepts)
+        all_audits.append(audit)
 
         # Serialize
         ttl_path = INSTANCES_DIR / f"{source_id}.ttl"
@@ -521,6 +702,9 @@ def main():
         n_triples = len(g)
         total_triples += n_triples
         print(f"    -> {ttl_path.name} ({n_triples} triples)")
+
+        audit_path = INSTANCE_AUDIT_DIR / f"{source_id}.json"
+        audit_path.write_text(json.dumps(audit, indent=2), encoding="utf-8")
 
         if new_concepts:
             print(f"    {len(new_concepts)} new HINT concepts proposed")
@@ -532,6 +716,9 @@ def main():
         ext_path.write_text(ext_ttl, encoding='utf-8')
         print(f"\nNew HINT concepts written to {ext_path}")
         print(f"  ({len(all_new_concepts)} concepts - REVIEW BEFORE USING)")
+
+    write_instance_generation_summary(all_audits)
+    print(f"Audit files written to {INSTANCE_AUDIT_DIR}")
 
     print(f"\nTotal triples generated: {total_triples}")
     print(f"Instance files in {INSTANCES_DIR}/")

@@ -1,0 +1,259 @@
+category,subject,predicate,target,status,note
+static_concept_mapping,https://w3id.org/hi-thesaurus/HealthAndLifestyleDomain,skos:closeMatch,http://www.wikidata.org/entity/Q12147,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/HealthAndLifestyleDomain,rdfs:seeAlso,http://dbpedia.org/resource/Health,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EducationDomain,skos:closeMatch,http://www.wikidata.org/entity/Q8434,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EducationDomain,rdfs:seeAlso,http://dbpedia.org/resource/Education,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MedicalDomain,skos:closeMatch,http://www.wikidata.org/entity/Q11190,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MedicalDomain,rdfs:seeAlso,http://dbpedia.org/resource/Medicine,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/LawAndPolicyDomain,skos:closeMatch,http://www.wikidata.org/entity/Q7748,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/LawAndPolicyDomain,rdfs:seeAlso,http://dbpedia.org/resource/Law,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/IndustrialAndServiceRoboticsDomain,skos:closeMatch,http://www.wikidata.org/entity/Q11012,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/IndustrialAndServiceRoboticsDomain,rdfs:seeAlso,http://dbpedia.org/resource/Robotics,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SmartCampusDomain,skos:closeMatch,http://www.wikidata.org/entity/Q3918,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SmartCampusDomain,rdfs:seeAlso,http://dbpedia.org/resource/Smart_campus,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DigitalMuseumDomain,skos:closeMatch,http://www.wikidata.org/entity/Q33506,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DigitalMuseumDomain,rdfs:seeAlso,http://dbpedia.org/resource/Virtual_museum,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UserWellbeingGoal,skos:closeMatch,http://www.wikidata.org/entity/Q332717,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UserWellbeingGoal,rdfs:seeAlso,http://dbpedia.org/resource/Well-being,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SafeRetrievalGoal,skos:relatedMatch,http://www.wikidata.org/entity/Q3054889,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SafeRetrievalGoal,rdfs:seeAlso,http://dbpedia.org/resource/Information_retrieval,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairAccurateVerdictGoal,skos:relatedMatch,http://www.wikidata.org/entity/Q189786,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairAccurateVerdictGoal,rdfs:seeAlso,http://dbpedia.org/resource/Fact-checking,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EffectiveLearningGoal,skos:closeMatch,http://www.wikidata.org/entity/Q133500,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EffectiveLearningGoal,rdfs:seeAlso,http://dbpedia.org/resource/Learning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AccurateTrustworthyDiagnosisGoal,skos:closeMatch,http://www.wikidata.org/entity/Q16644043,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AccurateTrustworthyDiagnosisGoal,rdfs:seeAlso,http://dbpedia.org/resource/Medical_diagnosis,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairEfficientHeatingGoal,skos:relatedMatch,http://www.wikidata.org/entity/Q185043,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairEfficientHeatingGoal,rdfs:seeAlso,http://dbpedia.org/resource/Energy_conservation,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EnhancedVisitorGoal,skos:relatedMatch,http://www.wikidata.org/entity/Q15401930,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EnhancedVisitorGoal,rdfs:seeAlso,http://dbpedia.org/resource/User_experience,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EthicalConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q9465,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EthicalConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Ethics,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PrivacyConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q8492,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PrivacyConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Privacy,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TransparencyConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q535347,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TransparencyConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Transparency_(behavior),linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairnessConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q189786,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairnessConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Fairness_(disambiguation),linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SafetyConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q3054889,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SafetyConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Safety,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AutonomyConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q4120621,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AutonomyConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Autonomy,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UndueInfluenceConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q1479126,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UndueInfluenceConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Undue_influence,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SustainabilityConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q219416,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SustainabilityConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Sustainability,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AccessibilityConstraint,skos:closeMatch,http://www.wikidata.org/entity/Q555097,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AccessibilityConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Accessibility,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UserComfortConstraint,skos:relatedMatch,http://www.wikidata.org/entity/Q373432,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UserComfortConstraint,rdfs:seeAlso,http://dbpedia.org/resource/Usability,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReasoningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q130901,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReasoningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Reasoning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/BayesianReasoningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q44432,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/BayesianReasoningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Bayesian_inference,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticReasoningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q1656682,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticReasoningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Semantic_reasoner,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EmbeddingReasoningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q65076586,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EmbeddingReasoningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Word_embedding,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ClinicalJudgmentCapability,skos:closeMatch,http://www.wikidata.org/entity/Q16644043,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ClinicalJudgmentCapability,rdfs:seeAlso,http://dbpedia.org/resource/Clinical_decision_support_system,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PatternLearningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q2539,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PatternLearningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Machine_learning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReinforcementLearningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q830688,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReinforcementLearningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Reinforcement_learning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MetaAnalysisCapability,skos:closeMatch,http://www.wikidata.org/entity/Q815382,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MetaAnalysisCapability,rdfs:seeAlso,http://dbpedia.org/resource/Meta-analysis,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ExplainingCapability,skos:closeMatch,http://www.wikidata.org/entity/Q487395,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ExplainingCapability,rdfs:seeAlso,http://dbpedia.org/resource/Explainable_artificial_intelligence,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/NegotiationCapability,skos:closeMatch,http://www.wikidata.org/entity/Q14982,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/NegotiationCapability,rdfs:seeAlso,http://dbpedia.org/resource/Negotiation,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeGraphQueryingCapability,skos:closeMatch,http://www.wikidata.org/entity/Q33002955,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeGraphQueryingCapability,rdfs:seeAlso,http://dbpedia.org/resource/Knowledge_graph,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SensingCapability,skos:closeMatch,http://www.wikidata.org/entity/Q167676,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SensingCapability,rdfs:seeAlso,http://dbpedia.org/resource/Sensor,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SituationalAwarenessCapability,skos:closeMatch,http://www.wikidata.org/entity/Q1752640,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SituationalAwarenessCapability,rdfs:seeAlso,http://dbpedia.org/resource/Situation_awareness,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MultimodalInterpretationCapability,skos:closeMatch,http://www.wikidata.org/entity/Q107190418,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MultimodalInterpretationCapability,rdfs:seeAlso,http://dbpedia.org/resource/Multimodal_learning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReportingCapability,skos:relatedMatch,http://www.wikidata.org/entity/Q32907,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FineDexterityCapability,skos:closeMatch,http://www.wikidata.org/entity/Q223638,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FineDexterityCapability,rdfs:seeAlso,http://dbpedia.org/resource/Fine_motor_skill,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/HeavyLiftingCapability,skos:relatedMatch,http://www.wikidata.org/entity/Q11012,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/OperatorCoordinationCapability,skos:relatedMatch,http://www.wikidata.org/entity/Q205892,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CognitiveReasoningCapability,skos:closeMatch,http://www.wikidata.org/entity/Q3966542,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CognitiveReasoningCapability,rdfs:seeAlso,http://dbpedia.org/resource/Cognition,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CommunicationExplanationCapability,skos:closeMatch,http://www.wikidata.org/entity/Q11024,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CommunicationExplanationCapability,rdfs:seeAlso,http://dbpedia.org/resource/Communication,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PerceptionSensingCapability,skos:closeMatch,http://www.wikidata.org/entity/Q1080148,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PerceptionSensingCapability,rdfs:seeAlso,http://dbpedia.org/resource/Perception,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ArgumentationReasoningMethod,skos:closeMatch,http://www.wikidata.org/entity/Q815741,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ArgumentationReasoningMethod,rdfs:seeAlso,http://dbpedia.org/resource/Argumentation_theory,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReinforcementLearningMethod,skos:closeMatch,http://www.wikidata.org/entity/Q830688,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ReinforcementLearningMethod,rdfs:seeAlso,http://dbpedia.org/resource/Reinforcement_learning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeGraphQueryMethod,skos:closeMatch,http://www.wikidata.org/entity/Q33002955,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeGraphQueryMethod,rdfs:seeAlso,http://dbpedia.org/resource/SPARQL,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PostHocExplanationMethod,skos:closeMatch,http://www.wikidata.org/entity/Q487395,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PostHocExplanationMethod,rdfs:seeAlso,http://dbpedia.org/resource/Explainable_artificial_intelligence,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/BayesianLogicMethod,skos:closeMatch,http://www.wikidata.org/entity/Q44432,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/BayesianLogicMethod,rdfs:seeAlso,http://dbpedia.org/resource/Bayesian_network,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MetaAnalysisScoringMethod,skos:closeMatch,http://www.wikidata.org/entity/Q815382,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MetaAnalysisScoringMethod,rdfs:seeAlso,http://dbpedia.org/resource/Meta-analysis,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticLinkingMethod,skos:closeMatch,http://www.wikidata.org/entity/Q1621273,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticLinkingMethod,rdfs:seeAlso,http://dbpedia.org/resource/Semantic_Web,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticEmbeddingMethod,skos:closeMatch,http://www.wikidata.org/entity/Q65076586,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticEmbeddingMethod,rdfs:seeAlso,http://dbpedia.org/resource/Word_embedding,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CooperativeLearningMethod,skos:closeMatch,http://www.wikidata.org/entity/Q1535726,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CooperativeLearningMethod,rdfs:seeAlso,http://dbpedia.org/resource/Collaborative_learning,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DataCollectionMethod,skos:closeMatch,http://www.wikidata.org/entity/Q1783551,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DataCollectionMethod,rdfs:seeAlso,http://dbpedia.org/resource/Data_collection,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DataCollectionTask,skos:closeMatch,http://www.wikidata.org/entity/Q1783551,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ConflictResolutionTask,skos:closeMatch,http://www.wikidata.org/entity/Q1194317,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ExplanationTask,skos:closeMatch,http://www.wikidata.org/entity/Q487395,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SituationalAssessmentTask,skos:closeMatch,http://www.wikidata.org/entity/Q1752640,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/QuestionAnsweringTask,skos:closeMatch,http://www.wikidata.org/entity/Q7271743,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/QuestionAnsweringTask,rdfs:seeAlso,http://dbpedia.org/resource/Question_answering,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SemanticReasoningTask,skos:closeMatch,http://www.wikidata.org/entity/Q1656682,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/BayesianInferenceTask,skos:closeMatch,http://www.wikidata.org/entity/Q44432,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SymptomAnalysisTask,skos:closeMatch,http://www.wikidata.org/entity/Q169872,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/RecommendResourcesTask,skos:closeMatch,http://www.wikidata.org/entity/Q860488,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PolicyLearningTask,skos:relatedMatch,http://www.wikidata.org/entity/Q830688,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeGraphQueryTask,skos:closeMatch,http://www.wikidata.org/entity/Q33002955,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MultimodalInputInterpretationTask,skos:closeMatch,http://www.wikidata.org/entity/Q107190418,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DecideInterventionTask,skos:relatedMatch,http://www.wikidata.org/entity/Q1426711,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Phenomenon,skos:closeMatch,http://www.wikidata.org/entity/Q483247,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TrustShiftPhenomenon,skos:relatedMatch,http://www.wikidata.org/entity/Q47461,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TrustShiftPhenomenon,rdfs:seeAlso,http://dbpedia.org/resource/Trust_(social_science),linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeMismatchPhenomenon,skos:relatedMatch,http://www.wikidata.org/entity/Q1125806,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/KnowledgeMismatchPhenomenon,rdfs:seeAlso,http://dbpedia.org/resource/Information_asymmetry,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DiagnosisAnchoringPhenomenon,skos:closeMatch,http://www.wikidata.org/entity/Q360537,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DiagnosisAnchoringPhenomenon,rdfs:seeAlso,http://dbpedia.org/resource/Anchoring_(cognitive_bias),linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Bias,skos:closeMatch,http://www.wikidata.org/entity/Q1482135,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Bias,rdfs:seeAlso,http://dbpedia.org/resource/Cognitive_bias,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ConfirmationBias,skos:closeMatch,http://www.wikidata.org/entity/Q175646,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ConfirmationBias,rdfs:seeAlso,http://dbpedia.org/resource/Confirmation_bias,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/GroupThinkingPhenomenon,skos:closeMatch,http://www.wikidata.org/entity/Q331556,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/GroupThinkingPhenomenon,rdfs:seeAlso,http://dbpedia.org/resource/Groupthink,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EngagementShiftPhenomenon,skos:relatedMatch,http://www.wikidata.org/entity/Q15401930,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/RiskExposurePhenomenon,skos:relatedMatch,http://www.wikidata.org/entity/Q104493,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/RiskExposurePhenomenon,rdfs:seeAlso,http://dbpedia.org/resource/Risk,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SensorNoisePhenomenon,skos:closeMatch,http://www.wikidata.org/entity/Q498845,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SensorNoisePhenomenon,rdfs:seeAlso,http://dbpedia.org/resource/Noise_(signal_processing),linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DataMismatchPhenomenon,skos:relatedMatch,http://www.wikidata.org/entity/Q310202,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TrustPreservationMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q47461,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TaskSuccessRateMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q3992824,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SafetyComplianceMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q3054889,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ExplanationClarityMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q487395,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/FairOutcomeMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q189786,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DiagnosisAccuracyMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q13479982,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/LearningGainMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q133500,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AnswerAccuracyMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q13479982,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TimeMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q11471,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EnergyEfficiencyMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q185043,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CO2ReductionMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q167336,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EngagementTimeMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q15401930,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/RecommendationRelevanceMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q860488,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UndueInfluenceMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q1479126,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/UserComfortMetric,skos:relatedMatch,http://www.wikidata.org/entity/Q373432,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VerbalDialogueModality,skos:closeMatch,http://www.wikidata.org/entity/Q131395,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TextChatModality,skos:closeMatch,http://www.wikidata.org/entity/Q15077303,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DashboardModality,skos:closeMatch,http://www.wikidata.org/entity/Q1072917,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VirtualRealityModality,skos:closeMatch,http://www.wikidata.org/entity/Q170519,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VirtualRealityModality,rdfs:seeAlso,http://dbpedia.org/resource/Virtual_reality,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VoiceChatModality,skos:relatedMatch,http://www.wikidata.org/entity/Q1569397,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/NetworkProtocolModality,skos:relatedMatch,http://www.wikidata.org/entity/Q15836568,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TutorRole,skos:closeMatch,http://www.wikidata.org/entity/Q37226,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/LearnerRole,skos:closeMatch,http://www.wikidata.org/entity/Q48282,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ClinicianRole,skos:closeMatch,http://www.wikidata.org/entity/Q39631,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/JurorRole,skos:closeMatch,http://www.wikidata.org/entity/Q319141,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VisitorRole,skos:relatedMatch,http://www.wikidata.org/entity/Q15401930,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Agent,skos:closeMatch,http://www.wikidata.org/entity/Q16735822,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Agent,rdfs:seeAlso,http://dbpedia.org/resource/Intelligent_agent,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ArtificialAgent,skos:closeMatch,http://www.wikidata.org/entity/Q11660,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ArtificialAgent,rdfs:seeAlso,http://dbpedia.org/resource/Artificial_intelligence,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/HumanAgent,skos:closeMatch,http://www.wikidata.org/entity/Q5,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Interaction,skos:closeMatch,http://www.wikidata.org/entity/Q80919,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Interaction,rdfs:seeAlso,http://dbpedia.org/resource/Human%E2%80%93computer_interaction,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Capability,skos:relatedMatch,http://www.wikidata.org/entity/Q1137655,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Task,skos:relatedMatch,http://www.wikidata.org/entity/Q759676,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Evaluation,skos:relatedMatch,http://www.wikidata.org/entity/Q1379672,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/PersonalAssistantUseCase,skos:closeMatch,http://www.wikidata.org/entity/Q2539925,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/MedicalDiagnosisUseCase,skos:closeMatch,http://www.wikidata.org/entity/Q16644043,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/AutonomousTutoringUseCase,skos:closeMatch,http://www.wikidata.org/entity/Q2251299,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/GroupDeliberationUseCase,skos:closeMatch,http://www.wikidata.org/entity/Q1201750,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/EnergyNegotiationUseCase,skos:relatedMatch,http://www.wikidata.org/entity/Q12739,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VirtualMuseumGuideUseCase,skos:relatedMatch,http://www.wikidata.org/entity/Q33506,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/CollaborativeManipulationUseCase,skos:relatedMatch,http://www.wikidata.org/entity/Q11012,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/HealthMonitoringContext,skos:relatedMatch,http://www.wikidata.org/entity/Q743034,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/OnlineLearningContext,skos:closeMatch,http://www.wikidata.org/entity/Q1412953,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ClinicalConsultationContext,skos:relatedMatch,http://www.wikidata.org/entity/Q39631,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/JuryDeliberationContext,skos:relatedMatch,http://www.wikidata.org/entity/Q1201750,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/WorkspaceManipulationContext,skos:relatedMatch,http://www.wikidata.org/entity/Q11012,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/VirtualExhibitionContext,skos:relatedMatch,http://www.wikidata.org/entity/Q464980,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/SmartCampusContext,skos:relatedMatch,http://www.wikidata.org/entity/Q3918,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Feedback,skos:closeMatch,http://www.wikidata.org/entity/Q184199,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TrustReportFeedback,skos:relatedMatch,http://www.wikidata.org/entity/Q47461,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/ExplanationMessageFeedback,skos:relatedMatch,http://www.wikidata.org/entity/Q487395,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/InterventionRationaleFeedback,skos:relatedMatch,http://www.wikidata.org/entity/Q1426711,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/RecommendationRationaleFeedback,skos:relatedMatch,http://www.wikidata.org/entity/Q860488,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/Experiment,skos:closeMatch,http://www.wikidata.org/entity/Q101965,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/TransparencyTrustExperiment,skos:relatedMatch,http://www.wikidata.org/entity/Q535347,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DiagnosisExperiment,skos:relatedMatch,http://www.wikidata.org/entity/Q16644043,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/OnlineTutoringExperiment,skos:relatedMatch,http://www.wikidata.org/entity/Q2251299,linked,
+static_concept_mapping,https://w3id.org/hi-thesaurus/DeliberationSupportExperiment,skos:relatedMatch,http://www.wikidata.org/entity/Q1201750,linked,
+manual_instance_link,https://w3id.org/hi-ontology/instances/HHAI2025,owl:sameAs,http://www.wikidata.org/entity/Q113466830,linked,
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper01_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_DelftUniversityOfTechnology,owl:sameAs,http://www.wikidata.org/entity/Q752663,linked,Dutch university
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper01_Author2,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper01_Author3,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper02_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_VrijeUniversiteitAmsterdam,owl:sameAs,http://www.wikidata.org/entity/Q1065414,linked,"university in Amsterdam, Netherlands"
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper02_Author2,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper02_Author3,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_InovacioniCentarEtfBelgradeRs,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper02_Author4,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper03_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_HuUniversityOfAppliedSciencesUtrecht,owl:sameAs,http://www.wikidata.org/entity/Q4372693,linked,"university in Utrecht, Netherlands"
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper03_Author2,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UtrechtUniversity,owl:sameAs,http://www.wikidata.org/entity/Q221653,linked,university in the Netherlands
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper03_Author3,owl:sameAs,http://www.wikidata.org/entity/Q130933180,linked,researcher
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper03_Author4,owl:sameAs,http://www.wikidata.org/entity/Q86502137,linked,researcher
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_JheronimusAcademyOfDataScienceEindhovenUniversityOfTechnologyTilburgUniversity,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper04_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UniversitatPompeuFabra,owl:sameAs,http://www.wikidata.org/entity/Q24543,linked,"university in Barcelona, Spain"
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper04_Author2,owl:sameAs,http://www.wikidata.org/entity/Q7322550,linked,Chilean computer scientist
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper04_Author3,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UniversitatPompeuFabraIcrea,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper05_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UniversityOfPisaItaly,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper05_Author2,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_GranSassoScienceInstituteGssiLaquilaItaly,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper05_Author3,owl:sameAs,http://www.wikidata.org/entity/Q62559988,linked,Italian computer scientist
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper05_Author4,owl:sameAs,http://www.wikidata.org/entity/Q59560987,linked,researcher ORCID ID = 0000-0002-2601-7009
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper06_Author1,owl:sameAs,http://www.wikidata.org/entity/Q56855274,linked,researcher
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_InstituteForSystemsAnalysisAndComputerScienceCnrNationalResearchCouncilOfItaly,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper06_Author2,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper06_Author3,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_SpindoxSpa,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper07_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UmeåUniversity,owl:sameAs,http://www.wikidata.org/entity/Q1144565,linked,"public university in Umeå, Sweden"
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper07_Author2,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper08_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_PolitecnicoDiMilano,owl:sameAs,http://www.wikidata.org/entity/Q392904,linked,"technical university in Milan, Italy"
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper08_Author2,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_DepartmentOfInformaticsScuolaNormaleSuperiore,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author2,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_DepartmentOfInformationEngineeringUniversityOfSiena,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author3,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_DepartmentOfPhilologyLiteratureAndLinguisticsUniversityOfPisa,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author4,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author5,owl:sameAs,http://www.wikidata.org/entity/Q108133611,linked,Italian computer scientist (1958-)
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author6,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author7,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper09_Author8,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper10_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_SmartbearSoftware,owl:sameAs,,unresolved,not found / no confident match
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper10_Author2,owl:sameAs,http://www.wikidata.org/entity/Q130806837,linked,researcher
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UniversityOfCaliforniaSanDiego,owl:sameAs,http://www.wikidata.org/entity/Q622664,linked,"public university in La Jolla, California, United States"
+author_wikidata,https://w3id.org/hi-ontology/instances/Paper11_Author1,owl:sameAs,,unresolved,not found / no confident match
+affiliation_wikidata,https://w3id.org/hi-ontology/instances/Affiliation_UniversityOfAppliedSciencesUtrecht,owl:sameAs,,unresolved,not found / no confident match

@@ -1,11 +1,11 @@
 {
-  "paper_id": "competition_HIComp_HHAI2024",
-  "title": "HI Competition Scenario: Child Education Team",
+  "paper_id": "competition_01",
+  "title": "HI Competition Scenario: Child Education Intervention",
   "authors": [],
   "keywords": [
     "child education",
-    "humanoid robot",
-    "learning intervention"
+    "robotic intervention",
+    "learning difficulties"
   ],
   "use_case": {
     "label": "Child Education Intervention",
@@ -19,12 +19,12 @@
         "hint:OnlineLearningContext"
       ],
       "constraint_concepts": [
-        "hint:TransparencyConstraint",
-        "hint:AutonomyConstraint"
+        "hint:AutonomyConstraint",
+        "hint:TransparencyConstraint"
       ],
       "phenomenon_concepts": [
         "hint:SkillsComplementarityPhenomenon",
-        "hint:TrustShiftPhenomenon"
+        "hint:KnowledgeMismatchPhenomenon"
       ]
     },
     "team": {
@@ -35,36 +35,36 @@
           "capabilities": [
             {
               "label": "Technology Enthusiasm",
-              "concept": "hint:OperatorCoordinationCapability",
+              "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
                 "Robot Interaction Task"
               ]
             },
             {
-              "label": "Pedagogical Skills",
+              "label": "Pedagogical Judgment",
               "concept": "hint:ReasoningCapability",
               "allows_tasks": [
-                "Educational Planning Task"
+                "Task Planning Task"
               ]
             }
           ]
         },
         {
           "label": "Anna",
-          "role_concept": "hint:TutorRole",
+          "role_concept": "hint:ClinicianRole",
           "capabilities": [
             {
-              "label": "Therapeutic Expertise",
+              "label": "Behaviorist Approach",
               "concept": "hint:ClinicalJudgmentCapability",
               "allows_tasks": [
-                "Child Assessment Task"
+                "Behavior Training Task"
               ]
             },
             {
-              "label": "Behaviorist Approach",
-              "concept": "hint:PatternLearningCapability",
+              "label": "Expert Position",
+              "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Behavior Training Task"
+                "Guidance Task"
               ]
             }
           ]
@@ -79,14 +79,14 @@
               "label": "Reactive Response",
               "concept": "hint:SensingCapability",
               "allows_tasks": [
-                "Stimuli Response Task"
+                "Interactive Session Task"
               ]
             },
             {
-              "label": "Wizard of Oz Interaction",
+              "label": "Wizard of Oz Paradigm",
               "concept": "hint:OperatorCoordinationCapability",
               "allows_tasks": [
-                "Guided Interaction Task"
+                "Coordinated Action Task"
               ]
             }
           ]
@@ -107,31 +107,31 @@
             "sub_tasks": []
           },
           {
-            "label": "Educational Planning Task",
-            "task_concept": "hint:SemanticReasoningTask",
+            "label": "Task Planning Task",
+            "task_concept": "hint:PolicyLearningTask",
             "required_capabilities": [
               "hint:ReasoningCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Child Assessment Task",
-            "task_concept": "hint:SymptomAnalysisTask",
+            "label": "Behavior Training Task",
+            "task_concept": "hint:DecideInterventionTask",
             "required_capabilities": [
               "hint:ClinicalJudgmentCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Behavior Training Task",
-            "task_concept": "hint:PolicyLearningTask",
+            "label": "Guidance Task",
+            "task_concept": "hint:ExplanationTask",
             "required_capabilities": [
-              "hint:PatternLearningCapability"
+              "hint:ExplainingCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Guided Interaction Task",
+            "label": "Coordinated Action Task",
             "task_concept": "hint:OperatorCoordinationTask",
             "required_capabilities": [
               "hint:OperatorCoordinationCapability"
@@ -154,28 +154,22 @@
     ],
     "task_executions": [
       {
-        "label": "NAO Stimuli Response",
-        "task_label": "Stimuli Response Task",
+        "label": "NAO Interactive Session",
+        "task_label": "Interactive Session Task",
         "performed_by": "NAO Robot",
-        "method_concept": "hint:DataCollectionMethod"
+        "method_concept": "hint:VirtualRealityInputParsingMethod"
       },
       {
-        "label": "Leah's Educational Planning",
-        "task_label": "Educational Planning Task",
+        "label": "Leah's Task Planning",
+        "task_label": "Task Planning Task",
         "performed_by": "Leah",
-        "method_concept": "hint:SemanticLinkingMethod"
-      },
-      {
-        "label": "Anna's Child Assessment",
-        "task_label": "Child Assessment Task",
-        "performed_by": "Anna",
-        "method_concept": "hint:MetaAnalysisScoringMethod"
+        "method_concept": "hint:CooperativeLearningMethod"
       }
     ],
     "evaluation": {
       "label": "Intervention Outcome Evaluation",
       "evaluation_concepts": [
-        "hint:AIInterventionImpactEvaluation"
+        "hint:TutorImpactEvaluation"
       ],
       "metric_concepts": [
         "hint:LearningGainMetric"
@@ -197,14 +191,14 @@
     {
       "uri": "hint:RobotInteractionTask",
       "label": "Robot Interaction Task",
-      "definition": "Task involving interaction with a robot to facilitate learning.",
+      "definition": "A task involving interaction between a human and a robot to achieve educational goals.",
       "broader": "hint:Task",
       "category": "Task"
     },
     {
-      "uri": "hint:EducationalPlanningTask",
-      "label": "Educational Planning Task",
-      "definition": "Task involving planning educational activities and interventions.",
+      "uri": "hint:TaskPlanningTask",
+      "label": "Task Planning Task",
+      "definition": "A task involving the planning and organization of educational activities.",
       "broader": "hint:Task",
       "category": "Task"
     }

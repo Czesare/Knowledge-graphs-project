@@ -29,7 +29,7 @@
     "context": {
       "label": "Face Matching Context",
       "context_concepts": [
-        "hint:WorkspaceManipulationContext"
+        "hint:JuryDeliberationContext"
       ],
       "constraint_concepts": [
         "hint:EthicalConstraint",
@@ -43,7 +43,7 @@
     "team": {
       "human_agents": [
         {
-          "label": "Human Operator",
+          "label": "Human Annotator",
           "role_concept": "hint:HumanUserRole",
           "capabilities": [
             {
@@ -54,10 +54,10 @@
               ]
             },
             {
-              "label": "Contextual Understanding",
-              "concept": "hint:SituationalAwarenessCapability",
+              "label": "Perception Capability",
+              "concept": "hint:SensingCapability",
               "allows_tasks": [
-                "Assess Task Difficulty"
+                "Evaluate Face Pair"
               ]
             }
           ]
@@ -65,7 +65,7 @@
       ],
       "artificial_agents": [
         {
-          "label": "Face Matching AI",
+          "label": "Face Matching System",
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
@@ -79,7 +79,7 @@
               "label": "Accuracy Reporting",
               "concept": "hint:ReportingCapability",
               "allows_tasks": [
-                "Notify Accuracy Change"
+                "Provide Matching Suggestion"
               ]
             }
           ]
@@ -95,30 +95,16 @@
             "label": "Evaluate Face Pair",
             "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
+              "hint:SensingCapability",
               "hint:ReasoningCapability"
             ],
             "sub_tasks": []
           },
           {
             "label": "Provide Matching Suggestion",
-            "task_concept": "hint:QuestionAnsweringTask",
-            "required_capabilities": [
-              "hint:PatternLearningCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Assess Task Difficulty",
-            "task_concept": "hint:SituationalAssessmentTask",
-            "required_capabilities": [
-              "hint:SituationalAwarenessCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Notify Accuracy Change",
             "task_concept": "hint:ExplanationTask",
             "required_capabilities": [
+              "hint:PatternLearningCapability",
               "hint:ReportingCapability"
             ],
             "sub_tasks": []
@@ -128,12 +114,12 @@
     ],
     "interactions": [
       {
-        "label": "AI Suggestion Notification",
+        "label": "Human-Machine Decision Interaction",
         "modality_concept": "hint:DashboardModality",
         "intent_concept": "hint:ExplanationIntent",
         "agents_involved": [
-          "Human Operator",
-          "Face Matching AI"
+          "Human Annotator",
+          "Face Matching System"
         ]
       }
     ],
@@ -141,18 +127,18 @@
       {
         "label": "Human Evaluates Face Pair",
         "task_label": "Evaluate Face Pair",
-        "performed_by": "Human Operator",
-        "method_concept": "hint:ArgumentationReasoningMethod"
+        "performed_by": "Human Annotator",
+        "method_concept": "hint:DataCollectionMethod"
       },
       {
-        "label": "AI Provides Suggestion",
+        "label": "System Provides Suggestion",
         "task_label": "Provide Matching Suggestion",
-        "performed_by": "Face Matching AI",
+        "performed_by": "Face Matching System",
         "method_concept": "hint:PatternLearningCapability"
       }
     ],
     "evaluation": {
-      "label": "Face Matching Evaluation",
+      "label": "Face Matching System Evaluation",
       "evaluation_concepts": [
         "hint:AIInterventionImpactEvaluation"
       ],
@@ -162,16 +148,24 @@
       ],
       "experiments": [
         {
-          "label": "Accuracy Impact Experiment",
+          "label": "Impact of Machine Accuracy on Human Performance",
           "experiment_concept": "hint:DeliberationSupportExperiment",
           "metrics_tested": [
             "hint:TaskSuccessRateMetric"
           ],
-          "null_hypothesis": "AI support does not improve human accuracy.",
-          "alternative_hypothesis": "AI support improves human accuracy."
+          "null_hypothesis": "Machine accuracy does not affect human performance.",
+          "alternative_hypothesis": "Machine accuracy affects human performance."
         }
       ]
     }
   },
-  "new_concepts": []
+  "new_concepts": [
+    {
+      "uri": "hint:FaceMatchingContext",
+      "label": "Face Matching Context",
+      "definition": "A context where human operators use decision support systems to match faces.",
+      "broader": "hint:JuryDeliberationContext",
+      "category": "Context"
+    }
+  ]
 }

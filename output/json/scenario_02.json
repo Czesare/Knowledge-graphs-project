@@ -4,7 +4,7 @@
   "authors": [],
   "keywords": [
     "neurodegeneration",
-    "protein folding",
+    "protein structure",
     "AI collaboration"
   ],
   "use_case": {
@@ -49,7 +49,7 @@
             },
             {
               "label": "Literature Review",
-              "concept": "hint:SemanticReasoningCapability",
+              "concept": "hint:ReasoningCapability",
               "allows_tasks": [
                 "Cross-reference Literature"
               ]
@@ -71,7 +71,7 @@
             },
             {
               "label": "3D Model Generation",
-              "concept": "hint:MultimodalInterpretationCapability",
+              "concept": "hint:SemanticReasoningCapability",
               "allows_tasks": [
                 "Protein Analysis"
               ]
@@ -97,37 +97,15 @@
             "task_concept": "hint:SymptomAnalysisTask",
             "required_capabilities": [
               "hint:PatternLearningCapability",
-              "hint:MultimodalInterpretationCapability"
+              "hint:SemanticReasoningCapability"
             ],
-            "sub_tasks": [
-              {
-                "label": "Sequence Input",
-                "task_concept": "hint:DataCollectionTask",
-                "required_capabilities": [
-                  "hint:SensingCapability"
-                ]
-              },
-              {
-                "label": "3D Model Generation",
-                "task_concept": "hint:ReconstructTrajectoryTask",
-                "required_capabilities": [
-                  "hint:MultimodalInterpretationCapability"
-                ]
-              },
-              {
-                "label": "Binding Site Identification",
-                "task_concept": "hint:SemanticReasoningTask",
-                "required_capabilities": [
-                  "hint:SemanticReasoningCapability"
-                ]
-              }
-            ]
+            "sub_tasks": []
           },
           {
             "label": "Cross-reference Literature",
             "task_concept": "hint:KnowledgeGraphQueryTask",
             "required_capabilities": [
-              "hint:SemanticReasoningCapability"
+              "hint:ReasoningCapability"
             ],
             "sub_tasks": []
           },
@@ -158,13 +136,13 @@
         "label": "Execute Protein Analysis",
         "task_label": "Protein Analysis",
         "performed_by": "AlphaFold",
-        "method_concept": "hint:KnowledgeGraphQueryMethod"
+        "method_concept": "hint:SemanticEmbeddingMethod"
       },
       {
         "label": "Conduct Literature Review",
         "task_label": "Cross-reference Literature",
         "performed_by": "Dr. Emily Chen",
-        "method_concept": "hint:SemanticLinkingMethod"
+        "method_concept": "hint:ArgumentationReasoningMethod"
       }
     ],
     "evaluation": {
@@ -173,21 +151,29 @@
         "hint:AIInterventionImpactEvaluation"
       ],
       "metric_concepts": [
-        "hint:TaskSuccessRateMetric",
-        "hint:DiagnosisAccuracyMetric"
+        "hint:DiagnosisAccuracyMetric",
+        "hint:TaskSuccessRateMetric"
       ],
       "experiments": [
         {
-          "label": "Protein Structure Prediction Accuracy",
+          "label": "Protein Prediction Accuracy Test",
           "experiment_concept": "hint:DiagnosisExperiment",
           "metrics_tested": [
             "hint:DiagnosisAccuracyMetric"
           ],
-          "null_hypothesis": "AlphaFold predictions do not improve research outcomes.",
-          "alternative_hypothesis": "AlphaFold predictions significantly improve research outcomes."
+          "null_hypothesis": "AlphaFold predictions do not improve diagnosis accuracy.",
+          "alternative_hypothesis": "AlphaFold predictions improve diagnosis accuracy."
         }
       ]
     }
   },
-  "new_concepts": []
+  "new_concepts": [
+    {
+      "uri": "hint:ProteinAnalysisTask",
+      "label": "Protein Analysis Task",
+      "definition": "Task involving the analysis of protein structures for therapeutic potential.",
+      "broader": "hint:SymptomAnalysisTask",
+      "category": "Task"
+    }
+  ]
 }

@@ -130,11 +130,12 @@ def main():
             target = arg
 
     # Check API key
-    if OPENAI_API_KEY == "YOUR_API_KEY_HERE":
-        print("ERROR: Set your OpenAI API key in src/config.py")
+    api_key = OPENAI_API_KEY.strip()
+    if not api_key:
+        print("ERROR: Set the OPENAI_API_KEY environment variable before running 02_extract_metadata.py")
         sys.exit(1)
 
-    client = OpenAI(api_key=OPENAI_API_KEY)
+    client = OpenAI(api_key=api_key)
     prompt_template = load_prompt_template()
 
     # Find text files to process

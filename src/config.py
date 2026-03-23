@@ -2,6 +2,7 @@
 Pipeline configuration.
 Edit the paths and API settings here before running.
 """
+import os
 from pathlib import Path
 
 # ── Directory layout ──────────────────────────────────────────
@@ -27,7 +28,7 @@ MERGED_KG_FILE = OUTPUT_DIR / "merged_kg.ttl"
 EXTERNAL_LINKS_FILE = OUTPUT_DIR / "external_links.ttl"
 
 # ── OpenAI API settings ──────────────────────────────────────
-OPENAI_API_KEY = ""  # <-- PUT YOUR KEY HERE
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 OPENAI_MODEL = "gpt-4o"               # good balance of quality/cost
 OPENAI_MAX_TOKENS = 4096
 OPENAI_TEMPERATURE = 0.1              # low temp for consistent structured output

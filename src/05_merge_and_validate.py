@@ -9,6 +9,7 @@ Merges: ontology + extensions + thesaurus + thesaurus extensions +
 
 Also runs basic validation checks.
 """
+import json
 import sys
 from pathlib import Path
 
@@ -28,11 +29,22 @@ from config import (
 HI = Namespace(HI_NS)
 HINT = Namespace(HINT_NS)
 INST = Namespace(INST_NS)
+AUDIT_DIR = OUTPUT_DIR / "audit"
+INSTANCE_AUDIT_SUMMARY = AUDIT_DIR / "instance_generation_summary.json"
+EXTERNAL_LINK_AUDIT_SUMMARY = AUDIT_DIR / "external_linking_summary.json"
+MERGE_AUDIT_SUMMARY = AUDIT_DIR / "merge_validation_summary.json"
 
 
 def count_by_type(g: Graph, rdf_type) -> int:
     """Count instances of a given RDF type."""
     return len(list(g.subjects(RDF.type, rdf_type)))
+
+
+def load_audit_summary(path: Path) -> dict | None:
+    """Load a JSON audit file if it exists."""
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def validate_teams(g: Graph) -> list[str]:
@@ -200,6 +212,43 @@ def main():
     print(f"    rdfs:seeAlso:     {see_also}")
     print(f"    TOTAL:            {same_as + close_match + related_match + see_also}")
 
+    # ── Repair / provenance audit ─────────────────────────────
+    instance_audit = load_audit_summary(INSTANCE_AUDIT_SUMMARY)
+    external_audit = load_audit_summary(EXTERNAL_LINK_AUDIT_SUMMARY)
+
+    print("\n=== Repair / Provenance Audit ===")
+    if instance_audit:
+        totals = instance_audit.get("totals", {})
+        extracted = totals.get("extracted_link_counts", {})
+        repaired = totals.get("repair_link_counts", {})
+        unresolved = totals.get("unresolved_counts", {})
+
+        print("  Instance-generation link counts:")
+        for label, counts in [
+            ("extracted", extracted),
+            ("repaired", repaired),
+            ("unresolved", unresolved),
+        ]:
+            print(f"    {label}:")
+            if counts:
+                for key, value in sorted(counts.items()):
+                    print(f"      - {key}: {value}")
+            else:
+                print("      - none")
+    else:
+        print("  Instance-generation audit summary not found.")
+
+    if external_audit:
+        print("  External-link audit:")
+        print(f"    linked actions: {external_audit.get('linked_actions', 0)}")
+        print(f"    unresolved actions: {external_audit.get('unresolved_actions', 0)}")
+        for key, value in sorted(external_audit.get("linked_counts_by_category", {}).items()):
+            print(f"      - linked {key}: {value}")
+        for key, value in sorted(external_audit.get("unresolved_counts_by_category", {}).items()):
+            print(f"      - unresolved {key}: {value}")
+    else:
+        print("  External-link audit summary not found.")
+
     # ── Validation ────────────────────────────────────────────
     print("\n=== Validation ===")
     all_issues = []
@@ -235,6 +284,34 @@ def main():
         print("  ✅ All validation checks passed!")
     elif not errors:
         print(f"\n  ✅ No errors. {len(warnings)} informational warning(s) only.")
+
+    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+    merge_summary = {
+        "triples": total,
+        "graph_counts": {
+            "papers": count_by_type(merged, HI.Paper),
+            "authors": count_by_type(merged, HI.Author),
+            "research_use_cases": count_by_type(merged, HI.ResearchUseCase),
+            "competition_use_cases": count_by_type(merged, HI.CompetitionUseCase),
+            "task_executions": count_by_type(merged, HI.TaskExecution),
+            "evaluations": count_by_type(merged, HI.Evaluation),
+            "experiments": count_by_type(merged, HI.Experiment),
+        },
+        "link_counts": {
+            "owl:sameAs": same_as,
+            "skos:closeMatch": close_match,
+            "skos:relatedMatch": related_match,
+            "rdfs:seeAlso": see_also,
+        },
+        "validation": {
+            "errors": len(errors),
+            "warnings": len(warnings),
+        },
+        "instance_generation_audit": instance_audit.get("totals") if instance_audit else None,
+        "external_link_audit": external_audit,
+    }
+    MERGE_AUDIT_SUMMARY.write_text(json.dumps(merge_summary, indent=2), encoding="utf-8")
+    print(f"  Audit summary written to: {MERGE_AUDIT_SUMMARY}")
 
     # ── Save ──────────────────────────────────────────────────
     MERGED_KG_FILE.parent.mkdir(parents=True, exist_ok=True)

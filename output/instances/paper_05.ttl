@@ -13,24 +13,17 @@ inst:Paper_05 a hi:Paper ;
         inst:Paper_05_Author2,
         inst:Paper_05_Author3,
         inst:Paper_05_Author4 ;
-    hi:hasKeyword inst:Keyword_AdaptiveSystems,
+    hi:hasKeyword inst:Keyword_AutonomousSystems,
         inst:Keyword_EthicalTrust,
         inst:Keyword_HybridAutonomy ;
     hi:hasPublicationYear "2025"^^xsd:gYear ;
     hi:hasTitle "Hybrid Autonomy: Towards a Unified Framework on Adaptability and Ethical Trust in Autonomous Systems"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
 
-inst:Paper_05_Evaluation a hi:Evaluation ;
-    rdfs:label "Trust and Ethical Adaptability Evaluation" ;
-    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
-    hi:hasExperiment inst:Paper_05_Experiment_TrustEvaluationExperiment ;
-    hi:hasMetricConcept hint:TrustPreservationMetric,
-        hint:UserComfortMetric .
-
-inst:Paper_05_Interaction_Patient-robotInteraction a hi:Interaction ;
-    rdfs:label "Patient-Robot Interaction" ;
+inst:Paper_05_Interaction_Robot-patientInteraction a hi:Interaction ;
+    rdfs:label "Robot-Patient Interaction" ;
     hi:hasAgentInvolved inst:Paper_05_AssistiveRobot,
-        inst:Paper_05_Patient ;
+        inst:Paper_05_Caregiver ;
     hi:hasInteractionIntentConcept hint:GuideIntent ;
     hi:hasInteractionModalityConcept hint:VoiceChatModality .
 
@@ -39,9 +32,9 @@ inst:HHAI2025 a hi:Conference ;
     hi:hasConferenceName "HHAI 2025"^^xsd:string ;
     hi:hasConferenceYear "2025"^^xsd:gYear .
 
-inst:Keyword_AdaptiveSystems a skos:Concept ;
+inst:Keyword_AutonomousSystems a skos:Concept ;
     skos:inScheme hint:HIScheme ;
-    skos:prefLabel "Adaptive Systems"@en .
+    skos:prefLabel "Autonomous Systems"@en .
 
 inst:Keyword_EthicalTrust a skos:Concept ;
     skos:inScheme hint:HIScheme ;
@@ -53,23 +46,27 @@ inst:Keyword_HybridAutonomy a skos:Concept ;
 
 inst:Paper_05_Author1 a hi:Author ;
     foaf:name "Beatrice Melis" ;
-    hi:hasAffiliation inst:Affiliation_UniversityOfPisa ;
+    hi:hasAffiliation inst:Affiliation_UniversityOfPisaItaly ;
     hi:hasAuthorName "Beatrice Melis"^^xsd:string .
 
 inst:Paper_05_Author2 a hi:Author ;
     foaf:name "Martina De Sanctis" ;
-    hi:hasAffiliation inst:Affiliation_GranSassoScienceInstitute ;
+    hi:hasAffiliation inst:Affiliation_GranSassoScienceInstituteGssiLaquilaItaly ;
     hi:hasAuthorName "Martina De Sanctis"^^xsd:string .
 
 inst:Paper_05_Author3 a hi:Author ;
     foaf:name "Paola Inverardi" ;
-    hi:hasAffiliation inst:Affiliation_GranSassoScienceInstitute ;
+    hi:hasAffiliation inst:Affiliation_GranSassoScienceInstituteGssiLaquilaItaly ;
     hi:hasAuthorName "Paola Inverardi"^^xsd:string .
 
 inst:Paper_05_Author4 a hi:Author ;
     foaf:name "Alessio Malizia" ;
-    hi:hasAffiliation inst:Affiliation_UniversityOfPisa ;
+    hi:hasAffiliation inst:Affiliation_UniversityOfPisaItaly ;
     hi:hasAuthorName "Alessio Malizia"^^xsd:string .
+
+inst:Paper_05_Caregiver_Cap_FeedbackProvision a hi:Capability ;
+    rdfs:label "Feedback Provision" ;
+    hi:hasCapabilityConcept hint:ReportingCapability .
 
 inst:Paper_05_Context a hi:Context ;
     rdfs:label "Nursing Home Assistance" ;
@@ -80,18 +77,20 @@ inst:Paper_05_Context a hi:Context ;
     hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
         hint:TrustShiftPhenomenon .
 
-inst:Paper_05_Exec_AdjustAutonomyLevel a hi:TaskExecution ;
-    rdfs:label "Adjust Autonomy Level" ;
+inst:Paper_05_Exec_AutonomyAdjustmentExecution a hi:TaskExecution ;
+    rdfs:label "Autonomy Adjustment Execution" ;
+    hi:evaluatedBy inst:Paper_05_Evaluation ;
     hi:hasMethodConcept hint:ReinforcementLearningMethod ;
-    hi:realizesTask inst:Paper_05_Task_AutonomyAdjustment .
+    hi:realizesTask inst:Paper_05_Task_AdjustAutonomyLevel .
 
-inst:Paper_05_Exec_ExecuteHygieneTask a hi:TaskExecution ;
-    rdfs:label "Execute Hygiene Task" ;
+inst:Paper_05_Exec_HygieneTaskExecution a hi:TaskExecution ;
+    rdfs:label "Hygiene Task Execution" ;
+    hi:evaluatedBy inst:Paper_05_Evaluation ;
     hi:hasMethodConcept hint:DataCollectionMethod ;
-    hi:realizesTask inst:Paper_05_Task_HygieneAssistance .
+    hi:realizesTask inst:Paper_05_Task_PerformHygieneTasks .
 
-inst:Paper_05_Experiment_TrustEvaluationExperiment a hi:Experiment ;
-    rdfs:label "Trust Evaluation Experiment" ;
+inst:Paper_05_Experiment_TrustAdaptabilityExperiment a hi:Experiment ;
+    rdfs:label "Trust Adaptability Experiment" ;
     hi:hasAlternativeHypothesis "Adaptive autonomy positively affects trust levels."^^xsd:string ;
     hi:hasExperimentConcept hint:TransparencyTrustExperiment ;
     hi:hasMetricTested hint:TrustPreservationMetric ;
@@ -100,99 +99,90 @@ inst:Paper_05_Experiment_TrustEvaluationExperiment a hi:Experiment ;
 inst:Paper_05_Goal_RespectPatientPreferences a hi:Goal ;
     rdfs:label "Respect Patient Preferences" ;
     hi:hasGoalConcept hint:UserWellbeingGoal ;
-    hi:requiresTask inst:Paper_05_Task_AutonomyAdjustment,
-        inst:Paper_05_Task_HygieneAssistance,
-        inst:Paper_05_Task_MonitorPatientState,
-        inst:Paper_05_Task_PreferenceCommunication,
-        inst:Paper_05_Task_ProvideInstructions .
-
-inst:Paper_05_Patient_Cap_FeedbackProvision a hi:Capability ;
-    rdfs:label "Feedback Provision" ;
-    hi:hasCapabilityConcept hint:RecommendationRationaleFeedback .
+    hi:requiresTask inst:Paper_05_Task_AdjustAutonomyLevel,
+        inst:Paper_05_Task_GuidePatient,
+        inst:Paper_05_Task_MonitorPatientAutonomy,
+        inst:Paper_05_Task_PerformHygieneTasks .
 
 inst:Paper_05_UseCase a hi:ResearchUseCase ;
-    rdfs:label "Adaptive Autonomy in Care Robots" ;
+    rdfs:label "Adaptive Autonomy in Nursing Home" ;
     hi:hasDomainConcept hint:HealthAndLifestyleDomain ;
     hi:hasHITeam inst:Paper_05_Team .
 
-inst:Affiliation_GranSassoScienceInstitute a hi:Affiliation ;
-    rdfs:label "Gran Sasso Science Institute" ;
-    schema1:name "Gran Sasso Science Institute" .
+inst:Affiliation_GranSassoScienceInstituteGssiLaquilaItaly a hi:Affiliation ;
+    rdfs:label "Gran Sasso Science Institute (GSSI), L’Aquila, Italy" ;
+    schema1:name "Gran Sasso Science Institute (GSSI), L’Aquila, Italy" .
 
-inst:Affiliation_UniversityOfPisa a hi:Affiliation ;
-    rdfs:label "University of Pisa" ;
-    schema1:name "University of Pisa" .
+inst:Affiliation_UniversityOfPisaItaly a hi:Affiliation ;
+    rdfs:label "University of Pisa, Italy" ;
+    schema1:name "University of Pisa, Italy" .
 
 inst:Paper_05_AssistiveRobot a hi:ArtificialAgent ;
     rdfs:label "Assistive Robot" ;
     hi:hasCapability inst:Paper_05_AssistiveRobot_Cap_AdaptiveAutonomy,
-        inst:Paper_05_AssistiveRobot_Cap_SituationalAwareness,
         inst:Paper_05_AssistiveRobot_Cap_TaskExecution,
         inst:Paper_05_AssistiveRobot_Cap_VerbalGuidance ;
     hi:hasRoleConcept hint:AIAssistantRole ;
-    hi:performsExecution inst:Paper_05_Exec_AdjustAutonomyLevel,
-        inst:Paper_05_Exec_ExecuteHygieneTask .
+    hi:performsExecution inst:Paper_05_Exec_AutonomyAdjustmentExecution,
+        inst:Paper_05_Exec_HygieneTaskExecution .
 
 inst:Paper_05_AssistiveRobot_Cap_AdaptiveAutonomy a hi:Capability ;
     rdfs:label "Adaptive Autonomy" ;
-    hi:allowsTask inst:Paper_05_Task_AutonomyAdjustment ;
+    hi:allowsTask inst:Paper_05_Task_AdjustAutonomyLevel ;
     hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
-
-inst:Paper_05_AssistiveRobot_Cap_SituationalAwareness a hi:Capability ;
-    rdfs:label "Situational Awareness" ;
-    hi:allowsTask inst:Paper_05_Task_MonitorPatientState ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
 
 inst:Paper_05_AssistiveRobot_Cap_TaskExecution a hi:Capability ;
     rdfs:label "Task Execution" ;
-    hi:allowsTask inst:Paper_05_Task_HygieneAssistance ;
+    hi:allowsTask inst:Paper_05_Task_PerformHygieneTasks ;
     hi:hasCapabilityConcept hint:FineDexterityCapability .
 
 inst:Paper_05_AssistiveRobot_Cap_VerbalGuidance a hi:Capability ;
     rdfs:label "Verbal Guidance" ;
-    hi:allowsTask inst:Paper_05_Task_ProvideInstructions ;
+    hi:allowsTask inst:Paper_05_Task_GuidePatient ;
     hi:hasCapabilityConcept hint:ExplainingCapability .
 
-inst:Paper_05_Patient a hi:HumanAgent ;
-    rdfs:label "Patient" ;
-    hi:hasCapability inst:Paper_05_Patient_Cap_FeedbackProvision,
-        inst:Paper_05_Patient_Cap_ProvidePreferences ;
+inst:Paper_05_Caregiver a hi:HumanAgent ;
+    rdfs:label "Caregiver" ;
+    hi:hasCapability inst:Paper_05_Caregiver_Cap_EthicalOversight,
+        inst:Paper_05_Caregiver_Cap_FeedbackProvision ;
     hi:hasRoleConcept hint:HumanUserRole .
 
-inst:Paper_05_Patient_Cap_ProvidePreferences a hi:Capability ;
-    rdfs:label "Provide Preferences" ;
-    hi:allowsTask inst:Paper_05_Task_PreferenceCommunication ;
-    hi:hasCapabilityConcept hint:SelfReportingCapability .
+inst:Paper_05_Caregiver_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:allowsTask inst:Paper_05_Task_MonitorPatientAutonomy ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
 
-inst:Paper_05_Task_MonitorPatientState a hi:Task ;
-    rdfs:label "Monitor Patient State" ;
-    hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_SituationalAwareness .
+inst:Paper_05_Evaluation a hi:Evaluation ;
+    rdfs:label "Trust and Ethical Adaptability Evaluation" ;
+    hi:hasEvaluationConcept hint:TransparencyEvaluation ;
+    hi:hasExperiment inst:Paper_05_Experiment_TrustAdaptabilityExperiment ;
+    hi:hasMetricConcept hint:TrustPreservationMetric,
+        hint:UserComfortMetric .
 
-inst:Paper_05_Task_PreferenceCommunication a hi:Task ;
-    rdfs:label "Preference Communication" ;
-    hi:hasTaskConcept hint:ProvideStatementTask ;
-    hi:requiresCapability inst:Paper_05_Patient_Cap_ProvidePreferences .
-
-inst:Paper_05_Task_ProvideInstructions a hi:Task ;
-    rdfs:label "Provide Instructions" ;
+inst:Paper_05_Task_GuidePatient a hi:Task ;
+    rdfs:label "Guide Patient" ;
     hi:hasTaskConcept hint:ExplanationTask ;
     hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_VerbalGuidance .
 
+inst:Paper_05_Task_MonitorPatientAutonomy a hi:Task ;
+    rdfs:label "Monitor Patient Autonomy" ;
+    hi:hasTaskConcept hint:SituationalAssessmentTask ;
+    hi:requiresCapability inst:Paper_05_Caregiver_Cap_EthicalOversight .
+
 inst:Paper_05_Team a hi:HITeam ;
-    rdfs:label "Adaptive Autonomy in Care Robots Team" ;
+    rdfs:label "Adaptive Autonomy in Nursing Home Team" ;
     hi:hasGoal inst:Paper_05_Goal_RespectPatientPreferences ;
     hi:hasMember inst:Paper_05_AssistiveRobot,
-        inst:Paper_05_Patient ;
+        inst:Paper_05_Caregiver ;
     hi:isInfluencedBy inst:Paper_05_Context .
 
-inst:Paper_05_Task_AutonomyAdjustment a hi:Task ;
-    rdfs:label "Autonomy Adjustment" ;
+inst:Paper_05_Task_AdjustAutonomyLevel a hi:Task ;
+    rdfs:label "Adjust Autonomy Level" ;
     hi:hasTaskConcept hint:DecideInterventionTask ;
     hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_AdaptiveAutonomy .
 
-inst:Paper_05_Task_HygieneAssistance a hi:Task ;
-    rdfs:label "Hygiene Assistance" ;
+inst:Paper_05_Task_PerformHygieneTasks a hi:Task ;
+    rdfs:label "Perform Hygiene Tasks" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
     hi:requiresCapability inst:Paper_05_AssistiveRobot_Cap_TaskExecution .
 

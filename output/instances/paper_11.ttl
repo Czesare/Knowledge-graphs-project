@@ -1,0 +1,190 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+inst:Paper_11 a hi:Paper ;
+    hi:describesUseCase inst:Paper_11_UseCase ;
+    hi:hasAuthor inst:Paper_11_Author1 ;
+    hi:hasKeyword inst:Keyword_Decision-support,
+        inst:Keyword_EmergencyResponse,
+        inst:Keyword_ResponsibleHuman-aiCooperation,
+        inst:Keyword_Value-sensitiveDesign ;
+    hi:hasPublicationYear "2025"^^xsd:gYear ;
+    hi:hasTitle "Supporting Responsible Human-AI Cooperation for Emergency Responders"^^xsd:string ;
+    hi:publishedAt inst:HHAI2025 .
+
+inst:Paper_11_Interaction_AiToHumanExplanation a hi:Interaction ;
+    rdfs:label "AI to Human Explanation" ;
+    hi:hasAgentInvolved inst:Paper_11_AiDecisionSupportSystem,
+        inst:Paper_11_EmergencyResponder ;
+    hi:hasInteractionIntentConcept hint:ExplanationIntent ;
+    hi:hasInteractionModalityConcept hint:DashboardModality .
+
+inst:Affiliation_UniversityOfAppliedSciencesUtrecht a hi:Affiliation ;
+    rdfs:label "University of Applied Sciences Utrecht" ;
+    schema1:name "University of Applied Sciences Utrecht" .
+
+inst:HHAI2025 a hi:Conference ;
+    rdfs:label "HHAI 2025" ;
+    hi:hasConferenceName "HHAI 2025"^^xsd:string ;
+    hi:hasConferenceYear "2025"^^xsd:gYear .
+
+inst:Keyword_Decision-support a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Decision-support"@en .
+
+inst:Keyword_EmergencyResponse a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Emergency response"@en .
+
+inst:Keyword_ResponsibleHuman-aiCooperation a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Responsible Human-AI cooperation"@en .
+
+inst:Keyword_Value-sensitiveDesign a skos:Concept ;
+    skos:inScheme hint:HIScheme ;
+    skos:prefLabel "Value-sensitive design"@en .
+
+inst:Paper_11_AiDecisionSupportSystem_Cap_DataAnalysis a hi:Capability ;
+    rdfs:label "Data Analysis" ;
+    hi:hasCapabilityConcept hint:MetaAnalysisCapability .
+
+inst:Paper_11_Author1 a hi:Author ;
+    foaf:name "Tina Mioch" ;
+    hi:hasAffiliation inst:Affiliation_UniversityOfAppliedSciencesUtrecht ;
+    hi:hasAuthorName "Tina Mioch"^^xsd:string .
+
+inst:Paper_11_Context a hi:Context ;
+    rdfs:label "Emergency Response Context" ;
+    hi:hasConstraintConcept hint:EthicalConstraint,
+        hint:PrivacyConstraint ;
+    hi:hasContextConcept hint:WorkspaceManipulationContext ;
+    hi:hasInfluenceOn inst:Paper_11_Team ;
+    hi:hasPhenomenonConcept hint:SkillsComplementarityPhenomenon,
+        hint:TrustShiftPhenomenon .
+
+inst:Paper_11_Exec_IncidentPredictionExecution a hi:TaskExecution ;
+    rdfs:label "Incident Prediction Execution" ;
+    hi:evaluatedBy inst:Paper_11_Evaluation ;
+    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
+    hi:realizesTask inst:Paper_11_Task_PredictIncidentDevelopment .
+
+inst:Paper_11_Exec_InterventionDecisionExecution a hi:TaskExecution ;
+    rdfs:label "Intervention Decision Execution" ;
+    hi:evaluatedBy inst:Paper_11_Evaluation ;
+    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
+    hi:realizesTask inst:Paper_11_Task_DecideIntervention .
+
+inst:Paper_11_Exec_SituationAssessmentExecution a hi:TaskExecution ;
+    rdfs:label "Situation Assessment Execution" ;
+    hi:evaluatedBy inst:Paper_11_Evaluation ;
+    hi:hasMethodConcept hint:DataCollectionMethod ;
+    hi:realizesTask inst:Paper_11_Task_AssessSituation .
+
+inst:Paper_11_Experiment_CooperationEffectivenessExperiment a hi:Experiment ;
+    rdfs:label "Cooperation Effectiveness Experiment" ;
+    hi:hasAlternativeHypothesis "AI improves decision-making success rate."^^xsd:string ;
+    hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
+    hi:hasMetricTested hint:TaskSuccessRateMetric ;
+    hi:hasNullHypothesis "AI does not improve decision-making success rate."^^xsd:string .
+
+inst:Paper_11_Goal_EnhanceDecisionMaking a hi:Goal ;
+    rdfs:label "Enhance Decision Making" ;
+    hi:hasGoalConcept hint:UserWellbeingGoal ;
+    hi:requiresTask inst:Paper_11_Task_AssessSituation,
+        inst:Paper_11_Task_DecideIntervention,
+        inst:Paper_11_Task_EvaluateAiRecommendations,
+        inst:Paper_11_Task_MonitorErSafety,
+        inst:Paper_11_Task_PredictIncidentDevelopment .
+
+inst:Paper_11_UseCase a hi:ResearchUseCase ;
+    rdfs:label "Emergency Response Decision Support" ;
+    hi:hasDomainConcept hint:IndustrialAndServiceRoboticsDomain ;
+    hi:hasHITeam inst:Paper_11_Team .
+
+inst:Paper_11_AiDecisionSupportSystem a hi:ArtificialAgent ;
+    rdfs:label "AI Decision Support System" ;
+    hi:hasCapability inst:Paper_11_AiDecisionSupportSystem_Cap_DataAnalysis,
+        inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition,
+        inst:Paper_11_AiDecisionSupportSystem_Cap_Real-timeMonitoring ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_11_Exec_IncidentPredictionExecution .
+
+inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition a hi:Capability ;
+    rdfs:label "Pattern Recognition" ;
+    hi:allowsTask inst:Paper_11_Task_PredictIncidentDevelopment ;
+    hi:hasCapabilityConcept hint:PatternLearningCapability .
+
+inst:Paper_11_AiDecisionSupportSystem_Cap_Real-timeMonitoring a hi:Capability ;
+    rdfs:label "Real-time Monitoring" ;
+    hi:allowsTask inst:Paper_11_Task_MonitorErSafety ;
+    hi:hasCapabilityConcept hint:SensingCapability .
+
+inst:Paper_11_EmergencyResponder a hi:HumanAgent ;
+    rdfs:label "Emergency Responder" ;
+    hi:hasCapability inst:Paper_11_EmergencyResponder_Cap_DecisionMaking,
+        inst:Paper_11_EmergencyResponder_Cap_EthicalOversight,
+        inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness ;
+    hi:hasRoleConcept hint:HumanUserRole ;
+    hi:performsExecution inst:Paper_11_Exec_InterventionDecisionExecution,
+        inst:Paper_11_Exec_SituationAssessmentExecution .
+
+inst:Paper_11_EmergencyResponder_Cap_DecisionMaking a hi:Capability ;
+    rdfs:label "Decision Making" ;
+    hi:allowsTask inst:Paper_11_Task_DecideIntervention ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_11_EmergencyResponder_Cap_EthicalOversight a hi:Capability ;
+    rdfs:label "Ethical Oversight" ;
+    hi:allowsTask inst:Paper_11_Task_EvaluateAiRecommendations ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+
+inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness a hi:Capability ;
+    rdfs:label "Situational Awareness" ;
+    hi:allowsTask inst:Paper_11_Task_AssessSituation ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
+inst:Paper_11_Task_EvaluateAiRecommendations a hi:Task ;
+    rdfs:label "Evaluate AI Recommendations" ;
+    hi:hasTaskConcept hint:ExplanationTask ;
+    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_EthicalOversight .
+
+inst:Paper_11_Task_MonitorErSafety a hi:Task ;
+    rdfs:label "Monitor ER Safety" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_11_AiDecisionSupportSystem_Cap_Real-timeMonitoring .
+
+inst:Paper_11_Team a hi:HITeam ;
+    rdfs:label "Emergency Response Decision Support Team" ;
+    hi:hasGoal inst:Paper_11_Goal_EnhanceDecisionMaking ;
+    hi:hasMember inst:Paper_11_AiDecisionSupportSystem,
+        inst:Paper_11_EmergencyResponder ;
+    hi:isInfluencedBy inst:Paper_11_Context .
+
+inst:Paper_11_Evaluation a hi:Evaluation ;
+    rdfs:label "Evaluation of ER-AI Cooperation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_11_Experiment_CooperationEffectivenessExperiment ;
+    hi:hasMetricConcept hint:TaskSuccessRateMetric,
+        hint:TrustPreservationMetric .
+
+inst:Paper_11_Task_AssessSituation a hi:Task ;
+    rdfs:label "Assess Situation" ;
+    hi:hasTaskConcept hint:SituationalAssessmentTask ;
+    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness .
+
+inst:Paper_11_Task_DecideIntervention a hi:Task ;
+    rdfs:label "Decide Intervention" ;
+    hi:hasTaskConcept hint:DecideInterventionTask ;
+    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_DecisionMaking .
+
+inst:Paper_11_Task_PredictIncidentDevelopment a hi:Task ;
+    rdfs:label "Predict Incident Development" ;
+    hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
+    hi:requiresCapability inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition .
+

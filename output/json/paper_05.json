@@ -4,28 +4,28 @@
   "authors": [
     {
       "name": "Beatrice Melis",
-      "affiliation": "University of Pisa"
+      "affiliation": "University of Pisa, Italy"
     },
     {
       "name": "Martina De Sanctis",
-      "affiliation": "Gran Sasso Science Institute"
+      "affiliation": "Gran Sasso Science Institute (GSSI), L’Aquila, Italy"
     },
     {
       "name": "Paola Inverardi",
-      "affiliation": "Gran Sasso Science Institute"
+      "affiliation": "Gran Sasso Science Institute (GSSI), L’Aquila, Italy"
     },
     {
       "name": "Alessio Malizia",
-      "affiliation": "University of Pisa"
+      "affiliation": "University of Pisa, Italy"
     }
   ],
   "keywords": [
     "Hybrid Autonomy",
     "Ethical Trust",
-    "Adaptive Systems"
+    "Autonomous Systems"
   ],
   "use_case": {
-    "label": "Adaptive Autonomy in Care Robots",
+    "label": "Adaptive Autonomy in Nursing Home",
     "type": "research",
     "domain_concepts": [
       "hint:HealthAndLifestyleDomain"
@@ -47,21 +47,21 @@
     "team": {
       "human_agents": [
         {
-          "label": "Patient",
+          "label": "Caregiver",
           "role_concept": "hint:HumanUserRole",
           "capabilities": [
             {
-              "label": "Provide Preferences",
-              "concept": "hint:SelfReportingCapability",
+              "label": "Ethical Oversight",
+              "concept": "hint:ClinicalJudgmentCapability",
               "allows_tasks": [
-                "Preference Communication"
+                "Monitor Patient Autonomy"
               ]
             },
             {
               "label": "Feedback Provision",
-              "concept": "hint:RecommendationRationaleFeedback",
+              "concept": "hint:ReportingCapability",
               "allows_tasks": [
-                "Provide Feedback"
+                "Provide Feedback to Robot"
               ]
             }
           ]
@@ -76,28 +76,21 @@
               "label": "Adaptive Autonomy",
               "concept": "hint:ReinforcementLearningCapability",
               "allows_tasks": [
-                "Autonomy Adjustment"
-              ]
-            },
-            {
-              "label": "Task Execution",
-              "concept": "hint:FineDexterityCapability",
-              "allows_tasks": [
-                "Hygiene Assistance"
+                "Adjust Autonomy Level"
               ]
             },
             {
               "label": "Verbal Guidance",
               "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Provide Instructions"
+                "Guide Patient"
               ]
             },
             {
-              "label": "Situational Awareness",
-              "concept": "hint:SituationalAwarenessCapability",
+              "label": "Task Execution",
+              "concept": "hint:FineDexterityCapability",
               "allows_tasks": [
-                "Monitor Patient State"
+                "Perform Hygiene Tasks"
               ]
             }
           ]
@@ -110,15 +103,15 @@
         "goal_concept": "hint:UserWellbeingGoal",
         "tasks": [
           {
-            "label": "Preference Communication",
-            "task_concept": "hint:ProvideStatementTask",
+            "label": "Monitor Patient Autonomy",
+            "task_concept": "hint:SituationalAssessmentTask",
             "required_capabilities": [
-              "hint:SelfReportingCapability"
+              "hint:ClinicalJudgmentCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Autonomy Adjustment",
+            "label": "Adjust Autonomy Level",
             "task_concept": "hint:DecideInterventionTask",
             "required_capabilities": [
               "hint:ReinforcementLearningCapability"
@@ -126,15 +119,7 @@
             "sub_tasks": []
           },
           {
-            "label": "Hygiene Assistance",
-            "task_concept": "hint:DataCollectionTask",
-            "required_capabilities": [
-              "hint:FineDexterityCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Provide Instructions",
+            "label": "Guide Patient",
             "task_concept": "hint:ExplanationTask",
             "required_capabilities": [
               "hint:ExplainingCapability"
@@ -142,10 +127,10 @@
             "sub_tasks": []
           },
           {
-            "label": "Monitor Patient State",
-            "task_concept": "hint:SituationalAssessmentTask",
+            "label": "Perform Hygiene Tasks",
+            "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
-              "hint:SituationalAwarenessCapability"
+              "hint:FineDexterityCapability"
             ],
             "sub_tasks": []
           }
@@ -154,33 +139,33 @@
     ],
     "interactions": [
       {
-        "label": "Patient-Robot Interaction",
+        "label": "Robot-Patient Interaction",
         "modality_concept": "hint:VoiceChatModality",
         "intent_concept": "hint:GuideIntent",
         "agents_involved": [
-          "Patient",
-          "Assistive Robot"
+          "Assistive Robot",
+          "Caregiver"
         ]
       }
     ],
     "task_executions": [
       {
-        "label": "Execute Hygiene Task",
-        "task_label": "Hygiene Assistance",
-        "performed_by": "Assistive Robot",
-        "method_concept": "hint:DataCollectionMethod"
-      },
-      {
-        "label": "Adjust Autonomy Level",
-        "task_label": "Autonomy Adjustment",
+        "label": "Autonomy Adjustment Execution",
+        "task_label": "Adjust Autonomy Level",
         "performed_by": "Assistive Robot",
         "method_concept": "hint:ReinforcementLearningMethod"
+      },
+      {
+        "label": "Hygiene Task Execution",
+        "task_label": "Perform Hygiene Tasks",
+        "performed_by": "Assistive Robot",
+        "method_concept": "hint:DataCollectionMethod"
       }
     ],
     "evaluation": {
       "label": "Trust and Ethical Adaptability Evaluation",
       "evaluation_concepts": [
-        "hint:AIInterventionImpactEvaluation"
+        "hint:TransparencyEvaluation"
       ],
       "metric_concepts": [
         "hint:TrustPreservationMetric",
@@ -188,7 +173,7 @@
       ],
       "experiments": [
         {
-          "label": "Trust Evaluation Experiment",
+          "label": "Trust Adaptability Experiment",
           "experiment_concept": "hint:TransparencyTrustExperiment",
           "metrics_tested": [
             "hint:TrustPreservationMetric"
@@ -203,7 +188,7 @@
     {
       "uri": "hint:AdaptiveAutonomyCapability",
       "label": "Adaptive Autonomy Capability",
-      "definition": "The ability of a system to adjust its level of autonomy based on user preferences and contextual factors.",
+      "definition": "The ability of a system to dynamically adjust its level of autonomy based on contextual and user-specific factors.",
       "broader": "hint:ReinforcementLearningCapability",
       "category": "Capability"
     }

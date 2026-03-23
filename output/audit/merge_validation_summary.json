@@ -1,0 +1,59 @@
+{
+  "triples": 3819,
+  "graph_counts": {
+    "papers": 11,
+    "authors": 36,
+    "research_use_cases": 11,
+    "competition_use_cases": 3,
+    "task_executions": 31,
+    "evaluations": 14,
+    "experiments": 14
+  },
+  "link_counts": {
+    "owl:sameAs": 17,
+    "skos:closeMatch": 83,
+    "skos:relatedMatch": 53,
+    "rdfs:seeAlso": 65
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "instance_generation_audit": {
+    "extracted_link_counts": {
+      "task_requiresCapability_direct_concept": 46,
+      "execution_realizesTask_direct_label": 30
+    },
+    "repair_link_counts": {
+      "task_requiresCapability_fallback_first_capability": 5,
+      "execution_realizesTask_fallback_first_task": 1
+    },
+    "unresolved_counts": {
+      "task_requiresCapability_unmatched": 5,
+      "execution_realizesTask_unmatched": 1
+    },
+    "new_concepts_proposed": 15
+  },
+  "external_link_audit": {
+    "total_actions": 258,
+    "linked_actions": 218,
+    "unresolved_actions": 40,
+    "total_link_triples_written": 218,
+    "linked_counts_by_category": {
+      "static_concept_mapping": 201,
+      "manual_instance_link": 1,
+      "affiliation_wikidata": 8,
+      "author_wikidata": 8
+    },
+    "unresolved_counts_by_category": {
+      "author_wikidata": 28,
+      "affiliation_wikidata": 12
+    },
+    "predicate_counts": {
+      "skos:closeMatch": 83,
+      "rdfs:seeAlso": 65,
+      "skos:relatedMatch": 53,
+      "owl:sameAs": 17
+    }
+  }
+}

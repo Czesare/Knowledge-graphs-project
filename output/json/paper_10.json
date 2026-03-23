@@ -18,54 +18,43 @@
     "robotics"
   ],
   "use_case": {
-    "label": "Cultural Heritage & Craftsmanship Preservation",
+    "label": "Cultural Heritage Preservation",
     "type": "research",
     "domain_concepts": [
       "hint:DigitalMuseumDomain"
     ],
     "context": {
-      "label": "Archival footage training context",
+      "label": "Cultural Preservation Context",
       "context_concepts": [
         "hint:VirtualExhibitionContext"
       ],
       "constraint_concepts": [
         "hint:EthicalConstraint",
-        "hint:PrivacyConstraint",
-        "hint:AutonomyConstraint"
+        "hint:PrivacyConstraint"
       ],
       "phenomenon_concepts": [
-        "hint:SkillsComplementarityPhenomenon",
         "hint:TrustShiftPhenomenon",
-        "hint:RiskExposurePhenomenon"
+        "hint:KnowledgeMismatchPhenomenon"
       ]
     },
     "team": {
       "human_agents": [
         {
-          "label": "Cultural Heritage Steward",
-          "role_concept": "hint:BuilderRole",
+          "label": "Cultural Expert",
+          "role_concept": "hint:HumanUserRole",
           "capabilities": [
             {
-              "label": "Cultural Stewardship",
-              "concept": "hint:DomainSpecificCapability",
+              "label": "Cultural Judgment",
+              "concept": "hint:ClinicalJudgmentCapability",
               "allows_tasks": [
-                "Archival Footage Collection",
-                "Ethical Data Governance & Consent"
+                "Data Collection Task"
               ]
             },
             {
               "label": "Ethical Oversight",
               "concept": "hint:ReasoningCapability",
               "allows_tasks": [
-                "Assess risks of misuse/misappropriation",
-                "Approve data sharing rules"
-              ]
-            },
-            {
-              "label": "Negotiation",
-              "concept": "hint:NegotiationCapability",
-              "allows_tasks": [
-                "Negotiate rights, consent, and access rules"
+                "Ethical Data Governance"
               ]
             }
           ]
@@ -73,36 +62,28 @@
       ],
       "artificial_agents": [
         {
-          "label": "Archival Footage AI System",
+          "label": "AI System",
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
-              "label": "Multimodal Understanding (Video)",
-              "concept": "hint:MultimodalInterpretationCapability",
-              "allows_tasks": [
-                "Video segmentation",
-                "Metadata tagging"
-              ]
-            },
-            {
-              "label": "Perception / Sensing",
-              "concept": "hint:PerceptionSensingCapability",
-              "allows_tasks": [
-                "Depth estimation from video"
-              ]
-            },
-            {
-              "label": "Pattern Learning",
+              "label": "Pattern Recognition",
               "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
-                "Learn patterns of craft processes"
+                "Data Processing"
               ]
             },
             {
-              "label": "Reinforcement Learning",
-              "concept": "hint:ReinforcementLearningCapability",
+              "label": "Depth Perception",
+              "concept": "hint:SensingCapability",
               "allows_tasks": [
-                "Learn from demonstrations for robotic skill"
+                "Depth Perception Enhancement"
+              ]
+            },
+            {
+              "label": "Data Governance",
+              "concept": "hint:SemanticReasoningCapability",
+              "allows_tasks": [
+                "Ethical Data Governance"
               ]
             }
           ]
@@ -111,38 +92,38 @@
     },
     "goals": [
       {
-        "label": "Ethical Preservation of Cultural Heritage",
+        "label": "Preserve Cultural Practices",
         "goal_concept": "hint:EnhancedVisitorGoal",
         "tasks": [
           {
-            "label": "Archival Footage Collection",
+            "label": "Data Collection Task",
             "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
-              "hint:DomainSpecificCapability"
+              "hint:SensingCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Video Segmentation & Metadata Tagging",
-            "task_concept": "hint:MultimodalInputInterpretationTask",
+            "label": "Data Processing",
+            "task_concept": "hint:SemanticReasoningTask",
             "required_capabilities": [
-              "hint:MultimodalInterpretationCapability"
+              "hint:PatternLearningCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Ethical Data Governance & Consent",
-            "task_concept": "hint:AllocationNegotationTask",
+            "label": "Depth Perception Enhancement",
+            "task_concept": "hint:ReconstructTrajectoryTask",
             "required_capabilities": [
-              "hint:NegotiationCapability"
+              "hint:SensingCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Skill Learning from Archival Video",
-            "task_concept": "hint:PolicyLearningTask",
+            "label": "Ethical Data Governance",
+            "task_concept": "hint:ConflictResolutionTask",
             "required_capabilities": [
-              "hint:ReinforcementLearningCapability"
+              "hint:ReasoningCapability"
             ],
             "sub_tasks": []
           }
@@ -151,61 +132,70 @@
     ],
     "interactions": [
       {
-        "label": "Consent & Governance Negotiation",
-        "modality_concept": "hint:DashboardModality",
-        "intent_concept": "hint:NegotiationIntent",
+        "label": "Human-AI Collaboration",
+        "modality_concept": "hint:VerbalDialogueModality",
+        "intent_concept": "hint:GuideIntent",
         "agents_involved": [
-          "Cultural Heritage Steward",
-          "Archival Footage AI System"
+          "Cultural Expert",
+          "AI System"
         ]
       }
     ],
     "task_executions": [
       {
-        "label": "Collect Footage",
-        "task_label": "Archival Footage Collection",
-        "performed_by": "Cultural Heritage Steward",
-        "method_concept": "hint:KnowledgeGraphQueryMethod"
+        "label": "Execute Data Collection",
+        "task_label": "Data Collection Task",
+        "performed_by": "Cultural Expert",
+        "method_concept": "hint:DataCollectionMethod"
       },
       {
-        "label": "Process Video (Segment/Tag/Depth)",
-        "task_label": "Video Segmentation & Metadata Tagging",
-        "performed_by": "Archival Footage AI System",
+        "label": "Execute Data Processing",
+        "task_label": "Data Processing",
+        "performed_by": "AI System",
         "method_concept": "hint:SemanticEmbeddingMethod"
       },
       {
-        "label": "Negotiate Governance Rules",
-        "task_label": "Ethical Data Governance & Consent",
-        "performed_by": "Cultural Heritage Steward",
-        "method_concept": "hint:ArgumentationReasoningMethod"
+        "label": "Execute Depth Perception Enhancement",
+        "task_label": "Depth Perception Enhancement",
+        "performed_by": "AI System",
+        "method_concept": "hint:ReinforcementLearningMethod"
       },
       {
-        "label": "Learn Skills from Demonstrations",
-        "task_label": "Skill Learning from Archival Video",
-        "performed_by": "Archival Footage AI System",
-        "method_concept": "hint:ReinforcementLearningMethod"
+        "label": "Execute Ethical Data Governance",
+        "task_label": "Ethical Data Governance",
+        "performed_by": "Cultural Expert",
+        "method_concept": "hint:ProtocolNegotiationMethod"
       }
     ],
     "evaluation": {
-      "label": "Ethical Data Governance Evaluation",
+      "label": "Cultural Preservation Evaluation",
       "evaluation_concepts": [
-        "hint:TransparencyEvaluation",
-        "hint:NegotationImpactEvaluation"
+        "hint:TransparencyEvaluation"
       ],
       "metric_concepts": [
         "hint:TrustPreservationMetric",
-        "hint:InformationQualityMetric"
+        "hint:FairOutcomeMetric"
       ],
-      "experiments": []
+      "experiments": [
+        {
+          "label": "Cultural Data Governance Experiment",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:TrustPreservationMetric"
+          ],
+          "null_hypothesis": "Data governance does not affect trust.",
+          "alternative_hypothesis": "Data governance enhances trust."
+        }
+      ]
     }
   },
   "new_concepts": [
     {
-      "uri": "hint:EthicalArchivalFootageTraining",
-      "label": "Ethical Archival Footage Training",
-      "definition": "Training AI systems from archival documentary footage under explicit governance rules to preserve community ownership, consent, and control.",
-      "broader": "hint:DataCollectionTask",
-      "category": "Method"
+      "uri": "hint:CulturalPreservationTask",
+      "label": "Cultural Preservation Task",
+      "definition": "A task focused on preserving cultural heritage and practices.",
+      "broader": "hint:Task",
+      "category": "Task"
     }
   ]
 }

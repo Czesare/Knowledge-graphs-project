@@ -1,0 +1,251 @@
+552 HHAI 2025
+D. Pedreschi et al. (Eds.)
+© 2025 The Authors.
+This article is published online with Open Access by IOS Press and distributed under the terms
+of the Creative Commons Attribution Non-Commercial License 4.0 (CC BY-NC 4.0).
+doi:10.3233/FAIA250690
+Supporting Responsible Human-AI
+Cooperation for Emergency Responders
+TinaMIOCHa,b,1
+aUniversityofAppliedSciencesUtrecht
+bDelftUniversityofTechnology
+ORCiDID:TinaMiochhttps://orcid.org/0000-0003-2457-5872
+Abstract. Emergency responders (ERs) work in dynamic, complex, and unpre-
+dictableenvironments.Theintegrationofincreasinglyadvancedsensorandarti-
+ficialintelligencetechnologyaffectstheworkprocessesanddecision-makingof
+ERsandleadstonewchallengesregardingefficientandresponsiblehuman-AIco-
+operation.Forresponsiblehuman-AIcooperation,AIsystemsshouldsupportrel-
+evanthumanvalues;however,itisnotclearwhichvaluestheseareandhowthey
+canbesupported.Thispaperoutlinesaninvestigationintodevelopingaframework
+forER-AIcooperationtoadvancethebuildingofsharedsituationawarenessand
+decision-making,whiletakingtheunderlyingvaluesintoaccount,andpresentsfirst
+resultsofrelevantvaluesanddesignrequirements.
+Keywords.ResponsibleHuman-AIcooperation,Emergencyresponse,Decision-
+support,Value-sensitivedesign
+1. Introduction
+Emergencyresponseorganizationsworkinenvironmentsandsituationsthatarecomplex,
+dynamic,andunpredictable.Obtainingactionablesituationawareness(SA)tomakefast
+and effective decisions is of utmost importance. Actionable SA includes observing the
+environment, assessing situations, predicting plausible future scenarios, and being able
+todeterminewhichofallpossibleactionsshouldbeexecuted[1].TosupportgainingSA
+indynamicandcomplexsituations,moreandmoreAIsystemsarebeingintroducedin
+emergencyresponseorganizations,e.g.,forfiredetection[2]andreal-timesurveillance
+oftheincidentscene[3].ThisintroductionofAItechnologyoffersnewpossibilitiesfor
+more efficient and effective decision-making and operations, e.g., prediction of the de-
+velopment of an incident, advice on decisions based on previous incidents or monitor-
+ingemergencyresponders(ERs)safetybytrackingaERsheartbeattolookforsignsof
+overexertionandissuingwarningsbasedonthisinformation.However,theintroduction
+ofAItechnologyleadstothechallengeofintegratingtheseAIsystemsinthedecision-
+makingprocessesinaresponsiblewaybyproperlyaddressing(public)valuesandpublic
+function.Inourview,AIsystemsinthisdomainarealwayspartofahybridhuman-AI
+system,asocio-technicalsystem,inwhichtaskallocationandtaskresponsibilitymight
+changeandnewhuman-AIdependenciesarise.Thisintroducestheresearchchallengeof
+1CorrespondingAuthor:TinaMioch,tina.mioch@hu.nl
+
+T.Mioch/SupportingResponsibleHuman-AICooperationforEmergencyResponders 553
+developinghybridhuman-AIsystemsinwhichAItechnologyandhumanscooperateina
+waythatcreatessynergy[4,5].Insuchhybridhuman-AIsystems,complexgoalscanbe
+achievedbycombininghumansandAItechnologythatcollectivelyworkonsharedob-
+jectiveswithcomplementarycapabilitiesthat,whencombined,augmenteachother[6].
+The development and application of these hybrid human-AI systems need to be done
+responsibly[7],e.g.,regardingpossiblebiasesin(training)datasetsandprivacyaspects
+(e.g.,(personal)dataonERssuchaslocation,performance,stress).Forsomedomains,
+theethicalaspectsofAIsystemsandapplicationshavereceivedalotofattention,e.g.,
+thehealthdomain[8,9]andthemilitarydomain[10].However,inthefieldofemergency
+response,itseemsthatethicswithregardtotheapplicationofAIhasnotyetbeenmuch
+addressed.
+Inthisresearchproject,weworkonagenericframeworktosupportresponsibleER-
+AIcooperation,includinginsightsintorelevantethicalaspectsanddesignrequirements
+to take into account when developing responsible AI systems for emergency response,
+design patterns to describe ER-AI cooperation, and measurements and corresponding
+toolsandmethodsforevaluatingresponsiblehuman-AIcooperation.
+2. Background
+AIisasystemtechnologythatwillfundamentallychangesocietyanditisnotyetclear
+howAIcanbeimplementedinaresponsibleandethicalway[11].Inrecentyears,sev-
+eralguidelineshavebeendevelopedfortheresponsibleapplicationofAI[7,12].How-
+ever,theseguidelinesdonotprovidepractitionerswithsufficienttoolsforthedesignand
+deploymentofresponsibleAI[13].Thisleavesemergencyresponseorganizationswith
+thechallengeofintegratingtheseAIdecision-supportsystemsresponsiblyintodecision-
+making processes. In addition, emergency response organizations foresee a change in
+tasks,roles,andresponsibilitiesthroughthedeploymentof(intelligent)decision-support
+systems,withERspassing(some)responsibilityandtaskstoAIsystems.Itisnotclear
+howthesechangeswillbeimplementedincurrentworkprocessesanddecisionrespon-
+sibilityandhierarchy,andhowhuman-AIcooperationshouldtakeshape.
+Johnson and Vera [14] developed a framework for organizing many of the impor-
+tant concepts associated with human-AI cooperation, focusing on interdependence be-
+tweenthedifferentactors.Itprovidesageneralstructureforuseinthedevelopmentof
+AIsystemsthatcooperatewellwithhumans.Theframeworkalsoshowsthelimitations
+of current cooperative intelligence of AI systems. For example, current AI systems of-
+ten collect large amounts of data about a situation but have limited self-awareness of
+itsownlimitationsandawarenessoftheother’scapabilitiesandlittlestrategicbehavior
+suchasintegrationintohumanworkflow.Fromaninteractionperspective,TeamDesign
+Patterns (TDPs) have been presented to provide the means to capture human-AI team-
+ing processes [15]. A design pattern is an evaluated and abstracted solution to a com-
+mon problem [16]. These TDPs describe how humans and AI systems cooperate with
+eachother,inatask-independentwaythatincludesrequirements,advantages,anddisad-
+vantages [17,18]. However, TDPs have not yet been applied and evaluated for real and
+dynamicworldcontextswithlargeincompleteanduncertaininformation[19].
+
+554 T.Mioch/SupportingResponsibleHuman-AICooperationforEmergencyResponders
+Figure1. Overviewofactivitiesinstudy1andrelationtogeneralframework.
+3. Researchquestion
+Thisleadstothefollowingresearchquestion:Howcanacollaborativedecision-support
+frameworkforER-AIteamsadvancethebuildingofsharedsituationawarenessandteam
+performance during incident control in complex and dynamic situations, while taking
+underlyingvaluesintoaccount?
+Investigatingthisresearchquestioncomprisesthefollowingsteps:
+1. Identify the values and context factors that should be taken into account in the
+design,implementation,anddeploymentofAIdecision-supportsystemsforER
+teamsincomplexanddynamicincidents.
+2. Investigate how cooperation can be supported between ERs and AI systems re-
+garding their roles, responsibilities, and mutual learning while taking into ac-
+counttheunderlyingvalues.
+3. IdentifymethodsthatcontributetotheevaluationofAI-humancooperationdur-
+ingcomplexanddynamicincidents.
+4. Methodandapproach
+Thissectiondescribes,foreachstepidentifiedinSection3,theresearchapproachesand
+activitiesthatwewilltaketoinvestigatethetopic.WeareinspiredbytheValueSensitive
+Design (VSD) methodology, which accounts for human values throughout the design
+process[20].VSDisaniterativemethodologythatintegratesthreeperspectives,namely
+conceptual,empirical,andtechnicalinvestigations.Theseinvestigationsareexecutedit-
+eratively,thoughnotnecessarilyinasetorder.VSDcontainsarichcollectionofdifferent
+methodsthathelpdesignersinvestigatevaluesintechnology,suchasdirectandindirect
+stakeholderanalysisandvaluescenarios,andisthusparticularlyusefulforourresearch.
+
+T.Mioch/SupportingResponsibleHuman-AICooperationforEmergencyResponders 555
+4.1. Study1:Responsibleandvalue-sensitiverequirementsofAIdecision-support
+systemsforERs
+To investigate responsible and value-sensitive requirements of AI systems for ERs, we
+firstconceptuallyandempiricallyinvestigatethevaluesandotherethicalaspectsthatare
+affected by AI systems in emergency response, followed by an analysis of the values
+to identify value-sensitive requirements for human-AI cooperation. For the conceptual
+investigation,weperformascopingliteraturereviewonethicalissuesthatmayemerge
+whenAIsystemsareappliedtoemergencyresponseandintegratetheresultswithother
+sources of ethical norms, such as, e.g., EU guidelines. For the empirical investigation,
+first, relevant stakeholders are explored and relevant values are identified that are im-
+pacted by AI in general, followed by an investigation into a specific AI application.
+Basedontheseresults,arequirementanalysisandspecificationisperformed.Theseac-
+tivitiesleadtotheformulationofaframeworkofethicalaspectsfortheintroductionof
+AI systems in emergency response, which will provide insight into the relevant ethical
+aspects to take into account when developing AI systems for ERs. For an overview of
+theactivitiesofstudy1andtherelationtothegeneralframework,seeFigure1.
+4.2. Study2:DesigningResponsibleCooperationbetweentheERandAIsystem
+TodesignresponsiblecooperationbetweenERsandAIsystems,weinvestigatehowER-
+AI cooperation can be supported. The ethical framework for AI systems in emergency
+response(resultofstudy1)isusedtodeterminethefocusofthedesignactivitiesinthis
+study. Building on existing work of TDPs [21], a first design of a framework for sup-
+portingER-AIcooperationismade,e.g.,ofmutualawarenessofresponsibilitiesandca-
+pabilitiesincomplexanddynamicenvironments.Thisfirstdesignwillbealow-fidelity
+paper-based prototype and will be evaluated during expert group sessions with stake-
+holders from emergency response organizations and scientific expert reviews. Require-
+mentsanddesigncriteriaareimprovedbasedontheresults,andamore‘experienceable’
+model(e.g.,avalue-orientedmock-up)isdesigned(seconddesigncycle).Thismock-up
+isevaluatedthroughanexpertreviewonthevalidityofthedesignpatternsandwithERs
+throughusabilitytests.
+4.3. Study3:Evaluationofresponsiblehuman-AIcooperation
+Weiterativelydevelopandadaptobjectiveandsubjectivemeasuresandthecorrespond-
+ing tools and methods to evaluate responsible human-AI cooperation for this domain
+duringthedesigncyclesofstudy2.Semi-structuredinterviewsareconductedwithdif-
+ferentstakeholdersontheapplicationofthemethods(includingtheevaluationcriteria,
+measurements, and steps in the evaluation process), and observations are made during
+theevaluations.Basedontheseresults,methodsandtoolsarerefined.Thisresultsinap-
+pliedmethodsandtoolsfortheevaluationofresponsibleER-AIcooperationincomplex
+anddynamicsituations.
+5. Firstresults
+Currently,wearefinishingstudy1.Regardingtheconceptualinvestigation,wearework-
+ingonthescopingliteraturereviewonethicalissuesthatmayemergewhenAIsystems
+
+556 T.Mioch/SupportingResponsibleHuman-AICooperationforEmergencyResponders
+Table1. Examplesofidentifiedimpact,theimpactedvalues,andthecorrespondingmodule,asreportedin
+Miochetal.[24].
+Value Impact Module
+Autonomy OverrelianceonAI Video analysis module,
+Materialpredictionmodule
+Well-being Feweraccidentswhendriving Materialpredictionmodule
+MorePTSDbecauseofavailabilityofincidentvideos Videoanalysismodule
+areappliedtoemergencyresponse.Wearecurrentlyanalyzingtheresultsofthislitera-
+ture review; preliminary results suggest that most of the literature on ethical aspects of
+AI systems in emergency response is related to rescue robotics, with a very limited set
+ofliteratureworkingonethicalaspectsofotherAIsystems(suchasdecisionsupport).
+The empirical investigation consisted of two steps; first, an investigation of values that
+are impacted by AI systems in general, identifying relevant stakeholders and a first set
+ofhumanvaluesthatareimpactedbyAIsystemsforthesestakeholders;second,anin-
+vestigation of relevant human values and other ethical aspects that are affected by the
+introductionofaspecificAI-basedDecisionAid(AIDA),adecisionsupportsystemun-
+derdevelopmentforFireServicesintheNetherlands.Weconcentratedontwomodules,
+the video analysis module that analyzes drone video streams and detects humans [22]
+andamaterialpredictionmodulethat,basedoncorrelationsfoundinpastincidentdata,
+predictsthefireservicesmaterialneededforanincident.
+In the first iteration on impacted human values by AI systems in general, we con-
+ducted several focus group sessions with fire service personnel to identify key human
+values.Somevalueswerefoundtobe(mostly)positivelyaffectedforthedifferentstake-
+holders (although there was no value that was only positively affected), i.e., physical
+well-being and psychological well-being. Several values were found to be only nega-
+tivelyaffectedforthedifferentstakeholders,i.e.,autonomy,identity,informedconsent,
+privacy, and trust. Other values that were identified to be affected by AI systems were
+accountability,transparency,reliability,security,andappropriatetraining[23].
+IntheseconditerationonaffectedhumanvaluesbytheAIDAsystem,weheld9ex-
+pertgroupsessionswithatotalof36fireserviceemployees,ofwhich15(head)incident
+commanders,17dispatchers,3firefighters,and1emergencycoordinator,anddiscussed
+theimpactofAIDAondifferentstakeholders.TheidentifiedimpactofAIsystemswas
+analyzed through thematic analysis and mapped onto affected underlying values. Pre-
+liminary results show that (1) previously identified values (for general AI systems) are
+implicatedbyeitherofthetwoAImodules,e.g.,Identity;(2)impactonvaluessuchas
+Well-being and Autonomy has been mentioned for both modules, and (3) there are dif-
+ferences between the two modules on how and which values are impacted [24]. In Ta-
+ble 1, examples of impact and corresponding value identified for the two modules are
+presented.
+Currently, we are also integrating the results of the different investigations into a
+general framework, identifying design requirements to lessen the negative impact and
+strengthen the positive impact of AI systems (see for examples of design requirements
+Table 2). These requirements should be considered for the design, development, and
+deployment of responsible collaborative decision-support of ER teams in complex and
+dynamic environments. We will also report on lessons learned of methods to identify
+impactedvaluesandvaluetensions.
+
+T.Mioch/SupportingResponsibleHuman-AICooperationforEmergencyResponders 557
+Table2. ExamplesofdesignrequirementsforoneidentifiedimpactofAIsystemsonthevalueAutonomy[23].
+Impact DesignRequirements
+DependenceonAI Personnelwill1 beextensivelytrainedonhowtheAIsystemworksandhowto
+interactwiththesystemduringoperations.
+PersonnelwillbeextensivelytrainedonhowtoworkeffectivelywithouttheAI
+systemincaseoffailureandtobeabletoevaluateadvisefromtheAIsystem.
+TheAIsystemwillbeabletoexplainwhyaparticularresultoradviseisgiven.This
+explanationwilltakethecontextintoaccountandbeadaptedtowardstheparticular
+taskandroleoftheER.
+1Weuse’will’inthedesignrequirementsspecificationinsteadof’shall’or’should’,asthelatterimplya
+normativeload.
+6. Futurework
+Asnextsteps,wewillstartdesigninghuman-AIcooperationthatsupportsidentifiedhu-
+manvalues(e.g.,autonomy),basedondesignrequirementsthathavebeenidentifiedin
+theempiricalinvestigation.Wewillchooseaspecificvaluetofocusonandanalyzehow
+thisvalueissupportedinthecurrentsetupofthedecision-supportsystemAIDA.Wewill
+thendevelopTDPstoimprovethecooperationbetweenERandAIDAtobettersupport
+theselectedvalue.Thiswillbedoneiteratively,designing,evaluating,andimprovingthe
+cooperationinseveralcycles,alsodevelopingmethodstoevaluatewhethertheparticular
+value has been supported. We believe that our results are also highly relevant to other
+domains that involve decision-making under time pressure and within dynamic, com-
+plexenvironmentswithincompleteinformation,suchasmilitary,police,andhealthcare
+settings,andwewillapplytheresultstoausecaseinanotherdomain.
+This research will result in a framework for collaborative decision-support to ad-
+vance the building of shared SA and team performance, while taking underlying val-
+ues into account, and applied methods and tools for the evaluation of ER-AI coopera-
+tionincomplexanddynamicenvironments.Inaddition,thisresearchwillcontributeto
+thedesireexpressedbyemergencyresponseorganizationsformoreinsightintohowco-
+operationbetweenAIsystemsandERscanbedesignedtooptimallysupportdecision-
+making, taking relevant values into account. By using an iterative design methodology
+and evaluation of a prototype in complex and realistic situations with stakeholders, AI
+developmentforpracticewillbeaccelerated;awarenesswithintheorganizationwillbe
+createdregardingadvantagesandchallengesofAIdecision-supportsystemsandofthe
+necessity of a responsible and context-dependent implementation of AI. Furthermore,
+thedevelopedprototypewillbeusedforfurtherdevelopmentofresponsibleAIsystems
+forERs.
+Acknowledgements
+IwouldliketothankmypromotorMarkA.Neerincx,co-promotorLucianoCavalcante
+Siebert,dailysupervisorHuibAldewereld,andadvisorStefanLeijnenfortheirsupport
+andadvice.IalsowouldliketothanktheSafetyRegions Rotterdam-RijnmondandZuid-
+Holland-Zuid and the Gezamenlijke Brandweer for their participation in this research.
+ThisresearchissupportedbytheUniversityofAppliedSciencesUtrecht(HU)through
+a‘promotievoucher’.
+
+558 T.Mioch/SupportingResponsibleHuman-AICooperationforEmergencyResponders

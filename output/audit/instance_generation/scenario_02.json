@@ -1,0 +1,13 @@
+{
+  "source_id": "scenario_02",
+  "is_scenario": true,
+  "extracted_link_counts": {
+    "task_requiresCapability_direct_concept": 4,
+    "execution_realizesTask_direct_label": 2
+  },
+  "repair_link_counts": {},
+  "unresolved_counts": {},
+  "repair_actions": [],
+  "unresolved_items": [],
+  "new_concepts_proposed": 1
+}

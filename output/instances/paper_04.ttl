@@ -19,17 +19,10 @@ inst:Paper_04 a hi:Paper ;
     hi:hasTitle "Human Response to Decision Support in Face Matching: The Influence of Task Difficulty and Machine Accuracy"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
 
-inst:Paper_04_Evaluation a hi:Evaluation ;
-    rdfs:label "Face Matching Evaluation" ;
-    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
-    hi:hasExperiment inst:Paper_04_Experiment_AccuracyImpactExperiment ;
-    hi:hasMetricConcept hint:TaskSuccessRateMetric,
-        hint:TrustPreservationMetric .
-
-inst:Paper_04_Interaction_AiSuggestionNotification a hi:Interaction ;
-    rdfs:label "AI Suggestion Notification" ;
-    hi:hasAgentInvolved inst:Paper_04_FaceMatchingAi,
-        inst:Paper_04_HumanOperator ;
+inst:Paper_04_Interaction_Human-machineDecisionInteraction a hi:Interaction ;
+    rdfs:label "Human-Machine Decision Interaction" ;
+    hi:hasAgentInvolved inst:Paper_04_FaceMatchingSystem,
+        inst:Paper_04_HumanAnnotator ;
     hi:hasInteractionIntentConcept hint:ExplanationIntent ;
     hi:hasInteractionModalityConcept hint:DashboardModality .
 
@@ -73,34 +66,34 @@ inst:Paper_04_Context a hi:Context ;
     rdfs:label "Face Matching Context" ;
     hi:hasConstraintConcept hint:EthicalConstraint,
         hint:TransparencyConstraint ;
-    hi:hasContextConcept hint:WorkspaceManipulationContext ;
+    hi:hasContextConcept hint:JuryDeliberationContext ;
     hi:hasInfluenceOn inst:Paper_04_Team ;
     hi:hasPhenomenonConcept hint:ConfirmationBias,
         hint:TrustShiftPhenomenon .
 
-inst:Paper_04_Exec_AiProvidesSuggestion a hi:TaskExecution ;
-    rdfs:label "AI Provides Suggestion" ;
+inst:Paper_04_Exec_HumanEvaluatesFacePair a hi:TaskExecution ;
+    rdfs:label "Human Evaluates Face Pair" ;
+    hi:evaluatedBy inst:Paper_04_Evaluation ;
+    hi:hasMethodConcept hint:DataCollectionMethod ;
+    hi:realizesTask inst:Paper_04_Task_EvaluateFacePair .
+
+inst:Paper_04_Exec_SystemProvidesSuggestion a hi:TaskExecution ;
+    rdfs:label "System Provides Suggestion" ;
+    hi:evaluatedBy inst:Paper_04_Evaluation ;
     hi:hasMethodConcept hint:PatternLearningCapability ;
     hi:realizesTask inst:Paper_04_Task_ProvideMatchingSuggestion .
 
-inst:Paper_04_Exec_HumanEvaluatesFacePair a hi:TaskExecution ;
-    rdfs:label "Human Evaluates Face Pair" ;
-    hi:hasMethodConcept hint:ArgumentationReasoningMethod ;
-    hi:realizesTask inst:Paper_04_Task_EvaluateFacePair .
-
-inst:Paper_04_Experiment_AccuracyImpactExperiment a hi:Experiment ;
-    rdfs:label "Accuracy Impact Experiment" ;
-    hi:hasAlternativeHypothesis "AI support improves human accuracy."^^xsd:string ;
+inst:Paper_04_Experiment_ImpactOfMachineAccuracyOnHumanPerformance a hi:Experiment ;
+    rdfs:label "Impact of Machine Accuracy on Human Performance" ;
+    hi:hasAlternativeHypothesis "Machine accuracy affects human performance."^^xsd:string ;
     hi:hasExperimentConcept hint:DeliberationSupportExperiment ;
     hi:hasMetricTested hint:TaskSuccessRateMetric ;
-    hi:hasNullHypothesis "AI support does not improve human accuracy."^^xsd:string .
+    hi:hasNullHypothesis "Machine accuracy does not affect human performance."^^xsd:string .
 
 inst:Paper_04_Goal_ImproveFaceMatchingAccuracy a hi:Goal ;
     rdfs:label "Improve Face Matching Accuracy" ;
     hi:hasGoalConcept hint:FairAccurateVerdictGoal ;
-    hi:requiresTask inst:Paper_04_Task_AssessTaskDifficulty,
-        inst:Paper_04_Task_EvaluateFacePair,
-        inst:Paper_04_Task_NotifyAccuracyChange,
+    hi:requiresTask inst:Paper_04_Task_EvaluateFacePair,
         inst:Paper_04_Task_ProvideMatchingSuggestion .
 
 inst:Paper_04_UseCase a hi:ResearchUseCase ;
@@ -112,64 +105,63 @@ inst:Affiliation_UniversitatPompeuFabra a hi:Affiliation ;
     rdfs:label "Universitat Pompeu Fabra" ;
     schema1:name "Universitat Pompeu Fabra" .
 
-inst:Paper_04_FaceMatchingAi a hi:ArtificialAgent ;
-    rdfs:label "Face Matching AI" ;
-    hi:hasCapability inst:Paper_04_FaceMatchingAi_Cap_AccuracyReporting,
-        inst:Paper_04_FaceMatchingAi_Cap_PatternRecognition ;
-    hi:hasRoleConcept hint:AIAssistantRole ;
-    hi:performsExecution inst:Paper_04_Exec_AiProvidesSuggestion .
+inst:Paper_04_Evaluation a hi:Evaluation ;
+    rdfs:label "Face Matching System Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_04_Experiment_ImpactOfMachineAccuracyOnHumanPerformance ;
+    hi:hasMetricConcept hint:TaskSuccessRateMetric,
+        hint:TrustPreservationMetric .
 
-inst:Paper_04_FaceMatchingAi_Cap_AccuracyReporting a hi:Capability ;
+inst:Paper_04_FaceMatchingSystem a hi:ArtificialAgent ;
+    rdfs:label "Face Matching System" ;
+    hi:hasCapability inst:Paper_04_FaceMatchingSystem_Cap_AccuracyReporting,
+        inst:Paper_04_FaceMatchingSystem_Cap_PatternRecognition ;
+    hi:hasRoleConcept hint:AIAssistantRole ;
+    hi:performsExecution inst:Paper_04_Exec_SystemProvidesSuggestion .
+
+inst:Paper_04_FaceMatchingSystem_Cap_AccuracyReporting a hi:Capability ;
     rdfs:label "Accuracy Reporting" ;
-    hi:allowsTask inst:Paper_04_Task_NotifyAccuracyChange ;
+    hi:allowsTask inst:Paper_04_Task_ProvideMatchingSuggestion ;
     hi:hasCapabilityConcept hint:ReportingCapability .
 
-inst:Paper_04_FaceMatchingAi_Cap_PatternRecognition a hi:Capability ;
+inst:Paper_04_FaceMatchingSystem_Cap_PatternRecognition a hi:Capability ;
     rdfs:label "Pattern Recognition" ;
     hi:allowsTask inst:Paper_04_Task_ProvideMatchingSuggestion ;
     hi:hasCapabilityConcept hint:PatternLearningCapability .
 
-inst:Paper_04_HumanOperator a hi:HumanAgent ;
-    rdfs:label "Human Operator" ;
-    hi:hasCapability inst:Paper_04_HumanOperator_Cap_ContextualUnderstanding,
-        inst:Paper_04_HumanOperator_Cap_JudgmentCapability ;
+inst:Paper_04_HumanAnnotator a hi:HumanAgent ;
+    rdfs:label "Human Annotator" ;
+    hi:hasCapability inst:Paper_04_HumanAnnotator_Cap_JudgmentCapability,
+        inst:Paper_04_HumanAnnotator_Cap_PerceptionCapability ;
     hi:hasRoleConcept hint:HumanUserRole ;
     hi:performsExecution inst:Paper_04_Exec_HumanEvaluatesFacePair .
 
-inst:Paper_04_HumanOperator_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:allowsTask inst:Paper_04_Task_AssessTaskDifficulty ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
-
-inst:Paper_04_HumanOperator_Cap_JudgmentCapability a hi:Capability ;
+inst:Paper_04_HumanAnnotator_Cap_JudgmentCapability a hi:Capability ;
     rdfs:label "Judgment Capability" ;
     hi:allowsTask inst:Paper_04_Task_EvaluateFacePair ;
     hi:hasCapabilityConcept hint:ReasoningCapability .
 
-inst:Paper_04_Task_AssessTaskDifficulty a hi:Task ;
-    rdfs:label "Assess Task Difficulty" ;
-    hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_04_HumanOperator_Cap_ContextualUnderstanding .
-
-inst:Paper_04_Task_NotifyAccuracyChange a hi:Task ;
-    rdfs:label "Notify Accuracy Change" ;
-    hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Paper_04_FaceMatchingAi_Cap_AccuracyReporting .
+inst:Paper_04_HumanAnnotator_Cap_PerceptionCapability a hi:Capability ;
+    rdfs:label "Perception Capability" ;
+    hi:allowsTask inst:Paper_04_Task_EvaluateFacePair ;
+    hi:hasCapabilityConcept hint:SensingCapability .
 
 inst:Paper_04_Team a hi:HITeam ;
     rdfs:label "Face Matching Decision Support Team" ;
     hi:hasGoal inst:Paper_04_Goal_ImproveFaceMatchingAccuracy ;
-    hi:hasMember inst:Paper_04_FaceMatchingAi,
-        inst:Paper_04_HumanOperator ;
+    hi:hasMember inst:Paper_04_FaceMatchingSystem,
+        inst:Paper_04_HumanAnnotator ;
     hi:isInfluencedBy inst:Paper_04_Context .
 
 inst:Paper_04_Task_EvaluateFacePair a hi:Task ;
     rdfs:label "Evaluate Face Pair" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_04_HumanOperator_Cap_JudgmentCapability .
+    hi:requiresCapability inst:Paper_04_HumanAnnotator_Cap_JudgmentCapability,
+        inst:Paper_04_HumanAnnotator_Cap_PerceptionCapability .
 
 inst:Paper_04_Task_ProvideMatchingSuggestion a hi:Task ;
     rdfs:label "Provide Matching Suggestion" ;
-    hi:hasTaskConcept hint:QuestionAnsweringTask ;
-    hi:requiresCapability inst:Paper_04_FaceMatchingAi_Cap_PatternRecognition .
+    hi:hasTaskConcept hint:ExplanationTask ;
+    hi:requiresCapability inst:Paper_04_FaceMatchingSystem_Cap_AccuracyReporting,
+        inst:Paper_04_FaceMatchingSystem_Cap_PatternRecognition .
 

@@ -1,0 +1,206 @@
+{
+  "paper_id": "paper_552",
+  "title": "Supporting Responsible Human-AI Cooperation for Emergency Responders",
+  "authors": [
+    {
+      "name": "Tina Mioch",
+      "affiliation": "University of Applied Sciences Utrecht"
+    }
+  ],
+  "keywords": [
+    "Responsible Human-AI cooperation",
+    "Emergency response",
+    "Decision-support",
+    "Value-sensitive design"
+  ],
+  "use_case": {
+    "label": "Emergency Response Decision Support",
+    "type": "research",
+    "domain_concepts": [
+      "hint:IndustrialAndServiceRoboticsDomain"
+    ],
+    "context": {
+      "label": "Emergency Response Context",
+      "context_concepts": [
+        "hint:WorkspaceManipulationContext"
+      ],
+      "constraint_concepts": [
+        "hint:EthicalConstraint",
+        "hint:PrivacyConstraint"
+      ],
+      "phenomenon_concepts": [
+        "hint:SkillsComplementarityPhenomenon",
+        "hint:TrustShiftPhenomenon"
+      ]
+    },
+    "team": {
+      "human_agents": [
+        {
+          "label": "Emergency Responder",
+          "role_concept": "hint:HumanUserRole",
+          "capabilities": [
+            {
+              "label": "Situational Awareness",
+              "concept": "hint:SituationalAwarenessCapability",
+              "allows_tasks": [
+                "Assess Situation"
+              ]
+            },
+            {
+              "label": "Decision Making",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Decide Intervention"
+              ]
+            },
+            {
+              "label": "Ethical Oversight",
+              "concept": "hint:ClinicalJudgmentCapability",
+              "allows_tasks": [
+                "Evaluate AI Recommendations"
+              ]
+            }
+          ]
+        }
+      ],
+      "artificial_agents": [
+        {
+          "label": "AI Decision Support System",
+          "role_concept": "hint:AIAssistantRole",
+          "capabilities": [
+            {
+              "label": "Pattern Recognition",
+              "concept": "hint:PatternLearningCapability",
+              "allows_tasks": [
+                "Predict Incident Development"
+              ]
+            },
+            {
+              "label": "Real-time Monitoring",
+              "concept": "hint:SensingCapability",
+              "allows_tasks": [
+                "Monitor ER Safety"
+              ]
+            },
+            {
+              "label": "Data Analysis",
+              "concept": "hint:MetaAnalysisCapability",
+              "allows_tasks": [
+                "Analyze Incident Data"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "goals": [
+      {
+        "label": "Enhance Decision Making",
+        "goal_concept": "hint:UserWellbeingGoal",
+        "tasks": [
+          {
+            "label": "Assess Situation",
+            "task_concept": "hint:SituationalAssessmentTask",
+            "required_capabilities": [
+              "hint:SituationalAwarenessCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Predict Incident Development",
+            "task_concept": "hint:CandidateHypothesisGenerationTask",
+            "required_capabilities": [
+              "hint:PatternLearningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Decide Intervention",
+            "task_concept": "hint:DecideInterventionTask",
+            "required_capabilities": [
+              "hint:ReasoningCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Monitor ER Safety",
+            "task_concept": "hint:DataCollectionTask",
+            "required_capabilities": [
+              "hint:SensingCapability"
+            ],
+            "sub_tasks": []
+          },
+          {
+            "label": "Evaluate AI Recommendations",
+            "task_concept": "hint:ExplanationTask",
+            "required_capabilities": [
+              "hint:ClinicalJudgmentCapability"
+            ],
+            "sub_tasks": []
+          }
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "label": "AI to Human Explanation",
+        "modality_concept": "hint:DashboardModality",
+        "intent_concept": "hint:ExplanationIntent",
+        "agents_involved": [
+          "AI Decision Support System",
+          "Emergency Responder"
+        ]
+      }
+    ],
+    "task_executions": [
+      {
+        "label": "Situation Assessment Execution",
+        "task_label": "Assess Situation",
+        "performed_by": "Emergency Responder",
+        "method_concept": "hint:DataCollectionMethod"
+      },
+      {
+        "label": "Incident Prediction Execution",
+        "task_label": "Predict Incident Development",
+        "performed_by": "AI Decision Support System",
+        "method_concept": "hint:ReinforcementLearningMethod"
+      },
+      {
+        "label": "Intervention Decision Execution",
+        "task_label": "Decide Intervention",
+        "performed_by": "Emergency Responder",
+        "method_concept": "hint:ArgumentationReasoningMethod"
+      }
+    ],
+    "evaluation": {
+      "label": "Evaluation of ER-AI Cooperation",
+      "evaluation_concepts": [
+        "hint:AIInterventionImpactEvaluation"
+      ],
+      "metric_concepts": [
+        "hint:TaskSuccessRateMetric",
+        "hint:TrustPreservationMetric"
+      ],
+      "experiments": [
+        {
+          "label": "Cooperation Effectiveness Experiment",
+          "experiment_concept": "hint:DeliberationSupportExperiment",
+          "metrics_tested": [
+            "hint:TaskSuccessRateMetric"
+          ],
+          "null_hypothesis": "AI does not improve decision-making success rate.",
+          "alternative_hypothesis": "AI improves decision-making success rate."
+        }
+      ]
+    }
+  },
+  "new_concepts": [
+    {
+      "uri": "hint:EmergencyResponseContext",
+      "label": "Emergency Response Context",
+      "definition": "The context in which emergency responders operate, characterized by dynamic and unpredictable environments.",
+      "broader": "hint:WorkspaceManipulationContext",
+      "category": "Context"
+    }
+  ]
+}

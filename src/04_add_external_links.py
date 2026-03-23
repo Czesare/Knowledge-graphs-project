@@ -10,6 +10,7 @@ and produces external_links.ttl with owl:sameAs, skos:closeMatch, etc.
 NOTE: This script requires internet access to query Wikidata's API.
 If offline, it will generate a template file you can fill in manually.
 """
+import csv
 import json
 import time
 import sys
@@ -34,6 +35,7 @@ INST = Namespace(INST_NS)
 HINT = Namespace(HINT_NS)
 WD = Namespace("http://www.wikidata.org/entity/")
 DBR = Namespace("http://dbpedia.org/resource/")
+AUDIT_DIR = OUTPUT_DIR / "audit"
 
 
 def search_wikidata(query: str, entity_type: str = None) -> dict | None:
@@ -71,6 +73,59 @@ def search_wikidata(query: str, entity_type: str = None) -> dict | None:
     return None
 
 
+def record_link_action(actions: list[dict], category: str, subject: str,
+                       predicate: str = "", target: str = "",
+                       status: str = "linked", note: str = ""):
+    """Append one structured linking action for later auditing."""
+    actions.append({
+        "category": category,
+        "subject": subject,
+        "predicate": predicate,
+        "target": target,
+        "status": status,
+        "note": note,
+    })
+
+
+def write_external_link_audit(actions: list[dict], total_link_triples: int):
+    """Write external linking actions and summary counts."""
+    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+    csv_path = AUDIT_DIR / "external_linking_actions.csv"
+    summary_path = AUDIT_DIR / "external_linking_summary.json"
+
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=["category", "subject", "predicate", "target", "status", "note"],
+        )
+        writer.writeheader()
+        writer.writerows(actions)
+
+    linked_counts_by_category = {}
+    unresolved_counts_by_category = {}
+    predicate_counts = {}
+    for action in actions:
+        category = action["category"]
+        predicate = action["predicate"]
+        if action["status"] == "linked":
+            linked_counts_by_category[category] = linked_counts_by_category.get(category, 0) + 1
+            if predicate:
+                predicate_counts[predicate] = predicate_counts.get(predicate, 0) + 1
+        else:
+            unresolved_counts_by_category[category] = unresolved_counts_by_category.get(category, 0) + 1
+
+    summary = {
+        "total_actions": len(actions),
+        "linked_actions": sum(1 for a in actions if a["status"] == "linked"),
+        "unresolved_actions": sum(1 for a in actions if a["status"] != "linked"),
+        "total_link_triples_written": total_link_triples,
+        "linked_counts_by_category": linked_counts_by_category,
+        "unresolved_counts_by_category": unresolved_counts_by_category,
+        "predicate_counts": predicate_counts,
+    }
+    summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+
+
 # ── Predefined concept mappings ───────────────────────────────
 # Comprehensive, manually verified mappings from HINT concepts
 # to Wikidata/DBpedia. Each concept can have multiple links.
@@ -89,6 +144,7 @@ def main():
     g.bind("dbr", DBR)
 
     link_count = 0
+    audit_actions = []
 
     # ── 1. Static concept mappings (always works, no API needed) ──
     print("=== Adding static concept mappings ===")
@@ -109,6 +165,14 @@ def main():
                 g.add((subject, OWL.sameAs, target))
 
             link_count += 1
+            record_link_action(
+                audit_actions,
+                "static_concept_mapping",
+                str(subject),
+                predicate_str,
+                target_uri,
+                "linked",
+            )
 
     print(f"  Added {link_count} static concept links")
 
@@ -128,6 +192,14 @@ def main():
 
             link_count += 1
             print(f"  {inst_ref} -> {target_uri}")
+            record_link_action(
+                audit_actions,
+                "manual_instance_link",
+                str(subject),
+                predicate_str,
+                target_uri,
+                "linked",
+            )
 
     # ── 3. Conference link (hardcoded as backup) ──────────────
     conf_uri = INST["HHAI2025"]
@@ -136,6 +208,14 @@ def main():
         g.add((conf_uri, OWL.sameAs, URIRef("http://www.wikidata.org/entity/Q113466830")))
         link_count += 1
         print("  HHAI 2025 -> Q113466830 (hardcoded)")
+        record_link_action(
+            audit_actions,
+            "hardcoded_conference_link",
+            str(conf_uri),
+            "owl:sameAs",
+            "http://www.wikidata.org/entity/Q113466830",
+            "linked",
+        )
 
     # ── 4. Author and institution links (from JSON files) ─────
     print("\n=== Linking authors and institutions ===")
@@ -177,8 +257,26 @@ def main():
                 g.add((author_uri, OWL.sameAs, URIRef(result["uri"])))
                 print(f"  {name} -> {result['uri']} ({result['description']})")
                 link_count += 1
+                record_link_action(
+                    audit_actions,
+                    "author_wikidata",
+                    str(author_uri),
+                    "owl:sameAs",
+                    result["uri"],
+                    "linked",
+                    result.get("description", ""),
+                )
             else:
                 print(f"  {name} -> not found / no confident match")
+                record_link_action(
+                    audit_actions,
+                    "author_wikidata",
+                    str(author_uri),
+                    "owl:sameAs",
+                    "",
+                    "unresolved",
+                    "not found / no confident match",
+                )
 
             # Institution
             aff = author.get("affiliation", "")
@@ -196,14 +294,33 @@ def main():
                     g.add((aff_uri, OWL.sameAs, URIRef(result["uri"])))
                     print(f"  {aff} -> {result['uri']} ({result['description']})")
                     link_count += 1
+                    record_link_action(
+                        audit_actions,
+                        "affiliation_wikidata",
+                        str(aff_uri),
+                        "owl:sameAs",
+                        result["uri"],
+                        "linked",
+                        result.get("description", ""),
+                    )
                 else:
                     print(f"  {aff} -> not found / no confident match")
+                    record_link_action(
+                        audit_actions,
+                        "affiliation_wikidata",
+                        str(aff_uri),
+                        "owl:sameAs",
+                        "",
+                        "unresolved",
+                        "not found / no confident match",
+                    )
 
             time.sleep(0.5)  # rate limiting
 
     # ── Save ──────────────────────────────────────────────────
     output_path = OUTPUT_DIR / "external_links.ttl"
     g.serialize(destination=str(output_path), format="turtle")
+    write_external_link_audit(audit_actions, link_count)
 
     print(f"\n=== Done ===")
     print(f"Total external links: {link_count}")

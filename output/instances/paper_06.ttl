@@ -20,19 +20,12 @@ inst:Paper_06 a hi:Paper ;
     hi:hasTitle "Multi-Head Networks for Missing Modalities: A Study on Robustness in Multimodal Learning"^^xsd:string ;
     hi:publishedAt inst:HHAI2025 .
 
-inst:Paper_06_Evaluation a hi:Evaluation ;
-    rdfs:label "Model Robustness Evaluation" ;
-    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
-    hi:hasExperiment inst:Paper_06_Experiment_AblationStudy ;
-    hi:hasMetricConcept hint:DiagnosisAccuracyMetric,
-        hint:TaskSuccessRateMetric .
-
-inst:Paper_06_Interaction_ModelEvaluationDiscussion a hi:Interaction ;
-    rdfs:label "Model Evaluation Discussion" ;
+inst:Paper_06_Interaction_ModelFeedbackSession a hi:Interaction ;
+    rdfs:label "Model Feedback Session" ;
     hi:hasAgentInvolved inst:Paper_06_Multi-headNetwork,
         inst:Paper_06_ResearchScientist ;
     hi:hasInteractionIntentConcept hint:ExplanationIntent ;
-    hi:hasInteractionModalityConcept hint:VerbalDialogueModality .
+    hi:hasInteractionModalityConcept hint:DashboardModality .
 
 inst:Affiliation_SpindoxSpa a hi:Affiliation ;
     rdfs:label "Spindox S.p.A." ;
@@ -82,39 +75,49 @@ inst:Paper_06_Context a hi:Context ;
     hi:hasPhenomenonConcept hint:DataMismatchPhenomenon,
         hint:SkillsComplementarityPhenomenon .
 
-inst:Paper_06_Exec_ConductModelEvaluation a hi:TaskExecution ;
-    rdfs:label "Conduct Model Evaluation" ;
+inst:Paper_06_Exec_ExecuteAblationStudy a hi:TaskExecution ;
+    rdfs:label "Execute Ablation Study" ;
+    hi:evaluatedBy inst:Paper_06_Evaluation ;
     hi:hasMethodConcept hint:MetaAnalysisScoringMethod ;
-    hi:realizesTask inst:Paper_06_Task_EvaluateModelRobustness .
+    hi:realizesTask inst:Paper_06_Task_ConductAblationStudy .
 
 inst:Paper_06_Exec_ExecuteFeatureExtraction a hi:TaskExecution ;
     rdfs:label "Execute Feature Extraction" ;
+    hi:evaluatedBy inst:Paper_06_Evaluation ;
     hi:hasMethodConcept hint:DataCollectionMethod ;
     hi:realizesTask inst:Paper_06_Task_FeatureExtraction .
 
-inst:Paper_06_Exec_ExecuteOrthogonalityLoss a hi:TaskExecution ;
-    rdfs:label "Execute Orthogonality Loss" ;
-    hi:hasMethodConcept hint:ReinforcementLearningMethod ;
+inst:Paper_06_Exec_ExecuteOrthogonalityLossApplication a hi:TaskExecution ;
+    rdfs:label "Execute Orthogonality Loss Application" ;
+    hi:evaluatedBy inst:Paper_06_Evaluation ;
+    hi:hasMethodConcept hint:SemanticLinkingMethod ;
     hi:realizesTask inst:Paper_06_Task_ApplyOrthogonalityLoss .
 
-inst:Paper_06_Experiment_AblationStudy a hi:Experiment ;
-    rdfs:label "Ablation Study" ;
+inst:Paper_06_Experiment_AblationStudyExperiment a hi:Experiment ;
+    rdfs:label "Ablation Study Experiment" ;
     hi:hasAlternativeHypothesis "Orthogonality loss improves robustness."^^xsd:string ;
     hi:hasExperimentConcept hint:DiagnosisExperiment ;
-    hi:hasMetricTested hint:TaskSuccessRateMetric ;
+    hi:hasMetricTested hint:DiagnosisAccuracyMetric ;
     hi:hasNullHypothesis "Orthogonality loss does not improve robustness."^^xsd:string .
 
 inst:Paper_06_Goal_EnhanceModelRobustness a hi:Goal ;
     rdfs:label "Enhance Model Robustness" ;
     hi:hasGoalConcept hint:UserWellbeingGoal ;
     hi:requiresTask inst:Paper_06_Task_ApplyOrthogonalityLoss,
-        inst:Paper_06_Task_AssessFeatureImportance,
-        inst:Paper_06_Task_EvaluateModelRobustness,
+        inst:Paper_06_Task_ConductAblationStudy,
         inst:Paper_06_Task_FeatureExtraction .
 
-inst:Paper_06_Multi-headNetwork_Cap_DataProcessing a hi:Capability ;
-    rdfs:label "Data Processing" ;
-    hi:hasCapabilityConcept hint:MultimodalInterpretationCapability .
+inst:Paper_06_Multi-headNetwork_Cap_Classification a hi:Capability ;
+    rdfs:label "Classification" ;
+    hi:hasCapabilityConcept hint:ReasoningCapability .
+
+inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement a hi:Capability ;
+    rdfs:label "Robustness Enhancement" ;
+    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
+
+inst:Paper_06_ResearchScientist_Cap_FeedbackProvision a hi:Capability ;
+    rdfs:label "Feedback Provision" ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
 
 inst:Paper_06_UseCase a hi:ResearchUseCase ;
     rdfs:label "Robust Multimodal Learning" ;
@@ -127,44 +130,34 @@ inst:Affiliation_InstituteForSystemsAnalysisAndComputerScienceCnrNationalResearc
 
 inst:Paper_06_Multi-headNetwork a hi:ArtificialAgent ;
     rdfs:label "Multi-Head Network" ;
-    hi:hasCapability inst:Paper_06_Multi-headNetwork_Cap_DataProcessing,
-        inst:Paper_06_Multi-headNetwork_Cap_PatternRecognition,
+    hi:hasCapability inst:Paper_06_Multi-headNetwork_Cap_Classification,
+        inst:Paper_06_Multi-headNetwork_Cap_FeatureExtraction,
         inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement ;
     hi:hasRoleConcept hint:AIAssistantRole ;
     hi:performsExecution inst:Paper_06_Exec_ExecuteFeatureExtraction,
-        inst:Paper_06_Exec_ExecuteOrthogonalityLoss .
+        inst:Paper_06_Exec_ExecuteOrthogonalityLossApplication .
 
-inst:Paper_06_Multi-headNetwork_Cap_PatternRecognition a hi:Capability ;
-    rdfs:label "Pattern Recognition" ;
+inst:Paper_06_Multi-headNetwork_Cap_FeatureExtraction a hi:Capability ;
+    rdfs:label "Feature Extraction" ;
     hi:allowsTask inst:Paper_06_Task_FeatureExtraction ;
     hi:hasCapabilityConcept hint:PatternLearningCapability .
 
-inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement a hi:Capability ;
-    rdfs:label "Robustness Enhancement" ;
-    hi:allowsTask inst:Paper_06_Task_ApplyOrthogonalityLoss ;
-    hi:hasCapabilityConcept hint:ReinforcementLearningCapability .
-
 inst:Paper_06_ResearchScientist a hi:HumanAgent ;
     rdfs:label "Research Scientist" ;
-    hi:hasCapability inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding,
-        inst:Paper_06_ResearchScientist_Cap_DomainJudgment ;
+    hi:hasCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment,
+        inst:Paper_06_ResearchScientist_Cap_FeedbackProvision ;
     hi:hasRoleConcept hint:HumanUserRole ;
-    hi:performsExecution inst:Paper_06_Exec_ConductModelEvaluation .
+    hi:performsExecution inst:Paper_06_Exec_ExecuteAblationStudy .
 
-inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:allowsTask inst:Paper_06_Task_AssessFeatureImportance ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
-
-inst:Paper_06_ResearchScientist_Cap_DomainJudgment a hi:Capability ;
-    rdfs:label "Domain Judgment" ;
-    hi:allowsTask inst:Paper_06_Task_EvaluateModelRobustness ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
-
-inst:Paper_06_Task_AssessFeatureImportance a hi:Task ;
-    rdfs:label "Assess Feature Importance" ;
+inst:Paper_06_Task_ApplyOrthogonalityLoss a hi:Task ;
+    rdfs:label "Apply Orthogonality Loss" ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_ContextualUnderstanding .
+    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment .
+
+inst:Paper_06_Task_ConductAblationStudy a hi:Task ;
+    rdfs:label "Conduct Ablation Study" ;
+    hi:hasTaskConcept hint:HypothesisComparisonTask ;
+    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment .
 
 inst:Paper_06_Team a hi:HITeam ;
     rdfs:label "Robust Multimodal Learning Team" ;
@@ -173,18 +166,19 @@ inst:Paper_06_Team a hi:HITeam ;
         inst:Paper_06_ResearchScientist ;
     hi:isInfluencedBy inst:Paper_06_Context .
 
-inst:Paper_06_Task_ApplyOrthogonalityLoss a hi:Task ;
-    rdfs:label "Apply Orthogonality Loss" ;
-    hi:hasTaskConcept hint:SemanticReasoningTask ;
-    hi:requiresCapability inst:Paper_06_Multi-headNetwork_Cap_RobustnessEnhancement .
+inst:Paper_06_Evaluation a hi:Evaluation ;
+    rdfs:label "Model Robustness Evaluation" ;
+    hi:hasEvaluationConcept hint:AIInterventionImpactEvaluation ;
+    hi:hasExperiment inst:Paper_06_Experiment_AblationStudyExperiment ;
+    hi:hasMetricConcept hint:DiagnosisAccuracyMetric,
+        hint:TaskSuccessRateMetric .
 
-inst:Paper_06_Task_EvaluateModelRobustness a hi:Task ;
-    rdfs:label "Evaluate Model Robustness" ;
-    hi:hasTaskConcept hint:ConflictResolutionTask ;
-    hi:requiresCapability inst:Paper_06_ResearchScientist_Cap_DomainJudgment .
+inst:Paper_06_ResearchScientist_Cap_DomainJudgment a hi:Capability ;
+    rdfs:label "Domain Judgment" ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
 
 inst:Paper_06_Task_FeatureExtraction a hi:Task ;
     rdfs:label "Feature Extraction" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_06_Multi-headNetwork_Cap_PatternRecognition .
+    hi:requiresCapability inst:Paper_06_Multi-headNetwork_Cap_FeatureExtraction .
 

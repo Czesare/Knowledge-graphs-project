@@ -1,13 +1,11 @@
 Concept,Type,#UseCases,Use Cases
-Trust Shift Phenomenon,Phenomenon,11,"Complex Claim Verification, Triple Extraction in Social Conversations, Explanation Stream Patterns in DSS, Face Matching Decision Support, Adaptive Autonomy in Care Robots, Smelting Plant Risk Assessment, Crisis Data Relevance Identification, Cultural Heritage & Craftsmanship Preservation, Cybersecurity Response for Voting System, Neurodegeneration Protein Analysis, Child Education Intervention"
-Transparency Constraint,Constraint,9,"Complex Claim Verification, Triple Extraction in Social Conversations, Explanation Stream Patterns in DSS, Face Matching Decision Support, Robust Multimodal Learning, Trustworthy RAG Chatbot for Public Administration, Cybersecurity Response for Voting System, Neurodegeneration Protein Analysis, Child Education Intervention"
-Skills Complementarity Phenomenon,Phenomenon,7,"Adaptive Autonomy in Care Robots, Robust Multimodal Learning, Smelting Plant Risk Assessment, Cultural Heritage & Craftsmanship Preservation, Cybersecurity Response for Voting System, Neurodegeneration Protein Analysis, Child Education Intervention"
-Ethical Constraint,Constraint,4,"Explanation Stream Patterns in DSS, Face Matching Decision Support, Adaptive Autonomy in Care Robots, Cultural Heritage & Craftsmanship Preservation"
-Privacy Constraint,Constraint,4,"Adaptive Autonomy in Care Robots, Crisis Data Relevance Identification, Trustworthy RAG Chatbot for Public Administration, Cultural Heritage & Craftsmanship Preservation"
-Autonomy Constraint,Constraint,3,"Cultural Heritage & Craftsmanship Preservation, Neurodegeneration Protein Analysis, Child Education Intervention"
-Knowledge Mismatch Phenomenon,Phenomenon,3,"Complex Claim Verification, Triple Extraction in Social Conversations, Trustworthy RAG Chatbot for Public Administration"
+Transparency Constraint,Constraint,11,"Complex Claim Verification, Triple Extraction from Social Dialogues, Explanation Stream Patterns in DSS, Face Matching Decision Support, Robust Multimodal Learning, Smelting Plant Risk Assessment, Crisis Data Relevance Identification, Trustworthy RAG Chatbot for Public Administration, Cybersecurity Response for Voting System, Neurodegeneration Protein Analysis, Child Education Intervention"
+Trust Shift Phenomenon,Phenomenon,10,"Complex Claim Verification, Triple Extraction from Social Dialogues, Explanation Stream Patterns in DSS, Face Matching Decision Support, Adaptive Autonomy in Nursing Home, Crisis Data Relevance Identification, Cultural Heritage Preservation, Emergency Response Decision Support, Cybersecurity Response for Voting System, Neurodegeneration Protein Analysis"
+Skills Complementarity Phenomenon,Phenomenon,7,"Adaptive Autonomy in Nursing Home, Robust Multimodal Learning, Smelting Plant Risk Assessment, Emergency Response Decision Support, Cybersecurity Response for Voting System, Neurodegeneration Protein Analysis, Child Education Intervention"
+Knowledge Mismatch Phenomenon,Phenomenon,6,"Complex Claim Verification, Triple Extraction from Social Dialogues, Smelting Plant Risk Assessment, Trustworthy RAG Chatbot for Public Administration, Cultural Heritage Preservation, Child Education Intervention"
+Ethical Constraint,Constraint,5,"Complex Claim Verification, Face Matching Decision Support, Adaptive Autonomy in Nursing Home, Cultural Heritage Preservation, Emergency Response Decision Support"
+Privacy Constraint,Constraint,4,"Adaptive Autonomy in Nursing Home, Trustworthy RAG Chatbot for Public Administration, Cultural Heritage Preservation, Emergency Response Decision Support"
+Autonomy Constraint,Constraint,2,"Neurodegeneration Protein Analysis, Child Education Intervention"
 Safety Constraint,Constraint,2,"Smelting Plant Risk Assessment, Cybersecurity Response for Voting System"
 Confirmation Bias,Phenomenon,2,"Explanation Stream Patterns in DSS, Face Matching Decision Support"
 Data Mismatch Phenomenon,Phenomenon,2,"Robust Multimodal Learning, Crisis Data Relevance Identification"
-Fairness Constraint,Constraint,1,Complex Claim Verification
-Risk Exposure Phenomenon,Phenomenon,1,Cultural Heritage & Craftsmanship Preservation

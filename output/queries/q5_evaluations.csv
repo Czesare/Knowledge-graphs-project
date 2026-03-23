@@ -1,11 +1,12 @@
 Paper,Evaluation,Experiment,Metric,H₀ (Null),H₁ (Alt.)
-Exploring Human-AI Synergy for Complex C,Fact-checking Evaluation,Question Generation Impact,Explanation Clarity Metric,LLM-generated questions do not improve veracity pr,LLM-generated questions improve veracity predictio
-Extracting Triples from Dialogues for Co,Triple Extraction Evaluation,Triple Extraction Precision Te,Task Success Rate Metric,Triple extraction models do not improve precision ,Triple extraction models improve precision over ba
-Formalizing Explanation Design Through I,Explanation Pattern Evaluation,Explanation Effectiveness Expe,Explanation Clarity Metric,Explanation patterns do not improve decision-makin,Explanation patterns improve decision-making.
-Formalizing Explanation Design Through I,Explanation Pattern Evaluation,Explanation Effectiveness Expe,Trust Preservation Metric,Explanation patterns do not improve decision-makin,Explanation patterns improve decision-making.
-Human Response to Decision Support in Fa,Face Matching Evaluation,Accuracy Impact Experiment,Task Success Rate Metric,AI support does not improve human accuracy.,AI support improves human accuracy.
-Hybrid Autonomy: Towards a Unified Frame,Trust and Ethical Adaptability,Trust Evaluation Experiment,Trust Preservation Metric,Adaptive autonomy does not affect trust levels.,Adaptive autonomy positively affects trust levels.
-Multi-Head Networks for Missing Modaliti,Model Robustness Evaluation,Ablation Study,Task Success Rate Metric,Orthogonality loss does not improve robustness.,Orthogonality loss improves robustness.
-Ontology-Based Risk Assessment in Smelti,System Evaluation,Scenario-Based Evaluation,Safety Compliance Metric,The system does not improve safety compliance.,The system improves safety compliance.
-Quality-Informed Active Learning on Soci,Active Learning Evaluation,Crisis Scenario Testing,Task Success Rate Metric,IQ indicators do not improve AL performance.,IQ indicators improve AL performance.
-Towards Building a Trustworthy RAG-Based,Evaluate Retrieval Performance,Embedding Model Comparison,Task Success Rate Metric,Italian-specific models perform equally well as En,English models outperform Italian-specific models.
+Exploring Human-AI Synergy for Complex C,Fact-checking Pipeline Evaluat,Question Generation Impact,Explanation Clarity Metric,LLM-generated questions do not improve veracity pr,LLM-generated questions improve veracity predictio
+Extracting Triples from Dialogues for Co,Model Performance Evaluation,Triple Extraction Accuracy Tes,Explanation Clarity Metric,The model does not improve triple extraction accur,The model improves triple extraction accuracy.
+Formalizing Explanation Design Through I,Explanation Effectiveness Eval,User Engagement Experiment,Explanation Clarity Metric,User engagement does not improve with ESPs,User engagement improves with ESPs
+Human Response to Decision Support in Fa,Face Matching System Evaluatio,Impact of Machine Accuracy on ,Task Success Rate Metric,Machine accuracy does not affect human performance,Machine accuracy affects human performance.
+Hybrid Autonomy: Towards a Unified Frame,Trust and Ethical Adaptability,Trust Adaptability Experiment,Trust Preservation Metric,Adaptive autonomy does not affect trust levels.,Adaptive autonomy positively affects trust levels.
+Hybrid Human-AI Systems for Preserving C,Cultural Preservation Evaluati,Cultural Data Governance Exper,Trust Preservation Metric,Data governance does not affect trust.,Data governance enhances trust.
+Multi-Head Networks for Missing Modaliti,Model Robustness Evaluation,Ablation Study Experiment,Diagnosis Accuracy Metric,Orthogonality loss does not improve robustness.,Orthogonality loss improves robustness.
+Ontology-Based Risk Assessment in Smelti,System Evaluation,Scenario-Based Testing,Safety Compliance Metric,The system does not improve safety compliance.,The system improves safety compliance.
+Quality-Informed Active Learning on Soci,Active Learning Evaluation,Crisis Scenario Evaluation,Task Success Rate Metric,IQ indicators do not improve AL performance.,IQ indicators improve AL performance.
+Supporting Responsible Human-AI Cooperat,Evaluation of ER-AI Cooperatio,Cooperation Effectiveness Expe,Task Success Rate Metric,AI does not improve decision-making success rate.,AI improves decision-making success rate.
+Towards Building a Trustworthy RAG-Based,Chatbot Performance Evaluation,RAG Chatbot Evaluation,Task Success Rate Metric,The RAG chatbot does not improve task success rate,The RAG chatbot improves task success rate.

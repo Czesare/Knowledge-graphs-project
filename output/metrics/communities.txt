@@ -1,81 +1,93 @@
-Communities: 16
-Modularity: 0.6097
-Sizes: [93, 75, 63, 56, 51, 45, 42, 39, 31, 28, 26, 20, 20, 17, 14, 10]
+Communities: 15
+Modularity: 0.5883
+Sizes: [112, 60, 57, 54, 52, 48, 44, 37, 36, 35, 33, 25, 20, 17, 13]
 
-Community 1 (93 nodes)
-  SKOS Concept: 75
-  Other: 9
-  Author: 4
+Community 1 (112 nodes)
+  SKOS Concept: 92
+  Other: 8
+  Author: 8
   Affiliation: 3
-  Paper: 2
-  Sample: hint:ReinforcementLearningWithKnowledgeGraphEvaluation, hint:Task, inst:Paper_07, SmartBear Software, hint:SocialConversationContext
+  Paper: 1
+  Sample: hint:SemanticEmbeddingTaskExecution, hint:VirtualRealityImpactEvaluation, inst:Keyword_Reliability, hint:OpenCabinetTask, hint:CulturalPreservationTask
 
-Community 2 (75 nodes)
-  SKOS Concept: 35
-  Capability: 19
-  Task: 10
-  Other: 4
+Community 2 (60 nodes)
+  SKOS Concept: 13
+  Capability: 12
+  Task: 8
+  Interaction: 7
+  Other: 6
+  HumanAgent: 4
+  Goal: 3
   ArtificialAgent: 3
-  HumanAgent: 1
+  HITeam: 3
+  UseCase: 1
+  Sample: Triple Extraction from Social Dialogues, Human-Machine Decision Interaction, Extract Knowledge from Dialogues, Enhance Model Robustness, hint:BayesianLogicMethod
+
+Community 3 (57 nodes)
+  Capability: 14
+  Task: 11
+  SKOS Concept: 9
+  Other: 6
+  Goal: 4
+  ArtificialAgent: 4
+  HITeam: 3
+  UseCase: 3
+  HumanAgent: 2
+  Interaction: 1
+  Sample: hint:PatternLearningCapability, hint:PostHocExplanationMethod, Generate Explanations Execution, Pattern Recognition, Face Matching Decision Support Team
+
+Community 4 (54 nodes)
+  SKOS Concept: 34
+  Context: 14
+  UseCase: 3
+  HITeam: 3
+  Sample: Cultural Heritage Preservation, Nursing Home Assistance, Social Conversation Context, School Intervention Context, hint:MoltenMetalHandling
+
+Community 5 (52 nodes)
+  SKOS Concept: 20
+  Experiment: 12
+  Evaluation: 12
+  Other: 2
+  Task: 2
+  Capability: 2
+  Goal: 1
+  ArtificialAgent: 1
+  Sample: hint:RecommendationRelevanceMetric, hint:AIInterventionImpactEvaluation, hint:UserComfortMetric, hint:TrustPreservationMetric, Cultural Data Governance Experiment
+
+Community 6 (48 nodes)
+  SKOS Concept: 15
+  Capability: 10
+  Task: 7
+  HumanAgent: 4
+  Other: 4
+  Interaction: 2
+  Experiment: 1
+  ArtificialAgent: 1
+  Evaluation: 1
+  HITeam: 1
   UseCase: 1
   Goal: 1
-  HITeam: 1
-  Sample: hint:CandidateHypothesisGenerationTask, hint:MetaAnalysisCapability, Reactive Response, Ethical Oversight, Professional Fact-Checker
+  Sample: Cultural Expert, hint:OnlineTutoringExperiment, hint:TutorRole, hint:SemanticReasoningTask, Decision Making
 
-Community 3 (63 nodes)
-  Capability: 14
-  SKOS Concept: 13
-  Task: 11
-  Other: 8
-  ArtificialAgent: 3
-  UseCase: 3
-  Goal: 3
-  HumanAgent: 3
-  HITeam: 3
-  Interaction: 2
-  Sample: Communication, Explainable AI System, hint:ExplanationTask, Pattern Recognition, Assess User Needs
-
-Community 4 (56 nodes)
-  SKOS Concept: 31
-  Evaluation: 13
-  Experiment: 12
-  Sample: hint:TaskSuccessRateMetric, Crisis Scenario Testing, hint:NegotationImpactEvaluation, Explanation Pattern Evaluation, Triple Extraction Evaluation
-
-Community 5 (51 nodes)
-  Capability: 11
-  Task: 10
-  SKOS Concept: 10
-  Other: 5
-  HumanAgent: 3
-  Goal: 3
-  HITeam: 3
-  UseCase: 2
-  ArtificialAgent: 2
-  Interaction: 2
-  Sample: Data Processing, Identify Relevant Data, Task Execution, Validate Data Selection, Ethical Oversight
-
-Community 6 (45 nodes)
-  SKOS Concept: 16
-  Task: 8
-  Capability: 8
-  HumanAgent: 3
-  HITeam: 2
-  Other: 2
-  UseCase: 2
-  Goal: 2
-  ArtificialAgent: 1
-  Interaction: 1
-  Sample: Neurodegeneration Protein Analysis Team, Evaluate Safety Protocols, Logistical Management, Ontology System, Safety Protocol Adherence
-
-Community 7 (42 nodes)
-  SKOS Concept: 29
-  Context: 13
-  Sample: hint:JuryDeliberationContext, hint:UndueInfluenceConstraint, Multimodal Learning Context, hint:SmartCampusContext, hint:ClinicalConsultationContext
-
-Community 8 (39 nodes)
-  Author: 14
-  Other: 12
+Community 7 (44 nodes)
+  Other: 17
+  Author: 13
   Affiliation: 8
-  Paper: 4
+  Paper: 5
   Conference: 1
-  Sample: inst:Keyword_DecisionSupportSystems, inst:Keyword_InteractionDesign, Universitat Pompeu Fabra, ICREA, inst:Paper_01_Author3, inst:Keyword_SocialConversations
+  Sample: inst:Paper_10_Author2, inst:Keyword_ResponsibleHuman-aiCooperation, Inovacioni Centar ETF: Belgrade, RS, inst:Keyword_Value-sensitiveDesign, SmartBear Software
+
+Community 8 (37 nodes)
+  Other: 7
+  Capability: 7
+  Task: 7
+  SKOS Concept: 6
+  HumanAgent: 2
+  Author: 2
+  UseCase: 1
+  Goal: 1
+  ArtificialAgent: 1
+  Paper: 1
+  Affiliation: 1
+  HITeam: 1
+  Sample: hint:ProtocolNegotiationMethod, inst:Keyword_DistributedCognitionTheory, Real-time Position Awareness, hint:RiskOperatorRole, hint:OperatorCoordinationTask

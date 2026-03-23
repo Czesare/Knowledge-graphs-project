@@ -1,0 +1,13 @@
+{
+  "source_id": "paper_07",
+  "is_scenario": false,
+  "extracted_link_counts": {
+    "task_requiresCapability_direct_concept": 3,
+    "execution_realizesTask_direct_label": 2
+  },
+  "repair_link_counts": {},
+  "unresolved_counts": {},
+  "repair_actions": [],
+  "unresolved_items": [],
+  "new_concepts_proposed": 1
+}

@@ -54,10 +54,10 @@
               ]
             },
             {
-              "label": "Contextual Understanding",
-              "concept": "hint:SituationalAwarenessCapability",
+              "label": "Feedback Provision",
+              "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Assess Feature Importance"
+                "Provide Feedback on Model Performance"
               ]
             }
           ]
@@ -69,24 +69,24 @@
           "role_concept": "hint:AIAssistantRole",
           "capabilities": [
             {
-              "label": "Pattern Recognition",
+              "label": "Feature Extraction",
               "concept": "hint:PatternLearningCapability",
               "allows_tasks": [
-                "Feature Extraction"
-              ]
-            },
-            {
-              "label": "Data Processing",
-              "concept": "hint:MultimodalInterpretationCapability",
-              "allows_tasks": [
-                "Handle Missing Modalities"
+                "Extract Features from Data"
               ]
             },
             {
               "label": "Robustness Enhancement",
               "concept": "hint:ReinforcementLearningCapability",
               "allows_tasks": [
-                "Apply Orthogonality Loss"
+                "Enhance Model Robustness"
+              ]
+            },
+            {
+              "label": "Classification",
+              "concept": "hint:ReasoningCapability",
+              "allows_tasks": [
+                "Classify Multimodal Data"
               ]
             }
           ]
@@ -110,23 +110,15 @@
             "label": "Apply Orthogonality Loss",
             "task_concept": "hint:SemanticReasoningTask",
             "required_capabilities": [
-              "hint:ReinforcementLearningCapability"
+              "hint:SemanticReasoningCapability"
             ],
             "sub_tasks": []
           },
           {
-            "label": "Evaluate Model Robustness",
-            "task_concept": "hint:ConflictResolutionTask",
+            "label": "Conduct Ablation Study",
+            "task_concept": "hint:HypothesisComparisonTask",
             "required_capabilities": [
-              "hint:ClinicalJudgmentCapability"
-            ],
-            "sub_tasks": []
-          },
-          {
-            "label": "Assess Feature Importance",
-            "task_concept": "hint:SemanticReasoningTask",
-            "required_capabilities": [
-              "hint:SituationalAwarenessCapability"
+              "hint:MetaAnalysisCapability"
             ],
             "sub_tasks": []
           }
@@ -135,8 +127,8 @@
     ],
     "interactions": [
       {
-        "label": "Model Evaluation Discussion",
-        "modality_concept": "hint:VerbalDialogueModality",
+        "label": "Model Feedback Session",
+        "modality_concept": "hint:DashboardModality",
         "intent_concept": "hint:ExplanationIntent",
         "agents_involved": [
           "Research Scientist",
@@ -152,14 +144,14 @@
         "method_concept": "hint:DataCollectionMethod"
       },
       {
-        "label": "Execute Orthogonality Loss",
+        "label": "Execute Orthogonality Loss Application",
         "task_label": "Apply Orthogonality Loss",
         "performed_by": "Multi-Head Network",
-        "method_concept": "hint:ReinforcementLearningMethod"
+        "method_concept": "hint:SemanticLinkingMethod"
       },
       {
-        "label": "Conduct Model Evaluation",
-        "task_label": "Evaluate Model Robustness",
+        "label": "Execute Ablation Study",
+        "task_label": "Conduct Ablation Study",
         "performed_by": "Research Scientist",
         "method_concept": "hint:MetaAnalysisScoringMethod"
       }
@@ -175,10 +167,10 @@
       ],
       "experiments": [
         {
-          "label": "Ablation Study",
+          "label": "Ablation Study Experiment",
           "experiment_concept": "hint:DiagnosisExperiment",
           "metrics_tested": [
-            "hint:TaskSuccessRateMetric"
+            "hint:DiagnosisAccuracyMetric"
           ],
           "null_hypothesis": "Orthogonality loss does not improve robustness.",
           "alternative_hypothesis": "Orthogonality loss improves robustness."
@@ -190,8 +182,8 @@
     {
       "uri": "hint:OrthogonalityLossCapability",
       "label": "Orthogonality Loss Capability",
-      "definition": "Capability to enhance model robustness by enforcing orthogonality among latent representations.",
-      "broader": "hint:ReinforcementLearningCapability",
+      "definition": "The ability to apply orthogonality constraints to enhance feature diversity and robustness.",
+      "broader": "hint:Capability",
       "category": "Capability"
     }
   ]
