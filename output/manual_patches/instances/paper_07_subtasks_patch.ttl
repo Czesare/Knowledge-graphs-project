@@ -1,0 +1,22 @@
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Patch: manual subtask decomposition for Paper 07
+# Source: output/instances/paper_07.ttl
+# Extracted from inst:Paper_07_Task_RiskAssessment
+
+inst:Paper_07_Task_RiskAssessment
+    hi:hasSubTask inst:Paper_07_Task_CoordinateWithDrivers,
+        inst:Paper_07_Task_MonitorLadlePlacement .
+
+inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
+    rdfs:label "Coordinate with Drivers" ;
+    hi:hasTaskConcept hint:OperatorCoordinationTask ;
+    hi:requiresCapability inst:Paper_07_Operator_Cap_Communication .
+
+inst:Paper_07_Task_MonitorLadlePlacement a hi:Task ;
+    rdfs:label "Monitor Ladle Placement" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_07_Driver_Cap_Real-timePositionAwareness .

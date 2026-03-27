@@ -160,10 +160,6 @@ inst:Paper_07_Operator_Cap_SafetyProtocolAdherence a hi:Capability ;
     hi:allowsTask inst:Paper_07_Task_RiskAssessment ;
     hi:hasCapabilityConcept hint:ReasoningCapability .
 
-inst:Paper_07_Task_MonitorLadlePlacement a hi:Task ;
-    rdfs:label "Monitor Ladle Placement" ;
-    hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_07_Driver_Cap_Real-timePositionAwareness .
 
 inst:Paper_07_Team a hi:HITeam ;
     rdfs:label "Smelting Plant Risk Assessment Team" ;
@@ -173,10 +169,6 @@ inst:Paper_07_Team a hi:HITeam ;
         inst:Paper_07_Operator ;
     hi:isInfluencedBy inst:Paper_07_Context .
 
-inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
-    rdfs:label "Coordinate with Drivers" ;
-    hi:hasTaskConcept hint:OperatorCoordinationTask ;
-    hi:requiresCapability inst:Paper_07_Operator_Cap_Communication .
 
 inst:Paper_07_Task_RiskAssessment a hi:Task ;
     rdfs:label "Risk Assessment" ;
