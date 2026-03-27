@@ -81,7 +81,7 @@
               "label": "Contextual Understanding",
               "concept": "hint:SituationalAwarenessCapability",
               "allows_tasks": [
-                "Situational Assessment Task"
+                "Ensure Data Privacy"
               ]
             }
           ]
@@ -100,17 +100,17 @@
               ]
             },
             {
-              "label": "Multilingual Embedding",
-              "concept": "hint:EmbeddingReasoningCapability",
+              "label": "Knowledge Graph Retrieval",
+              "concept": "hint:KnowledgeGraphQueryingCapability",
               "allows_tasks": [
-                "Knowledge Graph Query Task"
+                "Retrieve Relevant Information"
               ]
             },
             {
               "label": "Response Generation",
-              "concept": "hint:PatternLearningCapability",
+              "concept": "hint:ExplainingCapability",
               "allows_tasks": [
-                "Question Answering Task"
+                "Generate User-Friendly Responses"
               ]
             }
           ]
@@ -142,7 +142,7 @@
             "label": "Ensure Data Privacy",
             "task_concept": "hint:DataCollectionTask",
             "required_capabilities": [
-              "hint:SensingCapability"
+              "hint:SituationalAwarenessCapability"
             ],
             "sub_tasks": []
           }

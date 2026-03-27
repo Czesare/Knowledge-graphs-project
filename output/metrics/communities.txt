@@ -1,93 +1,87 @@
-Communities: 15
-Modularity: 0.5883
-Sizes: [112, 60, 57, 54, 52, 48, 44, 37, 36, 35, 33, 25, 20, 17, 13]
+Communities: 16
+Modularity: 0.5918
+Sizes: [125, 51, 49, 49, 48, 48, 47, 40, 34, 30, 28, 26, 24, 21, 13, 10]
 
-Community 1 (112 nodes)
-  SKOS Concept: 92
-  Other: 8
-  Author: 8
-  Affiliation: 3
-  Paper: 1
-  Sample: hint:SemanticEmbeddingTaskExecution, hint:VirtualRealityImpactEvaluation, inst:Keyword_Reliability, hint:OpenCabinetTask, hint:CulturalPreservationTask
+Community 1 (125 nodes)
+  SKOS Concept: 96
+  Other: 12
+  Author: 9
+  Affiliation: 4
+  Paper: 2
+  Experiment: 1
+  Evaluation: 1
+  Sample: hint:AIAdvisorRole, hint:EngagementTimeMetric, hint:VirtualGuideRole, hint:ProvideStatementTask, hint:EnergyEfficiencyMetric
 
-Community 2 (60 nodes)
-  SKOS Concept: 13
-  Capability: 12
-  Task: 8
-  Interaction: 7
+Community 2 (51 nodes)
+  Capability: 11
+  Task: 10
+  SKOS Concept: 10
   Other: 6
-  HumanAgent: 4
+  HumanAgent: 3
   Goal: 3
+  HITeam: 2
+  ArtificialAgent: 2
+  UseCase: 2
+  Evaluation: 1
+  Interaction: 1
+  Sample: Emergency Responder, Monitor ER Safety, Adaptive Autonomy in Nursing Home Team, Perform Hygiene Tasks, hint:Method
+
+Community 3 (49 nodes)
+  SKOS Concept: 25
+  Capability: 14
+  Task: 3
+  HumanAgent: 1
+  Goal: 1
+  ArtificialAgent: 1
+  HITeam: 1
+  Interaction: 1
+  UseCase: 1
+  Other: 1
+  Sample: hint:FineDexterityCapability, hint:KnowledgeGraphQueryingCapability, Government Employee, Risk Identification, hint:AnswerIntent
+
+Community 4 (49 nodes)
+  SKOS Concept: 16
+  Capability: 11
+  Task: 8
   ArtificialAgent: 3
   HITeam: 3
-  UseCase: 1
-  Sample: Triple Extraction from Social Dialogues, Human-Machine Decision Interaction, Extract Knowledge from Dialogues, Enhance Model Robustness, hint:BayesianLogicMethod
-
-Community 3 (57 nodes)
-  Capability: 14
-  Task: 11
-  SKOS Concept: 9
-  Other: 6
-  Goal: 4
-  ArtificialAgent: 4
-  HITeam: 3
   UseCase: 3
-  HumanAgent: 2
-  Interaction: 1
-  Sample: hint:PatternLearningCapability, hint:PostHocExplanationMethod, Generate Explanations Execution, Pattern Recognition, Face Matching Decision Support Team
+  Goal: 2
+  Other: 2
+  HumanAgent: 1
+  Sample: Communication Clarity, IP Blocking, Cross-check Predictions, AI Security System, hint:SmartCampusDomain
 
-Community 4 (54 nodes)
+Community 5 (48 nodes)
   SKOS Concept: 34
   Context: 14
-  UseCase: 3
-  HITeam: 3
-  Sample: Cultural Heritage Preservation, Nursing Home Assistance, Social Conversation Context, School Intervention Context, hint:MoltenMetalHandling
-
-Community 5 (52 nodes)
-  SKOS Concept: 20
-  Experiment: 12
-  Evaluation: 12
-  Other: 2
-  Task: 2
-  Capability: 2
-  Goal: 1
-  ArtificialAgent: 1
-  Sample: hint:RecommendationRelevanceMetric, hint:AIInterventionImpactEvaluation, hint:UserComfortMetric, hint:TrustPreservationMetric, Cultural Data Governance Experiment
+  Sample: hint:SafetyConstraint, Nursing Home Assistance, hint:PrivacyConstraint, hint:AutonomyConstraint, Molten Metal Handling
 
 Community 6 (48 nodes)
-  SKOS Concept: 15
-  Capability: 10
-  Task: 7
+  Capability: 11
+  SKOS Concept: 10
+  Task: 8
+  Other: 6
   HumanAgent: 4
-  Other: 4
+  ArtificialAgent: 2
+  HITeam: 2
   Interaction: 2
-  Experiment: 1
-  ArtificialAgent: 1
-  Evaluation: 1
-  HITeam: 1
+  Goal: 2
   UseCase: 1
-  Goal: 1
-  Sample: Cultural Expert, hint:OnlineTutoringExperiment, hint:TutorRole, hint:SemanticReasoningTask, Decision Making
+  Sample: hint:OperatorCoordinationCapability, Risk Assessment, Cross-reference Literature, Ontology System, Smelting Plant Risk Assessment Team
 
-Community 7 (44 nodes)
+Community 7 (47 nodes)
   Other: 17
-  Author: 13
+  Author: 14
   Affiliation: 8
   Paper: 5
-  Conference: 1
-  Sample: inst:Paper_10_Author2, inst:Keyword_ResponsibleHuman-aiCooperation, Inovacioni Centar ETF: Belgrade, RS, inst:Keyword_Value-sensitiveDesign, SmartBear Software
-
-Community 8 (37 nodes)
-  Other: 7
-  Capability: 7
-  Task: 7
-  SKOS Concept: 6
-  HumanAgent: 2
-  Author: 2
   UseCase: 1
-  Goal: 1
-  ArtificialAgent: 1
-  Paper: 1
-  Affiliation: 1
-  HITeam: 1
-  Sample: hint:ProtocolNegotiationMethod, inst:Keyword_DistributedCognitionTheory, Real-time Position Awareness, hint:RiskOperatorRole, hint:OperatorCoordinationTask
+  Conference: 1
+  SKOS Concept: 1
+  Sample: Smelting Plant Risk Assessment, Jheronimus Academy of Data Science, Eindhoven University of Technology, Tilburg University, Politecnico di Milano, HHAI 2025, inst:Paper_08_Author2
+
+Community 8 (40 nodes)
+  SKOS Concept: 13
+  Experiment: 12
+  Evaluation: 11
+  Other: 4
+  Sample: Fact-checking Pipeline Evaluation, Active Learning Evaluation, Trust and Effectiveness Experiment, hint:ExplanationClarityMetric, Ablation Study Experiment

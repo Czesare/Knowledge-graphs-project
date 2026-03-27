@@ -1,5 +1,5 @@
 {
-  "triples": 3819,
+  "triples": 3839,
   "graph_counts": {
     "papers": 11,
     "authors": 36,
@@ -10,7 +10,7 @@
     "experiments": 14
   },
   "link_counts": {
-    "owl:sameAs": 17,
+    "owl:sameAs": 28,
     "skos:closeMatch": 83,
     "skos:relatedMatch": 53,
     "rdfs:seeAlso": 65

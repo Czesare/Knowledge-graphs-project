@@ -1,3 +1,4 @@
+
 """
 Expanded static concept mappings from HINT thesaurus to Wikidata and DBpedia.
 Replace the CONCEPT_MAPPINGS dict in 04_add_external_links.py with this one.
@@ -552,5 +553,44 @@ INSTANCE_LINKS = {
     # HHAI Conference
     "inst:HHAI2025": [
         ("owl:sameAs", "http://www.wikidata.org/entity/Q113466830"),            # HHAI conference
+    ],
+
+    # ================================================================
+    # PAPER DOI LINKS (owl:sameAs to https://doi.org/ URIs)
+    # DOIs extracted from parsed paper text (output/text/paper_XX.txt).
+    # All papers appear in HHAI 2025 proceedings (IOS Press / FAIA series).
+    # ================================================================
+    "inst:Paper_01": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250620"),
+    ],
+    "inst:Paper_02": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250636"),
+    ],
+    "inst:Paper_03": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250644"),
+    ],
+    "inst:Paper_04": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250657"),
+    ],
+    "inst:Paper_05": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250628"),
+    ],
+    "inst:Paper_06": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250641"),
+    ],
+    "inst:Paper_07": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250646"),
+    ],
+    "inst:Paper_08": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250650"),
+    ],
+    "inst:Paper_09": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250637"),
+    ],
+    "inst:Paper_10": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250626"),
+    ],
+    "inst:Paper_11": [
+        ("owl:sameAs", "https://doi.org/10.3233/FAIA250690"),
     ],
 }

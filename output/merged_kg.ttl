@@ -327,6 +327,7 @@ inst:Paper09_Author5 owl:sameAs wd:Q108133611 .
 inst:Paper10_Author2 owl:sameAs wd:Q130806837 .
 
 inst:Paper_01 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250620> ;
     hi:describesUseCase inst:Paper_01_UseCase ;
     hi:hasAuthor inst:Paper_01_Author1,
         inst:Paper_01_Author2,
@@ -346,6 +347,7 @@ inst:Paper_01_Interaction_Human-aiQuestionReview a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:TextChatModality .
 
 inst:Paper_02 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250636> ;
     hi:describesUseCase inst:Paper_02_UseCase ;
     hi:hasAuthor inst:Paper_02_Author1,
         inst:Paper_02_Author2,
@@ -366,6 +368,7 @@ inst:Paper_02_Interaction_Human-aiDialogue a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:TextChatModality .
 
 inst:Paper_03 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250644> ;
     hi:describesUseCase inst:Paper_03_UseCase ;
     hi:hasAuthor inst:Paper_03_Author1,
         inst:Paper_03_Author2,
@@ -387,6 +390,7 @@ inst:Paper_03_Interaction_User-systemExplanationInteraction a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:DashboardModality .
 
 inst:Paper_04 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250657> ;
     hi:describesUseCase inst:Paper_04_UseCase ;
     hi:hasAuthor inst:Paper_04_Author1,
         inst:Paper_04_Author2,
@@ -406,6 +410,7 @@ inst:Paper_04_Interaction_Human-machineDecisionInteraction a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:DashboardModality .
 
 inst:Paper_05 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250628> ;
     hi:describesUseCase inst:Paper_05_UseCase ;
     hi:hasAuthor inst:Paper_05_Author1,
         inst:Paper_05_Author2,
@@ -426,6 +431,7 @@ inst:Paper_05_Interaction_Robot-patientInteraction a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:VoiceChatModality .
 
 inst:Paper_06 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250641> ;
     hi:describesUseCase inst:Paper_06_UseCase ;
     hi:hasAuthor inst:Paper_06_Author1,
         inst:Paper_06_Author2,
@@ -446,6 +452,7 @@ inst:Paper_06_Interaction_ModelFeedbackSession a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:DashboardModality .
 
 inst:Paper_07 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250646> ;
     hi:describesUseCase inst:Paper_07_UseCase ;
     hi:hasAuthor inst:Paper_07_Author1,
         inst:Paper_07_Author2 ;
@@ -466,6 +473,7 @@ inst:Paper_07_Interaction_Operator-driverCommunication a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:VoiceChatModality .
 
 inst:Paper_08 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250650> ;
     hi:describesUseCase inst:Paper_08_UseCase ;
     hi:hasAuthor inst:Paper_08_Author1,
         inst:Paper_08_Author2 ;
@@ -484,6 +492,7 @@ inst:Paper_08_Interaction_Analyst-systemDialogue a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:TextChatModality .
 
 inst:Paper_09 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250637> ;
     hi:describesUseCase inst:Paper_09_UseCase ;
     hi:hasAuthor inst:Paper_09_Author1,
         inst:Paper_09_Author2,
@@ -513,6 +522,7 @@ inst:Paper_09_Interaction_UserQueryInteraction a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:TextChatModality .
 
 inst:Paper_10 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250626> ;
     hi:describesUseCase inst:Paper_10_UseCase ;
     hi:hasAuthor inst:Paper_10_Author1,
         inst:Paper_10_Author2 ;
@@ -532,6 +542,7 @@ inst:Paper_10_Interaction_Human-aiCollaboration a hi:Interaction ;
     hi:hasInteractionModalityConcept hint:VerbalDialogueModality .
 
 inst:Paper_11 a hi:Paper ;
+    owl:sameAs <https://doi.org/10.3233/FAIA250690> ;
     hi:describesUseCase inst:Paper_11_UseCase ;
     hi:hasAuthor inst:Paper_11_Author1 ;
     hi:hasKeyword inst:Keyword_Decision-support,
@@ -807,6 +818,14 @@ hint:DiagnosisAnchoringPhenomenon a skos:Concept ;
     skos:closeMatch wd:Q360537 ;
     skos:definition "A phenomenon in which an agent prematurely fixates on an initial hypothesis or diagnosis, influencing subsequent reasoning."@en ;
     skos:prefLabel "Diagnosis Anchoring Phenomenon"@en .
+
+hint:EmbeddingReasoningCapability a skos:Concept ;
+    rdfs:seeAlso dbr:Word_embedding ;
+    skos:broader hint:CognitiveReasoningCapability ;
+    skos:closeMatch wd:Q65076586 ;
+    skos:definition "Capability to reason using vector embeddings of data."@en ;
+    skos:inScheme hint:Scheme ;
+    skos:prefLabel "Embedding reasoning capability"@en .
 
 hint:EmergencyResponseContext a skos:Concept ;
     skos:broader hint:WorkspaceManipulationContext ;
@@ -2218,26 +2237,13 @@ inst:Paper_09_Goal_ProvideAccurateInformation a hi:Goal ;
         inst:Paper_09_Task_GenerateUser-friendlyResponses,
         inst:Paper_09_Task_RetrieveRelevantInformation .
 
-inst:Paper_09_GovernmentEmployee_Cap_ContextualUnderstanding a hi:Capability ;
-    rdfs:label "Contextual Understanding" ;
-    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
-
-inst:Paper_09_RagChatbot_Cap_MultilingualEmbedding a hi:Capability ;
-    rdfs:label "Multilingual Embedding" ;
-    hi:hasCapabilityConcept hint:EmbeddingReasoningCapability .
-
-inst:Paper_09_RagChatbot_Cap_ResponseGeneration a hi:Capability ;
-    rdfs:label "Response Generation" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
+inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment a hi:Capability ;
+    rdfs:label "Domain Judgment" ;
+    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
 
 inst:Paper_09_RagChatbot_Cap_SemanticRetrieval a hi:Capability ;
     rdfs:label "Semantic Retrieval" ;
     hi:hasCapabilityConcept hint:SemanticReasoningCapability .
-
-inst:Paper_09_Task_EnsureDataPrivacy a hi:Task ;
-    rdfs:label "Ensure Data Privacy" ;
-    hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment .
 
 inst:Paper_09_UseCase a hi:ResearchUseCase ;
     rdfs:label "Trustworthy RAG Chatbot for Public Administration" ;
@@ -2558,14 +2564,6 @@ hint:EffectiveLearningGoal a skos:Concept ;
     skos:definition "A goal focused on promoting effective learning and knowledge acquisition."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Effective Learning Goal"@en .
-
-hint:EmbeddingReasoningCapability a skos:Concept ;
-    rdfs:seeAlso dbr:Word_embedding ;
-    skos:broader hint:CognitiveReasoningCapability ;
-    skos:closeMatch wd:Q65076586 ;
-    skos:definition "Capability to reason using vector embeddings of data."@en ;
-    skos:inScheme hint:Scheme ;
-    skos:prefLabel "Embedding reasoning capability"@en .
 
 hint:FairOutcomeMetric a skos:Concept ;
     skos:broader hint:Metric ;
@@ -3067,11 +3065,6 @@ inst:Paper_07_Operator_Cap_SafetyProtocolAdherence a hi:Capability ;
     hi:allowsTask inst:Paper_07_Task_RiskAssessment ;
     hi:hasCapabilityConcept hint:ReasoningCapability .
 
-inst:Paper_07_Task_MonitorLadlePlacement a hi:Task ;
-    rdfs:label "Monitor Ladle Placement" ;
-    hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_07_Driver_Cap_Real-timePositionAwareness .
-
 inst:Paper_07_Team a hi:HITeam ;
     rdfs:label "Smelting Plant Risk Assessment Team" ;
     hi:hasGoal inst:Paper_07_Goal_ProactiveRiskManagement ;
@@ -3140,6 +3133,11 @@ inst:Paper_09_GovernmentEmployee a hi:HumanAgent ;
         inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment ;
     hi:hasRoleConcept hint:HumanUserRole .
 
+inst:Paper_09_GovernmentEmployee_Cap_ContextualUnderstanding a hi:Capability ;
+    rdfs:label "Contextual Understanding" ;
+    hi:allowsTask inst:Paper_09_Task_EnsureDataPrivacy ;
+    hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
+
 inst:Paper_09_RagChatbot a hi:ArtificialAgent ;
     rdfs:label "RAG Chatbot" ;
     hi:hasCapability inst:Paper_09_RagChatbot_Cap_MultilingualEmbedding,
@@ -3149,15 +3147,20 @@ inst:Paper_09_RagChatbot a hi:ArtificialAgent ;
     hi:performsExecution inst:Paper_09_Exec_ExecuteInformationRetrieval,
         inst:Paper_09_Exec_ExecuteResponseGeneration .
 
-inst:Paper_09_Task_GenerateUser-friendlyResponses a hi:Task ;
-    rdfs:label "Generate User-Friendly Responses" ;
-    hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment .
+inst:Paper_09_RagChatbot_Cap_MultilingualEmbedding a hi:Capability ;
+    rdfs:label "Knowledge Graph Retrieval" ;
+    hi:allowsTask inst:Paper_09_Task_RetrieveRelevantInformation ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
 
-inst:Paper_09_Task_RetrieveRelevantInformation a hi:Task ;
-    rdfs:label "Retrieve Relevant Information" ;
-    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
-    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment .
+inst:Paper_09_RagChatbot_Cap_ResponseGeneration a hi:Capability ;
+    rdfs:label "Response Generation" ;
+    hi:allowsTask inst:Paper_09_Task_GenerateUser-friendlyResponses ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
+
+inst:Paper_09_Task_EnsureDataPrivacy a hi:Task ;
+    rdfs:label "Ensure Data Privacy" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_ContextualUnderstanding .
 
 inst:Paper_09_Team a hi:HITeam ;
     rdfs:label "Trustworthy RAG Chatbot for Public Administration Team" ;
@@ -3547,14 +3550,6 @@ hint:Interaction a skos:Concept ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Interaction"@en .
 
-hint:KnowledgeGraphQueryingCapability a skos:Concept ;
-    rdfs:seeAlso dbr:Knowledge_graph ;
-    skos:broader hint:DomainSpecificCapability ;
-    skos:closeMatch wd:Q33002955 ;
-    skos:definition "Capability to query and retrieve information from knowledge graphs."@en ;
-    skos:inScheme hint:Scheme ;
-    skos:prefLabel "Knowledge graph querying capability"@en .
-
 hint:LearningGainMetric a skos:Concept ;
     skos:broader hint:Metric ;
     skos:definition "A metric that quantifies the learning gain."@en ;
@@ -3685,18 +3680,10 @@ inst:Paper_01_Evaluation a hi:Evaluation ;
     hi:hasMetricConcept hint:ExplanationClarityMetric,
         hint:TaskSuccessRateMetric .
 
-inst:Paper_01_Task_EvidenceRetrieval a hi:Task ;
-    rdfs:label "Evidence Retrieval" ;
-    hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_DataProcessing .
-
-inst:Paper_01_Task_QuestionGeneration a hi:Task ;
-    rdfs:label "Question Generation" ;
-    hi:hasTaskConcept hint:QuestionAnsweringTask ;
-    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition .
-
 inst:Paper_01_Task_VeracityPrediction a hi:Task ;
     rdfs:label "Veracity Prediction" ;
+    hi:hasSubTask inst:Paper_01_Task_EvidenceRetrieval,
+        inst:Paper_01_Task_QuestionGeneration ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
     hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight .
 
@@ -3736,13 +3723,15 @@ inst:Paper_06_Task_FeatureExtraction a hi:Task ;
     hi:hasTaskConcept hint:DataCollectionTask ;
     hi:requiresCapability inst:Paper_06_Multi-headNetwork_Cap_FeatureExtraction .
 
-inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
-    rdfs:label "Coordinate with Drivers" ;
-    hi:hasTaskConcept hint:OperatorCoordinationTask ;
-    hi:requiresCapability inst:Paper_07_Operator_Cap_Communication .
+inst:Paper_07_Task_MonitorLadlePlacement a hi:Task ;
+    rdfs:label "Monitor Ladle Placement" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_07_Driver_Cap_Real-timePositionAwareness .
 
 inst:Paper_07_Task_RiskAssessment a hi:Task ;
     rdfs:label "Risk Assessment" ;
+    hi:hasSubTask inst:Paper_07_Task_CoordinateWithDrivers,
+        inst:Paper_07_Task_MonitorLadlePlacement ;
     hi:hasTaskConcept hint:SituationalAssessmentTask ;
     hi:requiresCapability inst:Paper_07_Operator_Cap_SafetyProtocolAdherence .
 
@@ -3755,6 +3744,16 @@ inst:Paper_08_Task_QualityIndicatorEvaluation a hi:Task ;
     rdfs:label "Quality Indicator Evaluation" ;
     hi:hasTaskConcept hint:ExplanationTask ;
     hi:requiresCapability inst:Paper_08_ActiveLearningSystem_Cap_InformationQualityAnalysis .
+
+inst:Paper_09_Task_GenerateUser-friendlyResponses a hi:Task ;
+    rdfs:label "Generate User-Friendly Responses" ;
+    hi:hasTaskConcept hint:ExplanationTask ;
+    hi:requiresCapability inst:Paper_09_RagChatbot_Cap_ResponseGeneration .
+
+inst:Paper_09_Task_RetrieveRelevantInformation a hi:Task ;
+    rdfs:label "Retrieve Relevant Information" ;
+    hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
+    hi:requiresCapability inst:Paper_09_RagChatbot_Cap_MultilingualEmbedding .
 
 inst:Paper_10_AiSystem_Cap_DepthPerception a hi:Capability ;
     rdfs:label "Depth Perception" ;
@@ -3789,20 +3788,12 @@ inst:Paper_11_Evaluation a hi:Evaluation ;
     hi:hasMetricConcept hint:TaskSuccessRateMetric,
         hint:TrustPreservationMetric .
 
-inst:Paper_11_Task_AssessSituation a hi:Task ;
-    rdfs:label "Assess Situation" ;
-    hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness .
-
 inst:Paper_11_Task_DecideIntervention a hi:Task ;
     rdfs:label "Decide Intervention" ;
+    hi:hasSubTask inst:Paper_11_Task_AssessSituation,
+        inst:Paper_11_Task_PredictIncidentDevelopment ;
     hi:hasTaskConcept hint:DecideInterventionTask ;
     hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_DecisionMaking .
-
-inst:Paper_11_Task_PredictIncidentDevelopment a hi:Task ;
-    rdfs:label "Predict Incident Development" ;
-    hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
-    hi:requiresCapability inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition .
 
 inst:Scenario_01_Task_BlockSuspectedIps a hi:Task ;
     rdfs:label "Block Suspected IPs" ;
@@ -3888,6 +3879,14 @@ hint:KnowledgeGraphQueryTask a skos:Concept ;
     skos:definition "A task that involves querying knowledge graphs or databases for information."@en ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Knowledge Query Task"@en .
+
+hint:KnowledgeGraphQueryingCapability a skos:Concept ;
+    rdfs:seeAlso dbr:Knowledge_graph ;
+    skos:broader hint:DomainSpecificCapability ;
+    skos:closeMatch wd:Q33002955 ;
+    skos:definition "Capability to query and retrieve information from knowledge graphs."@en ;
+    skos:inScheme hint:Scheme ;
+    skos:prefLabel "Knowledge graph querying capability"@en .
 
 hint:LearningAdaptationCapability a skos:Concept ;
     skos:broader hint:Capability ;
@@ -3975,6 +3974,16 @@ hi:realizesTask a owl:ObjectProperty ;
     rdfs:domain hi:TaskExecution ;
     rdfs:range hi:Task .
 
+inst:Paper_01_Task_EvidenceRetrieval a hi:Task ;
+    rdfs:label "Evidence Retrieval" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_DataProcessing .
+
+inst:Paper_01_Task_QuestionGeneration a hi:Task ;
+    rdfs:label "Question Generation" ;
+    hi:hasTaskConcept hint:QuestionAnsweringTask ;
+    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition .
+
 inst:Paper_04_Task_EvaluateFacePair a hi:Task ;
     rdfs:label "Evaluate Face Pair" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
@@ -3987,9 +3996,10 @@ inst:Paper_04_Task_ProvideMatchingSuggestion a hi:Task ;
     hi:requiresCapability inst:Paper_04_FaceMatchingSystem_Cap_AccuracyReporting,
         inst:Paper_04_FaceMatchingSystem_Cap_PatternRecognition .
 
-inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment a hi:Capability ;
-    rdfs:label "Domain Judgment" ;
-    hi:hasCapabilityConcept hint:ClinicalJudgmentCapability .
+inst:Paper_07_Task_CoordinateWithDrivers a hi:Task ;
+    rdfs:label "Coordinate with Drivers" ;
+    hi:hasTaskConcept hint:OperatorCoordinationTask ;
+    hi:requiresCapability inst:Paper_07_Operator_Cap_Communication .
 
 inst:Paper_10_Evaluation a hi:Evaluation ;
     rdfs:label "Cultural Preservation Evaluation" ;
@@ -3997,6 +4007,16 @@ inst:Paper_10_Evaluation a hi:Evaluation ;
     hi:hasExperiment inst:Paper_10_Experiment_CulturalDataGovernanceExperiment ;
     hi:hasMetricConcept hint:FairOutcomeMetric,
         hint:TrustPreservationMetric .
+
+inst:Paper_11_Task_AssessSituation a hi:Task ;
+    rdfs:label "Assess Situation" ;
+    hi:hasTaskConcept hint:SituationalAssessmentTask ;
+    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness .
+
+inst:Paper_11_Task_PredictIncidentDevelopment a hi:Task ;
+    rdfs:label "Predict Incident Development" ;
+    hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
+    hi:requiresCapability inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition .
 
 inst:Scenario_02_Task_ProteinAnalysis a hi:Task ;
     rdfs:label "Protein Analysis" ;
@@ -4207,14 +4227,6 @@ hint:UseCase a skos:Concept ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Use Case"@en .
 
-hint:ExplainingCapability a skos:Concept ;
-    rdfs:seeAlso dbr:Explainable_artificial_intelligence ;
-    skos:broader hint:PerceptionSensingCapability ;
-    skos:closeMatch wd:Q487395 ;
-    skos:definition "Capability to provide explanations or justifications for decisions or actions taken."@en ;
-    skos:inScheme hint:Scheme ;
-    skos:prefLabel "Explaining capability"@en .
-
 hint:SituationalAwarenessCapability a skos:Concept ;
     rdfs:seeAlso dbr:Situation_awareness ;
     skos:broader hint:LearningAdaptationCapability ;
@@ -4260,6 +4272,14 @@ hint:Experiment a skos:Concept ;
     skos:exactMatch hi:Experiment ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Experiment"@en .
+
+hint:ExplainingCapability a skos:Concept ;
+    rdfs:seeAlso dbr:Explainable_artificial_intelligence ;
+    skos:broader hint:PerceptionSensingCapability ;
+    skos:closeMatch wd:Q487395 ;
+    skos:definition "Capability to provide explanations or justifications for decisions or actions taken."@en ;
+    skos:inScheme hint:Scheme ;
+    skos:prefLabel "Explaining capability"@en .
 
 hint:HumanUserRole a skos:Concept ;
     skos:broader hint:Role ;
@@ -4336,6 +4356,14 @@ hint:ReasoningCapability a skos:Concept ;
     skos:inScheme hint:Scheme ;
     skos:prefLabel "Reasoning capability"@en .
 
+hint:PatternLearningCapability a skos:Concept ;
+    rdfs:seeAlso dbr:Machine_learning ;
+    skos:broader hint:CommunicationExplanationCapability ;
+    skos:closeMatch wd:Q2539 ;
+    skos:definition "Capability to learn and recognize patterns in data."@en ;
+    skos:inScheme hint:Scheme ;
+    skos:prefLabel "Pattern learning capability"@en .
+
 hint:Role a skos:Concept ;
     skos:definition "A specific function or position that an agent assumes within a Hybrid Intelligence system."@en ;
     skos:exactMatch hi:Role ;
@@ -4356,14 +4384,6 @@ hint:EthicalConstraint a skos:Concept ;
     skos:exactMatch hi:EthicalConstraint ;
     skos:inScheme hint:HIScheme ;
     skos:prefLabel "Ethical Constraint"@en .
-
-hint:PatternLearningCapability a skos:Concept ;
-    rdfs:seeAlso dbr:Machine_learning ;
-    skos:broader hint:CommunicationExplanationCapability ;
-    skos:closeMatch wd:Q2539 ;
-    skos:definition "Capability to learn and recognize patterns in data."@en ;
-    skos:inScheme hint:Scheme ;
-    skos:prefLabel "Pattern learning capability"@en .
 
 hint:TaskSuccessRateMetric a skos:Concept ;
     skos:broader hint:Metric ;
@@ -4461,16 +4481,16 @@ hi:HITeam a owl:Class ;
     rdfs:label "HI Team"@en ;
     rdfs:comment "A hybrid intelligence team composed of human and artificial agents pursuing a shared goal."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty hi:hasGoal ;
+            owl:someValuesFrom hi:Goal ],
+        [ a owl:Restriction ;
             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onClass hi:ArtificialAgent ;
             owl:onProperty hi:hasMember ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onClass hi:HumanAgent ;
-            owl:onProperty hi:hasMember ],
-        [ a owl:Restriction ;
-            owl:onProperty hi:hasGoal ;
-            owl:someValuesFrom hi:Goal ] .
+            owl:onProperty hi:hasMember ] .
 
 hint:TaskExecution a skos:Concept ;
     skos:definition "The process of carrying out a specific task within a Hybrid Intelligence system."@en ;

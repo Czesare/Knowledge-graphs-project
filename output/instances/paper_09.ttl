@@ -149,15 +149,18 @@ inst:Paper_09_Goal_ProvideAccurateInformation a hi:Goal ;
 
 inst:Paper_09_GovernmentEmployee_Cap_ContextualUnderstanding a hi:Capability ;
     rdfs:label "Contextual Understanding" ;
+    hi:allowsTask inst:Paper_09_Task_EnsureDataPrivacy ;
     hi:hasCapabilityConcept hint:SituationalAwarenessCapability .
 
 inst:Paper_09_RagChatbot_Cap_MultilingualEmbedding a hi:Capability ;
-    rdfs:label "Multilingual Embedding" ;
-    hi:hasCapabilityConcept hint:EmbeddingReasoningCapability .
+    rdfs:label "Knowledge Graph Retrieval" ;
+    hi:allowsTask inst:Paper_09_Task_RetrieveRelevantInformation ;
+    hi:hasCapabilityConcept hint:KnowledgeGraphQueryingCapability .
 
 inst:Paper_09_RagChatbot_Cap_ResponseGeneration a hi:Capability ;
     rdfs:label "Response Generation" ;
-    hi:hasCapabilityConcept hint:PatternLearningCapability .
+    hi:allowsTask inst:Paper_09_Task_GenerateUser-friendlyResponses ;
+    hi:hasCapabilityConcept hint:ExplainingCapability .
 
 inst:Paper_09_RagChatbot_Cap_SemanticRetrieval a hi:Capability ;
     rdfs:label "Semantic Retrieval" ;
@@ -166,7 +169,7 @@ inst:Paper_09_RagChatbot_Cap_SemanticRetrieval a hi:Capability ;
 inst:Paper_09_Task_EnsureDataPrivacy a hi:Task ;
     rdfs:label "Ensure Data Privacy" ;
     hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_ContextualUnderstanding .
 
 inst:Paper_09_UseCase a hi:ResearchUseCase ;
     rdfs:label "Trustworthy RAG Chatbot for Public Administration" ;
@@ -202,12 +205,12 @@ inst:Paper_09_RagChatbot a hi:ArtificialAgent ;
 inst:Paper_09_Task_GenerateUser-friendlyResponses a hi:Task ;
     rdfs:label "Generate User-Friendly Responses" ;
     hi:hasTaskConcept hint:ExplanationTask ;
-    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_09_RagChatbot_Cap_ResponseGeneration .
 
 inst:Paper_09_Task_RetrieveRelevantInformation a hi:Task ;
     rdfs:label "Retrieve Relevant Information" ;
     hi:hasTaskConcept hint:KnowledgeGraphQueryTask ;
-    hi:requiresCapability inst:Paper_09_GovernmentEmployee_Cap_DomainJudgment .
+    hi:requiresCapability inst:Paper_09_RagChatbot_Cap_MultilingualEmbedding .
 
 inst:Paper_09_Team a hi:HITeam ;
     rdfs:label "Trustworthy RAG Chatbot for Public Administration Team" ;

@@ -210,7 +210,7 @@ WHERE {
     }
 }
 GROUP BY ?paperTitle
-HAVING (COUNT(DISTINCT ?capConcept) > 0)
+HAVING (COUNT(DISTINCT ?capConcept) > 1)
 ORDER BY DESC(?nDistinctCapabilities)
 """
 
@@ -286,7 +286,7 @@ WHERE {
     ?uc rdfs:label ?ucLabel .
 }
 GROUP BY ?conceptLabel ?conceptType
-HAVING (COUNT(DISTINCT ?uc) >= 1)
+HAVING (COUNT(DISTINCT ?uc) >= 2)
 ORDER BY DESC(?nUseCases) ?conceptType ?conceptLabel
 """
 
@@ -498,7 +498,37 @@ def run_q5(g: Graph):
     print_table(headers, rows)
 
     save_csv(headers, rows, QUERIES_DIR / "q5_evaluations.csv")
-    print(f"  → {len(rows)} results. Saved to queries/q5_evaluations.*")
+
+    # Visualisation: experiments per paper, coloured by whether a metric is tested
+    if rows:
+        from collections import defaultdict
+        paper_exps = defaultdict(lambda: {"with_metric": 0, "no_metric": 0})
+        for r in rows:
+            paper = str(r[0])[:35]
+            if r[3] and r[3] != "—":
+                paper_exps[paper]["with_metric"] += 1
+            else:
+                paper_exps[paper]["no_metric"] += 1
+
+        papers = list(paper_exps.keys())
+        with_m = [paper_exps[p]["with_metric"] for p in papers]
+        no_m = [paper_exps[p]["no_metric"] for p in papers]
+
+        fig, ax = plt.subplots(figsize=(12, 5))
+        x = range(len(papers))
+        ax.bar(x, with_m, label="Experiment with metric", color="#4CAF50")
+        ax.bar(x, no_m, bottom=with_m, label="Experiment without metric", color="#B0BEC5")
+        ax.set_xticks(x)
+        ax.set_xticklabels(papers, rotation=45, ha="right", fontsize=8)
+        ax.set_ylabel("Number of Experiments")
+        ax.set_title("Q5: Experiments per Paper (metric coverage)")
+        ax.legend()
+        ax.yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
+        plt.tight_layout()
+        plt.savefig(QUERIES_DIR / "q5_evaluations.png", dpi=150)
+        plt.close()
+
+    print(f"  -> {len(rows)} results. Saved to queries/q5_evaluations.*")
 
 
 # ══════════════════════════════════════════════════════════════

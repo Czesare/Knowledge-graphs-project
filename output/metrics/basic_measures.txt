@@ -2,7 +2,7 @@ classes: 25
 object_properties: 48
 datatype_properties: 11
 individuals: 641
-triples: 3819
+triples: 3839
 entities: 734
 blank_nodes: 29
 skos_concepts: 292
