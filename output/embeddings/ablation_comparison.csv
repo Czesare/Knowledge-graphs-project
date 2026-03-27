@@ -1,7 +1,7 @@
 Model,Dataset,MRR,Hits@1,Hits@3,Hits@10
-ComplEx,Own KG,0.0057,0.0,0.0019,0.0078
-ComplEx,Combined,0.0044,0.0,0.0,0.0078
-TransE,Own KG,0.0776,0.0117,0.0973,0.1887
-TransE,Combined,0.0709,0.0091,0.0972,0.1801
-DistMult,Own KG,0.3132,0.2004,0.3307,0.5564
-DistMult,Combined,0.4226,0.3368,0.4495,0.5855
+ComplEx,Own KG,0.0101,0.0039,0.0058,0.0077
+ComplEx,Combined,0.0044,0.0013,0.0013,0.0026
+TransE,Own KG,0.0667,0.0039,0.0907,0.1911
+TransE,Combined,0.0541,0.0,0.0631,0.1508
+DistMult,Own KG,0.3268,0.2394,0.332,0.5193
+DistMult,Combined,0.3805,0.2771,0.4111,0.5941

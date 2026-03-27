@@ -245,6 +245,7 @@ Current `requirements.txt` covers the main Python dependencies used by the numbe
 * `scikit-learn`
 * `scipy`
 * `torch`
+* `pytest`
 
 ### OpenAI API key
 
