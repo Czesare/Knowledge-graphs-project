@@ -166,18 +166,7 @@ inst:Paper_01_Evaluation a hi:Evaluation ;
     hi:hasMetricConcept hint:ExplanationClarityMetric,
         hint:TaskSuccessRateMetric .
 
-inst:Paper_01_Task_EvidenceRetrieval a hi:Task ;
-    rdfs:label "Evidence Retrieval" ;
-    hi:hasTaskConcept hint:DataCollectionTask ;
-    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_DataProcessing .
-
-inst:Paper_01_Task_QuestionGeneration a hi:Task ;
-    rdfs:label "Question Generation" ;
-    hi:hasTaskConcept hint:QuestionAnsweringTask ;
-    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition .
-
 inst:Paper_01_Task_VeracityPrediction a hi:Task ;
     rdfs:label "Veracity Prediction" ;
     hi:hasTaskConcept hint:SemanticReasoningTask ;
     hi:requiresCapability inst:Paper_01_ProfessionalFact-checker_Cap_EthicalOversight .
-

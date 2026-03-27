@@ -33,6 +33,9 @@ AUDIT_DIR = OUTPUT_DIR / "audit"
 INSTANCE_AUDIT_SUMMARY = AUDIT_DIR / "instance_generation_summary.json"
 EXTERNAL_LINK_AUDIT_SUMMARY = AUDIT_DIR / "external_linking_summary.json"
 MERGE_AUDIT_SUMMARY = AUDIT_DIR / "merge_validation_summary.json"
+MANUAL_PATCHES_DIR = OUTPUT_DIR / "manual_patches"
+MANUAL_INSTANCE_PATCHES_DIR = MANUAL_PATCHES_DIR / "instances"
+MANUAL_LINK_PATCHES_DIR = MANUAL_PATCHES_DIR / "links"
 
 
 def count_by_type(g: Graph, rdf_type) -> int:
@@ -166,6 +169,16 @@ def main():
     ext_links = OUTPUT_DIR / "external_links.ttl"
     if ext_links.exists():
         files_to_load.append(("LINKS", ext_links))
+
+    # Manual instance patches (loaded after base instances)
+    if MANUAL_INSTANCE_PATCHES_DIR.exists():
+        for ttl in sorted(MANUAL_INSTANCE_PATCHES_DIR.glob("*.ttl")):
+            files_to_load.append(("PATCH_INSTANCE", ttl))
+
+    # Manual link patches (loaded after base external links)
+    if MANUAL_LINK_PATCHES_DIR.exists():
+        for ttl in sorted(MANUAL_LINK_PATCHES_DIR.glob("*.ttl")):
+            files_to_load.append(("PATCH_LINKS", ttl))
 
     # Load all
     for category, filepath in files_to_load:

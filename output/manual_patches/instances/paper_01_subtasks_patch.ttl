@@ -1,0 +1,18 @@
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+inst:Paper_01_Task_VeracityPrediction
+    hi:hasSubTask inst:Paper_01_Task_EvidenceRetrieval,
+        inst:Paper_01_Task_QuestionGeneration .
+
+inst:Paper_01_Task_EvidenceRetrieval a hi:Task ;
+    rdfs:label "Evidence Retrieval" ;
+    hi:hasTaskConcept hint:DataCollectionTask ;
+    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_DataProcessing .
+
+inst:Paper_01_Task_QuestionGeneration a hi:Task ;
+    rdfs:label "Question Generation" ;
+    hi:hasTaskConcept hint:QuestionAnsweringTask ;
+    hi:requiresCapability inst:Paper_01_LargeLanguageModel_Cap_PatternRecognition .
