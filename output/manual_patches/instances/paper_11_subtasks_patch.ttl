@@ -1,0 +1,22 @@
+@prefix hi: <https://w3id.org/hi-ontology#> .
+@prefix hint: <https://w3id.org/hi-thesaurus/> .
+@prefix inst: <https://w3id.org/hi-ontology/instances/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Patch: manual subtask decomposition for Paper 11
+# Source: output/instances/paper_11.ttl
+# Extracted from inst:Paper_11_Task_DecideIntervention
+
+inst:Paper_11_Task_DecideIntervention
+    hi:hasSubTask inst:Paper_11_Task_AssessSituation,
+        inst:Paper_11_Task_PredictIncidentDevelopment .
+
+inst:Paper_11_Task_AssessSituation a hi:Task ;
+    rdfs:label "Assess Situation" ;
+    hi:hasTaskConcept hint:SituationalAssessmentTask ;
+    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness .
+
+inst:Paper_11_Task_PredictIncidentDevelopment a hi:Task ;
+    rdfs:label "Predict Incident Development" ;
+    hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
+    hi:requiresCapability inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition .

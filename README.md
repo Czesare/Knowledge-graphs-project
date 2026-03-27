@@ -17,11 +17,11 @@ Current checked-in repository state:
 - **11 HHAI papers**
 - **3 HI competition scenarios**
 - **14 source artifacts**
-- **3819 triples** in the final merged graph
+- **3839 triples** in the final merged graph
 - **641 individuals**
-- **218 external links**
+- **229 external links** (including DOI-based `owl:sameAs` for all 11 papers)
 - **SHACL conformance: 0 violations**
-- **5 competency-question SPARQL query outputs**
+- **5 competency-question SPARQL query outputs** (each with CSV and PNG chart)
 - **provenance / repair audit outputs** in `output/audit/`
 
 Canonical merged graph:
@@ -64,11 +64,13 @@ This design keeps the pipeline:
 The current project pipeline produces a knowledge graph that:
 
 - integrates **11 research papers** and **3 competition scenarios**
-- links to external resources through **218 external links**
+- links to external resources through **229 external links** (including DOI-based `owl:sameAs` for all 11 papers)
 - passes **SHACL validation with zero violations**
-- supports **five non-trivial competency-question queries**
+- supports **five non-trivial competency-question queries** (each with CSV and PNG chart)
 - includes **metrics, community analysis, embeddings, and ablation results**
 - explicitly reports **repaired** and **unresolved** ABox links instead of hiding them
+- models `hi:hasSubTask` decompositions in three papers (paper_01, paper_07, paper_11)
+- resolves all previously unresolved `requiresCapability` links in paper_09
 
 This makes the repository suitable both as:
 
@@ -150,6 +152,7 @@ Output:
 
 ### 05. `05_merge_and_validate.py`
 Merges schema, thesaurus, extensions, instances, and links into a canonical KG and performs structural validation checks.
+It also loads protected manual patch files from `output/manual_patches/` after the generated instances and links.
 
 Outputs:
 - `output/merged_kg.ttl`
@@ -196,6 +199,7 @@ Output:
 ├── output/
 │   ├── text/                   # Parsed source text
 │   ├── json/                   # LLM-generated structured metadata
+│   ├── manual_patches/         # Protected manual RDF patches loaded after generated files
 │   ├── instances/              # Per-source RDF instance graphs
 │   ├── audit/                  # Repair/provenance summaries
 │   ├── queries/                # SPARQL outputs
@@ -340,6 +344,14 @@ without repeating the LLM extraction step.
 
 This distinction is important: the project is **not fully self-contained from zero without API access**, but it is **substantially reproducible downstream from checked artifacts**.
 
+### Note on direct TTL edits
+
+Several post-pipeline improvements were applied as direct edits to checked-in artifacts rather than as pipeline changes:
+
+* **DOI external links** — added to `output/external_links.ttl` directly and to `src/expanded_concept_mappings.py` so they are picked up by stage 05 and persist through future stage 04 reruns.
+* **`hi:hasSubTask` decompositions** — originally added directly to `output/instances/paper_01.ttl`, `paper_07.ttl`, and `paper_11.ttl`, but now migrated to `output/manual_patches/instances/` as protected patch files loaded during stage 05. The corresponding `output/json/` files were not updated, so a full stage 03 rebuild alone would not recreate these decompositions.
+* **paper_09 capability alignment** — corrected in both `output/json/paper_09.json` and `output/instances/paper_09.ttl`, so a stage 03 re-run from the corrected JSON would reproduce the fix.
+
 ---
 
 ## Outputs
@@ -381,11 +393,11 @@ The current checked-in snapshot includes:
 
 Key current graph statistics:
 
-* **3819 triples**
+* **3839 triples**
 * **641 individuals**
 * **11 papers**
 * **3 competition scenarios**
-* **218 external links**
+* **229 external links**
 
 These values describe the current repository snapshot and should not be interpreted as benchmark claims.
 
@@ -410,9 +422,9 @@ This keeps the KG generation process inspectable and reduces prompt-driven RDF v
 
 Current merged validation summary:
 
-* **3819 triples**
+* **3839 triples**
 * **0 validation errors**
-* **1 validation warning**
+* **0 validation warnings**
 * explicit counts for:
 
   * extracted links
@@ -452,6 +464,8 @@ Current audited counts from the instance-generation / merge summaries include:
 * **5** unresolved capability matches
 * **1** unresolved execution-task match
 
+The three previously unresolved `requiresCapability` links in paper_09 were resolved by a direct correction to both `output/json/paper_09.json` and `output/instances/paper_09.ttl`. The correction aligned the capability concepts assigned to agents with the capability concepts referenced in the task `required_capabilities` fields (the two sides of LLM extraction had been misaligned).
+
 This is important academically: the project now exposes structural repairs explicitly instead of silently masking them.
 
 ---
@@ -469,12 +483,12 @@ The repository currently includes five competency-question-oriented SPARQL query
 Current query stage highlights:
 
 * **15** results for team composition / roles
-* **11** capability-distribution results
-* **10** constraint / phenomenon results
+* **11** capability-distribution results (filter: `> 1` capability per paper)
+* **10** constraint / phenomenon results (filter: `>= 2` total per use case)
 * **29** interaction / method results
 * **11** evaluation / experiment results
 
-These outputs are available in:
+Each query produces both a CSV result table and a PNG chart. These outputs are available in:
 
 * `output/queries/`
 
@@ -536,7 +550,7 @@ Author and affiliation linking uses conservative query-based matching and does n
 
 ### 3. Some ABox repairs still exist
 
-A small number of fallback-generated and unresolved links remain. These are now explicitly audited.
+A small number of fallback-generated and unresolved links remain. These are now explicitly audited. The paper_09 `requiresCapability` misalignments were resolved by direct JSON and TTL correction rather than pipeline re-generation.
 
 ### 4. Embedding predictions are exploratory
 
@@ -546,6 +560,10 @@ The embedding experiments are useful enrichment, but raw link prediction outputs
 
 Pellet reasoning through Owlready2 requires Java and is more environment-sensitive than the rest of the pipeline.
 
+### 6. Sub-task decompositions are preserved through a manual patch layer
+
+The `hi:hasSubTask` decompositions for paper_01, paper_07, and paper_11 are stored in `output/manual_patches/instances/` and merged after the generated instance files. The corresponding `output/json/` files were not updated, so a full rebuild from stage 03 alone would not reproduce these decompositions unless the manual patches are also retained.
+
 ---
 
 ## Submission-Oriented Summary
@@ -553,12 +571,14 @@ Pellet reasoning through Owlready2 requires Java and is more environment-sensiti
 This repository now contains a complete academic-engineering pipeline that:
 
 * builds a Hybrid Intelligence KG from **11 papers** and **3 scenarios**
-* produces a final graph of **3819 triples**
-* adds **218 external links**
+* produces a final graph of **3839 triples**
+* adds **229 external links**, including DOI-based `owl:sameAs` for all 11 papers
 * passes **SHACL validation with zero violations**
-* answers **five competency questions**
+* answers **five competency questions**, each with a CSV result table and PNG chart
 * provides graph metrics, community analysis, embeddings, and ablation results
 * exposes repaired and unresolved ABox cases through explicit audit outputs
+* models `hi:hasSubTask` task decompositions in three papers
+* resolves all `requiresCapability` misalignments in paper_09
 
 The strongest current deliverables for review are:
 

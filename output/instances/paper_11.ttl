@@ -173,18 +173,7 @@ inst:Paper_11_Evaluation a hi:Evaluation ;
     hi:hasMetricConcept hint:TaskSuccessRateMetric,
         hint:TrustPreservationMetric .
 
-inst:Paper_11_Task_AssessSituation a hi:Task ;
-    rdfs:label "Assess Situation" ;
-    hi:hasTaskConcept hint:SituationalAssessmentTask ;
-    hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_SituationalAwareness .
-
 inst:Paper_11_Task_DecideIntervention a hi:Task ;
     rdfs:label "Decide Intervention" ;
     hi:hasTaskConcept hint:DecideInterventionTask ;
     hi:requiresCapability inst:Paper_11_EmergencyResponder_Cap_DecisionMaking .
-
-inst:Paper_11_Task_PredictIncidentDevelopment a hi:Task ;
-    rdfs:label "Predict Incident Development" ;
-    hi:hasTaskConcept hint:CandidateHypothesisGenerationTask ;
-    hi:requiresCapability inst:Paper_11_AiDecisionSupportSystem_Cap_PatternRecognition .
-
